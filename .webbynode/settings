@@ -1,2 +1,2 @@
-engine=rack
+engine=rails3
 dns_alias='www.practicingruby.com'
