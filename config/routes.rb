@@ -2,6 +2,10 @@ PracticingRubyWeb::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  match '/hooks/2f94d5ec414b463caa8d6f5f98bff105fd1b2151112' => 'hooks#receive'
+
+  resources :users
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
