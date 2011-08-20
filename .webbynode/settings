@@ -1,1 +1,2 @@
 engine=rack
+dns_alias='www.practicingruby.com'
