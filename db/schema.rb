@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110820183757) do
+ActiveRecord::Schema.define(:version => 20110821020718) do
+
+  create_table "articles", :force => true do |t|
+    t.text     "subject"
+    t.text     "body"
+    t.text     "status",                :default => "draft"
+    t.text     "mailchimp_campaign_id"
+    t.datetime "published_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.text     "first_name"

@@ -4,3 +4,4 @@ log/*.log
 tmp/
 .rvmrc
 config/database.yml
+config/initializers/mailchimp_settings.rb
