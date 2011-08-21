@@ -1,0 +1,7 @@
+module MailChimp
+  SETTINGS = { :list_id      => 'YOURLISTID',
+               :api_key      => 'YOURAPIKEY',
+               :testers      => ["your@email.com"],
+               :sender_name  => "Your Sender Name",
+               :sender_email => "Your Sender Email" }
+end

@@ -1,0 +1,7 @@
+- Catch campaign send web hook call and set published status.
+- Move MC interactions into their own module
+- Articles CRUD
+- Github auth / account linking
+- Archives
+- Comment System (see uni-web)
+- Some sort of dashboard
