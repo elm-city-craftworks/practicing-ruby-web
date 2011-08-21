@@ -7,6 +7,7 @@ gem 'rails', '3.0.10'
 
 gem 'pg'
 gem 'haml'
+gem 'hominid'
 
 # Use unicorn as the web server
 # gem 'unicorn'
