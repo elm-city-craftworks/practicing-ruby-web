@@ -1,0 +1,16 @@
+div#content {
+  margin:0 auto;
+  width:800px;
+}
+
+div#content p {
+  font-family: courier;
+  font-size: 0.9em;
+  text-align: justify;
+  line-height: 1.5em;
+}
+
+div#footer p {
+  text-align: right;
+  font-size: 0.8em;
+}

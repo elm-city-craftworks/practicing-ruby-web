@@ -5,6 +5,11 @@ PracticingRubyWeb::Application.routes.draw do
   match '/hooks/2f94d5ec414b463caa8d6f5f98bff105fd1b2151112' => 'hooks#receive'
 
   resources :users
+  resource :community, :controller => "community" do
+    member do
+      get 'welcome'
+    end
+  end
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
