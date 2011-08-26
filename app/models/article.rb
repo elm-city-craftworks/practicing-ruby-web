@@ -1,23 +1,21 @@
 class Article < ActiveRecord::Base
   before_create do
-    self.mailchimp_campaign_id = create_mailchimp_campaign
+#    self.mailchimp_campaign_id = create_mailchimp_campaign
   end
 
   before_update do
-    update_mailchimp_campaign if status == "draft"
+#    update_mailchimp_campaign if status == "draft"
   end
 
   def create_mailchimp_campaign
     client = Hominid::API.new(MailChimp::SETTINGS[:api_key])
-    p [subject, body]
-
 
     client.campaign_create('plaintext', 
       { :list_id    =>  MailChimp::SETTINGS[:list_id],
         :subject    => subject,
         :from_email => MailChimp::SETTINGS[:sender_email],
         :from_name  => MailChimp::SETTINGS[:sender_name] },
-      { :text => body }
+      { :text => sanitize(body) }
     )
   end
 
@@ -26,7 +24,7 @@ class Article < ActiveRecord::Base
 
     client.campaign_update(mailchimp_campaign_id, :subject, subject)  
     client.campaign_update(mailchimp_campaign_id, :title, subject)  
-    client.campaign_update(mailchimp_campaign_id, :content, { :text => body })  
+    client.campaign_update(mailchimp_campaign_id, :content, { :text => sanitize(body) })  
   end
 
   def deliver_test
@@ -40,6 +38,10 @@ class Article < ActiveRecord::Base
   end
 
   private
+
+  def sanitize(text)
+    text.gsub("[]","[\u200B]")
+  end
 
   def mailchimp_client
     Hominid::API.new(MailChimp::SETTINGS[:api_key])

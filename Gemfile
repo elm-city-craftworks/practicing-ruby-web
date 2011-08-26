@@ -9,6 +9,8 @@ gem 'pg'
 gem 'haml'
 gem 'hominid'
 
+gem 'rdiscount'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
