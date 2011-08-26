@@ -1,0 +1,13 @@
+%img{:src => "/images/robo-banner.png"}
+
+%div{:id => "article"}
+  %hr
+  %h2 Articles from Volume 2    
+
+  %ul
+  - Article.order(:created_at).each do |a|
+    %li= link_to a.subject, article_path(a)
+
+  %h2 Articles from Volume 1 
+
+  %p{:style => "text-align: left"} Most of the articles from Volume 1 are already publicly available via blog.rubybestpractices.com. I've linked them below to make them easier for you to find.
