@@ -8,10 +8,10 @@ class HooksController < ApplicationController
                   :mailchimp_web_id => params[:data][:web_id])
       render :text => "subscribed"
     when "unsubscribe"
-      user = find_user
+#      user = find_user
 
-      user.try(:destroy)
-      render :text => "unsubscribed"
+#      user.try(:destroy)
+#      render :text => "unsubscribed"
     when "profile"
       user = find_user
 
