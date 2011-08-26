@@ -4,10 +4,41 @@
   %hr
   %h2 Articles from Volume 2    
 
+  %p{:style => "text-align: left"} New articles are posted each Tuesday, usually between 16:00 UTC and 20:00 UTC
+
   %ul
-  - Article.order(:created_at).each do |a|
-    %li= link_to a.subject, article_path(a)
+    - Article.order(:created_at).each do |a|
+      %li= link_to a.subject, article_path(a)
 
   %h2 Articles from Volume 1 
 
   %p{:style => "text-align: left"} Most of the articles from Volume 1 are already publicly available via blog.rubybestpractices.com. I've linked them below to make them easier for you to find.
+  %ul
+    %li= link_to "Issue 1.1: Ruby's method lookup path (1 of 2)", "http://blog.rubybestpractices.com/posts/gregory/030-issue-1-method-lookup.html"
+    %li= link_to "Issue 1.2: Ruby's method lookup path (2 of 2)", "http://blog.rubybestpractices.com/posts/gregory/031-issue-2-method-lookup.html"
+    %li= link_to "Issue 1.3: Writing configurable applications (1 of 2)", "http://blog.rubybestpractices.com/posts/gregory/032-issue-3-configurable.html"
+    %li= link_to "Issue 1.4: Writing configurable applications (2 of 2)", "http://blog.rubybestpractices.com/posts/gregory/033-issue-4-configurable.html"
+    %li= link_to "Issue 1.4: Writing configurable applications (2 of 2)", "http://blog.rubybestpractices.com/posts/gregory/033-issue-4-configurable.html"
+    %li= link_to "Issue 1.5: Testing anti-patterns: testing private methods", "http://blog.rubybestpractices.com/posts/gregory/034-issue-5-testing-antipatterns.html"
+    %li= link_to "Issue 1.6: Meditations on bad and good code (1 of 2)", "http://blog.rubybestpractices.com/posts/gregory/035-issue-6-good-and-bad-code.html"
+    %li= link_to "Issue 1.7: Meditations on bad and good code (2 of 2)", "http://blog.rubybestpractices.com/posts/gregory/036-issue-7-good-and-bad-code.html"
+    %li= link_to "Issue 1.8: Uses for modules (1 of 4)", "http://blog.rubybestpractices.com/posts/gregory/037-issue-8-uses-for-modules.html"
+    %li= link_to "Issue 1.9: Uses for modules (2 of 4)", "http://blog.rubybestpractices.com/posts/gregory/038-issue-9-uses-for-modules.html"
+    %li= link_to "Issue 1.10: Uses for modules (3 of 4)", "http://blog.rubybestpractices.com/posts/gregory/040-issue-10-uses-for-modules.html"
+    %li= link_to "Issue 1.10.5: Addendum to 'Uses for modules, part 3'", "http://blog.rubybestpractices.com/posts/gregory/041-issue-10.5-uses-for-modules.html" 
+    %li= link_to "Issue 1.11: Uses for modules (4 of 4)", "http://blog.rubybestpractices.com/posts/gregory/043-issue-11-uses-for-modules.html"
+    %li= link_to "Issue 1.12: Rapid prototyping", "http://blog.rubybestpractices.com/posts/gregory/044-issue-12-rapid-prototyping.html"
+    %li= link_to "Issue 1.13: Obfuscations of Christmas past", "http://blog.rubybestpractices.com/posts/gregory/045-issue-14-obfuscations.html"
+    %li= link_to "Issue 1.14: Duck typing in practice (1 of 2)", "http://blog.rubybestpractices.com/posts/gregory/046-issue-14-duck-typing.html"
+    %li= link_to "Issue 1.15: Duck typing in practice (2 of 2)", "http://blog.rubybestpractices.com/posts/gregory/047-issue-15-duck-typing-2.html"
+    %li= link_to "Issue 1.16: Interesting ruby hackers", "http://blog.rubybestpractices.com/posts/gregory/048-issue-16-interesting-ruby-hackers.html"
+    %li= link_to "Issue 1.17: Interesting ruby hacker-writers", "http://blog.rubybestpractices.com/posts/gregory/049-issues-17-interesting-ruby-writers.html"
+    %li= link_to "Issue 1.18: Dirty little secrets about testing", "http://blog.rubybestpractices.com/posts/gregory/050-issues-18-testing-dogma.html"
+    %li= link_to "Issue 1.19: Thoughts on mocking (1 of 2)", "http://blog.rubybestpractices.com/posts/gregory/051-issue-19-thoughts-on-mocking.html"
+    %li= link_to "Issue 1.20: Thoughts on mocking (2 of 2)", "http://blog.rubybestpractices.com/posts/gregory/052-issue-20-thoughts-on-mocking.html"
+    %li Issue 1.21: Not yet released
+    %li Issue 1.22: Not yet released
+    %li Issue 1.23: Not yet released
+    %li Issue 1.24: Not yet released
+    %li Issue 1.25: Not yet released
+    %li Issue 1.26: Not yet released
