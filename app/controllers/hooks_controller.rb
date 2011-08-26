@@ -1,4 +1,6 @@
 class HooksController < ApplicationController
+  skip_before_filter :authenticate
+
   def receive
     case params[:type]
     when "subscribe"
