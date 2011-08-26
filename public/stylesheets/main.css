@@ -10,6 +10,15 @@ div#content p {
   line-height: 1.5em;
 }
 
+div#article p {
+  font-family: sans;
+  font-size: 1.1em;
+}
+
+div#article h1, h2, h3 {
+  font-family: courier;
+}
+
 div#footer p {
   text-align: right;
   font-size: 0.8em;
