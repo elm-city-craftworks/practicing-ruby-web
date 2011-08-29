@@ -11,7 +11,10 @@ class ArticlesController < ApplicationController
 
     @subject = article.subject
 
-    @body    = RDiscount.new(article.body).to_html.html_safe
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+      :autolink => true, :space_after_headers => true)
+
+    @body    = markdown.render(article.body).html_safe
   end
 
   def edit
