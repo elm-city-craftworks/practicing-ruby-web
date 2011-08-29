@@ -7,7 +7,7 @@
   %p{:style => "text-align: left"} New articles are posted each Tuesday, usually between 16:00 UTC and 20:00 UTC
 
   %ul
-    - Article.order(:created_at).each do |a|
+    - @articles.each do |a|
       %li= link_to a.subject, article_path(a)
 
   %h2 Articles from Volume 1 
