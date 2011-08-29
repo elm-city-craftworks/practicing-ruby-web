@@ -9,7 +9,7 @@ gem 'pg'
 gem 'haml'
 gem 'hominid'
 
-gem 'rdiscount'
+gem 'redcarpet', "~> 2.0.0b3"
 
 # Use unicorn as the web server
 # gem 'unicorn'
