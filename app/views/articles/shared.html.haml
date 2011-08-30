@@ -1,0 +1,15 @@
+- content_for(:title) { @subject }
+
+#article
+  #share_alert
+    = link_to @github, "http://github.com/#{@github}"
+    enjoyed this article and decided to share it with you. If you like
+    what you see here,
+    = link_to "become a subscriber!", "http://eepurl.com/fjxR2"
+    New articles are published every week, and a subscription costs only
+    $8/month. You'll also have access to the great community of folks
+    who read this newsletter.
+
+  %h1= @article.subject
+
+  = md(@article.body)

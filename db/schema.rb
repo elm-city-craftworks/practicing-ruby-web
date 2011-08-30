@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830041617) do
+ActiveRecord::Schema.define(:version => 20110830162757) do
 
   create_table "articles", :force => true do |t|
     t.text     "subject"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(:version => 20110830041617) do
   create_table "authorizations", :force => true do |t|
     t.text     "github_uid"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shared_articles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.text     "secret"
+    t.integer  "views"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

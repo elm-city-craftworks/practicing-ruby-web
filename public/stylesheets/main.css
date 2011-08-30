@@ -41,6 +41,25 @@ div#article h1 a#share:hover {
 }
 div#article h1 a#share img { height: 16px; width: 16px; }
 
+div#article #share_alert {
+  padding: 1em;
+  background-color: #CBF5D0;
+  border: 3px solid #252;
+  color: #252;
+  font-size: 1.1em;
+  font-family: sans-serif;
+  text-align: justify;
+  line-height: 1.3em;
+}
+
+div#article #share_alert a {
+  color: #428528;
+  font-weight: bold;
+}
+div#article #share_alert a:visited {
+  color: #428528;
+}
+
 div#footer p {
   text-align: right;
   font-size: 0.8em;
