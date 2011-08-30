@@ -42,4 +42,9 @@ class SessionsController < ApplicationController
     AuthorizationLink.activate(params[:secret])
     redirect_to community_url
   end
+
+  def destroy
+    session["authorization_id"] = nil
+    redirect_to "/"
+  end
 end
