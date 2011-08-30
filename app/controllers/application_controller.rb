@@ -1,14 +1,24 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate
+  before_filter :authenticate_user
 
   def authenticate
-    authenticate_or_request_with_http_basic(
-       "A real auth system is coming soon. "+
-       "For now, use the email address you're using with "+
-       "MailChimp as your username. Password can be left blank.") do |id, password|
-      session[:seekrit] = password
-      User.where(:email => id).first
+    current_authorization || redirect_to("/auth/github")
+  end
+  
+  def authenticate_user
+    unless current_user
+      redirect_to current_authorization.authorization_link
     end
+  end
+
+  def current_authorization
+    @current_authorization ||= 
+      Authorization.find_by_id(session[:authorization_id])
+  end
+
+  def current_user
+    current_authorization.user
   end
 end

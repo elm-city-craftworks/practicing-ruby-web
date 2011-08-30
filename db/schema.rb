@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110821020718) do
+ActiveRecord::Schema.define(:version => 20110830041617) do
 
   create_table "articles", :force => true do |t|
     t.text     "subject"
@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(:version => 20110821020718) do
     t.datetime "updated_at"
   end
 
+  create_table "authorization_links", :force => true do |t|
+    t.text     "mailchimp_email"
+    t.text     "github_nickname"
+    t.text     "secret"
+    t.integer  "authorization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.text     "github_uid"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.text     "first_name"
     t.text     "last_name"
@@ -30,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20110821020718) do
     t.text     "mailchimp_web_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "github_nickname"
+    t.boolean  "admin",            :default => false
   end
 
 end

@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   end 
 
   def authenticate_admin
-    raise unless session[:seekrit] == "unicorngangsta"
+    raise unless current_user.admin
   end
 
 end

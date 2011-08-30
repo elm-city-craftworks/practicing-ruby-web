@@ -6,6 +6,11 @@ PracticingRubyWeb::Application.routes.draw do
 
   resources :users
   resources :articles
+  resources :authorization_links
+  resources :sessions 
+
+  match '/sessions/link/:secret' => 'sessions#link'
+  match '/auth/github/callback' => 'sessions#create'
 
   resource :community, :controller => "community" do
     member do
