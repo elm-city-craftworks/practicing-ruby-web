@@ -5,7 +5,12 @@ PracticingRubyWeb::Application.routes.draw do
   match '/hooks/2f94d5ec414b463caa8d6f5f98bff105fd1b2151112' => 'hooks#receive'
 
   resources :users
-  resources :articles
+  resources :articles do
+    member do
+      get 'share'
+    end
+  end
+
   resources :authorization_links
   resources :sessions
 

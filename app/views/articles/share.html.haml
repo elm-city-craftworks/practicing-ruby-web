@@ -1,0 +1,6 @@
+- content_for(:title) { "Sharing #{@article.subject}" }
+
+#article
+  %h1 Sharing #{@article.subject}
+
+  = link_to "&larr; back to the article".html_safe, article_path(@article)

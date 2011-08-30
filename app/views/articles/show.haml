@@ -1,6 +1,10 @@
 - content_for(:title) { @subject }
 
 #article
-  %h1= @subject
+  %h1
+    = @subject
+    = link_to share_article_path(@article), :id => "share" do
+      = image_tag "share.png"
+      Share
 
   = @body
