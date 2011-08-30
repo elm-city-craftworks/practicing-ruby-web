@@ -1,0 +1,2 @@
+module AuthorizationLinksHelper
+end
