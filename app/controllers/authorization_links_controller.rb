@@ -21,7 +21,8 @@ class AuthorizationLinksController < ApplicationController
       render("invalid_email") and return
     end
     
-    @authorization_link.update_attributes(params["authorization_link"])
+    @authorization_link.email = @email
+    @authorization_link.save
 
     AuthorizationLinksMailer.deliver_email_confirmation(@authorization_link)
 
