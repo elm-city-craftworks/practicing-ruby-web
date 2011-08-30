@@ -24,6 +24,23 @@ div#article h1, h2, h3 {
   font-family: courier;
 }
 
+div#article h1 a#share {
+  float: right;
+  font-size: 0.5em;
+  font-weight: normal;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5em;
+  border: 1px solid #aaa;
+  color: #333;
+}
+
+div#article h1 a#share:hover {
+  background-color: #eee;
+  border-color: #333;
+}
+div#article h1 a#share img { height: 16px; width: 16px; }
+
 div#footer p {
   text-align: right;
   font-size: 0.8em;
