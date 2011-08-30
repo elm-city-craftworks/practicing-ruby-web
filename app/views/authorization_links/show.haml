@@ -1,0 +1,12 @@
+%img{:src => "/images/robo-banner.png"}
+
+%p
+  We sent a confirmation email to
+  = @authorization_link.mailchimp_email
+  that will allow you to link your subscription
+  information to the github nickname you provided:
+  = @authorization_link.github_nickname
+
+%p
+  Please click the link in that email to complete your registration. 
+  If you have any problems, don't hesitate to contact gregory.t.brown@gmail.com.
