@@ -24,9 +24,13 @@ div#article h1, h2, h3 {
   font-family: courier;
 }
 
+div#article h1 {
+  font-size: 1.6em;
+}
+
 div#article h1 a#share {
   float: right;
-  font-size: 0.5em;
+  font-size: 0.75em;
   font-weight: normal;
   text-decoration: none;
   display: inline-block;
