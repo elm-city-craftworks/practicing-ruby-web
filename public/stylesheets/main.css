@@ -10,9 +10,13 @@ div#content p {
   line-height: 1.5em;
 }
 
-div#article {
+div#article p, div#article li {
   font-family: sans-serif;
   font-size: 1.1em;
+}
+
+div#article li{
+  margin-bottom: 0.5em;
 }
 
 div#article h1, h2, h3 {
