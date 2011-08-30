@@ -11,6 +11,7 @@ PracticingRubyWeb::Application.routes.draw do
 
   match '/sessions/link/:secret' => 'sessions#link'
   match '/auth/github/callback' => 'sessions#create'
+  match '/logout' => 'sessions#destroy', :as => 'logout'
 
   resource :community, :controller => "community" do
     member do
