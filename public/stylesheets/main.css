@@ -28,6 +28,10 @@ div#article h1 {
   font-size: 1.6em;
 }
 
+div#article h1 .clear {
+  clear: both;
+}
+
 div#article h1 a#share {
   float: right;
   font-size: 0.75em;
