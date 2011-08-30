@@ -32,6 +32,10 @@ div#article h1 .clear {
   clear: both;
 }
 
+div#article p.bold {
+  font-weight: bold;
+}
+
 div#article h1 a#share {
   float: right;
   font-size: 0.75em;
