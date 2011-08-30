@@ -1,8 +1,6 @@
-%img{:src => "/images/robo-banner.png"}
-
-%div{:id => "article"}
+#article
   %hr
-  %h2 Articles from Volume 2    
+  %h2 Articles from Volume 2
 
   %p{:style => "text-align: left"} New articles are posted each Tuesday, usually between 16:00 UTC and 20:00 UTC
 
@@ -10,7 +8,7 @@
     - @articles.each do |a|
       %li= link_to a.subject, article_path(a)
 
-  %h2 Articles from Volume 1 
+  %h2 Articles from Volume 1
 
   %p{:style => "text-align: left"} Most of the articles from Volume 1 are already publicly available via blog.rubybestpractices.com. I've linked them below to make them easier for you to find.
   %ul
@@ -25,7 +23,7 @@
     %li= link_to "Issue 1.8: Uses for modules (1 of 4)", "http://blog.rubybestpractices.com/posts/gregory/037-issue-8-uses-for-modules.html"
     %li= link_to "Issue 1.9: Uses for modules (2 of 4)", "http://blog.rubybestpractices.com/posts/gregory/038-issue-9-uses-for-modules.html"
     %li= link_to "Issue 1.10: Uses for modules (3 of 4)", "http://blog.rubybestpractices.com/posts/gregory/040-issue-10-uses-for-modules.html"
-    %li= link_to "Issue 1.10.5: Addendum to 'Uses for modules, part 3'", "http://blog.rubybestpractices.com/posts/gregory/041-issue-10.5-uses-for-modules.html" 
+    %li= link_to "Issue 1.10.5: Addendum to 'Uses for modules, part 3'", "http://blog.rubybestpractices.com/posts/gregory/041-issue-10.5-uses-for-modules.html"
     %li= link_to "Issue 1.11: Uses for modules (4 of 4)", "http://blog.rubybestpractices.com/posts/gregory/043-issue-11-uses-for-modules.html"
     %li= link_to "Issue 1.12: Rapid prototyping", "http://blog.rubybestpractices.com/posts/gregory/044-issue-12-rapid-prototyping.html"
     %li= link_to "Issue 1.13: Obfuscations of Christmas past", "http://blog.rubybestpractices.com/posts/gregory/045-issue-14-obfuscations.html"

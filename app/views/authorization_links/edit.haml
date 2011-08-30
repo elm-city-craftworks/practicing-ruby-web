@@ -1,9 +1,7 @@
-%img{:src => "/images/robo-banner.png"}
-
 %hr
 
 %p
-  We weren't able to automatically link your github account to your email address. Usually this means one of two things: either your email address on github does not match the email address that you subscribed to the newsletter with, or you didn't subscribe to the newsletter yet. 
+  We weren't able to automatically link your github account to your email address. Usually this means one of two things: either your email address on github does not match the email address that you subscribed to the newsletter with, or you didn't subscribe to the newsletter yet.
 
 %p
   %b
@@ -12,10 +10,10 @@
 - form_for(@authorization_link) do |f|
   = f.text_field :mailchimp_email
   = f.submit "Link this email address to my Github account"
-%p 
-  %b 
-    If you have not subscribed for the newsletter yet, please 
+%p
+  %b
+    If you have not subscribed for the newsletter yet, please
     %a{:href=>"http://eepurl.com/fjxR2"} sign up now!
   You will be charged $8/month and receive new articles weekly.
-  
+
 %p Don't hesitate to email gregory.t.brown@gmail.com if you run into any problems linking your account.
