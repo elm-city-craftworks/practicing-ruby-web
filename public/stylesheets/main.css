@@ -17,6 +17,7 @@ div#article p, div#article li {
 
 div#article li{
   margin-bottom: 0.5em;
+  line-height: 1.3em;
 }
 
 div#article h1, h2, h3 {
