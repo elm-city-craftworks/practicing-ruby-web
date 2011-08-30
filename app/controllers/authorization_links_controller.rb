@@ -21,7 +21,7 @@ class AuthorizationLinksController < ApplicationController
       render("invalid_email") and return
     end
     
-    @authorization_link.email = @email
+    @authorization_link.mailchimp_email = @email
     @authorization_link.save
 
     AuthorizationLinksMailer.deliver_email_confirmation(@authorization_link)
