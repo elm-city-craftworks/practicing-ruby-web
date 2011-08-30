@@ -30,3 +30,40 @@ div#footer p {
 }
 
 .left { text-align: left; }
+
+/* Navigation */
+
+#navigation {
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  padding: 0.75em 0;
+  margin-bottom: 1em;
+}
+
+#navigation a {
+  display: inline-block;
+  margin-right: 1.5em;
+  text-decoration: none;
+  color: #222;
+  font-family: courier;
+}
+
+#navigation a:visited { color: #222; }
+
+#navigation a:hover {
+  text-decoration: underline;
+  color: #666;
+}
+
+#navigation div.right {
+  float: right;
+}
+
+#navigation div.right a {
+  margin-left: 1.5em;
+  margin-right: 0;
+}
+
+#navigation div.clear {
+  clear: right;
+}
