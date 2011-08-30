@@ -1,6 +1,10 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticate_admin, :only => [:create, :new, :edit, :update, :destroy]
+  before_filter :authenticate_admin, :only => [:create, :new, :edit, :update,
+                                               :destroy]
   before_filter :find_article, :only => [:show, :edit, :update, :share]
+
+  skip_before_filter :authenticate,      :only => [:shared]
+  skip_before_filter :authenticate_user, :only => [:shared]
 
   def index
     @articles = Article.where(:status => "published").order(:created_at)
@@ -8,15 +12,6 @@ class ArticlesController < ApplicationController
 
   def show
     authenticate_admin if @article.status == "draft"
-
-    @subject = @article.subject
-
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-      :autolink            => true,
-      :space_after_headers => true,
-      :no_intra_emphasis   => true)
-
-    @body    = markdown.render(@article.body).html_safe
   end
 
   def update
@@ -25,7 +20,20 @@ class ArticlesController < ApplicationController
   end
 
   def share
+    @share = SharedArticle.find_or_create_by_article_id_and_user_id(
+      @article.id, current_user.id)
+  end
 
+  def shared
+    @share = SharedArticle.find_by_secret(params[:secret])
+
+    unless @share
+      raise "Invalid Share Key"
+    else
+      @share.viewed
+      @github  = @share.user.github_nickname
+      @article = @share.article
+    end
   end
 
   private

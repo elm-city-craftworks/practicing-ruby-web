@@ -2,9 +2,9 @@
 
 #article
   %h1
-    = @subject
+    = @article.subject
     = link_to share_article_path(@article), :id => "share" do
       = image_tag "share.png"
       Share
 
-  = @body
+  = md(@article.body)

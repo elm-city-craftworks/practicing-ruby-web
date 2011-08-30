@@ -3,7 +3,7 @@ class AuthorizationLink < ActiveRecord::Base
 
   before_save do
     if mailchimp_email && secret.blank?
-      write_attribute(:secret, (0...30).map{ ('a'..'z').to_a[rand(26)] }.join)
+      write_attribute(:secret, SecretGenerator.generate)
     end
   end
 
