@@ -1,2 +1,11 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+// Setup the PR [Practicing Ruby] Namespace
+var PR = PR ? PR : new Object();
+
+PR.setupNamespace = function(namespace){
+	if(PR[namespace] == undefined)
+		PR[namespace] = {}
+}
+
+jQuery(function(){
+  if(PR.Preview) PR.Preview.init();
+});

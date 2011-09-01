@@ -14,6 +14,8 @@ PracticingRubyWeb::Application.routes.draw do
   resources :authorization_links
   resources :sessions
 
+  resources :comments
+
   match '/sessions/link/:secret' => 'sessions#link'
   match '/auth/github/callback' => 'sessions#create'
   match '/logout' => 'sessions#destroy', :as => 'logout'
