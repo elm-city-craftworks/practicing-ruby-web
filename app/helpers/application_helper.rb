@@ -15,4 +15,10 @@ module ApplicationHelper
 
     markdown.render(content).html_safe
   end
+
+  def gravatar(user, size=64)
+    hash = Digest::MD5.hexdigest(user.email.downcase)
+
+    image_tag "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
+  end
 end

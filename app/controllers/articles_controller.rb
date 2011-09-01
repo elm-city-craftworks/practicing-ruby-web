@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
 
   def show
     authenticate_admin if @article.status == "draft"
+    @comments = @article.comments.order("created_at")
   end
 
   def update
