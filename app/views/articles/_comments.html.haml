@@ -1,0 +1,16 @@
+#comments
+  - if @comments.empty?
+    %h2 There aren't any comments yet!
+    Get things rolling by being the first to post.
+  - else
+    - @comments.each do |comment|
+      = render :partial => "comments/show", :locals => {:comment => comment}
+
+  = form_for @article.comments.build do |f|
+    = f.hidden_field :commentable_type
+    = f.hidden_field :commentable_id
+
+    = f.text_area :body, 'data-preview' => true
+
+    %p
+      = f.submit "Comment"
