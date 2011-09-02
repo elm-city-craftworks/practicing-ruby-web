@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
       raise "Invalid Share Key"
     else
       @share.viewed
-      @github  = @share.user.github_nickname
+      @user  = @share.user
       @article = @share.article
     end
   end

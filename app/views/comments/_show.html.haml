@@ -1,9 +1,8 @@
 .comment{:data => { :id => comment.id,
                     :editable => (comment.user == current_user).inspect }}
   .header
-    = gravatar(comment.user)
-    = comment.user.name
-    .details commented
+    = gravatar(comment.user, 32)
+    = link_to_github comment.user
     .controls
       - if current_user == comment.user
         = link_to 'Edit', '#', :class => "edit", :title => "Edit"
