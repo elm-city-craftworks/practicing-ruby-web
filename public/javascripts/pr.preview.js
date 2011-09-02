@@ -35,12 +35,19 @@ PR.Preview.init = function(){
 }
 
 PR.Preview.buildPreviewTab = function(textarea){
+  var labelText = textarea.attr('data-label');
+  var label = "";
+
+  if(labelText.length > 0)
+    label = '<li class="label">' + labelText + '</li>';
+
   // insert tabs
 	textarea.before(' \
 		<ul class="tabs"> \
 			<li><a href="#edit">Edit</a></li> \
-			<li><a href="#preview">Preview</a></li> \
-		</ul> \
+			<li><a href="#preview">Preview</a></li>' +
+		  label +
+		'</ul> \
 	');
 
 	// wrap textarea
