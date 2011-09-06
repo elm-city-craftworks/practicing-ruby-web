@@ -1,5 +1,4 @@
 - Move MC interactions into their own module
 - Comment System (see uni-web)
 - Some sort of dashboard
-- Disable click to edit
 - Enable preview when editing comments
