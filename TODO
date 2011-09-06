@@ -1,7 +1,16 @@
-- Catch campaign send web hook call and set published status.
 - Move MC interactions into their own module
 - Articles CRUD
-- Github auth / account linking
-- Archives
-- Comment System (see uni-web)
-- Some sort of dashboard
+- Announcements
+- Dashboard
+  - Activity feed
+    - Comments
+    - Articles
+    - Announcements
+- Comment replies
+- Use server to process markdown
+- Comment emails
+  - User preferences - opt-out
+  - @ mentions
+  - Conversation started
+  - Follow conversation
+  - Follow all conversations
