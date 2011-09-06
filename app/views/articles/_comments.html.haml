@@ -1,8 +1,8 @@
 #comments
   - if @comments.empty?
     %hr
-    %h2 There aren't any comments yet!
-    %p Get things rolling by being the first to post.
+    %p.message
+      There aren't any comments yet. Get things rolling by being the first to post.
   - else
     - @comments.each do |comment|
       = render :partial => "comments/show", :locals => {:comment => comment}
