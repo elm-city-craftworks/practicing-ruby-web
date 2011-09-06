@@ -12,11 +12,12 @@ class ArticlesController < ApplicationController
 
   def show
     authenticate_admin if @article.status == "draft"
+    @comments = @article.comments.order("created_at")
   end
 
   def update
     @article.update_attributes(params[:article])
-    redirect_to article
+    redirect_to @article
   end
 
   def share
@@ -30,8 +31,8 @@ class ArticlesController < ApplicationController
     unless @share
       raise "Invalid Share Key"
     else
-      @share.viewed
-      @github  = @share.user.github_nickname
+      @share.viewed unless current_user
+      @user  = @share.user
       @article = @share.article
     end
   end

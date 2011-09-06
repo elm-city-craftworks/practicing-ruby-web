@@ -10,7 +10,10 @@
   <%= stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection' %>
   <![endif]-->
   <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery.jeditable.js', 'pr.preview', 'pr.comments', 'showdown' %>
   <%= csrf_meta_tag %>
+
+  <%= yield(:header_bottom) %>
 </head>
 <body>
 

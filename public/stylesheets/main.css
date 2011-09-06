@@ -1,3 +1,11 @@
+body{
+  font-size: 15px;
+}
+
+pre, li{
+  font-size: 0.95em;
+}
+
 div#content {
   margin:0 auto;
   width:800px;
@@ -10,8 +18,8 @@ div#content p {
   line-height: 1.5em;
 }
 
-div#article p, div#article li {
-  font-family: sans-serif;
+div#article p {
+  font-family: 'Helvetica', sans-serif;
   font-size: 1.1em;
 }
 
@@ -25,7 +33,7 @@ div#article h1, h2, h3 {
 }
 
 div#article h1 {
-  font-size: 1.6em;
+  font-size: 1.5em;
 }
 
 div#article h1 .clear {
@@ -59,7 +67,7 @@ div#article #share_alert {
   border: 3px solid #252;
   color: #252;
   font-size: 1.1em;
-  font-family: sans-serif;
+  font-family: 'Helvetica', sans-serif;
   text-align: justify;
   line-height: 1.3em;
 }

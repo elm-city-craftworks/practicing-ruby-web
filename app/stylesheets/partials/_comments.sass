@@ -1,0 +1,95 @@
+#comments
+  p.message
+    font-weight: bold
+  .comment
+    border: 0.5em solid #eee
+    margin: 1em 0
+    .header
+      padding: 0.5em
+      font-family: sans-serif
+      background-color: #eee
+      color: #333
+      a
+        color: #222
+      img
+        vertical-align: middle
+        margin-right: 5px
+
+      .on
+        display: inline-block
+        float: right
+        padding-top: 5px
+        margin-left: 5px
+        color: #888
+        font-size: 0.9em
+      .controls
+        float: right
+        display: inline-block
+        a
+          display: inline-block
+          margin-left: 5px
+          margin-top: 5px
+    .content
+      padding: 0.5em
+
+  form.new_comment
+    .tab_container
+      border: 0.5em solid #eee
+      border-top: 0
+      padding: 0.5em
+
+    textarea
+      width: 740px
+      height: 250px
+      font-size: 1.1em
+      font-family: sans-serif
+      padding: 0.75em
+    .tab_container #preview
+      min-height: 145px
+    ul.tabs
+      margin: 0
+      padding: 0
+      list-style: none
+      height: 30px
+      padding: 5px
+      background: #eee
+      font-size: 0.9em
+
+      li
+        float: left
+        margin: 0
+        margin-right: 10px
+        padding: 0
+        height: 29px
+        line-height: 29px
+        overflow: hidden
+        position: relative
+        +border-radius(10px)
+        font-family: 'Helvetica', sans-serif
+        font-size: 1.2em
+
+        &.label
+          float: right
+          color: #888
+          font-size: 0.9em
+          a
+            display: inline-block
+            padding: 0
+            color: #888
+            text-decoration: underline
+            &:hover
+              background: #eee
+              color: #333
+
+        &.active
+          background: #fff
+          a:hover
+            background: #fff
+        a
+          text-decoration: none
+          color: #000
+          display: block
+          padding: 0 20px
+          +border-radius(10px)
+          &:hover
+            background: #ccc
