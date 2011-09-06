@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
     unless @share
       raise "Invalid Share Key"
     else
-      @share.viewed
+      @share.viewed unless current_user
       @user  = @share.user
       @article = @share.article
     end
