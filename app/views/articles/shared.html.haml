@@ -13,3 +13,10 @@
   %h1= @article.subject
 
   = md(@article.body)
+
+  #comments
+    %hr
+    %p.message{:style => "text-align: center;"}
+      By
+      = link_to "subscribing now", "http://eepurl.com/fjxR2"
+      you can read the comments about this article and also post your own.
