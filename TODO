@@ -1,7 +1,6 @@
 - Move MC interactions into their own module
 - Comment System (see uni-web)
 - Some sort of dashboard
-- Don't increment views if a user is logged in
 - Add border around New Comment & mimic GitHub
 - Disable click to edit
 - Share links should at least hint at a comment system.
