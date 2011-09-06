@@ -2,7 +2,7 @@
 
 #article
   #share_alert
-    = link_to @github, "http://github.com/#{@github}"
+    = link_to_github @user
     enjoyed this article and decided to share it with you. If you like
     what you see here,
     = link_to "become a subscriber!", "http://eepurl.com/fjxR2"
@@ -13,3 +13,10 @@
   %h1= @article.subject
 
   = md(@article.body)
+
+  #comments
+    %hr
+    %p.message{:style => "text-align: center;"}
+      By
+      = link_to "subscribing now", "http://eepurl.com/fjxR2"
+      you can read the comments about this article and also post your own.
