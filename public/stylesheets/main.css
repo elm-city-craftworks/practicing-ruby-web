@@ -26,6 +26,7 @@ div#article p {
 div#article li{
   margin-bottom: 0.5em;
   line-height: 1.3em;
+  font-family: 'Helvetica', sans-serif;
 }
 
 div#article h1, h2, h3 {
