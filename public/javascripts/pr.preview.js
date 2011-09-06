@@ -6,7 +6,7 @@ PR.Preview.init = function(){
 	});
 
 	// override tab clicks
-	$('ul.tabs a').live('click', function(e) {
+	$('ul.tabs li:not(.label) a').live('click', function(e) {
 		var tabs = $(this).parents('ul').find('li');
 		var tab_contents = $(this).parents('ul').next('.tab_container').find('.tab_content');
 
@@ -35,7 +35,9 @@ PR.Preview.init = function(){
 }
 
 PR.Preview.buildPreviewTab = function(textarea){
-  var labelText = textarea.attr('data-label');
+  var labelText = "Comments are processed as " +
+    "<a href='http://daringfireball.net/projects/markdown/syntax'" +
+    " target='_blank'>Markdown</a>";
   var label = "";
 
   if(labelText.length > 0)
