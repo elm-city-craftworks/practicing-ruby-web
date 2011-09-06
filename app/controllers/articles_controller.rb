@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article.update_attributes(params[:article])
-    redirect_to article
+    redirect_to @article
   end
 
   def share
