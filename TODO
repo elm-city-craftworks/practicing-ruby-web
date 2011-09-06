@@ -1,7 +1,9 @@
-- Catch campaign send web hook call and set published status.
 - Move MC interactions into their own module
-- Articles CRUD
-- Github auth / account linking
-- Archives
 - Comment System (see uni-web)
 - Some sort of dashboard
+- Don't increment views if a user is logged in
+- Add border around New Comment & mimic GitHub
+- Disable click to edit
+- Share links should at least hint at a comment system.
+    How about showing the nicknames of the people who commented and the dates, and then have a note below:  "Join the conversation about this article by subscribing now" OR "No comments yet. Subscribe now and you can be the first to share your thoughts on this article"
+- Enable preview when editing comments
