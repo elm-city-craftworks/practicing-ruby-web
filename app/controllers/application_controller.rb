@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
   def current_user
     current_authorization.try(:user)
   end
+
+  def admin_only
+    raise "Access Denied" unless current_user && current_user.admin
+  end
 end

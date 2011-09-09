@@ -1,0 +1,17 @@
+
+= error_messages_for(@announcement)
+
+%p
+  = f.label :title
+  = f.text_field :title
+
+%p
+  = f.label :author_id
+  = f.select :author_id,
+    User.where(:admin => true).order("first_name").map {|c| [c.first_name, c.id]}
+
+#announcements= f.text_area :body, 'data-preview' => true
+
+%p
+  = f.submit
+  = link_to "Cancel", admin_announcements_path
