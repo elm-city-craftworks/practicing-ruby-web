@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901130928) do
+ActiveRecord::Schema.define(:version => 20110909193908) do
+
+  create_table "announcements", :force => true do |t|
+    t.text     "title"
+    t.text     "body"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "articles", :force => true do |t|
     t.text     "subject"
