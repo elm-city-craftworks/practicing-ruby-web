@@ -1,5 +1,5 @@
 - content_for(:title) { @subject }
-- content_for :header_bottom do
+- content_for(:header_bottom) do
   :javascript
     $(function(){
       PR.Comments.init('#{comments_path}/');
