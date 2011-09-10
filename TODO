@@ -17,3 +17,4 @@
   == Table For Now ==
   - Follow conversation
   - Follow all conversations
+Fix redirects to do redirect_back_or_default
