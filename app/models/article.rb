@@ -4,6 +4,6 @@ class Article < ActiveRecord::Base
   validates_presence_of :issue_number
 
   def full_subject
-    [issue_number, subject].join(": ")
+    "Issue #{issue_number}: #{subject}"
   end
 end
