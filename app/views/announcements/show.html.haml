@@ -1,0 +1,7 @@
+- content_for(:title) { @announcement.title }
+
+#announcements
+  = render :partial => "announcement",
+    :locals => {:announcement => @announcement}
+
+  %p= link_to "&larr; back to announcements".html_safe, announcements_path
