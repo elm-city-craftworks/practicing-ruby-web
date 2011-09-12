@@ -8,7 +8,6 @@
 - Add "Delete" on comments for admins
 - Indent pre tags on comments
 - Comment replies
-- Use server to process markdown
 - Comment emails
   - User preferences - opt-out
   - @ mentions

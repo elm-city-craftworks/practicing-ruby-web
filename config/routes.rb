@@ -27,6 +27,7 @@ PracticingRubyWeb::Application.routes.draw do
   end
 
   resources :announcements
+  resources :users
 
   namespace :admin do
     resources :announcements
