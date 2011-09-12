@@ -1,0 +1,18 @@
+%h1 Articles
+
+%p= link_to "Create Article", new_admin_article_path
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th
+  %tbody
+    - @articles.each do |article|
+      %tr{:class => cycle('even','odd')}
+        %td= link_to article.subject, edit_admin_article_path(article)
+        %td.action= link_to "Destroy",
+          admin_article_path(article),
+          :confirm => "Are you sure you wish to delete this article?",
+          :method  => 'DELETE',
+          :class   => "delete"
