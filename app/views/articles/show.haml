@@ -6,12 +6,10 @@
     });
 
 #article
-  %h1
-    = @article.subject
-    = link_to share_article_path(@article), :id => "share" do
-      = image_tag "share.png"
-      Share
-    .clear
+  #article_bar
+    = @article.full_subject
+    .right
+      = link_to "Share this article", share_article_path(@article)
 
   = md(@article.body)
 
