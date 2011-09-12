@@ -18,6 +18,8 @@
 </head>
 <body>
 
+<%= render :partial => "shared/flash", :locals => {:flash => flash} %>
+
 <div id="content">
   <%= link_to image_tag("robo-banner.png"), home_path %>
   <%= render :partial => "shared/navigation" %>
