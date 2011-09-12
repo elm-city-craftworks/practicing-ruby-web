@@ -16,8 +16,7 @@ PR.Preview.init = function(){
 
 		// convert markdown for preview
 		if($(this).attr("href") == "#preview"){
-		  var html = PR.Preview.convertMarkdown(tab_contents.find('textarea').val());
-      tab_contents.filter('#preview').html(html);
+      PR.Preview.convertMarkdown(tab_contents);
     }
 
 		// show active tab contents
@@ -76,7 +75,11 @@ PR.Preview.enableTabs = function(textarea) {
 	tab_contents.first().show();
 }
 
-PR.Preview.convertMarkdown = function(text) {
-	var converter = new Showdown.converter();
-	return converter.makeHtml(text);
+PR.Preview.convertMarkdown = function(tab) {
+  var text = tab.find('textarea').val();
+
+	$.post("/markdown/parse.text", { text: text },
+	  function(data){
+      tab.filter('#preview').html(data);
+	  });
 }
