@@ -1,23 +1,13 @@
-%h2 Settings
+%h2 Settings for #{@user.github_nickname}
 
 = form_for @user do |f|
   = error_messages_for(@user)
 
-  %p
-    = f.label :first_name
-    %br
-    = f.text_field :first_name
-  %p
-    = f.label :last_name
-    %br
-    = f.text_field :last_name
-  %hr
   %p
     = f.check_box :notify_conversations
     = f.label :notify_conversations, "Notify me when conversations start"
   %p
     = f.check_box :notify_mentions
     = f.label :notify_mentions, "Notify me when I am mentioned in a conversation"
-  %hr
   %p
     = f.submit "Update Settings"
