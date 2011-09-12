@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912173127) do
+ActiveRecord::Schema.define(:version => 20110912175336) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20110912173127) do
     t.datetime "published_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "issue_number"
   end
 
   create_table "authorization_links", :force => true do |t|
