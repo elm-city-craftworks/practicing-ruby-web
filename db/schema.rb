@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110909193908) do
+ActiveRecord::Schema.define(:version => 20110912173127) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -73,7 +73,9 @@ ActiveRecord::Schema.define(:version => 20110909193908) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "github_nickname"
-    t.boolean  "admin",            :default => false
+    t.boolean  "admin",                :default => false
+    t.boolean  "notify_conversations", :default => true,  :null => false
+    t.boolean  "notify_mentions",      :default => true,  :null => false
   end
 
 end

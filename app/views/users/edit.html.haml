@@ -11,5 +11,13 @@
     = f.label :last_name
     %br
     = f.text_field :last_name
+  %hr
+  %p
+    = f.check_box :notify_conversations
+    = f.label :notify_conversations, "Notify me when conversations start"
+  %p
+    = f.check_box :notify_mentions
+    = f.label :notify_mentions, "Notify me when I am mentioned in a conversation"
+  %hr
   %p
     = f.submit "Update Settings"
