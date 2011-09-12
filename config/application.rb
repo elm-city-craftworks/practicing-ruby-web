@@ -39,5 +39,9 @@ module PracticingRubyWeb
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     Haml::Template.options[:ugly] = true
+
+    config.action_mailer.default_url_options = { :host => "practicingruby.com" }
+
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
