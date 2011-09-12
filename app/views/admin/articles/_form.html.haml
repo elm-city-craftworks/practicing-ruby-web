@@ -3,7 +3,13 @@
   = error_messages_for(@article)
 
   %p
+    = f.label :subject
+    %br
     = f.text_field :subject
+  %p
+    = f.label :issue_number
+    %br
+    = f.text_field :issue_number
   %p
     = f.text_area :body, :rows => 60, :cols => 80, :'data-preview' => true
 
