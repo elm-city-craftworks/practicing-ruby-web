@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
   end
 
   def notify_mentioned
-    # TODO
+    ConversationMailer.mentioned(self).deliver
   end
 
 end
