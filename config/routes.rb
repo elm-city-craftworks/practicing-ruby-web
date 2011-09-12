@@ -27,6 +27,8 @@ PracticingRubyWeb::Application.routes.draw do
   end
 
   resources :announcements
+
+  match '/users/settings' => 'users#edit', :as => "user_settings"
   resources :users
 
   namespace :admin do
