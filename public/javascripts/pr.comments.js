@@ -36,4 +36,8 @@ PR.Comments.init = function(commentsPath){
     });
   });
 
+  $('form.new_comment').submit(function(e){
+    $('input[type=submit]', this).attr('disabled', 'disabled');
+  })
+
 }
