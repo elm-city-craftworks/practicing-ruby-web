@@ -1,0 +1,11 @@
+#articles
+
+  = error_messages_for(@article)
+
+  %p
+    = f.text_field :subject
+  %p
+    = f.text_area :body, :rows => 60, :cols => 80, :'data-preview' => true
+
+  = f.submit
+

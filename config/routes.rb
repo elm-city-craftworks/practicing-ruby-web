@@ -30,6 +30,7 @@ PracticingRubyWeb::Application.routes.draw do
 
   namespace :admin do
     resources :announcements
+    resources :articles
   end
 
 end
