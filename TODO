@@ -1,6 +1,5 @@
 - Move MC interactions into their own module
 - Articles CRUD
-- Announcements
 - Dashboard
   - Activity feed
     - Comments
