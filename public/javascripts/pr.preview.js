@@ -77,6 +77,7 @@ PR.Preview.enableTabs = function(textarea) {
 
 PR.Preview.convertMarkdown = function(tab) {
   var text = tab.find('textarea').val();
+  tab.filter('#preview').html("Loading ...");
 
 	$.post("/markdown/parse.text", { text: text },
 	  function(data){
