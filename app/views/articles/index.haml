@@ -6,7 +6,7 @@
 
   %ul
     - @articles.each do |a|
-      %li= link_to a.subject, article_path(a)
+      %li= link_to a.full_subject, article_path(a)
 
   %h2 Articles from Volume 1
 
