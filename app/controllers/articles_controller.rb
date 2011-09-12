@@ -1,6 +1,4 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticate_admin, :only => [:create, :new, :edit, :update,
-                                               :destroy]
   before_filter :find_article, :only => [:show, :edit, :update, :share]
 
   skip_before_filter :authenticate,      :only => [:shared]
@@ -13,11 +11,6 @@ class ArticlesController < ApplicationController
   def show
     authenticate_admin if @article.status == "draft"
     @comments = @article.comments.order("created_at")
-  end
-
-  def update
-    @article.update_attributes(params[:article])
-    redirect_to @article
   end
 
   def share
