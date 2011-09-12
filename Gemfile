@@ -11,3 +11,13 @@ gem 'redcarpet', "~> 2.0.0b3"
 gem 'compass', '~> 0.11.5'
 
 gem "jquery-rails"
+
+group :test do
+  gem "minitest",  "~> 2.3.1"
+  #gem "capybara",  "~> 0.4.1.1"
+  gem "factory_girl_rails"
+  #gem "mocha"
+  gem "colorific", "~> 1.0.0"
+  gem "test_notifier", '~> 0.4.0'
+end
+
