@@ -1,0 +1,6 @@
+.announcement
+  .title
+    = link_to announcement.title, announcement_path(announcement)
+    .on= announcement.created_at.to_date
+
+  = md(announcement.body)
