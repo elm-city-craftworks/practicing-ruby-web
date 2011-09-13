@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate
+    store_location
     current_authorization || redirect_to("/auth/github")
   end
 
@@ -26,5 +27,14 @@ class ApplicationController < ActionController::Base
 
   def admin_only
     raise "Access Denied" unless current_user && current_user.admin
+  end
+
+  def store_location
+    session[:return_to] = request.request_uri
+  end
+
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
   end
 end
