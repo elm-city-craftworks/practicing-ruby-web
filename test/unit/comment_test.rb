@@ -17,10 +17,10 @@ class CommentTest < ActiveSupport::TestCase
 
     test "returns an array of valid users mentioned" do
       person = Factory(:user, :github_nickname => "PerSon")
-      frank  = Factory(:user, :github_nickname => "frank_pepelio")
+      frank  = Factory(:user, :github_nickname => "frank-pepelio")
 
       comment = Factory(:comment,
-        :body => "I mention @person and @FRank_pepelio but @noexist isn't there")
+        :body => "I mention @person: and @FRank-pepelio but @noexist isn't there")
 
       mentioned_users = comment.mentioned_users
 
