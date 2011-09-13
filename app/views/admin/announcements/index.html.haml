@@ -2,17 +2,18 @@
 
 %p= link_to "Create Announcement", new_admin_announcement_path
 
-%table
+%table.admin
   %thead
     %tr
       %th Title
       %th Author
-      %th
+      %th{:colspan => 2}
   %tbody
     - @announcements.each do |announcement|
       %tr{:class => cycle('even','odd')}
         %td= link_to announcement.title, edit_admin_announcement_path(announcement)
         %td= announcement.author.name
+        %td= link_to "Show", announcement_path(announcement)
         %td.action= link_to "Destroy",
           admin_announcement_path(announcement),
           :confirm => "Are you sure you wish to delete this announcement?",
