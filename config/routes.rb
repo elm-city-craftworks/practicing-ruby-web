@@ -22,7 +22,7 @@ PracticingRubyWeb::Application.routes.draw do
 
   resource :community, :controller => "community" do
     member do
-      get 'welcome'
+      get 'faq'
     end
   end
 
