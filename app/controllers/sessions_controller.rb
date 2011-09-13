@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session["authorization_id"] = authorization.id
 
       if authorization.user
-        redirect_to community_url
+        redirect_back_or_default(community_url)
       elsif link = authorization.authorization_link
         redirect_to authorization_link_path(link)
       else
