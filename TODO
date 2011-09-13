@@ -12,4 +12,7 @@
   == Table For Now ==
   - Follow conversation
   - Follow all conversations
+
 Fix redirects to do redirect_back_or_default
+Add background job processing
+Mention Regex should exclude parens after the username
