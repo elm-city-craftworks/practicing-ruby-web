@@ -11,11 +11,8 @@ class ConversationMailer < ActionMailer::Base
     )
   end
 
-  def mentioned(comment)
+  def mentioned(comment, users)
     @article = comment.commentable
-    users = comment.mentioned_users.where(:notify_mentions => true).map {|u| u.email }
-
-    return if users.empty?
 
     mail(
       :to      => "practicingruby@gmail.com",

@@ -25,7 +25,10 @@ class Comment < ActiveRecord::Base
   end
 
   def notify_mentioned
-    ConversationMailer.mentioned(self).deliver
+    users = comment.mentioned_users.where(:notify_mentions => true).map {|u| u.email }
+
+    return if users.empty?
+    ConversationMailer.mentioned(self, users).deliver
   end
 
 end
