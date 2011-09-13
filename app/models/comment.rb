@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :body
 
   def mentioned_users
-    mentions = body.scan(/@(\S+)/).flatten.map {|m| m.downcase }
+    mentions = body.scan(/@([a-z\d-]+)/i).flatten.map {|m| m.downcase }
 
     User.where("LOWER(github_nickname) IN (?)", mentions)
   end
