@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
-  after_create :notify_greg_conversation_started
-  after_create :notify_mentioned
+  #after_create :notify_conversation_started
+  #after_create :notify_mentioned
 
   belongs_to :commentable, :polymorphic => true
   belongs_to :user
@@ -13,6 +13,8 @@ class Comment < ActiveRecord::Base
     User.where("LOWER(github_nickname) IN (?)", mentions)
   end
 
+  private
+
   def notify_conversation_started
     if commentable.comments.count == 1
       users = User.where(:notify_conversations => true).map {|u| u.email }
@@ -20,12 +22,6 @@ class Comment < ActiveRecord::Base
         ConversationMailer.started(commentable, u).deliver
       end
     end
-  end
-
-  private
-
-  def notify_greg_conversation_started
-    ConversationMailer.started(commentable, ["gregory_brown@letterboxes.org"]).deliver
   end
 
   def notify_mentioned
