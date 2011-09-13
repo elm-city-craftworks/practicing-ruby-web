@@ -1,9 +1,8 @@
 class ConversationMailer < ActionMailer::Base
   default :from => "practicingruby@gmail.com"
 
-  def started(article)
+  def started(article, users)
     @article = article
-    users = User.where(:notify_conversations => true).map {|u| u.email }
 
     mail(
       :to      => "practicingruby@gmail.com",
