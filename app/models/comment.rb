@@ -17,7 +17,10 @@ class Comment < ActiveRecord::Base
 
   def notify_conversation_started
     if commentable.comments.count == 1
-      ConversationMailer.started(commentable).deliver
+      users = User.where(:notify_conversations => true).map {|u| u.email }
+      users.each_slice(25) do |u|
+        ConversationMailer.started(commentable, u).deliver
+      end
     end
   end
 
