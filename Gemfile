@@ -12,6 +12,8 @@ gem 'compass', '~> 0.11.5'
 
 gem "jquery-rails"
 
+gem 'mailhopper'
+
 group :test do
   gem "minitest",  "~> 2.3.1"
   #gem "capybara",  "~> 0.4.1.1"
