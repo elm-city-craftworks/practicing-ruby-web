@@ -9,3 +9,4 @@ config/initializers/omniauth.rb
 config/initializers/mail_settings.rb
 public/stylesheets/compiled/*.css
 lib/development_mail_interceptor.rb
+.sass-cache/

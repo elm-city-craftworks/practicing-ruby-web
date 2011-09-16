@@ -8,7 +8,6 @@ gem 'hominid'
 gem 'omniauth'
 
 gem 'redcarpet', "~> 2.0.0b3"
-gem 'compass', '~> 0.11.5'
 
 gem "jquery-rails"
 
@@ -17,6 +16,15 @@ gem 'mailhopper',
   :branch => "bcc_fix"
 
 gem 'delayed_mailhopper'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+  gem 'compass', '~> 0.12.alpha'
+end
 
 group :test do
   gem "minitest",  "~> 2.3.1"

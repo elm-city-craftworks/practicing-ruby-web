@@ -1,2 +1,2 @@
 script/delayed_job restart RAILS_ENV=production
-compass compile
+rake assets:precompile
