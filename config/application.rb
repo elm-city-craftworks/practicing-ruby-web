@@ -43,5 +43,7 @@ module PracticingRubyWeb
     config.action_mailer.default_url_options = { :host => "practicingruby.com" }
 
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.action_mailer.delivery_method = :mailhopper
   end
 end
