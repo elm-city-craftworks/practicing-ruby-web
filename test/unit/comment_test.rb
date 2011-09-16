@@ -20,8 +20,42 @@ class CommentTest < ActiveSupport::TestCase
       frank  = Factory(:user, :github_nickname => "frank-pepelio")
 
       comment = Factory(:comment,
-        :body => "I mention @person: and @FRank-pepelio but @noexist isn't there")
+        :body => "I mention @PerSon and @frank-pepelio")
 
+      mentioned_users = comment.mentioned_users
+
+      assert_equal 2, mentioned_users.count
+      assert mentioned_users.include?(person)
+      assert mentioned_users.include?(frank)
+    end
+
+    test "omits mentioned users that do not have a matching user record" do
+      frank  = Factory(:user, :github_nickname => "frank-pepelio")
+
+      comment = Factory(:comment,
+        :body => "I mention @frank-pepelio and @noexist")
+
+      mentioned_users = comment.mentioned_users
+
+      assert_equal [frank], mentioned_users
+    end
+
+    test "match mentioned users without case sensitivity" do
+      frank  = Factory(:user, :github_nickname => "frank-pepelio")
+
+      comment = Factory(:comment,
+        :body => "I mention @FRANK-pepelio")
+
+      mentioned_users = comment.mentioned_users
+
+      assert_equal [frank], mentioned_users
+    end
+
+    test "allows user mentions to include punctuation" do
+      frank   = Factory(:user, :github_nickname => "frank-pepelio")
+      person  = Factory(:user, :github_nickname => "person")
+
+      comment = Factory(:comment, :body => "@person, @frank-pepelio: YAY!")
       mentioned_users = comment.mentioned_users
 
       assert_equal 2, mentioned_users.count
