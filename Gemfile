@@ -35,3 +35,6 @@ group :test do
   gem "test_notifier", '~> 0.4.0'
 end
 
+group :production do
+  gem 'therubyracer'
+end
