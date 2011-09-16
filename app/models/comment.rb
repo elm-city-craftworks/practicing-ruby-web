@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
-  #after_create :notify_conversation_started
-  #after_create :notify_mentioned
+  after_create :notify_conversation_started
+  after_create :notify_mentioned
 
   belongs_to :commentable, :polymorphic => true
   belongs_to :user

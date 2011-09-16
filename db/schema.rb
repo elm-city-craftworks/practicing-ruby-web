@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912175336) do
+ActiveRecord::Schema.define(:version => 20110916131749) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(:version => 20110912175336) do
     t.string   "commentable_type"
     t.integer  "user_id"
     t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "emails", :force => true do |t|
+    t.string   "from_address",     :null => false
+    t.string   "to_address"
+    t.string   "cc_address"
+    t.string   "bcc_address"
+    t.string   "reply_to_address"
+    t.string   "subject"
+    t.text     "content"
+    t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
