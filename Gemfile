@@ -11,10 +11,7 @@ gem 'redcarpet', "~> 2.0.0b3"
 
 gem "jquery-rails"
 
-gem 'mailhopper',
-  :git    => "git://github.com/jordanbyron/mailhopper.git",
-  :branch => "bcc_fix"
-
+gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
 
 # Gems used only for assets and not required
