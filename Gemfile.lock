@@ -43,10 +43,17 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     chunky_png (1.2.4)
+    coffee-rails (3.1.1)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.1.2)
     colorific (1.0.0)
       minitest (~> 2.3.1)
       ruby-progressbar (~> 0.0.10)
-    compass (0.11.5)
+    compass (0.12.alpha.0)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
@@ -58,6 +65,8 @@ GEM
       delayed_job
       mailhopper (~> 0.0.1)
     erubis (2.7.0)
+    execjs (1.2.6)
+      multi_json (~> 1.0)
     factory_girl (2.1.0)
     factory_girl_rails (1.2.0)
       factory_girl (~> 2.1.0)
@@ -164,6 +173,12 @@ GEM
     ruby-progressbar (0.0.10)
     rubyntlm (0.1.1)
     sass (3.1.7)
+    sass-rails (3.1.2)
+      actionpack (~> 3.1.0)
+      railties (~> 3.1.0)
+      sass (>= 3.1.4)
+      sprockets (~> 2.0.0)
+      tilt (~> 1.3.2)
     sprockets (2.0.0)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -176,13 +191,17 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.29)
+    uglifier (1.0.3)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  coffee-rails (~> 3.1.0)
   colorific (~> 1.0.0)
-  compass (~> 0.11.5)
+  compass (~> 0.12.alpha)
   delayed_mailhopper
   factory_girl_rails
   haml
@@ -194,4 +213,6 @@ DEPENDENCIES
   pg
   rails (~> 3.1.0)
   redcarpet (~> 2.0.0b3)
+  sass-rails (~> 3.1.0)
   test_notifier (~> 0.4.0)
+  uglifier
