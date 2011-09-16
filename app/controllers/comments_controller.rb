@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = "Comment posted!"
-      redirect_to article_path(comment.commentable)
+      redirect_to article_path(@comment.commentable)
     else
       flash[:error] = "Please enter some text to create a comment!"
       @article  = @comment.commentable
