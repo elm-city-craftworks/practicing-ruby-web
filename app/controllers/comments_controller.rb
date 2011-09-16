@@ -3,13 +3,17 @@ class CommentsController < ApplicationController
   before_filter :commentator_only, :only => [:update, :destroy]
 
   def create
-    comment = Comment.new(params[:comment])
-    comment.user = current_user
+    @comment = Comment.new(params[:comment])
+    @comment.user = current_user
 
-    if comment.save
+    if @comment.save
+      flash[:notice] = "Comment posted!"
       redirect_to article_path(comment.commentable)
     else
-      raise "Error with comment"
+      flash[:error] = "Please enter some text to create a comment!"
+      @article  = @comment.commentable
+      @comments = @article.comments
+      render "articles/show"
     end
   end
 
