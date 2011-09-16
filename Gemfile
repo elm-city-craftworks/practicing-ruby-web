@@ -12,7 +12,10 @@ gem 'compass', '~> 0.11.5'
 
 gem "jquery-rails"
 
-gem 'mailhopper'
+gem 'mailhopper',
+  :git    => "git://github.com/jordanbyron/mailhopper.git",
+  :branch => "bcc_fix"
+
 gem 'delayed_mailhopper'
 
 group :test do
