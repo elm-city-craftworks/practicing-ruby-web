@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jordanbyron/mailhopper.git
-  revision: 5b0e9da82f03e6b975396be725498d07769ce7a7
+  revision: 5feb8c397b8572d0f6888395ba77ddb95c3afc5b
   branch: bcc_fix
   specs:
     mailhopper (0.0.4)
@@ -167,7 +167,7 @@ GEM
     sprockets (2.0.0)
       hike (~> 1.2)
       rack (~> 1.0)
-      tilt (!= 1.3.0, ~> 1.1)
+      tilt (~> 1.1, != 1.3.0)
     test_notifier (0.4.0)
       notifier
     thor (0.14.6)
