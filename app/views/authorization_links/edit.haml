@@ -7,7 +7,7 @@
   %b
     If you are already subscribed, try manually linking your account.
 
-- form_for(@authorization_link) do |f|
+= form_for(@authorization_link) do |f|
   = f.text_field :mailchimp_email
   = f.submit "Link this email address to my Github account"
 %p
