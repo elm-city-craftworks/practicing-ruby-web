@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
       link.save
 
       if link.mailchimp_email
-         AuthorizationLinksMailer.deliver_email_confirmation(link)
+         AuthorizationLinksMailer.email_confirmation(link).deliver
         redirect_to link
       else
         redirect_to edit_authorization_link_path(link)
