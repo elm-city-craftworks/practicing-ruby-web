@@ -25,7 +25,7 @@ end
 
 group :test do
   gem "minitest",  "~> 2.3.1"
-  #gem "capybara",  "~> 0.4.1.1"
+  gem "capybara"
   gem "factory_girl_rails"
   #gem "mocha"
   gem "colorific", "~> 1.0.0"
