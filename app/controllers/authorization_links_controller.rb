@@ -24,7 +24,7 @@ class AuthorizationLinksController < ApplicationController
     @authorization_link.mailchimp_email = @email
     @authorization_link.save
 
-    AuthorizationLinksMailer.email_confirmation(@authorization_link).deliver
+    AuthorizationLinksMailer.deliver_email_confirmation(@authorization_link)
 
     redirect_to @authorization_link
   end
