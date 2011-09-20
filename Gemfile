@@ -29,7 +29,7 @@ group :test do
   gem "factory_girl_rails"
   #gem "mocha"
   gem "colorific", "~> 1.0.0"
-  gem "test_notifier", '~> 0.4.0'
+  gem "test_notifier"
 end
 
 group :production do
