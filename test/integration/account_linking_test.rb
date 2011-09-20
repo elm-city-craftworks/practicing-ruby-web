@@ -10,13 +10,11 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     login(:nickname => "sandal", :email => email, :uid => uid)
 
     visit community_url
+    get_authorization_link(uid)
 
-    auth_link = Authorization.find_by_github_uid(uid).
-                              authorization_link
+    assert_confirmation_sent(email)
 
-    assert_confirmation_sent(:link => auth_link, :email => email)
-
-    assert_activated(auth_link)
+    assert_activated
   end
 
   test "github manual linking" do
@@ -28,17 +26,18 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     login(:nickname => "sandal", :email => github_email, :uid => uid)
 
     visit community_url
+    get_authorization_link(uid)
 
-    auth_link = Authorization.find_by_github_uid(uid).
-                              authorization_link
+    assert_email_manually_entered(mailchimp_email)
 
-    assert_email_manually_entered(:link  => auth_link, 
-                                  :email => mailchimp_email)
+    assert_confirmation_sent(mailchimp_email)
 
-    assert_confirmation_sent(:link  => auth_link, 
-                             :email => mailchimp_email)
+    assert_activated
+  end
 
-    assert_activated(auth_link)
+  def get_authorization_link(uid)
+    @auth_link = Authorization.find_by_github_uid(uid).
+                               authorization_link
   end
 
   def login(params)
@@ -55,29 +54,27 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     Factory(:user, params)
   end
 
-  def assert_confirmation_sent(params)
-    assert_equal authorization_link_path(params[:link]), current_path
+  def assert_confirmation_sent(email)
+    assert_equal authorization_link_path(@auth_link), current_path
 
     refute_empty ActionMailer::Base.deliveries
 
-    mail = ActionMailer::Base.deliveries.first
-    ActionMailer::Base.deliveries.clear
-
-    assert_equal [params[:email]], mail.to
+    mail = ActionMailer::Base.deliveries.pop
+    assert_equal [email], mail.to
   end
 
-  def assert_email_manually_entered(params)
-    assert_equal edit_authorization_link_path(params[:link]), current_path
+  def assert_email_manually_entered(email)
+    assert_equal edit_authorization_link_path(@auth_link), current_path
     fill_in "authorization_link_mailchimp_email", 
-      :with => params[:email]
+      :with => email
 
     click_button("Link this email address to my Github account")
 
-    params[:link].reload
+    @auth_link.reload
   end
 
-  def assert_activated(auth_link)
-    visit "/sessions/link/#{auth_link.secret}"
+  def assert_activated
+    visit "/sessions/link/#{@auth_link.secret}"
     assert_equal articles_path, current_path
   end
 end
