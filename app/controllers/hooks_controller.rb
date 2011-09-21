@@ -25,7 +25,7 @@ class HooksController < ApplicationController
       render :text => "update profile"
     else
       # ghetto
-      if RAILS_ENV == "development"
+      if Rails.env == "development"
         raise
       else
         render :text => "ok (unsupported)"
