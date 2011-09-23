@@ -46,3 +46,9 @@
       #existing-subscribers
         Already a subscriber?
         = link_to "Log in here", community_path
+
+      %p
+        Topics recently covered by Practicing Ruby include: 
+        %ul
+        - Article.order("created_at DESC").limit(5).each do |a|
+          %li= "#{a.subject}"
