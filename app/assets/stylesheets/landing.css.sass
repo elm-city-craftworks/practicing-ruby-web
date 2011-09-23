@@ -1,0 +1,33 @@
+@import "compass/reset"
+
+@font-face
+  font-family: 'SketchyMedium'
+  src: url('/fonts/sketchy-webfont.eot')
+  src: url('/fonts/sketchy-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/sketchy-webfont.woff') format('woff'), url('/fonts/sketchy-webfont.ttf') format('truetype'), url('/fonts/sketchy-webfont.svg#SketchyMedium') format('svg')
+  font-weight: normal
+  font-style: normal
+
+body.landing
+  .container
+    margin: 0 auto
+    width: 970px
+    position: relative
+  #header
+    padding-top: 50px
+    text-align: left
+    border-bottom: 5px solid #000
+    #robot
+      width: 500px
+      height: 360px
+      display: inline-block
+      background-image: asset-url("robo-landing.png", image)
+      margin-bottom: -3px
+    #pr
+      font-family: "SketchyMedium"
+      position: absolute
+      bottom: 70px
+      right: 0px
+      font-size: 90px
+      line-height: 1.25em
+      text-align: center
+
