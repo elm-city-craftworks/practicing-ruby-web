@@ -1,7 +1,36 @@
 #header
   .container
     #robot
-    #pr
+    #title
       Practicing
       %br
       Ruby
+
+#content
+  .container
+    #main
+      %h2 Get yourself a knowledge bomb!
+
+      %p
+        Getting better at software development can be hard work. There is an
+        endless sea of learning materials out there, but just figuring out what
+        topics you should focus on could take up all of your time if you let it.
+        Don’t fall into that trap, instead, let me do the legwork for you!
+      %p
+        As a published author, a professional trainer, and as someone who has
+        built and maintained a very popular open source project, I’ve done so
+        much research and practiced so many techniques over the last several
+        years that I feel like my head is going to explode. But rather than
+        letting that happen, it’d be better for both of us if I just gradually
+        released all the things I’ve learned so that others can benefit from them.
+    #sidebar
+      #sign-up
+        :plain
+          <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+          	<label for="mce-EMAIL">Sign up for Practicing Ruby!</label>
+          	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+          	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+          </form>
+      #existing-subscribers
+        Already a subscriber?
+        = link_to "Log in here", community_path
