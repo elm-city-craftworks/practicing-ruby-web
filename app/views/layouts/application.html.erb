@@ -14,7 +14,10 @@
 <%= render :partial => "shared/flash", :locals => {:flash => flash} %>
 
 <div id="content">
-  <%= link_to image_tag("robo-banner.png"), home_path %>
+  <%= link_to home_path, :id => "header" do %>
+    <%= image_tag("robo-banner.png") %>
+    <h1>Practicing Ruby</h1>
+  <% end %>
   <%= render :partial => "shared/navigation" %>
   <%= yield %>
   <hr>
