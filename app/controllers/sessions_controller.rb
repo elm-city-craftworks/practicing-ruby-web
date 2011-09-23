@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session["authorization_id"] = nil
+    session.delete("authorization_id")
     redirect_to "/"
   end
 end
