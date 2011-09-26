@@ -3,6 +3,8 @@ class Article < ActiveRecord::Base
 
   validates_presence_of :issue_number
 
+  scope :published, where(:status => "published")
+
   def full_subject
     "Issue #{issue_number}: #{subject}"
   end
