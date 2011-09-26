@@ -42,14 +42,16 @@ body.landing
     margin-top: 40px
     .container
       +container
+    #abstract
+      +column(24, true)
+      font-size: 20px
+      margin-bottom: 1em
+
     #main
       +column(14)
       +append(1)
-      h2
-        font-size: 20px
-        margin-bottom: 1em
       p
-        margin: 1em 0
+        margin-bottom: 1em
         line-height: 20px
         text-align: justify
     #sidebar
@@ -70,5 +72,24 @@ body.landing
         #mce-EMAIL
           width: 175px
       #existing-subscribers
-        margin-top: 1em
+        margin-top: 1.5em
         text-align: center
+      #recent-topics
+        margin-top: 2em
+        text-align: center
+        h3
+          line-height: 1.3em
+          padding: 1em
+          +border-top-radius(10px)
+          background-color: #318364
+          color: #f9f9f9
+          img
+            vertical-align: bottom
+            margin-right: 0.5em
+        ul
+          padding: 1em
+          padding-bottom: 3em
+          background-color: #D9FFDF
+          +background-image(linear-gradient(#D9FFDF, #f9f9f9))
+          li
+            margin-bottom: 0.5em

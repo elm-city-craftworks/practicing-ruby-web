@@ -8,29 +8,28 @@
 
 #content
   .container
+    #abstract A Weekly Ruby Journal That Will Blow Your Mind.
     #main
-      %h2 A Weekly Ruby Journal That Will Blow Your Mind. 
-
       %p
         Getting better at software development can be hard work. There is an
         endless sea of learning materials out there, but just figuring out what
         topics you should focus on could take up all of your time if you let it.
         Don’t fall into that trap, instead, let me do the legwork for you!
       %p
-        As a subscriber to Practicing Ruby, you'll get access to well-polished 
+        As a subscriber to Practicing Ruby, you'll get access to well-polished
         weekly brain dumps about topics that will help you become a better
-        Ruby developer. You'll also be able to join a dedicated group of 
+        Ruby developer. You'll also be able to join a dedicated group of
         Practicing Rubyists in lively conversations about the eclectic mix of
         topics I'm writing about.
       %p
-        By becoming a paid subscriber, you'll help make sure that 
+        By becoming a paid subscriber, you'll help make sure that
         Practicing Ruby remains a sustainable project while
-        simultaneously making it easier for me to spend more and more time working 
-        on Mendicant University, my free online school for software developers. 
+        simultaneously making it easier for me to spend more and more time working
+        on Mendicant University, my free online school for software developers.
         So in addition to getting access to a great learning
         resource for yourself, you'll be helping me teach others as well.
       %p
-        Feel free to contact me at gregory.t.brown@gmail.com with any questions 
+        Feel free to contact me at gregory.t.brown@gmail.com with any questions
         you have about this service. I'll do my best to get back to you as soon as I can.
 
     #sidebar
@@ -47,8 +46,11 @@
         Already a subscriber?
         = link_to "Log in here", community_path
 
-      %p
-        Topics recently covered by Practicing Ruby include: 
+      #recent-topics
+        %h3
+          = image_tag "ruby.png"
+          Topics recently covered by Practicing Ruby
+
         %ul
-        - Article.order("created_at DESC").limit(5).each do |a|
-          %li= "#{a.subject}"
+          - @recent_topics.each do |a|
+            %li= "#{a.subject}"
