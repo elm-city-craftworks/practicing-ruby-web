@@ -8,6 +8,8 @@ class HomeController < ApplicationController
     if current_user
       redirect_to articles_path
     end
+
+    @recent_topics = Article.order("created_at DESC").limit(5)
   end
 
 end
