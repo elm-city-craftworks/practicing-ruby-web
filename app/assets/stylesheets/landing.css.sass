@@ -2,6 +2,7 @@
 @import "blueprint/grid"
 @import "compass/css3/images"
 @import "compass/css3/border-radius"
+@import "compass/css3/box-shadow"
 @import "partials/fonts"
 
 body.landing
@@ -64,6 +65,8 @@ body.landing
       +column(9, true)
 
       #sign-up
+        +single-box-shadow(#333, 0, 0, 5px)
+        margin: 0 5px
         padding: 1.5em
         color: #fff
         +background-image(linear-gradient(#2D74BA, #1E4C78))
@@ -81,6 +84,9 @@ body.landing
         margin-top: 1.5em
         text-align: center
       #recent-topics
+        margin: 0 5px
+        +single-box-shadow(#333, 0, 0, 5px)
+        +border-radius(10px)
         margin-top: 2em
         text-align: center
         h3
@@ -93,9 +99,9 @@ body.landing
             vertical-align: bottom
             margin-right: 0.5em
         ul
+          +border-bottom-radius(10px)
           padding: 1em
-          padding-bottom: 3em
           background-color: #D9FFDF
-          +background-image(linear-gradient(#D9FFDF, #f9f9f9))
+          +background-image(linear-gradient(#B8DABF, #D9FFDF))
           li
             margin-bottom: 0.5em
