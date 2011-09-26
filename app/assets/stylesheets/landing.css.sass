@@ -23,7 +23,7 @@ body.landing
     background-color: #215742
     #robot
       width: 354px
-      height: 250px
+      height: 249px
       display: inline-block
       background-image: asset-url("robo-landing.png", image)
       margin-bottom: -3px
@@ -36,6 +36,12 @@ body.landing
       font-size: 74px
       line-height: 1.25em
       text-align: center
+
+      #byline
+        font-size: 26px
+        margin-top: 20px
+        line-height: 26px
+        color: #ccc
 
   #content
     font-size: 13px
@@ -80,14 +86,18 @@ body.landing
           font-size: 16px
         #mce-EMAIL
           width: 175px
+        p#payment
+          margin-top: 10px
+          font-size: 0.9em
       #existing-subscribers
         margin-top: 1.5em
         text-align: center
       #recent-topics
         margin: 0 5px
+        margin-top: 4px
         +single-box-shadow(#333, 0, 0, 5px)
         +border-radius(10px)
-        margin-top: 2em
+        margin-bottom: 2em
         text-align: center
         h3
           line-height: 1.3em
