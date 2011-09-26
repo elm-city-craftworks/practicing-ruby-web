@@ -1,2 +1,3 @@
 script/delayed_job restart RAILS_ENV=production
+rm -rf /var/rapp/practicing-ruby-web/tmp/cache
 rake assets:precompile
