@@ -1,7 +1,9 @@
 #header
   .container
     #robot
-    #title Practicing Ruby
+    #title
+      Practicing Ruby
+      #byline with Gregory Brown
 
 #content
   .container
@@ -33,19 +35,6 @@
         you have about this service. I'll do my best to get back to you as soon as I can.
 
     #sidebar
-      #sign-up
-        :plain
-          <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-          	<label for="mce-EMAIL">Sign up for Practicing Ruby!</label>
-          	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-          	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-            <p style="margin-top: 10px">Subscribers pay $8/month via amazon payments</p>
-          </form>
-
-      #existing-subscribers
-        Already a subscriber?
-        = link_to "Log in here", community_path
-
       #recent-topics
         %h3
           = image_tag "ruby.png"
@@ -54,3 +43,16 @@
         %ul
           - @recent_topics.each do |a|
             %li= "#{a.subject}"
+
+      #sign-up
+        :plain
+          <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+          	<label for="mce-EMAIL">Sign up for Practicing Ruby!</label>
+          	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+          	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+            <p id="payment">Subscribers pay $8/month via amazon payments</p>
+          </form>
+
+      #existing-subscribers
+        Already a subscriber?
+        = link_to "Log in here", community_path
