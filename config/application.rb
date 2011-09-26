@@ -54,5 +54,7 @@ module PracticingRubyWeb
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.action_mailer.delivery_method = :mailhopper
+
+    config.assets.precompile += %w(landing.css)
   end
 end

@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       redirect_to articles_path
     end
 
-    @recent_topics = Article.order("created_at DESC").limit(5)
+    @recent_topics = Article.published.order("created_at DESC").limit(5)
   end
 
 end
