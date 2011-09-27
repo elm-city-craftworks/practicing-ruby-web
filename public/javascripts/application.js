@@ -1,8 +1,3 @@
-//= require jquery
-//= require jquery_ujs
-//= require_self
-//= require_tree .
-
 // Setup the PR [Practicing Ruby] Namespace
 var PR = PR ? PR : new Object();
 
