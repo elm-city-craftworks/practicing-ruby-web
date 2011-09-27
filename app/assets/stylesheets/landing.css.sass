@@ -3,6 +3,7 @@
 @import "compass/css3/images"
 @import "compass/css3/border-radius"
 @import "compass/css3/box-shadow"
+@import "compass/css3/text-shadow"
 @import "partials/fonts"
 
 body.landing
@@ -22,13 +23,14 @@ body.landing
     border-bottom: 10px solid #14372A
     background-color: #215742
     #robot
-      width: 354px
+      width: 373px
       height: 249px
       display: inline-block
       background-image: asset-url("robo-landing.png", image)
       margin-bottom: -4px
     #title
-      color: #ddd
+      +single-text-shadow(#506055, 0, 0, 8px)
+      color: #eee
       font-family: "Sketchy"
       position: absolute
       bottom: 70px
@@ -41,7 +43,7 @@ body.landing
         font-size: 26px
         margin-top: 20px
         line-height: 26px
-        color: #ccc
+        color: #ddd
 
   #content
     font-size: 13px
