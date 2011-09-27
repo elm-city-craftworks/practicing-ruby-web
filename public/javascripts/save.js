@@ -1,5 +1,18 @@
+/*
+* save.js
+* Track changes in a form and display a warning if they haven't been submitted
+*
+* Usage:
+* Add 'data-track-changes=true' to any form which you want to track changes
+*
+*   <form data-track-changes=true> ... </form>
+*/
+
 Save = {
   init: function(){
+
+    // Track keydown so changes are tracked immediately in
+    // textarea and input[type=text] elements, and change for select
     jQuery('form[data-track-changes=true] :input').
       keydown(Save.change).change(Save.change);
 
