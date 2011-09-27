@@ -8,8 +8,7 @@
     - @comments.each do |comment|
       = render :partial => "comments/show", :locals => {:comment => comment}
 
-  = form_for @article.comments.build,
-    :html => { :'data-track-changes' => true } do |f|
+  = form_for @article.comments.build do |f|
     = f.hidden_field :commentable_type
     = f.hidden_field :commentable_id
 
