@@ -44,6 +44,6 @@ class CommentsController < ApplicationController
   end
 
   def commentator_only
-    raise "Access Denied" if @comment.user != current_user
+    raise "Access Denied" unless @comment.editable_by? current_user
   end
 end
