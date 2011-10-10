@@ -3,7 +3,7 @@
 <head>
   <title><%= yield(:title).blank? ? controller_name.humanize : yield(:title) %> - Practicing Ruby</title>
 
-  <%= stylesheet_link_tag 'application', 'compiled/screen' %>
+  <%= stylesheet_link_tag 'application', 'compiled/screen', 'pygments' %>
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'jquery.jeditable', 'pr.comments', 'pr.preview',
                              'save' %>

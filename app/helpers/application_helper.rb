@@ -14,7 +14,15 @@ module ApplicationHelper
       :no_intra_emphasis   => true,
       :fenced_code_blocks  => true)
 
-    markdown.render(content).html_safe
+    syntax_highlighter(markdown.render(content)).html_safe
+  end
+
+  def syntax_highlighter(html)
+    doc = Nokogiri::HTML(html)
+    doc.search("//code[@class]").each do |code|
+      code.replace Albino.colorize(code.text.rstrip, code[:class])
+    end
+    doc.to_s
   end
 
   def gravatar(user, size=64)
