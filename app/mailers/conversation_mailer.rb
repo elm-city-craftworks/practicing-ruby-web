@@ -20,4 +20,14 @@ class ConversationMailer < ActionMailer::Base
       :subject => "You've been mentioned in a conversation about Practicing Ruby #{@article.issue_number}"
     )
   end
+
+  def comment_made(comment, users)
+    @article = comment.commentable
+
+    mail(
+      :to      => "practicingruby@gmail.com",
+      :bcc     => users,
+      :subject => "A comment has been made about Practicing Ruby #{@article.issue_number}"
+    )
+  end
 end

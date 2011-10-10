@@ -1,13 +1,9 @@
 - Move MC interactions into their own module
-- Articles CRUD
 - Dashboard
   - Activity feed
     - Comments
     - Articles
     - Announcements
-- Allow Edit/Delete comments for admins
-- Send a message to admins every time a comment is made
-- Indent pre tags on comments
 - Comment replies
 - Comment emails
   == Table For Now ==
