@@ -13,6 +13,10 @@ class Comment < ActiveRecord::Base
     User.where("LOWER(github_nickname) IN (?)", mentions)
   end
 
+  def editable_by?(user)
+    self.user == user || user.admin?
+  end
+
   private
 
   def notify_conversation_started
