@@ -1,10 +1,10 @@
 .comment{:data => { :id => comment.id,
-                    :editable => (comment.user == current_user).inspect }}
+                    :editable => (comment.editable_by?(current_user)).inspect }}
   .header
     = gravatar(comment.user, 32)
     = link_to_github comment.user
     .controls
-      - if current_user == comment.user
+      - if comment.editable_by? current_user
         = link_to 'Edit', '#', :class => "edit", :title => "Edit"
         = link_to 'Delete', comment_path(comment),
           :class   => "remove", :title  => "Delete",
