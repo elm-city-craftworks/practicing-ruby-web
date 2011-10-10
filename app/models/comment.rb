@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
-  after_create :notify_conversation_started
-  after_create :notify_mentioned
+  after_create :notify_conversation_started, :notify_mentioned,
+               :notify_comment_made
 
   belongs_to :commentable, :polymorphic => true
   belongs_to :user
@@ -17,10 +17,14 @@ class Comment < ActiveRecord::Base
     self.user == user || user.admin?
   end
 
+  def first_comment?
+    commentable.comments.count == 1
+  end
+
   private
 
   def notify_conversation_started
-    if commentable.comments.count == 1
+    if first_comment?
       users = User.where(:notify_conversations => true).map {|u| u.email }
       users.each_slice(25) do |u|
         ConversationMailer.started(commentable, u).deliver
@@ -33,6 +37,15 @@ class Comment < ActiveRecord::Base
 
     return if users.empty?
     ConversationMailer.mentioned(self, users).deliver
+  end
+
+  def notify_comment_made
+    users = User.where(:admin => true)
+    users = users.where("users.id NOT IN(?)", mentioned_users) if mentioned_users.any?
+    users = users.map {|u| u.email }
+
+    return if users.empty? || first_comment?
+    ConversationMailer.comment_made(self, users).deliver
   end
 
 end
