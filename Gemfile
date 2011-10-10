@@ -9,6 +9,8 @@ gem 'hominid'
 gem 'omniauth'
 
 gem 'redcarpet', "~> 2.0.0b3"
+gem "albino"
+gem "nokogiri"
 
 gem "jquery-rails"
 
