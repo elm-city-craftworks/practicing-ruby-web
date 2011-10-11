@@ -3,24 +3,44 @@
 <head>
   <title>We're sorry, but something went wrong (500)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
+    body {
+      background-color: #eee;
+      color: #666;
+      font-family: arial, sans-serif;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    div#content {
+      width: 500px;
+      margin: 5em auto;
+      text-align: center;
+      background-color: #fff;
+      padding: 2em;
+
+      /* Border Radius */
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -o-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -khtml-border-radius: 10px;
+      border-radius: 10px;
+
+      /* Shadow */
+      -moz-box-shadow: 0 0 5px #333333;
+      -webkit-box-shadow: 0 0 5px #333333;
+      -o-box-shadow: 0 0 5px #333333;
+      box-shadow: 0 0 5px #333333;
+
+    }
+    a { color: #BD0010; }
+    h1 { font-size: 100%; color: #333; line-height: 1.5em; }
   </style>
 </head>
 
 <body>
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
+  <div id="content">
     <h1>We're sorry, but something went wrong.</h1>
-    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
+    <p>Please let us know about it: <a href="mailto:practicingruby@gmail.com?subject=Huston, we have a problem.">practicingruby@gmail.com</a></p>
+    <p><a href="/">&larr; practicingruby.com</a></p>
   </div>
 </body>
 </html>
