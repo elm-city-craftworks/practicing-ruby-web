@@ -10,8 +10,29 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       refute ActionMailer::Base.deliveries.empty?
 
-      assert ActionMailer::Base.deliveries.first.bcc.include?(comment.user.email)
-      refute ActionMailer::Base.deliveries.first.bcc.include?(no_email.email)
+      message = ActionMailer::Base.deliveries.first
+
+      assert message.bcc.include?(comment.user.email)
+      refute message.bcc.include?(no_email.email)
+    end
+
+    test "comment emails include a link back to article comments" do
+      admin = Factory(:user, :admin => true, :github_nickname => "Jordan")
+
+      first_comment   = Factory(:comment, :body => "First")
+      mention_comment = Factory(:comment, :body => "@#{admin.github_nickname}",
+        :commentable => first_comment.commentable)
+
+      email_bodies = ActionMailer::Base.deliveries.map {|e| e.body.to_s }
+
+      article_url = Rails.application.routes.url_helpers.
+        article_url( first_comment.commentable,
+                     :anchor    => "comments",
+                     :only_path => true )
+
+      email_bodies.each do |body|
+        assert body[article_url]
+      end
     end
 
     test "comment made emails are sent to admins" do
