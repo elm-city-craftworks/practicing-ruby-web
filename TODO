@@ -4,10 +4,9 @@
     - Comments
     - Articles
     - Announcements
-- Comment replies
-- Comment emails
-  == Table For Now ==
-  - Follow conversation
-  - Follow all conversations
+- Follow conversation
+- Follow all conversations
+- Reply to comment button (adds a in-reply-to link)
+- Link to comment
 
 Add Asset Pipeline (http://railscasts.com/episodes/282-upgrading-to-rails-3-1)
