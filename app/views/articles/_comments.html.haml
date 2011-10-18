@@ -4,7 +4,7 @@
   - if @comments.empty?
     %p.message
       Looks like the discussion about this article hasn't started yet. 
-      If you've got something on your mind, please share it!
+      Please take a moment to share what's on your mind.
   - else
     - @comments.each do |comment|
       = render :partial => "comments/show", :locals => {:comment => comment}
