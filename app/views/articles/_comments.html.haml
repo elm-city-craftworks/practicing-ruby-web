@@ -3,8 +3,11 @@
 
   - if @comments.empty?
     %p.message
-      Discussion about this article hasn't started yet. Please change that by sharing what's on your mind.
+      No Practicing Ruby article is complete without a good conversation. 
+      Please help me out by sharing your thoughts.
   - else
+    %p.message
+  
     - @comments.each do |comment|
       = render :partial => "comments/show", :locals => {:comment => comment}
 
