@@ -1,4 +1,4 @@
-- content_for(:title) { @subject }
+- content_for(:title) { "Issue #{@article.issue_number}" }
 - content_for(:header_bottom) do
   :javascript
     $(function(){
