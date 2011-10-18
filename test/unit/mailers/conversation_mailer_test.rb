@@ -87,5 +87,20 @@ class ConversationMailerTest < ActionMailer::TestCase
       refute comment_email.bcc.include?(admin_user.email)
       assert comment_email.bcc.include?(other_admin.email)
     end
+
+    test "conversation emails are not sent for non-published articles" do
+      article = Factory(:article, :status => "draft")
+
+      first_comment = Factory(:comment, :body        => "First Comment",
+                                        :commentable => article)
+
+      assert ActionMailer::Base.deliveries.empty?
+
+      mention_comment = Factory(:comment,
+        :body        => "Hi @#{first_comment.user.github_nickname}",
+        :commentable => article)
+
+      assert ActionMailer::Base.deliveries.empty?
+    end
   end
 end
