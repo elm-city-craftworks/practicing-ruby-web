@@ -24,5 +24,5 @@ group :test do
   gem "factory_girl_rails"
   #gem "mocha"
   gem "colorific", "~> 1.0.0"
-  gem "test_notifier"
+  gem "test_notifier", "~> 1.0.0"
 end
