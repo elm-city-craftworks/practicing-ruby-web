@@ -1,5 +1,5 @@
 - Move MC interactions into their own module
-- Caching!
+- Caching! See: http://guides.rubyonrails.org/caching_with_rails.html
 - Dashboard
   - Activity feed
     - Comments
