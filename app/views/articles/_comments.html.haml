@@ -3,8 +3,7 @@
 
   - if @comments.empty?
     %p.message
-      Looks like the discussion about this article hasn't started yet. 
-      Please take a moment to share what's on your mind.
+      The discussion about this article hasn't started yet. You can change that by sharing what's on your mind.
   - else
     - @comments.each do |comment|
       = render :partial => "comments/show", :locals => {:comment => comment}
