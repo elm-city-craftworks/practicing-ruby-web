@@ -8,4 +8,8 @@ class Article < ActiveRecord::Base
   def full_subject
     "Issue #{issue_number}: #{subject}"
   end
+
+  def published?
+    status == "published"
+  end
 end

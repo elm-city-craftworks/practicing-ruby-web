@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
   private
 
   def notify_conversation_started
-    if first_comment?
+    if first_comment? && commentable.published?
       users = User.where(:notify_conversations => true).map {|u| u.email }
       users.each_slice(25) do |u|
         ConversationMailer.started(commentable, u).deliver
@@ -35,7 +35,7 @@ class Comment < ActiveRecord::Base
   def notify_mentioned
     users = mentioned_users.where(:notify_mentions => true).map {|u| u.email }
 
-    return if users.empty?
+    return if users.empty? || !commentable.published?
     ConversationMailer.mentioned(self, users).deliver
   end
 
