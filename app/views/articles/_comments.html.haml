@@ -3,11 +3,13 @@
 
   - if @comments.empty?
     %p.message
-      No Practicing Ruby article is complete without a good conversation. 
+      No 
+      %i Practicing Ruby 
+      article is complete without a good conversation. 
       Please share your thoughts!
   - else
     %p.message
-  
+      Now that you've read this article, what is on your mind?
     - @comments.each do |comment|
       = render :partial => "comments/show", :locals => {:comment => comment}
 
