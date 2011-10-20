@@ -11,7 +11,8 @@
     .right
       = link_to "Share this article", share_article_path(@article)
 
-  = md(@article.body)
+  - cache("article_body_#{@article.id}") do
+    = md(@article.body)
 
 
   = render :partial => "articles/comments"
