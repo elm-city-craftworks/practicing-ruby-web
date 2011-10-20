@@ -1,3 +1,7 @@
+- if current_user.admin?
+  #admin
+    = button_to "New article", new_admin_article_path, :method => :get
+
 #article
 
   %h2 Articles from Volume 2

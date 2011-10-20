@@ -9,6 +9,9 @@
   #article_bar
     = @article.full_subject
     .right
+      - if current_user.admin?
+        = link_to "Edit", edit_admin_article_path(@article)
+
       = link_to "Share this article", share_article_path(@article)
 
   - cache("article_body_#{@article.id}") do
