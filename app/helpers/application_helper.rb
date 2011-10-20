@@ -19,10 +19,12 @@ module ApplicationHelper
 
   def syntax_highlighter(html)
     doc = Nokogiri::HTML(html)
+
     doc.search("//code[@class]").each do |code|
       code.parent.replace Albino.colorize(code.text.rstrip, code[:class])
     end
-    doc.to_s
+
+    doc.xpath("//body").children.to_s
   end
 
   def gravatar(user, size=64)
