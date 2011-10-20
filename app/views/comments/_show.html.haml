@@ -13,4 +13,6 @@
     .on
       = time_ago_in_words comment.created_at
       ago
-  .content= md(comment.body)
+  .content
+    - cache("comment_body_#{comment.id}") do
+      = md(comment.body)
