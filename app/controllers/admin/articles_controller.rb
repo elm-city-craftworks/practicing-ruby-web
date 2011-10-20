@@ -28,6 +28,8 @@ module Admin
 
     def update
       if @article.update_attributes(params[:article])
+        expire_fragment("article_body_#{@article.id}")
+
         flash[:notice] = "Article successfully updated."
         redirect_to admin_articles_path
       else

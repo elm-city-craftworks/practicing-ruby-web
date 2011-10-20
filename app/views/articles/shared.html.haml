@@ -12,7 +12,8 @@
 
   %h1= @article.subject
 
-  = md(@article.body)
+  - cache("article_body_#{@article.id}") do
+    = md(@article.body)
 
   #comments
     %hr
