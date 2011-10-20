@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = "Comment posted!"
-      redirect_to article_path(@comment.commentable)
+      redirect_to article_path(@comment.commentable, :anchor => "comments")
     else
       flash[:error] = "Please enter some text to create a comment!"
       @article  = @comment.commentable
@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment.update_attribute(:body, params[:value])
+    expire_fragment("comment_body_#{@comment.id}")
 
     respond_to do |format|
       format.text
