@@ -16,7 +16,7 @@ module Admin
 
       if @article.save
         flash[:notice] = "Article successfully created."
-        redirect_to admin_articles_path
+        redirect_to article_path(@article)
       else
         render :action => :new
       end
@@ -31,7 +31,7 @@ module Admin
         expire_fragment("article_body_#{@article.id}")
 
         flash[:notice] = "Article successfully updated."
-        redirect_to admin_articles_path
+        redirect_to article_path(@article)
       else
         render :action => :edit
       end
