@@ -1,5 +1,10 @@
 - content_for(:title) { "Announcements" }
 
+- if current_user.admin?
+  #admin
+    = button_to "New announcement", new_admin_announcement_path, :method => :get
+  .clear
+
 #announcements
 
   = render :partial => "announcement", :collection => @announcements
