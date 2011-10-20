@@ -2,5 +2,8 @@
   .title
     = link_to announcement.title, announcement_path(announcement)
     .on= announcement.created_at.to_date
+    - if current_user.admin?
+      .right
+        = link_to "Edit", edit_admin_announcement_path(announcement)
 
   = md(announcement.body)
