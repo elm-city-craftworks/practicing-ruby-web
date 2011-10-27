@@ -208,6 +208,7 @@ DEPENDENCIES
   jquery-rails
   mailhopper (~> 0.0.4)
   minitest (~> 2.3.1)
+  nokogiri
   omniauth
   pg
   rails (~> 3.1.0)
