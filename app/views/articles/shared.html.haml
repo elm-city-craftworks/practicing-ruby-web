@@ -1,7 +1,7 @@
 - content_for(:title) { @article.full_subject }
 
 #article
-  %h1= @article.subject
+  %h1= @article.full_subject
 
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
