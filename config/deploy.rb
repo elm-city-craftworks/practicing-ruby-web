@@ -40,3 +40,38 @@ after "deploy", "deploy:migrate"
 after "deploy", 'deploy:cleanup'
 
 # load 'deploy/assets' Asset Precompile
+
+desc "Import articles from the server"
+task :import_articles do
+  file  = "#{application}.#{Time.now.strftime '%Y-%m-%d_%H:%M:%S'}.sql.bz2"
+  remote_file = "#{deploy_to}/#{file}"
+  remote_db   = remote_database_config
+
+  run %{pg_dump --clean --no-owner --no-privileges -U#{remote_db['username']}
+        -h#{remote_db['host']} -t articles #{remote_db['database']} | bzip2 > #{remote_file}} do |ch, stream, out|
+    ch.send_data "#{remote_db['password']}\n" if out =~ /^Password:/
+    puts out
+  end
+
+  rsync = "rsync #{user}@#{find_servers.first.host}:#{remote_file} tmp"
+  puts `#{rsync}`
+
+  local_db = database_config
+
+  load_articles = "bzcat tmp/#{file} | psql -U#{local_db['username']} #{local_db['database']}"
+  puts `#{load_articles}`
+
+  run "rm #{remote_file}"
+  `rm tmp/#{file}`
+
+  puts "  * Articles Imported"
+end
+
+def database_config(db="development")
+  YAML::load_file('config/database.yml')[db]
+end
+
+def remote_database_config(db="production")
+  remote_config = capture("cat #{deploy_to}/config/database.yml")
+  YAML::load(remote_config)[db]
+end
