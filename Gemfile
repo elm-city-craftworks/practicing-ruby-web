@@ -18,6 +18,8 @@ gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
 gem 'compass', '~> 0.11.5'
 
+gem 'capistrano'
+
 group :test do
   gem "minitest",  "~> 2.3.1"
   gem "capybara"
