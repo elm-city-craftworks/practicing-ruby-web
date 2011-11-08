@@ -10,4 +10,7 @@
     = f.check_box :notify_mentions
     = f.label :notify_mentions, "Notify me when I am mentioned in a conversation"
   %p
+    = f.check_box :notify_comment_made
+    = f.label :notify_comment_made, "Notify me every time a comment is made"
+  %p
     = f.submit "Update Settings"
