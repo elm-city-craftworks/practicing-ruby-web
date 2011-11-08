@@ -40,11 +40,11 @@ class Comment < ActiveRecord::Base
   end
 
   def notify_comment_made
-    users = User.where(:admin => true)
+    users = User.where(:notify_comment_made => true)
     users = users.where("users.id NOT IN(?)", mentioned_users) if mentioned_users.any?
     users = users.map {|u| u.email }
 
-    return if users.empty? || first_comment?
+    return if users.empty? || first_comment? || !commentable.published?
     ConversationMailer.comment_made(self, users).deliver
   end
 
