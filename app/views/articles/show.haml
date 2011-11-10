@@ -8,6 +8,7 @@
 #article
   #article_bar
     = @article.full_subject
+    = "( #{@article.created_at.strftime('%Y.%m.%d')} )"
     .right
       - if current_user.admin?
         = link_to "Edit", edit_admin_article_path(@article)
