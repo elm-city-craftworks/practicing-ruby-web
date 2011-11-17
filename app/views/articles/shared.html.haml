@@ -1,7 +1,7 @@
 - content_for(:title) { @article.full_subject }
 
 #article
-  %h1= "#{@article.full_subject} (#{@article.created_at.strftime('%Y.%m.%d')})"
+  #article_bar= "#{@article.full_subject} (#{@article.created_at.strftime('%Y.%m.%d')})"
 
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
@@ -10,7 +10,7 @@
     %hr
     #share_alert
       = link_to_github @user
-      liked this article and decided to share it with you. 
+      liked this article and decided to share it with you.
       If you enjoyed reading it, be sure to check out what
       = link_to "Practicing Ruby", "http://practicingruby.com"
       is all about. There is a lot more great stuff where
