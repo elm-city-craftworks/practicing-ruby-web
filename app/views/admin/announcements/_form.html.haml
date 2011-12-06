@@ -10,6 +10,14 @@
   = f.select :author_id,
     User.where(:admin => true).order("first_name").map {|c| [c.first_name, c.id]}
 
+%p
+  = f.check_box :broadcast
+  = f.label :broadcast
+
+%p
+  = f.label :broadcast_message
+  = f.text_field :broadcast_message
+
 #announcements= f.text_area :body, 'data-preview' => true
 
 %p

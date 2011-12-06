@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111108180149) do
+ActiveRecord::Schema.define(:version => 20111206143647) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20111108180149) do
     t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "broadcast",         :default => false, :null => false
+    t.text     "broadcast_message"
   end
 
   create_table "articles", :force => true do |t|
