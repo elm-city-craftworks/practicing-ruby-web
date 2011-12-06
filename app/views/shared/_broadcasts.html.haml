@@ -1,4 +1,5 @@
 - if current_user && Announcement.broadcasts.any?
   #broadcasts
     - Announcement.broadcasts.each do |broadcast|
-      .broadcast= link_to broadcast.broadcast_message, announcement_path(broadcast)
+      .broadcast
+        = link_to broadcast.broadcast_message, announcement_path(broadcast)
