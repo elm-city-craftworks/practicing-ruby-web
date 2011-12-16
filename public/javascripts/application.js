@@ -8,4 +8,5 @@ PR.setupNamespace = function(namespace){
 
 jQuery(function(){
   if(PR.Preview) PR.Preview.init();
+  $('textarea').elastic();
 });
