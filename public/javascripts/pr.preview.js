@@ -14,14 +14,17 @@ PR.Preview.init = function(){
 		$(this).parent().addClass("active");
 		tab_contents.hide();
 
+		// show active tab contents
+		var activeTab = tab_contents.filter($(this).attr("href"));
+		$(activeTab).show();
+
 		// convert markdown for preview
 		if($(this).attr("href") == "#preview"){
       PR.Preview.convertMarkdown(tab_contents);
     }
-
-		// show active tab contents
-		var activeTab = tab_contents.filter($(this).attr("href"));
-		$(activeTab).show();
+    else{
+      activeTab.find('textarea').focus();
+    }
 
 		e.preventDefault();
 	});
