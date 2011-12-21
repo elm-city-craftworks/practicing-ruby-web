@@ -1,1 +1,1 @@
-script/delayed_job restart RAILS_ENV=production
+sudo god restart practicing_ruby_delayed_job
