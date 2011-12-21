@@ -1,7 +1,7 @@
 RAILS_ROOT = File.dirname(File.dirname(__FILE__))
 
 God.watch do |w|
-  script          = "RAILS_ENV=production #{RAILS_ROOT}/script/delayed_job"
+  script          = "#{RAILS_ROOT}/script/delayed_job"
   w.name          = "practicing_ruby_delayed_job"
   w.group         = "practicing_ruby"
   w.interval      = 60.seconds
@@ -11,6 +11,10 @@ God.watch do |w|
   w.start_grace   = 20.seconds
   w.restart_grace = 20.seconds
   w.pid_file      = "#{RAILS_ROOT}/tmp/pids/delayed_job.pid"
+  w.log           = "#{RAILS_ROOT}/log/delayed_job.god.log"
+  w.err_log       = "#{RAILS_ROOT}/log/delayed_job.god.errors.log"
+
+  w.env = { 'RAILS_ENV' => "production" }
 
   w.behavior(:clean_pid_file)
 
