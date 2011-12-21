@@ -28,3 +28,7 @@ group :test do
   gem "colorific", "~> 1.0.0"
   gem "test_notifier", "~> 1.0.0"
 end
+
+group :production do
+  gem "god", :require => false
+end
