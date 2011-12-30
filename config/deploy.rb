@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 
-set :application, "practicing-ruby-web"
-set :repository,  "git://github.com/elm-city-craftworks/practicing-ruby-web.git"
+set :application, "practicing-ruby"
+set :repository,  "git@github.com:elm-city-craftworks/practicing-ruby-web.git"
 
 set :scm, :git
 set :deploy_to, "/var/rapp/#{application}"
@@ -28,12 +28,6 @@ after 'deploy:update_code' do
   each do |from, to|
     run "ln -nfs #{shared_path}/#{from} #{release_path}/#{to}"
   end
-end
-
-before 'deploy' do
-  puts "\n*** Capistrano not setup on server ***\n" +
-       "***   Run webbynode push instead   ***\n\n"
-  exit
 end
 
 after "deploy", "deploy:migrate"
