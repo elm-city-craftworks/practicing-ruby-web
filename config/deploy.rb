@@ -38,6 +38,7 @@ after "deploy", "deploy:migrate"
 after "deploy", 'deploy:cleanup'
 
 after 'deploy' do
+  run "sudo god load #{release_path}/config/delayed_job.god"
   run "sudo god start practicing_ruby_delayed_job"
 end
 
