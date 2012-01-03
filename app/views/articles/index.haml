@@ -4,12 +4,20 @@
 
 #article
 
+  %h2 Articles from Volume 3
+
+  %p.left This is the current volume of Practicing Ruby. New articles are typically released on Tuesdays, between 19:00 and 23:00 UTC. After all 12 issues of Volume 3 are released, we will take a short break and then resume with Volume 4 starting on April 3rd, 2012.
+  
+  %ul.index
+    - @v3_articles.each do |a|
+      %li= link_to a.full_subject, article_path(a)
+
   %h2 Articles from Volume 2
 
-  %p.left New articles are posted each Tuesday, usually between 19:00 UTC and 23:00 UTC
-
+  %p.left While they have not yet been publicly released, all 17 issues from Volume 2 are available to subscribers. Feel free to leave comments on them if you'd like, I still pay attention to discussion about these articles and occasionally make updates to them.
+  
   %ul.index
-    - @articles.each do |a|
+    - @v2_articles.each do |a|
       %li= link_to a.full_subject, article_path(a)
 
   %h2 Articles from Volume 1
