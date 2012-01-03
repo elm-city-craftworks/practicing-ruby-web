@@ -20,6 +20,10 @@ namespace :deploy do
   end
 end
 
+before 'deploy:update_code' do
+  run "sudo god stop practicing_ruby_delayed_job"
+end
+
 after 'deploy:update_code' do
   { "database.yml"          => "config/database.yml",
     "mail_settings.rb"      => "config/initializers/mail_settings.rb",
@@ -32,6 +36,10 @@ end
 
 after "deploy", "deploy:migrate"
 after "deploy", 'deploy:cleanup'
+
+after 'deploy' do
+  run "sudo god start practicing_ruby_delayed_job"
+end
 
 # load 'deploy/assets' Asset Precompile
 
