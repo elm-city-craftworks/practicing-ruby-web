@@ -11,11 +11,15 @@ class HooksController < ApplicationController
                   :mailchimp_web_id => params[:data][:web_id])
       render :text => "subscribed"
     when "unsubscribe"
-      render :text => "ok (unsubscribe)"
-#      user = find_user
+      if params[:data][:action] == "delete"
+        return render(:text => "ok (delete unsubscribed user)")
+      end
 
-#      user.try(:destroy)
-#      render :text => "unsubscribed"
+      client = Hominid::API.new(MailChimp::SETTINGS[:api_key])
+      client.list_unsubscribe(MailChimp::SETTINGS[:list_id], 
+                              params[:data][:email], true)
+
+      render :text => "ok (unsubscribe)"
     when "profile"
       user = find_user
 
@@ -25,7 +29,7 @@ class HooksController < ApplicationController
       render :text => "update profile"
     else
       # ghetto
-      if Rails.env == "development"
+      if Rails.env.development?
         raise
       else
         render :text => "ok (unsupported)"
