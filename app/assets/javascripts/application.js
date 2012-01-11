@@ -1,5 +1,7 @@
 //= require jquery
 //= require jquery_ujs
+//= require md_preview
+//= require jquery.elastic
 //= require_self
 //= require_tree .
 
@@ -11,8 +13,3 @@ PR.setupNamespace = function(namespace){
 	if(PR[namespace] == undefined)
 		PR[namespace] = {}
 }
-
-jQuery(function(){
-  if(PR.Preview) PR.Preview.init();
-  $('textarea').elastic();
-});
