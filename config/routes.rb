@@ -37,6 +37,4 @@ PracticingRubyWeb::Application.routes.draw do
     resources :articles
   end
 
-  match 'markdown/parse' => 'markdown#parse', :as => "parse_markdown"
-
 end
