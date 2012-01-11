@@ -42,7 +42,7 @@ after 'deploy' do
   run "sudo god start practicing_ruby_delayed_job"
 end
 
-# load 'deploy/assets' Asset Precompile
+load 'deploy/assets'
 
 desc "Import articles from the server"
 namespace :import do

@@ -1,4 +1,7 @@
-$display-font: "Primer", courier
+//= require_self
+//= require_tree '../../../vendor/assets/stylesheets'
+
+$display-font: courier //"Primer",
 
 =markdown
   p
@@ -61,14 +64,14 @@ a, a:visited
 
 @import compass/css3
 
-@import /partials/navigation
-@import /partials/flash
-@import /partials/comments
-@import /partials/articles
-@import /partials/tabs
-@import /partials/announcements
-@import /partials/fonts
-@import /partials/broadcasts
+@import partials/navigation
+@import partials/flash
+@import partials/comments
+@import partials/articles
+@import partials/tabs
+@import partials/announcements
+@import partials/fonts
+@import partials/broadcasts
 
 #content #faq
   +markdown
