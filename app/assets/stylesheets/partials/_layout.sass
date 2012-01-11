@@ -1,0 +1,66 @@
+@media only screen and (max-device-width: 480px)
+  body
+    font-size: 25px
+  pre
+    overflow: scroll
+    -webkit-overflow-scrolling: touch
+    font-size: 0.75em
+
+a, a:visited
+  color: #BD0010
+
+div#content
+  margin: 0 auto
+  width: 800px
+
+p
+  font-family: courier
+  font-size: 0.9em
+  text-align: justify
+  line-height: 1.5em
+
+#faq
+  +markdown
+
+h1#header
+  margin-top: 0
+  font-weight: normal
+  a
+    color: #333
+    text-decoration: none
+    font-family: "Sketchy"
+    display: inline-block
+    font-size: 48px
+    &:hover
+      color: #666
+
+table.admin
+  width: 100%
+  td, th
+    padding: 2px
+  th
+    text-align: left
+
+#admin
+  float: right
+  font-size: 1.25em
+
+.clear
+  clear: both
+
+.left
+  text-align: left
+
+
+h1, h2, h3
+  font-family: $display-font
+
+form.edit_announcement, form.new_announcement
+  input[type=text]
+    width: 500px
+
+body
+  font-size: 15px
+
+li
+  font-size: 0.95em
