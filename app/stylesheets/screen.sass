@@ -1,3 +1,5 @@
+$display-font: "Primer", courier
+
 =markdown
   p
     font-family: 'Helvetica', sans-serif
@@ -11,9 +13,13 @@
     font-family: 'Helvetica', sans-serif
 
   h1, h2, h3
-    font-family: courier
+    font-family: $display-font
 
   h1
+    font-size: 2em
+  h2
+    font-size: 1.75em
+  h3
     font-size: 1.5em
 
   h1 .clear
@@ -54,6 +60,8 @@ a, a:visited
   color: #BD0010
 
 @import compass/css3
+
+@import /partials/navigation
 @import /partials/flash
 @import /partials/comments
 @import /partials/articles
@@ -91,6 +99,32 @@ table.admin
 .clear
   clear: both
 
+.left
+  text-align: left
+
+
+h1, h2, h3
+  font-family: $display-font
+
 form.edit_announcement, form.new_announcement
   input[type=text]
     width: 500px
+
+body
+  font-size: 15px
+
+
+li
+  font-size: 0.95em
+
+
+div#content
+  margin: 0 auto
+  width: 800px
+
+
+div#content p
+  font-family: Helvetica, sans-serif
+  font-size: 1.1em
+  text-align: justify
+  line-height: 1.5em
