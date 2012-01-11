@@ -2,10 +2,22 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-Bundler.require(:default, Rails.env)
+Bundler.require *Rails.groups(:assets => %w(development test))
 
 module PracticingRubyWeb
   class Application < Rails::Application
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    # Precomplie layout css
+    config.assets.precompile << 'landing.css'
+
+    # Partially load application for faster precompile time
+    config.assets.initialize_on_precompile = false
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
