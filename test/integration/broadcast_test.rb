@@ -15,7 +15,7 @@ class BroadcastTest < ActionDispatch::IntegrationTest
 
     assert_content announcement.broadcast_message
 
-    click_link @article.full_subject
+    visit article_path(@article)
 
     assert_content announcement.broadcast_message
 
@@ -28,7 +28,7 @@ class BroadcastTest < ActionDispatch::IntegrationTest
 
     assert_no_content announcement.broadcast_message
 
-    click_link @article.full_subject
+    visit article_path(@article)
 
     assert_no_content announcement.broadcast_message
   end
