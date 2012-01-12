@@ -48,7 +48,7 @@ desc "Import articles from the server"
 namespace :import do
   task :articles do
     file  = "#{application}.#{Time.now.strftime '%Y-%m-%d_%H:%M:%S'}.sql.bz2"
-    remote_file = "#{deploy_to}/#{file}"
+    remote_file = "#{current_path}/#{file}"
     remote_db   = remote_database_config
 
     run %{pg_dump --clean --no-owner --no-privileges -U#{remote_db['username']}
@@ -79,6 +79,6 @@ def database_config(db="development")
 end
 
 def remote_database_config(db="production")
-  remote_config = capture("cat #{deploy_to}/config/database.yml")
+  remote_config = capture("cat #{shared_path}/database.yml")
   YAML::load(remote_config)[db]
 end
