@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
+  before_filter :create_visit, :only => [:show]
 
   skip_before_filter :authenticate,      :only => [:shared]
   skip_before_filter :authenticate_user, :only => [:shared]
@@ -44,6 +45,17 @@ class ArticlesController < ApplicationController
 
   def authenticate_admin
     raise unless current_user.admin
+  end
+
+  def create_visit
+    article_visit = ArticleVisit.where(:user_id => current_user.id,
+      :article_id => @article.id)
+
+    if article_visit.any?
+      article_visit.first.viewed
+    else
+      article_visit.create
+    end
   end
 
 end
