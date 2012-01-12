@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111206143647) do
+ActiveRecord::Schema.define(:version => 20120112195907) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(:version => 20111206143647) do
     t.datetime "updated_at"
     t.boolean  "broadcast",         :default => false, :null => false
     t.text     "broadcast_message"
+  end
+
+  create_table "article_visits", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.integer  "views",      :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "articles", :force => true do |t|
