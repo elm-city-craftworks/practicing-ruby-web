@@ -2,7 +2,7 @@ PracticingRubyWeb::Application.routes.draw do
 
   root :to => 'home#index'
 
-  match '/hooks/2f94d5ec414b463caa8d6f5f98bff105fd1b2151112' => 'hooks#receive'
+  match "/hooks/#{MailChimp::SETTINGS[:webhook_key]}" => 'hooks#receive'
 
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
 

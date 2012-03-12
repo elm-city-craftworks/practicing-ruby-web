@@ -3,5 +3,6 @@ module MailChimp
                :api_key      => 'YOURAPIKEY',
                :testers      => ["your@email.com"],
                :sender_name  => "Your Sender Name",
-               :sender_email => "Your Sender Email" }
+               :sender_email => "Your Sender Email",
+               :webhook_key  => "Your webhook key" }
 end
