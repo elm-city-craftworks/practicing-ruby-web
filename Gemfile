@@ -39,4 +39,5 @@ end
 
 group :production do
   gem "god", :require => false
+  gem 'exception_notification'
 end
