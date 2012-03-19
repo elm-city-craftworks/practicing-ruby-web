@@ -7,34 +7,11 @@ class SessionsController < ApplicationController
     github_uid = auth["uid"].to_s
 
     if authorization = Authorization.find_by_github_uid(github_uid)
-      session["authorization_id"] = authorization.id
-
-      if authorization.user
-        redirect_back_or_default(community_url)
-      elsif link = authorization.authorization_link
-        redirect_to authorization_link_path(link)
-      else
-        raise "Orphaned"
-      end
+      login_or_finish_confirmation(authorization)
     else
       authorization = Authorization.create(:github_uid => github_uid)
-      session["authorization_id"] = authorization.id
-
-      link = AuthorizationLink.new(:authorization_id => authorization.id,
-                                   :github_nickname  => auth["user_info"]["nickname"])
-
-      if User.find_by_email(auth["user_info"]["email"].downcase)
-        link.mailchimp_email = auth["user_info"]["email"].downcase
-      end
-
-      link.save
-
-      if link.mailchimp_email
-         AuthorizationLinksMailer.email_confirmation(link).deliver
-        redirect_to link
-      else
-        redirect_to edit_authorization_link_path(link)
-      end
+      
+      start_confirmation(authorization, auth["user_info"])
     end
   end
 
@@ -46,5 +23,36 @@ class SessionsController < ApplicationController
   def destroy
     session.delete("authorization_id")
     redirect_to "/"
+  end
+
+  private
+
+  def login_or_finish_confirmation(authorization)
+    session["authorization_id"] = authorization.id
+
+    if authorization.confirmed?
+      redirect_back_or_default(community_url)
+    elsif link = authorization.authorization_link
+      redirect_to authorization_link_path(link)
+    else
+      raise "Orphaned"
+    end
+  end
+
+  def start_confirmation(authorization, user_info)
+    session["authorization_id"] = authorization.id
+    github_email                = user_info["email"].downcase
+
+    link = AuthorizationLink.create(:authorization_id => authorization.id,
+                                    :github_nickname  => user_info["nickname"])
+
+    if User.find_by_email(github_email)
+      link.update_attribute(:mailchimp_email, github_email)
+
+      AuthorizationLinksMailer.email_confirmation(link).deliver
+      redirect_to link
+    else
+      redirect_to edit_authorization_link_path(link)
+    end
   end
 end
