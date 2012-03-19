@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
       link = AuthorizationLink.new(:authorization_id => authorization.id,
                                    :github_nickname  => auth["user_info"]["nickname"])
 
-      if User.find_by_email(auth["user_info"]["email"])
-        link.mailchimp_email = auth["user_info"]["email"]
+      if User.find_by_email(auth["user_info"]["email"].downcase)
+        link.mailchimp_email = auth["user_info"]["email"].downcase
       end
 
       link.save

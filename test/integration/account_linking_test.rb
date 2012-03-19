@@ -35,12 +35,25 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     assert_activated
   end
 
-  test "case insensitive email matches" do
+  test "Mailchimp emails are downcased automatically" do
     email = "Gregory.T.Brown@gmail.com"
     uid   = "12345"
 
     create_user(:email => email)
     login(:nickname => "sandal", :email => "gregory.t.brown@gmail.com", :uid => uid)
+    visit community_url
+
+    get_authorization_link(uid)
+
+    assert_activated 
+  end
+
+  test "Github emails are downcased automatically" do
+    email = "gregory.t.brown@gmail.com"
+    uid   = "12345"
+
+    create_user(:email => email)
+    login(:nickname => "sandal", :email => "GREGORY.t.brown@gmail.com", :uid => uid)
     visit community_url
 
     get_authorization_link(uid)

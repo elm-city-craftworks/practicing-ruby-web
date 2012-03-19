@@ -15,7 +15,7 @@ class AuthorizationLinksController < ApplicationController
   end
 
   def update
-    @email = params["authorization_link"]["mailchimp_email"]
+    @email = params["authorization_link"]["mailchimp_email"].downcase
 
     unless User.find_by_email(@email)
       render("invalid_email") and return
