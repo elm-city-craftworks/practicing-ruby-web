@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
 
   def start_confirmation(authorization, user_info)
     session["authorization_id"] = authorization.id
-    github_email                = user_info["email"].downcase
+    github_email                = user_info["email"].to_s.downcase
 
     link = AuthorizationLink.create(:authorization_id => authorization.id,
                                     :github_nickname  => user_info["nickname"])
