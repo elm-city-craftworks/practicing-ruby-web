@@ -61,6 +61,24 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     assert_activated 
   end
 
+  test "Manually entered emails are downcased automatically" do
+    mailchimp_email = "gregory.t.brown@gmail.com"
+    github_email    = "test@test.com"
+    uid             = "12345"
+
+    create_user(:email => mailchimp_email)
+    login(:nickname => "sandal", :email => github_email, :uid => uid)
+
+    visit community_url
+    get_authorization_link(uid)
+
+    assert_email_manually_entered("gregory.t.brown@GMAIL.COM")
+
+    assert_confirmation_sent(mailchimp_email)
+
+    assert_activated
+  end
+
   def get_authorization_link(uid)
     @auth_link = Authorization.find_by_github_uid(uid).
                                authorization_link
