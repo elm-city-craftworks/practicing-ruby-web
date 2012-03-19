@@ -19,8 +19,10 @@ class AuthorizationLink < ActiveRecord::Base
       auth.save!
 
       link.destroy
+
+      true
     else
-      raise
+      false
     end
   end
 end

@@ -95,7 +95,28 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     assert_confirmation_sent(mailchimp_email)
 
     assert_activated
+  end
 
+  test "Revisiting the activation link displays an expiration notice" do
+    mailchimp_email = "gregory.t.brown@gmail.com"
+    github_email    = nil
+    uid             = "12345"
+
+    create_user(:email => mailchimp_email)
+    login(:nickname => "sandal", :email => github_email, :uid => uid)
+
+    visit community_url
+    get_authorization_link(uid)
+
+    assert_email_manually_entered("gregory.t.brown@gmail.com")
+
+    assert_confirmation_sent(mailchimp_email)
+
+    assert_activated
+
+    visit "/sessions/link/#{@auth_link.secret}"
+
+    assert page.has_content?("expired")  
   end
 
   def get_authorization_link(uid)

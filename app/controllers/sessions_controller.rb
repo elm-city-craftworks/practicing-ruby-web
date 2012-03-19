@@ -16,8 +16,11 @@ class SessionsController < ApplicationController
   end
 
   def link
-    AuthorizationLink.activate(params[:secret])
-    redirect_to community_url
+    if AuthorizationLink.activate(params[:secret])
+      redirect_to community_url
+    else
+      render("expired_link")
+    end
   end
 
   def destroy
