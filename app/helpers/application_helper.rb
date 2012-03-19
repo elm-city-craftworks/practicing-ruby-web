@@ -11,6 +11,10 @@ module ApplicationHelper
     MdPreview::Parser.parse(content)
   end
 
+  def beta_testers
+    yield if current_user.beta_tester?
+  end
+
   def gravatar(user, size=64)
     hash = Digest::MD5.hexdigest(user.email.downcase)
 
