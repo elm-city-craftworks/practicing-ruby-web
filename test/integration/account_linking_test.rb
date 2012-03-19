@@ -35,6 +35,19 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     assert_activated
   end
 
+  test "case insensitive email matches" do
+    email = "Gregory.T.Brown@gmail.com"
+    uid   = "12345"
+
+    create_user(:email => email)
+    login(:nickname => "sandal", :email => "gregory.t.brown@gmail.com", :uid => uid)
+    visit community_url
+
+    get_authorization_link(uid)
+
+    assert_activated 
+  end
+
   def get_authorization_link(uid)
     @auth_link = Authorization.find_by_github_uid(uid).
                                authorization_link

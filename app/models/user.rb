@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   attr_protected :admin
 
+  before_save do
+    write_attribute(:email, email.downcase) if changed.include?("email")
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
