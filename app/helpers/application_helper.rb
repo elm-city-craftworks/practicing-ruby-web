@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def beta_testers
-    yield if current_user.beta_tester?
+    yield if current_user.try(:beta_tester)
   end
 
   def gravatar(user, size=64)
