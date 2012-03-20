@@ -15,8 +15,8 @@
     = render :partial => "shared/flash", :locals => {:flash => flash}
     #content
       - beta_testers do
-        = image_tag "beta_badge.png", :style => "float: right; height: 75px; margin-top: 10px"
-      
+        = image_tag "beta_badge.png", :id => "beta-badge"      
+
       %h1#header= link_to "Practicing Ruby", home_path
         
       = render :partial => "shared/navigation"
