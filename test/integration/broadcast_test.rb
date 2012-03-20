@@ -3,9 +3,9 @@ require 'test_helper'
 class BroadcastTest < ActionDispatch::IntegrationTest
 
   setup do
-    @user = Factory(:user)
-    @authorization = Authorization.create(:github_uid => 12345, :user_id => @user.id)
-    @article = Factory(:article)
+    @authorization = Factory(:authorization)
+    @user          = @authorization.user
+    @article       = Factory(:article)
   end
 
   test "broadcasts are visible to logged in users" do
