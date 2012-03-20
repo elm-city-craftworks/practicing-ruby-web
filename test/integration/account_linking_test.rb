@@ -7,7 +7,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid   = "12345"
 
     create_user(:email => email)
-    login(:nickname => "sandal", :email => email, :uid => uid)
+    authenticate(:nickname => "sandal", :email => email, :uid => uid)
 
     visit community_url
     get_authorization_link(uid)
@@ -23,7 +23,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid             = "12345"
 
     create_user(:email => mailchimp_email)
-    login(:nickname => "sandal", :email => github_email, :uid => uid)
+    authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
     visit community_url
     get_authorization_link(uid)
@@ -40,7 +40,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid   = "12345"
 
     create_user(:email => email)
-    login(:nickname => "sandal", :email => "gregory.t.brown@gmail.com", :uid => uid)
+    authenticate(:nickname => "sandal", :email => "gregory.t.brown@gmail.com", :uid => uid)
     visit community_url
 
     get_authorization_link(uid)
@@ -53,7 +53,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid   = "12345"
 
     create_user(:email => email)
-    login(:nickname => "sandal", :email => "GREGORY.t.brown@gmail.com", :uid => uid)
+    authenticate(:nickname => "sandal", :email => "GREGORY.t.brown@gmail.com", :uid => uid)
     visit community_url
 
     get_authorization_link(uid)
@@ -67,7 +67,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid             = "12345"
 
     create_user(:email => mailchimp_email)
-    login(:nickname => "sandal", :email => github_email, :uid => uid)
+    authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
     visit community_url
     get_authorization_link(uid)
@@ -85,7 +85,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid             = "12345"
 
     create_user(:email => mailchimp_email)
-    login(:nickname => "sandal", :email => github_email, :uid => uid)
+    authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
     visit community_url
     get_authorization_link(uid)
@@ -103,7 +103,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     uid             = "12345"
 
     create_user(:email => mailchimp_email)
-    login(:nickname => "sandal", :email => github_email, :uid => uid)
+    authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
     visit community_url
     get_authorization_link(uid)
@@ -124,7 +124,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
                                authorization_link
   end
 
-  def login(params)
+  def authenticate(params)
     OmniAuth.config.add_mock(:github, {
       :uid => params[:uid],
       :user_info => {
