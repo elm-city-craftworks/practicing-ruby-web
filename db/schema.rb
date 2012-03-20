@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112195907) do
+ActiveRecord::Schema.define(:version => 20120319214410) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20120112195907) do
     t.boolean  "notify_conversations", :default => true,  :null => false
     t.boolean  "notify_mentions",      :default => true,  :null => false
     t.boolean  "notify_comment_made",  :default => false, :null => false
+    t.boolean  "beta_tester",          :default => false
   end
 
 end
