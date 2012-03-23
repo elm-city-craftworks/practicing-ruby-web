@@ -3,10 +3,11 @@
     = button_to "New article", new_admin_article_path, :method => :get
 
 #article
+  %p Practicing Ruby is currently in a break period, but I will resume publishing articles soon. The first article for volume 4 will be released on April 10, 2012.
 
   %h2 Articles from Volume 3
 
-  %p.left This is the current volume of Practicing Ruby. New articles are typically released on Tuesdays, between 19:00 and 23:00 UTC. After all 12 issues of Volume 3 are released, we will take a short break and then resume with Volume 4 starting on April 3rd, 2012.
+  %p.left While they have not yet been publicly released, all 10 issues from Volume 3 are available to subscribers. Feel free to leave comments on them if you'd like, I still pay attention to discussion about these articles and occasionally make updates to them.
   
   %ul.index
     - @v3_articles.published.each do |a|
