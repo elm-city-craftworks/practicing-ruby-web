@@ -1,4 +1,6 @@
+- if @article.published?
+  = javascript_tag "alert('Be careful buddy, this is a published article!!!')"
+
 = form_for @article, :url => admin_article_path(@article),
   :html => { :'data-track-changes' => true } do |f|
   = render :partial => "form", :locals => {:f => f}
-
