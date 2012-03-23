@@ -5,6 +5,14 @@ class Article < ActiveRecord::Base
 
   scope :published, where(:status => "published")
 
+  def self.published
+    where(:status => "published")
+  end
+
+  def self.drafts
+    where(:status => "draft")
+  end
+
   def full_subject
     "Issue #{issue_number}: #{subject}"
   end
