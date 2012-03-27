@@ -11,6 +11,8 @@ class SharingTest < ActionDispatch::IntegrationTest
     assert_shared_article_accessible
 
     assert_no_content("Log out")
+
+    assert_equal 200, page.status_code
   end
 
   test "shared article visible to logged in users" do
@@ -19,6 +21,14 @@ class SharingTest < ActionDispatch::IntegrationTest
     assert_shared_article_accessible
 
     assert_content("Log out")
+
+    assert_equal 200, page.status_code
+  end
+
+  test "requesting invalid share key causes a 404 response" do
+    visit shared_article_path("notarealkey")
+
+    assert_equal 404, page.status_code
   end
 
   def assert_shared_article_accessible

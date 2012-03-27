@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
     @share = SharedArticle.find_by_secret(params[:secret])
 
     unless @share
-      raise "Invalid Share Key"
+      return render :text => "Article not found!", :status => 404
     else
       @share.viewed unless current_user
       @user  = @share.user
