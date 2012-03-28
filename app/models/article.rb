@@ -1,9 +1,15 @@
 class Article < ActiveRecord::Base
   has_many :comments, :as => :commentable
+  belongs_to :volume
 
   validates_presence_of :issue_number
 
-  scope :published, where(:status => "published")
+  default_scope { order(:created_at) }
+
+  def self.in_volume(number)
+    includes(:volume)
+      .where("volumes.number = ?", number)
+  end
 
   def self.published
     where(:status => "published")
