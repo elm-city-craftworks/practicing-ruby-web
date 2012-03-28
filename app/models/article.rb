@@ -4,10 +4,11 @@ class Article < ActiveRecord::Base
 
   validates_presence_of :issue_number
 
+  default_scope { order(:created_at) }
+
   def self.in_volume(number)
     includes(:volume)
       .where("volumes.number = ?", number)
-      .order("articles.created_at")
   end
 
   def self.published
