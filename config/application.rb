@@ -56,5 +56,9 @@ module PracticingRubyWeb
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.action_mailer.delivery_method = :mailhopper
+
+    config.generators do |g|
+      g.test_framework nil
+    end
   end
 end
