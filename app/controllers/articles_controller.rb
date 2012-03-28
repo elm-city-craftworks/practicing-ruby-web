@@ -6,11 +6,9 @@ class ArticlesController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:shared]
 
   def index
-    @v2_articles = Article.where("issue_number LIKE '2.%'").
-                           order(:created_at)
+    @v2_articles = Article.in_volume(2)
 
-    @v3_articles = Article.where("issue_number LIKE '3.%'").
-                           order(:created_at)
+    @v3_articles = Article.in_volume(3)
   end
 
   def show
