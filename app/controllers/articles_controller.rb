@@ -6,9 +6,7 @@ class ArticlesController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:shared]
 
   def index
-    @v2_articles = Article.in_volume(2)
-
-    @v3_articles = Article.in_volume(3)
+    @volumes = Volume.order("number desc")
   end
 
   def show
