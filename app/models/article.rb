@@ -4,6 +4,12 @@ class Article < ActiveRecord::Base
 
   validates_presence_of :issue_number
 
+  def self.in_volume(number)
+    includes(:volume)
+      .where("volumes.number = ?", number)
+      .order("articles.created_at")
+  end
+
   def self.published
     where(:status => "published")
   end
