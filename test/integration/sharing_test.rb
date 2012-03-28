@@ -20,7 +20,7 @@ class SharingTest < ActionDispatch::IntegrationTest
 
     assert_shared_article_accessible
 
-    assert_content("Log out")
+    assert_content("Sign out")
 
     assert_equal 200, page.status_code
   end

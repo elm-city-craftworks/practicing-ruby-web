@@ -1,6 +1,7 @@
-#upper_navigation
-  .right
-    = link_to "FAQ", "/community/faq"
-    = link_to "Updates", announcements_path
-    = link_to "Settings", edit_user_path(current_user), :class => "user_pages"
-    = link_to "Sign out", logout_path, :class => "user_pages"
+- if current_user
+  #upper_navigation
+    .right
+      = link_to "FAQ", "/community/faq"
+      = link_to "Updates", announcements_path
+      = link_to "Settings", edit_user_path(current_user), :class => "user_pages"
+      = link_to "Sign out", logout_path, :class => "user_pages"
