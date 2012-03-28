@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319214410) do
+ActiveRecord::Schema.define(:version => 20120328151105) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120319214410) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "issue_number"
+    t.integer  "volume_id"
   end
 
   create_table "authorization_links", :force => true do |t|
@@ -117,6 +118,15 @@ ActiveRecord::Schema.define(:version => 20120319214410) do
     t.boolean  "notify_mentions",      :default => true,  :null => false
     t.boolean  "notify_comment_made",  :default => false, :null => false
     t.boolean  "beta_tester",          :default => false
+  end
+
+  create_table "volumes", :force => true do |t|
+    t.integer  "number"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "finish_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
