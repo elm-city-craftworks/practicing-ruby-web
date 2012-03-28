@@ -1,9 +1,8 @@
 class Article < ActiveRecord::Base
   has_many :comments, :as => :commentable
+  belongs_to :volume
 
   validates_presence_of :issue_number
-
-  scope :published, where(:status => "published")
 
   def self.published
     where(:status => "published")
