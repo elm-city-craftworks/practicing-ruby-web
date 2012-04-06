@@ -7,11 +7,11 @@ class PR.RoboBar
     this._createBar()
 
   show: ->
-    @bar.css("bottom", "0px")
+    @bar.css "bottom", "0px"
 
   hide: ->
     height = @bar.css('height')
-    @bar.css("bottom", "-" + height)
+    @bar.css "bottom", "-" + height
 
   toggle: =>
     if @visible

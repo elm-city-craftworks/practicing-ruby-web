@@ -10,16 +10,17 @@ $robobar-height: 45px
   right: 20px
   height: $robobar-height
   width: 65px
-  background: #8cbe5f asset-url("announcement.png", image) center center no-repeat
+  background: #8cbe5f asset-url("tinyrobo.png", image) center 8px no-repeat
   cursor: pointer
   z-index: 100
 
   &:hover, &.active
     +opacity(1)
     +single-box-shadow(#333, 0, 0, 10px)
+    height: $robobar-height + 5px
 
   &.active
-    height: $robobar-height + 5px
+    height: 85px
     background-color: #CCC9D1
     &:hover
       background-color: #E2E1E9
