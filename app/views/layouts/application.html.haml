@@ -13,11 +13,16 @@
 
   %body
     = render :partial => "shared/flash", :locals => {:flash => flash}
-    #content
-      - beta_testers do
-        = image_tag "beta_badge.png", :id => "beta-badge"      
 
+    = render :partial => "shared/upper_navigation"
+    #content
+      %i
+        %span{:style => "float: right; padding-top: 30px; text-align: center; font-size: 1.1em"}
+          An eclectic journal for the dedicated hacker 
+          %br
+          lovingly curated by Gregory Brown
       %h1#header= link_to "Practicing Ruby", home_path
+
         
       = render :partial => "shared/navigation"
       = render :partial => "shared/broadcasts"

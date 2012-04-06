@@ -6,7 +6,11 @@ class ArticlesController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:shared]
 
   def index
-    @volumes = Volume.order("number desc")
+    if params["volume"]
+      @volumes = Volume.where(:number => params["volume"].to_i)
+    else
+      @volumes = Volume.order("number desc")
+    end
   end
 
   def show
