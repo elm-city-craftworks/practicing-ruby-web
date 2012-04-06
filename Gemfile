@@ -3,8 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.1.0'
 
 gem 'pg'
-gem 'haml'
-gem 'sass'
 gem 'hominid'
 gem 'omniauth'
 
@@ -14,7 +12,10 @@ gem "nokogiri"
 gem "md_preview"
 gem "md_emoji"
 
+gem 'haml'
+gem 'sass'
 gem "jquery-rails"
+gem 'draper'
 
 gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
