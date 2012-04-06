@@ -35,9 +35,10 @@ group :test do
   gem "minitest",  "~> 2.3.1"
   gem "capybara"
   gem "factory_girl_rails"
-  #gem "mocha"
   gem "colorific", "~> 1.0.0"
   gem "test_notifier", "~> 1.0.0"
+  gem "capybara-webkit"
+  gem "database_cleaner"
 end
 
 group :production do
