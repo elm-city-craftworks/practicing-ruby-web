@@ -12,9 +12,13 @@ $robobar-height: 45px
   +single-box-shadow(#333, 0, 0, 5px)
   cursor: pointer
   +single-transition(all, .15s, ease-in, 0)
-  &:hover
+  z-index: 100
+  &:hover, &.active
     +opacity(1)
     +single-box-shadow(#333, 0, 0, 10px)
+  &.active
+    height: $robobar-height + 5px
+    background-color: #8cbe5f
 
 #robo-bar
   position: fixed
@@ -25,9 +29,10 @@ $robobar-height: 45px
   +single-box-shadow(#333, 0, 0, 10px)
   +single-transition(all, .15s, ease-in, 0)
 
-  a#close-robo-bar
-    display: block
-    float: right
+  button
+    +sassy-button-structure(5px, 14px)
+    +sassy-button-gradient("matte", #8cbe5f)
+    margin: 6px
 
 // Ensures all content is visible when RoboBar is visible
 #robo-bar-gutter
