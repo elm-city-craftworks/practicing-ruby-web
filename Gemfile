@@ -13,6 +13,7 @@ gem "md_preview"
 gem "md_emoji"
 
 gem 'haml'
+gem 'coffee-filter', '~> 0.1.1'
 gem 'sass'
 gem "jquery-rails"
 gem 'draper'
