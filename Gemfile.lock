@@ -71,6 +71,8 @@ GEM
     delayed_mailhopper (0.0.2)
       delayed_job
       mailhopper (~> 0.0.1)
+    draper (0.10.0)
+      activesupport (>= 2.3.10)
     erubis (2.7.0)
     exception_notification (2.5.2)
       actionmailer (>= 3.0.4)
@@ -245,6 +247,7 @@ DEPENDENCIES
   colorific (~> 1.0.0)
   compass (~> 0.12.alpha)
   delayed_mailhopper
+  draper
   exception_notification
   factory_girl_rails
   god
