@@ -1,8 +1,8 @@
 class PR.RoboBar
   constructor: (@sharePath) ->
-    console.debug @sharePath
+    @chippy  = new PR.RoboBar.Chippy(this)
+    @visible = false
 
-    @chippy = new PR.RoboBar.Chippy(this)
     this._createGutter()
     this._createBar()
 
@@ -12,6 +12,16 @@ class PR.RoboBar
   hide: ->
     height = @bar.css('height')
     @bar.css("bottom", "-" + height)
+
+  toggle: =>
+    if @visible
+      @chippy.idle()
+      this.hide()
+    else
+      @chippy.activate()
+      this.show()
+
+    @visible = !@visible
 
   # Private Methods
 
@@ -29,7 +39,7 @@ class PR.RoboBar
       id: 'share-article'
     })
 
-    @btnShare.text("Share")
+    @btnShare.text("Share with your friends")
 
     @bar.append(@btnShare)
 
@@ -44,20 +54,15 @@ class PR.RoboBar.Chippy
   constructor: (@robobar) ->
     this._create()
 
-    @chippy.on 'click', this.toggle
+    @chippy.on 'click', @robobar.toggle
 
-  toggle: =>
-    if @chippy.hasClass('active')
-      @chippy.removeClass 'active'
-      @robobar.hide()
+  idle: ->
+    @chippy.removeClass 'active'
+    @chippy.attr 'title', null
 
-      @chippy.attr('title', null)
-    else
-      @chippy.addClass 'active'
-      @robobar.show()
-
-      @chippy.attr('title', "Close")
-
+  activate: ->
+    @chippy.addClass 'active'
+    @chippy.attr 'title', 'Close'
 
   # Private methods
 
