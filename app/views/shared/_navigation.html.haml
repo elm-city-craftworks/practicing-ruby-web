@@ -1,9 +1,11 @@
 - if current_user
   #navigation
-    = link_to "Articles", articles_path
-    = link_to "Announcements", announcements_path
-    = link_to "FAQ", "/community/faq"
+    %strong FREE:
+    = link_to "Volume 1", articles_path(:volume => 1)
+    = link_to "Volume 2", articles_path(:volume => 2)
+    %strong MEMBERS:
+    = link_to "Volume 3", articles_path(:volume => 3)
     .right
-      = link_to "Settings", edit_user_path(current_user)
-      = link_to "Log out", logout_path
+      %strong SPECIAL:
+      Coming Soon!
     .clear
