@@ -1,0 +1,35 @@
+$robobar-height: 45px
+
+#chippy
+  position: fixed
+  bottom: 0
+  right: 0
+  height: $robobar-height
+  width: 65px
+  background: #FF5646 asset-url("announcement.png", image) center center no-repeat
+  +opacity(0.5)
+  +border-top-left-radius(5px)
+  +single-box-shadow(#333, 0, 0, 5px)
+  cursor: pointer
+  +single-transition(all, .15s, ease-in, 0)
+  &:hover
+    +opacity(1)
+    +single-box-shadow(#333, 0, 0, 10px)
+
+#robo-bar
+  position: fixed
+  bottom: -$robobar-height
+  height: $robobar-height
+  width: 100%
+  +background-image(linear-gradient(#FF5646, #C74338))
+  +single-box-shadow(#333, 0, 0, 10px)
+  +single-transition(all, .15s, ease-in, 0)
+
+  a#close-robo-bar
+    display: block
+    float: right
+
+// Ensures all content is visible when RoboBar is visible
+#robo-bar-gutter
+  height: $robobar-height
+  width: 100%
