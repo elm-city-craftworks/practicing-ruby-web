@@ -1,21 +1,23 @@
 $robobar-height: 45px
 
 #chippy
+  +opacity(0.5)
+  +border-top-left-radius(5px)
+  +single-box-shadow(#333, 0, 0, 5px)
+  +single-transition(all, .15s, ease-in, 0)
   position: fixed
   bottom: 0
   right: 0
   height: $robobar-height
   width: 65px
   background: #8cbe5f asset-url("announcement.png", image) center center no-repeat
-  +opacity(0.5)
-  +border-top-left-radius(5px)
-  +single-box-shadow(#333, 0, 0, 5px)
   cursor: pointer
-  +single-transition(all, .15s, ease-in, 0)
   z-index: 100
+
   &:hover, &.active
     +opacity(1)
     +single-box-shadow(#333, 0, 0, 10px)
+
   &.active
     height: $robobar-height + 5px
     background-color: #CCC9D1
@@ -23,13 +25,13 @@ $robobar-height: 45px
       background-color: #E2E1E9
 
 #robo-bar
+  +background-image(linear-gradient(#E2E1E9, #CCC9D1))
+  +single-box-shadow(#333, 0, 0, 10px)
+  +single-transition(all, .15s, ease-in, 0)
   position: fixed
   bottom: -$robobar-height
   height: $robobar-height
   width: 100%
-  +background-image(linear-gradient(#E2E1E9, #CCC9D1))
-  +single-box-shadow(#333, 0, 0, 10px)
-  +single-transition(all, .15s, ease-in, 0)
 
   button
     +sassy-button-structure(5px, 14px)
