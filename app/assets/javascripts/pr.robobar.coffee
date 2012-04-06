@@ -12,7 +12,6 @@ class PR.RoboBar
   hide: ->
     height = @bar.css('height')
     @bar.css("bottom", "-" + height)
-    @chippy.show()
 
   # Private Methods
 
@@ -21,20 +20,18 @@ class PR.RoboBar
       id: 'robo-bar'
     })
 
-    @closeButton = $('<a/>', {
-      id: 'close-robo-bar',
-      href: '#'
-    })
-
-    @closeButton.text("Close")
-
-    @closeButton.on 'click', (e) =>
-      this.hide()
-      e.preventDefault()
-
-    @bar.append(@closeButton)
+    this._createShare()
 
     $('body').append @bar
+
+  _createShare: ->
+    @btnShare = $('<button/>', {
+      id: 'share-article'
+    })
+
+    @btnShare.text("Share")
+
+    @bar.append(@btnShare)
 
   _createGutter: ->
     @gutter = $('<div/>', {
@@ -47,16 +44,20 @@ class PR.RoboBar.Chippy
   constructor: (@robobar) ->
     this._create()
 
-    @chippy.on 'click', this.click
+    @chippy.on 'click', this.toggle
 
-  click: (e) =>
-    width = @chippy.css 'width'
-    @chippy.css 'right', "-" + width
+  toggle: =>
+    if @chippy.hasClass('active')
+      @chippy.removeClass 'active'
+      @robobar.hide()
 
-    @robobar.show()
+      @chippy.attr('title', null)
+    else
+      @chippy.addClass 'active'
+      @robobar.show()
 
-  show: =>
-    @chippy.css 'right', "0px"
+      @chippy.attr('title', "Close")
+
 
   # Private methods
 
