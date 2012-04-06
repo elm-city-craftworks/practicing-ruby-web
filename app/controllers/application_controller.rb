@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     unless current_user
       redirect_to current_authorization.authorization_link
     end
+    
+    redirect_to problems_sessions_path if current_user.account_disabled
   end
 
   def current_authorization

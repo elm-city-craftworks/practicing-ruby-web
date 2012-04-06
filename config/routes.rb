@@ -11,7 +11,11 @@ PracticingRubyWeb::Application.routes.draw do
   end
 
   resources :authorization_links
-  resources :sessions
+  resources :sessions do
+    collection do
+      get 'problems'
+    end
+  end
 
   resources :comments
 
