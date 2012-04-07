@@ -7,10 +7,13 @@
 //= require_tree .
 
 // Setup the PR [Practicing Ruby] Namespace
-
 var PR = PR ? PR : new Object();
 
 PR.setupNamespace = function(namespace){
 	if(PR[namespace] == undefined)
 		PR[namespace] = {}
 }
+
+// Facebox Assets
+$.facebox.settings.closeImage   = '/assets/facebox/closelabel.png';
+$.facebox.settings.loadingImage = '/assets/facebox/loading.gif';
