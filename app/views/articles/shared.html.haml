@@ -1,5 +1,35 @@
 - content_for(:title) { @article.full_subject }
 
+:coffeescript
+  $ ->
+    new PR.ShareBox()
+
+#share-box
+  .header Welcome to Practicing Ruby Issue #{@article.issue_number}
+
+  .personal
+    #{link_to_github @user} subscribes to Practicing Ruby and has shared
+    Issue #{@article.issue_number} with you.
+
+  %hr
+
+  .subscribe
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+    .controls
+      %button Subscribe Now &raquo;
+  .read
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+    .controls
+      %button Continue to Issue #{@article.issue_number} &raquo;
+
+  .clear
+
 #article
   #article_bar= "#{@article.full_subject} (#{@article.published_date})"
 
