@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
 
   def show
     authenticate_admin if @article.status == "draft"
+
     @comments = @article.comments.order("created_at")
   end
 
@@ -38,7 +39,11 @@ class ArticlesController < ApplicationController
   private
 
   def find_article
-    @article = Article.find(params[:id])
+    if params[:volume] && params[:issue]
+      @article = Article.find_by_issue_number("#{params[:volume]}.#{params[:issue]}")
+    else
+      @article = Article.find(params[:id])
+    end
   end
 
   def authenticate_admin
