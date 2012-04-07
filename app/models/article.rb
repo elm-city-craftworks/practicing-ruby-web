@@ -26,4 +26,8 @@ class Article < ActiveRecord::Base
   def published?
     status == "published"
   end
+
+  def published_date
+    (published_time || created_at).strftime('%Y.%m.%d')
+  end
 end
