@@ -27,16 +27,18 @@ group :assets do
   gem 'sass-rails',   '~> 3.1.0'
   gem 'coffee-rails', '~> 3.1.0'
   gem 'uglifier'
-  gem 'compass',      '~> 0.12.alpha'
+  gem 'compass-rails'
+  gem 'sassy-buttons'
 end
 
 group :test do
   gem "minitest",  "~> 2.3.1"
   gem "capybara"
   gem "factory_girl_rails"
-  #gem "mocha"
   gem "colorific", "~> 1.0.0"
   gem "test_notifier", "~> 1.0.0"
+  gem "capybara-webkit"
+  gem "database_cleaner"
 end
 
 group :production do
