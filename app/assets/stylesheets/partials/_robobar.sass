@@ -45,17 +45,21 @@ $robobar-height: 45px
   width: 100%
 
 .robo-panel
-  +single-box-shadow(#333, 0, 0, 10px)
+  +single-box-shadow(#000, 0, 0, 10px)
   +single-transition(all, .25s, ease-in-out, 0)
   +border-top-radius(5px)
   position: relative
-  border: 4px solid #e9e9e9
-  background-color: #f9f9f9
+  border: 4px solid #ddd
+  color: #333
+  background: asset-url("cross_scratches.png", image) repeat
   position: fixed
   bottom: -200px + $robobar-height + 4px + 10px // Height, bar, border, shadow
   left: 20px
   width: 700px
   height: 300px
+
+  strong
+    color: #000
 
   div.robo-panel-content
     padding: 10px
