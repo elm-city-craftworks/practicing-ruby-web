@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120406161709) do
+ActiveRecord::Schema.define(:version => 20120407204814) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(:version => 20120406161709) do
   create_table "authorizations", :force => true do |t|
     t.text     "github_uid"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "collections", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
