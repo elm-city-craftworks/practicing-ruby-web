@@ -5,6 +5,9 @@
   %br
   = f.text_field :subject
 %p
+  = f.label :published_time
+  = f.date_select :published_time
+%p
   = f.label :volume_id
   = f.collection_select :volume_id, Volume.order("number desc"), :id, :number
 %p
