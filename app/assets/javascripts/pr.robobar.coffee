@@ -191,7 +191,8 @@ class PR.RoboBar.Share extends PR.RoboBar.Panel
       success: (data) ->
         textField = $('<input/>', {
           type: 'text',
-          value: data
+          value: data,
+          disabled: 'disabled'
         })
 
         $('#robo-share-url').html textField
