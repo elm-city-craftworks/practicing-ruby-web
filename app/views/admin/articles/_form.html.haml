@@ -11,6 +11,9 @@
   = f.label :volume_id
   = f.collection_select :volume_id, Volume.order("number desc"), :id, :number
 %p
+  = f.label :collection_id
+  = f.collection_select :collection_id, Collection.all, :id, :name
+%p
   = f.label :issue_number
   %br
   = f.text_field :issue_number
