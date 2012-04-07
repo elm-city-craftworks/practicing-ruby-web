@@ -20,6 +20,7 @@
 
 #facebox .content {
   display: block;
+  display:table;
   width: 370px;
   padding: 10px;
   background: #fff;
