@@ -1,0 +1,37 @@
+#share-box
+  display: none
+#facebox div.share-box
+  width: 700px
+  hr
+    color: #eee
+    border: 1px solid #eee
+    background-color: #eee
+    height: 2px
+    margin: 10px
+  .header
+    font-size: 1.5em
+    text-align: center
+    padding: 10px
+    color: #333
+  .personal
+    text-align: center
+    padding: 10px
+    font-size: 1.25em
+  div.subscribe, div.read
+    font-size: 1.1em
+    float: left
+    width: 250px
+    margin: 10px 50px
+    text-align: justify
+    .controls
+      margin-top: 15px
+      text-align: center
+      button
+        width: 250px
+  div.subscribe button
+    +sassy-button("matte", 5px, 1em, #8cbe5f, #8cbe5f, #fff)
+  div.read button
+    +sassy-button("matte", 5px, 1em, #eee, #eee, #333)
+
+  .clear
+    clear: both
