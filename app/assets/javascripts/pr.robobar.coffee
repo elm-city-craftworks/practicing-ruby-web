@@ -150,9 +150,9 @@ class PR.RoboBar.Share extends PR.RoboBar.Panel
     content = """
               <strong>Share with your friends</strong>
               <p>
-                As a subscriber to Practicing Ruby, you are free to share our
-                articles with your friends. The link below will allow
-                non-subscribers to view this issue.
+                As a subscriber to Practicing Ruby, you can share this article
+                with anyone you want! The link below will allow non-subscribers
+                to view this content without signing up for an account.
               </p>
               <p>
                 <span id='robo-share-url'>
@@ -160,18 +160,17 @@ class PR.RoboBar.Share extends PR.RoboBar.Panel
                 </span>
               </p>
               <p>
-                Feel free to email this link, post it to a mailing list,
-                tweet it, or otherwise distribute it any way you want.
-                Sharing is caring!
+                When someone visits this article via the link above, they will
+                be presented with a short message about what Practicing Ruby
+                is all about, and also will see your Github name so that they
+                know who to thank for sharing. But with just a single click
+                they will be able to start reading, so don't worry about
+                sending your friends through some annoying registration process
+                just to get at my content.
               </p>
-              <p>
-                Be sure to note that when someone views a Practicing Ruby
-                article via a share link you created, your github username will
-                be displayed at the bottom of the page so that they know who to
-                thank! Of course, no one except those who receive your link will
-                know about your act of kindness, so those who prefer to keep a
-                gruff public persona can still use this feature in private.
-              </p>
+
+              <p>Even though this is a paid service, I believe that <b>Sharing is
+              Caring</b>. So please spread the love!</p>
               """
 
     this.html(content)
