@@ -4,3 +4,10 @@
   %p
     = link_to "Volume #{v.number}", "/volume/#{v.number}"
     = v.description
+
+%h2 By Collection
+
+- Collection.all.each do |c|
+  %p
+    = link_to c.name, "/collection/#{c.slug}"
+    = c.description

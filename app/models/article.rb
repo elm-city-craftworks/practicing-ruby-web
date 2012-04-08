@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   has_many :comments, :as => :commentable
   belongs_to :volume
+  belongs_to :collection
 
   validates_presence_of :issue_number
 

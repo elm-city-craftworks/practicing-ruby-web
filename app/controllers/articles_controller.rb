@@ -7,9 +7,11 @@ class ArticlesController < ApplicationController
 
   def index
     if params["volume"]
-      @volumes = Volume.where(:number => params["volume"].to_i)
+      @article_groupings = Volume.where(:number => params["volume"].to_i)
+    elsif params["collection"]
+      @article_groupings = Collection.where(:slug => params["collection"])
     else
-      @volumes = Volume.order("number desc")
+      @article_groupings = Volume.order("number desc")
     end
   end
 
