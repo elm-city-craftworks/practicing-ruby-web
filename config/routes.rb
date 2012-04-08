@@ -7,6 +7,7 @@ PracticingRubyWeb::Application.routes.draw do
   match "/library" => 'home#library'
   match "/volume/:volume/" => 'articles#index'
   match "/volume/:volume/issue/:issue" => 'articles#show'
+  match "/collection/:collection/" => 'articles#index'
  
   resources :articles do
     member do
