@@ -200,7 +200,7 @@ class PR.RoboBar.Share extends PR.RoboBar.Panel
 
         textField.on 'keydown click', (e) ->
           $(this).select().focus()
-          e.preventDefault()
+          e.preventDefault() unless e.metaKey
       error: (jqXHR, textStatus, errorThrown) ->
         $('#robo-share-url').text "Error loading share url: #{textStatus}"
     }
