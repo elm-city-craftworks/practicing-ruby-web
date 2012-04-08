@@ -22,6 +22,13 @@ class ArticlesController < ApplicationController
   def share
     @share = SharedArticle.find_or_create_by_article_id_and_user_id(
       @article.id, current_user.id)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => shared_article_url(@share.secret).to_json
+      end
+    end
   end
 
   def shared

@@ -1,9 +1,9 @@
 - content_for(:title) { @article.full_subject }
 - content_for(:header_bottom) do
-  :javascript
-    $(function(){
-      PR.Comments.init('#{comments_path}/');
-    });
+  :coffeescript
+    $ ->
+      PR.Comments.init('#{comments_path}/')
+      new PR.RoboBar('#{share_article_path(@article)}')
 
 #article
   #article_bar
@@ -13,7 +13,7 @@
       - if current_user.admin?
         = link_to "Edit", edit_admin_article_path(@article)
 
-      = link_to "Share this article", share_article_path(@article)
+      = link_to "Share this article", '#', :'data-share-link' => true
 
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
