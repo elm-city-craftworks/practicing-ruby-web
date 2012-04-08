@@ -191,13 +191,16 @@ class PR.RoboBar.Share extends PR.RoboBar.Panel
       success: (data) ->
         textField = $('<input/>', {
           type: 'text',
-          value: data,
-          disabled: 'disabled'
+          value: data
         })
 
         $('#robo-share-url').html textField
 
         textField.select().focus()
+
+        textField.on 'keydown click', (e) ->
+          $(this).select().focus()
+          e.preventDefault()
       error: (jqXHR, textStatus, errorThrown) ->
         $('#robo-share-url').text "Error loading share url: #{textStatus}"
     }
