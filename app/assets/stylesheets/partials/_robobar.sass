@@ -1,0 +1,83 @@
+$robobar-height: 45px
+
+#chippy
+  +opacity(0.5)
+  +border-top-radius(5px)
+  +single-box-shadow(#333, 0, 0, 5px)
+  +single-transition(all, .15s, ease-in, 0)
+  position: fixed
+  bottom: 0
+  right: 20px
+  height: $robobar-height
+  width: 65px
+  background: #8cbe5f asset-url("tinyrobo.png", image) center 8px no-repeat
+  cursor: pointer
+  z-index: 100
+
+  &:hover, &.active
+    +opacity(1)
+    +single-box-shadow(#333, 0, 0, 10px)
+    height: $robobar-height + 5px
+
+  &.active
+    height: 85px
+    background-color: #CCC9D1
+    &:hover
+      background-color: #E2E1E9
+
+#robo-bar
+  +background-image(linear-gradient(#E2E1E9, #CCC9D1))
+  +single-box-shadow(#333, 0, 0, 10px)
+  +single-transition(all, .15s, ease-in, 0)
+  position: fixed
+  bottom: -$robobar-height
+  height: $robobar-height
+  width: 100%
+
+  button
+    +sassy-button-structure(5px, 14px)
+    +sassy-button-gradient("matte", #8cbe5f)
+    margin: 6px
+
+// Ensures all content is visible when RoboBar is visible
+#robo-bar-gutter
+  height: $robobar-height
+  width: 100%
+
+.robo-panel
+  +single-box-shadow(#000, 0, 0, 10px)
+  +single-transition(all, .25s, ease-in-out, 0)
+  +border-top-radius(5px)
+  position: relative
+  border: 4px solid #ddd
+  color: #333
+  background: asset-url("cross_scratches.png", image) repeat
+  position: fixed
+  bottom: -200px + $robobar-height + 4px + 10px // Height, bar, border, shadow
+  left: 20px
+  width: 700px
+  height: 300px
+
+  strong
+    color: #000
+
+  div.robo-panel-content
+    padding: 10px
+    font-family: "Helvetica", sans-serif
+
+  a.robo-panel-close
+    display: block
+    position: absolute
+    top: 5px
+    right: 5px
+    height: 11px
+    width: 11px
+    background: transparent asset-url("controls/close.png", image) center 0px no-repeat
+    &:hover
+      background-position: center -11px
+
+#robo-share-url input
+  box-sizing: border-box
+  width: 100%
+  font-size: 1.25em
+  color: #000
