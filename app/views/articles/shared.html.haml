@@ -48,9 +48,12 @@
   #comments
     %hr
     #share_alert
-      = link_to_github @user
-      liked this article and decided to share it with you.
-      If you enjoyed reading it, be sure to check out what
-      = link_to "Practicing Ruby", "http://practicingruby.com"
-      is all about. There is a lot more great stuff where
-      this came from!
+      The discussion thread for this article is available to subscribers
+      only. If you want to share some feedback or ask me a question, please
+      = link_to "sign up", "/"
+      , 
+      = link_to "log in", article_path(@article.id)
+      , or send an email to
+      = link_to "gregory.t.brown@gmail.com", "mailto:gregory.t.brown@gmail.com"
+
+      
