@@ -16,3 +16,7 @@
         - if current_user.admin?
           - group.articles.drafts.each do |a|
             %li= link_to "[DRAFT] #{a.full_subject}", article_path(a)
+  %hr
+  %div{:align => :center}
+    For more great content, head back to
+    = link_to "the library page.", library_path

@@ -21,3 +21,10 @@
   %p
     = link_to "Volume #{v.number}", "/volume/#{v.number}"
     = v.description
+
+%hr
+%div{:align => :center}
+  Not sure where to start? Try a
+  = link_to "randomly selected article.", article_path(Article.where(:status => "published").sample.id)
+    
+
