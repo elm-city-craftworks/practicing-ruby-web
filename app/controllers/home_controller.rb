@@ -11,4 +11,9 @@ class HomeController < ApplicationController
 
     render :index, :layout => "landing"
   end
+
+  def library
+    authenticate
+    authenticate_user
+  end
 end
