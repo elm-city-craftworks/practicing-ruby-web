@@ -10,7 +10,7 @@
       %p.left= group.description
     
       %ul.index
-        -group.articles.published.each do |a|
+        -group.articles.published.order("published_time").each do |a|
           %li= link_to a.full_subject, article_path(a)
 
         - if current_user.admin?
