@@ -1,13 +1,23 @@
-%h2 By Volume
+%p
+  %em
+    As a subscriber to Practicing Ruby, you get full access to my library of back issues. The archives currently contain a total of
+    = Article.where(:status => "published").count
+    issues spread across
+    = Volume.count
+    volumes, and several new articles get added each month. 
 
-- Volume.all.each do |v|
-  %p
-    = link_to "Volume #{v.number}", "/volume/#{v.number}"
-    = v.description
+%p Back issues are organized in two ways: by thematic collections and by chronologically-ordered volumes. Follow your interests and feel free to jump around the collections and volumes. The way you read this content is entirely up to you and your studies should happen on your own schedule, not mine!
 
-%h2 By Collection
+%h3 By Collection
 
 - Collection.all.each do |c|
   %p
     = link_to c.name, "/collection/#{c.slug}"
     = c.description
+
+%h3 By Volume
+
+- Volume.all.each do |v|
+  %p
+    = link_to "Volume #{v.number}", "/volume/#{v.number}"
+    = v.description
