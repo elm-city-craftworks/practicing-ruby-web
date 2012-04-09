@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       return redirect_to articles_path
     end
 
-    @recent_topics = Article.published.order("created_at DESC").limit(5)
+    @recent_topics = Article.published.order("published_time DESC").limit(5)
 
     render :index, :layout => "landing"
   end
