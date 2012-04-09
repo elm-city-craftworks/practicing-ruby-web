@@ -16,13 +16,11 @@
 
     = render :partial => "shared/upper_navigation"
     #content
-      %i
-        %span{:style => "float: right; padding-top: 30px; text-align: center; font-size: 1.1em"}
-          An eclectic journal for the dedicated hacker 
+      #header
+        %h1= link_to "Practicing Ruby", home_path
+        .tagline
+          An eclectic journal for the dedicated hacker
           %br
           lovingly curated by Gregory Brown
-      %h1#header= link_to "Practicing Ruby", home_path
-
-      %hr  
       = render :partial => "shared/broadcasts"
       = yield

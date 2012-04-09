@@ -6,12 +6,24 @@
     -webkit-overflow-scrolling: touch
     font-size: 0.75em
 
+body
+  font-size: 15px
+  margin: 0
+  padding: 0
+  font-family: Helvetica, sans-serif
+
 a, a:visited
   color: #BD0010
 
 div#content
   margin: 0 auto
   width: 800px
+
+div#footer
+  margin-top: 1em
+  padding: 1em 0
+  border-top: 3px solid #eee
+  text-align: center
 
 p
   font-family: Helvetica, sans-serif
@@ -27,17 +39,29 @@ img#beta-badge
   margin-top: 10px
   display: inline-block
 
-h1#header
-  margin-top: 0
-  font-weight: normal
-  a
-    color: #333
-    text-decoration: none
-    font-family: "Sketchy"
+
+#header
+  border-bottom: 3px solid #eee
+  h1
+    margin-top: 0
+    font-weight: normal
     display: inline-block
-    font-size: 48px
-    &:hover
-      color: #666
+    a
+      color: #333
+      text-decoration: none
+      font-family: "Sketchy"
+      display: inline-block
+      font-size: 48px
+      &:hover
+        color: #666
+  .tagline
+    font-style: italic
+    float: right
+    padding-top: 30px
+    text-align: center
+    font-size: 1.1em
+    display: inline-block
+    color: #444
 
 table.admin
   width: 100%
@@ -63,11 +87,6 @@ h1, h2, h3
 form.edit_announcement, form.new_announcement
   input[type=text]
     width: 500px
-
-body
-  font-size: 15px
-  margin: 0
-  padding: 0
 
 li
   font-size: 0.95em
