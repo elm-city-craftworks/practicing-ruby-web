@@ -4,7 +4,7 @@
     = Article.where(:status => "published").count
     issues spread across
     = Volume.count
-    volumes, and several new articles get added each month. 
+    volumes, and several new articles get added each month.
 
 %p Back issues are organized in two ways: by thematic collections and by chronologically-ordered volumes. Follow your interests and feel free to jump around the collections and volumes. The way you read this content is entirely up to you and your studies should happen on your own schedule, not mine!
 
@@ -22,9 +22,8 @@
     = link_to "Volume #{v.number}", "/volume/#{v.number}"
     = v.description
 
-%hr
-%div{:align => :center}
+#footer
   Not sure where to start? Try a
   = link_to "randomly selected article.", article_path(Article.where(:status => "published").sample.id)
-    
+
 
