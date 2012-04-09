@@ -7,14 +7,17 @@ class ArticlesController < ApplicationController
 
   def index
     if params["volume"]
-      @volumes = Volume.where(:number => params["volume"].to_i)
+      @article_groupings = Volume.where(:number => params["volume"].to_i)
+    elsif params["collection"]
+      @article_groupings = Collection.where(:slug => params["collection"])
     else
-      @volumes = Volume.order("number desc")
+      redirect_to "/library" 
     end
   end
 
   def show
     authenticate_admin if @article.status == "draft"
+
     @comments = @article.comments.order("created_at")
   end
 
@@ -45,7 +48,11 @@ class ArticlesController < ApplicationController
   private
 
   def find_article
-    @article = Article.find(params[:id])
+    if params[:volume] && params[:issue]
+      @article = Article.find_by_issue_number("#{params[:volume]}.#{params[:issue]}")
+    else
+      @article = Article.find(params[:id])
+    end
   end
 
   def authenticate_admin

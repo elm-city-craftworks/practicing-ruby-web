@@ -2,14 +2,13 @@ class HomeController < ApplicationController
   skip_before_filter :authenticate
   skip_before_filter :authenticate_user
 
-  layout "landing"
-
   def index
     if current_user
-      redirect_to articles_path
+      return redirect_to articles_path
     end
 
-    @recent_topics = Article.published.order("created_at DESC").limit(5)
-  end
+    @recent_topics = Article.published.order("published_time DESC").limit(5)
 
+    render :index, :layout => "landing"
+  end
 end
