@@ -159,6 +159,6 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
   def assert_activated
     visit "/sessions/link/#{@auth_link.secret}"
-    assert_equal articles_path, current_path
+    assert_equal library_path, current_path
   end
 end

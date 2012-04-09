@@ -9,9 +9,9 @@ class DisabledAccountsTest < ActionDispatch::IntegrationTest
 
   test "can log in normally when account is not disabled" do
     sign_user_in
-    visit articles_path
+    visit library_path
     
-    assert_equal articles_path, current_path
+    assert_equal library_path, current_path
   end
   
   test "gets rerouted to session problem page when account is disabled" do
