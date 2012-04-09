@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
     elsif params["collection"]
       @article_groupings = Collection.where(:slug => params["collection"])
     else
-      @article_groupings = Volume.order("number desc")
+      redirect_to "/library" 
     end
   end
 
