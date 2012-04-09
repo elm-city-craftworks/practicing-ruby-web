@@ -25,6 +25,8 @@ class ActionDispatch::IntegrationTest
       'uid'       => '12345',
       'user_info' => { 'nickname' => 'frankpepelio' }
     }
+
+    Factory(:article)
   end
 
   teardown do
