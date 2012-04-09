@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
-  skip_before_filter :authenticate
-  skip_before_filter :authenticate_user
+  skip_before_filter :authenticate, :only => [:index]
+  skip_before_filter :authenticate_user, :only => [:index]
 
   def index
     if current_user
@@ -10,10 +10,5 @@ class HomeController < ApplicationController
     @recent_topics = Article.published.order("published_time DESC").limit(5)
 
     render :index, :layout => "landing"
-  end
-
-  def library
-    authenticate
-    authenticate_user
   end
 end
