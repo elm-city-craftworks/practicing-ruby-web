@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     unless current_user
-      redirect_to current_authorization.authorization_link
+      return redirect_to(current_authorization.authorization_link)
     end
     
     redirect_to problems_sessions_path if current_user.account_disabled
