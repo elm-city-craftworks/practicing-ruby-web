@@ -5,29 +5,28 @@
     new PR.ShareBox()
 
 #share-box
-  .header Well hello there, stranger. Welcome to Practicing Ruby! 
-  
+  .header Well hello there, stranger. Welcome to Practicing Ruby!
+
   .personal
     It looks like #{link_to_github @user} has invited you here to check out Issue #{@article.issue_number}.
-    %hr
 
   .subscribe
-    %i
+    %span.top
       This journal is a grassroots effort to produce
-      extraordinarily good content for Ruby programmers.
+      extraordinarily good content for ruby programmers.
     %br
     %br
-    If you like what you see here, please subscribe! 
-    It only costs $8/month for full access to an 
+    If you like what you see here, please subscribe!
+    It only costs $8/month for full access to an
     ever-growing library of articles, and that
-    money supports the 
+    money supports the
     sustainability of this project.
     .controls
       %button Subscribe Now &raquo;
   .read
-    %i
+    %span.top
       If you're itching to start reading right away,
-      just click the big button below and dive right in. 
+      just click the big button below and dive right in.
     %br
     %br
     Although the discussion thread for
@@ -51,9 +50,9 @@
       The discussion thread for this article is available to subscribers
       only. If you want to share some feedback or ask me a question, please
       = link_to "sign up", "/"
-      , 
+      ,
       = link_to "log in", article_path(@article.id)
       , or send an email to
       = link_to "gregory.t.brown@gmail.com", "mailto:gregory.t.brown@gmail.com"
 
-      
+
