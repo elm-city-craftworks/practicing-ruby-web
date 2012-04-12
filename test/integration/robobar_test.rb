@@ -39,16 +39,12 @@ class RobobarTest < ActionDispatch::IntegrationTest
 
     assert find('#robo-share').visible?, "Share panel isn't visible"
 
-    # Share link doesn't exist right away and we need to wait a bit
-
-    sleep 0.5
-
-    share = SharedArticle.where(
-      :article_id => @article.id, :user_id => @user.id
-    ).first
-
     within("#robo-share") do
       share_link = find('input').value || '' # So the test fails gracefully
+
+      share = SharedArticle.where(
+        :article_id => @article.id, :user_id => @user.id
+      ).first
 
       assert share_link[/#{shared_article_path(share.secret)}/],
         "Share URL appears invalid: #{share_link}"
