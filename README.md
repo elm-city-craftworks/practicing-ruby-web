@@ -1,5 +1,7 @@
 == Practicing Ruby
 
+[![Build Status](https://secure.travis-ci.org/elm-city-craftworks/practicing-ruby-web.png?branch=master)](http://travis-ci.org/elm-city-craftworks/practicing-ruby-web)
+
 1. create config/database.yml
 1. create config/initializers/mailchimp_settings.rb
 1. create config/initializers/secret_token.rb
