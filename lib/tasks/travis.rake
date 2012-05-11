@@ -4,6 +4,19 @@ namespace :travis do
   desc 'Create database.yml for testing'
   task :setup do
 
+    # Move configuration files into place
+    #
+    initializers = Rails.root.join("config", "initializers")
+
+    FileUtils.cp initializers + "mailchimp_settings.rb.example",
+                 initializers + "mailchimp_settings.rb"
+
+    FileUtils.cp initializers + "omniauth.rb.example",
+                 initializers + "omniauth.rb"
+
+    FileUtils.cp initializers + "secret_token.rb.example",
+                 initializers + "secret_token.rb"
+
     # Setup our database.yml file
     #
     File.open(Rails.root.join("config", "database.yml"), 'w') do |f|
@@ -24,18 +37,5 @@ CONFIG
     # Load the schema
     #
     Rake::Task["db:test:load"].invoke
-
-    # Move configuration files into place
-    #
-    initializers = Rails.root.join("config", "initializers")
-
-    FileUtils.cp initializers + "mailchimp_settings.rb.example",
-                 initializers + "mailchimp_settings.rb"
-
-    FileUtils.cp initializers + "omniauth.rb.example",
-                 initializers + "omniauth.rb"
-
-    FileUtils.cp initializers + "secret_token.rb.example",
-                 initializers + "secret_token.rb"
   end
 end
