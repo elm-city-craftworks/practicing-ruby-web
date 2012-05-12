@@ -18,7 +18,7 @@ class BroadcastTest < ActionDispatch::IntegrationTest
     visit article_path(@article)
 
     assert_content announcement.broadcast_message
-    flunk
+
   end
 
   test "broadcasts are not visible when set to false" do
