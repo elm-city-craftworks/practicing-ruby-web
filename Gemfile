@@ -32,13 +32,13 @@ group :assets do
 end
 
 group :test do
-  gem "minitest",  "~> 2.3.1"
+  gem "minitest",  "~> 2.12.1"
   gem "capybara"
   gem "factory_girl_rails"
-  gem "colorific", "~> 1.0.0"
-  gem "test_notifier", "~> 1.0.0"
   gem "capybara-webkit"
   gem "database_cleaner"
+  gem "test_notifier", "~> 1.0.0"
+  gem "turn", "~> 0.9.5"
 end
 
 group :production do
