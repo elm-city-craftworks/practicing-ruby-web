@@ -6,7 +6,6 @@ class CommentTest < ActiveSupport::TestCase
       comment = Factory(:comment, :body => "No mentions here")
 
       assert_equal [], comment.mentioned_users
-      flunk
     end
 
     test "returns an empty array if no valid mentions are present" do
