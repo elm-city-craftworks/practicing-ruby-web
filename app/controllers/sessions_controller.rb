@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       login_or_finish_confirmation(authorization)
     else
       authorization = Authorization.create(:github_uid => github_uid)
-      
+
       start_confirmation(authorization, auth["user_info"])
     end
   end
@@ -34,6 +34,8 @@ class SessionsController < ApplicationController
     session["authorization_id"] = authorization.id
 
     if authorization.confirmed?
+      current_user.update_attribute(:notifications_enabled, true)
+
       redirect_back_or_default(community_url)
     elsif link = authorization.authorization_link
       redirect_to authorization_link_path(link)

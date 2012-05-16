@@ -4,30 +4,44 @@ class ConversationMailer < ActionMailer::Base
   def started(article, users)
     @article = article
 
-    mail(
-      :to      => "practicingruby@gmail.com",
-      :bcc     => users,
-      :subject => "A conversation has started about Practicing Ruby #{article.issue_number}"
-    )
+    batch(users) do |addresses|
+      mail(
+        :to      => "practicingruby@gmail.com",
+        :bcc     => addresses,
+        :subject => "A conversation has started about Practicing Ruby #{article.issue_number}"
+      ).deliver
+    end
   end
 
   def mentioned(comment, users)
     @article = comment.commentable
 
-    mail(
-      :to      => "practicingruby@gmail.com",
-      :bcc     => users,
-      :subject => "You've been mentioned in a conversation about Practicing Ruby #{@article.issue_number}"
-    )
+    batch(users) do |addresses|
+      mail(
+        :to      => "practicingruby@gmail.com",
+        :bcc     => addresses,
+        :subject => "You've been mentioned in a conversation about Practicing Ruby #{@article.issue_number}"
+      ).deliver
+    end
   end
 
   def comment_made(comment, users)
     @article = comment.commentable
 
-    mail(
-      :to      => "practicingruby@gmail.com",
-      :bcc     => users,
-      :subject => "A comment has been made about Practicing Ruby #{@article.issue_number}"
-    )
+    batch(users) do |addresses|
+      mail(
+        :to      => "practicingruby@gmail.com",
+        :bcc     => addresses,
+        :subject => "A comment has been made about Practicing Ruby #{@article.issue_number}"
+      ).deliver
+    end
+  end
+
+  private
+
+  def batch(users)
+    users.to_notify.find_in_batches(:batch_size => 25) do |group|
+      yield group.map(&:email)
+    end
   end
 end
