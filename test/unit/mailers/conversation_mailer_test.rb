@@ -76,39 +76,75 @@ class ConversationMailerTest < ActionMailer::TestCase
       assert ActionMailer::Base.deliveries.first.bcc.include?(user.email)
     end
 
-    test "emails are not sent to mentioned users" do
+    test "emails are sent to mentioned users" do
       assert ActionMailer::Base.deliveries.empty?
 
-      user             = Factory(:user, :notify_comment_made => true )
-      dont_notify_user = Factory(:user, :notify_comment_made => false)
-      mentioned_user   = Factory(:user, :notify_comment_made => true,
-                                        :github_nickname     => "x"  )
+      user             = Factory(:user, :notify_conversations => false )
+      dont_notify_user = Factory(:user, :notify_conversations => false)
+      mentioned_user   = Factory(:user, :notify_conversations => false,
+                                        :notify_comment_made  => true,
+                                        :github_nickname      => "x" )
 
-      first_comment = Factory(:comment, :body => "First Comment",
-                                        :user => user)
-
-      ActionMailer::Base.deliveries.clear # Remove conversation started email
-
-      assert ActionMailer::Base.deliveries.empty?
-
-      second_comment = Factory(:comment,
+      Factory(:comment,
         :body        => "Hey @#{mentioned_user.github_nickname}",
-        :user        => user,
-        :commentable => first_comment.commentable)
+        :user        => user)
 
-      assert_equal 2, ActionMailer::Base.deliveries.count
+      assert_equal 1, ActionMailer::Base.deliveries.count
 
-      mentioned_email = ActionMailer::Base.deliveries.find {|e| e.subject[/mentioned/i] }
+      mentioned_email = ActionMailer::Base.deliveries.first
 
       assert mentioned_email.bcc.include?(mentioned_user.email)
       refute mentioned_email.bcc.include?(user.email)
       refute mentioned_email.bcc.include?(dont_notify_user.email)
+    end
 
-      comment_email = ActionMailer::Base.deliveries.find {|e| e != mentioned_email }
+  end
 
-      refute comment_email.bcc.include?(mentioned_user.email)
-      assert comment_email.bcc.include?(user.email)
-      refute comment_email.bcc.include?(dont_notify_user.email)
+  context "Users with notifications disabled" do
+
+    test "do not recieve conversation started emails" do
+      assert ActionMailer::Base.deliveries.empty?
+
+      user = Factory(:user, :notifications_enabled => false)
+
+      first_comment = Factory(:comment, :body => "First Comment",
+                                        :user => user)
+
+      assert ActionMailer::Base.deliveries.empty?
+    end
+
+    test "do not recieve emails when mentioned" do
+      # Users don't want to know about new conversations, so only a mention
+      # email should be created for +dont_notify_user+, but in this case
+      # he doesn't get anything
+
+      user             = Factory(:user, :notify_conversations  => false)
+      dont_notify_user = Factory(:user, :notify_mentions       => true,
+                                        :notifications_enabled => false,
+                                        :notify_conversations  => false,
+                                        :github_nickname       => "not_me")
+
+      Factory(:comment, :body => "Hey @#{dont_notify_user.github_nickname}",
+                        :user => user )
+
+      assert ActionMailer::Base.deliveries.empty?
+    end
+
+    test "do not recieve emails when comments are made" do
+      user             = Factory(:user, :notify_conversations  => false)
+      dont_notify_user = Factory(:user, :notify_comment_made   => true,
+                                        :notifications_enabled => false,
+                                        :notify_conversations  => false)
+      # First comment
+      first_comment = Factory(:comment, :body => "Oh yeah starting a conversation",
+                                        :user => user )
+
+      # Second comment
+      Factory(:comment, :body => "But I'm just talking to myself",
+                        :user => user,
+                        :commentable => first_comment.commentable )
+
+      assert ActionMailer::Base.deliveries.empty?
     end
 
   end
