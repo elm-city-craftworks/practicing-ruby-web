@@ -10,6 +10,7 @@ require 'database_cleaner'
 TestNotifier.silence_no_notifier_warning = true
 DatabaseCleaner.strategy                 = :truncation
 OmniAuth.config.test_mode                = true
+Turn.config.natural                      = true
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
