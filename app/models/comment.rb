@@ -25,27 +25,24 @@ class Comment < ActiveRecord::Base
 
   def notify_conversation_started
     if first_comment? && commentable.published?
-      users = User.where(:notify_conversations => true).map {|u| u.email }
-      users.each_slice(25) do |u|
-        ConversationMailer.started(commentable, u).deliver
-      end
+      users = User.where(:notify_conversations => true)
+      ConversationMailer.started(commentable, users)
     end
   end
 
   def notify_mentioned
-    users = mentioned_users.where(:notify_mentions => true).map {|u| u.email }
+    users = mentioned_users.where(:notify_mentions => true)
 
     return if users.empty? || !commentable.published?
-    ConversationMailer.mentioned(self, users).deliver
+    ConversationMailer.mentioned(self, users)
   end
 
   def notify_comment_made
     users = User.where(:notify_comment_made => true)
     users = users.where("users.id NOT IN(?)", mentioned_users) if mentioned_users.any?
-    users = users.map {|u| u.email }
 
     return if users.empty? || first_comment? || !commentable.published?
-    ConversationMailer.comment_made(self, users).deliver
+    ConversationMailer.comment_made(self, users)
   end
 
 end
