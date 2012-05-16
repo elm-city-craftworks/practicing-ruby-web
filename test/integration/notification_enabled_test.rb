@@ -7,7 +7,7 @@ class NotificationEnabledTest < ActionDispatch::IntegrationTest
     @user.update_attribute(:notifications_enabled, false)
   end
 
-  test "notifications are turned on when a users logs in" do
+  test "notifications are turned on when a users sign in" do
     sign_user_in
 
     @user.reload
