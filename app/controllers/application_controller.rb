@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate
   before_filter :authenticate_user
+  before_filter :enable_notifications
 
   helper_method :current_user
 
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       return redirect_to(current_authorization.authorization_link)
     end
-    
+
     redirect_to problems_sessions_path if current_user.account_disabled
   end
 
@@ -38,5 +39,13 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  private
+
+  def enable_notifications
+    if current_user && !current_user.notifications_enabled
+      current_user.update_attribute(:notifications_enabled, true)
+    end
   end
 end
