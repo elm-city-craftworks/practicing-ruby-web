@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   attr_protected :admin
 
+  scope :to_notify, where(notifications_enabled: true)
+
   before_save do
     write_attribute(:email, email.downcase) if changed.include?("email")
   end
