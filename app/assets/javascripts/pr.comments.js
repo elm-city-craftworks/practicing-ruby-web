@@ -20,19 +20,26 @@ PR.Comments.init = function(commentsPath){
     $(el).children(".content").click(function(e){
       if (e.target.tagName != "A")
         $(e.target).trigger('edit');
+    }).bind('jeditable.editing', function(){
+      MdPreview.buildPreviewTab($(this));
+    }).bind('jeditable.reset', function(){
+      PR.Comments.teardownPreview(this);
     });
 
     $(el).children(".content").editable(commentsPath + id, {
-      type:      'textarea',
-      method:    'PUT',
-      indicator: 'Saving ...',
-      cancel:    'Cancel',
-      submit:    'Save',
-      loadurl:   commentsPath + id,
-      width:     '98%',
-      event:     'edit',
-      onblur:    'ignore',
-      clicktoedit: false
+      type:        'textarea',
+      method:      'PUT',
+      indicator:   'Saving ...',
+      cancel:      'Cancel',
+      submit:      'Save',
+      loadurl:     commentsPath + id,
+      width:       '98%',
+      event:       'edit',
+      onblur:      'ignore',
+      clicktoedit: false,
+      callback:    function(value, settings) {
+        PR.Comments.teardownPreview(this);
+      }
     });
   });
 
@@ -40,4 +47,13 @@ PR.Comments.init = function(commentsPath){
     $('input[type=submit]', this).attr('disabled', 'disabled');
   })
 
+}
+
+PR.Comments.teardownPreview = function(content){
+  var content          = $(content);
+  var previewContainer = content.parents('div.markdown-preview');
+  var commentContainer = content.parents('div.comment');
+
+  content.appendTo(commentContainer);
+  previewContainer.remove();
 }
