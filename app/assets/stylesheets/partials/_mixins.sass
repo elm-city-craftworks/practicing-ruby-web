@@ -1,0 +1,61 @@
+=markdown
+  p
+    font-family: 'Helvetica', sans-serif
+    font-size: 1.1em
+    &.bold
+      font-weight: bold
+
+  li
+    margin-bottom: 0.5em
+    line-height: 1.3em
+    font-family: 'Helvetica', sans-serif
+
+  h3
+    font-size: 1.5em
+    font-weight: normal
+    border-bottom: #eee 2px solid
+    padding-bottom: 5px
+
+  h1 .clear
+    clear: both
+
+  pre
+    +image-box
+    background: #f5f5f5
+    padding: 1em
+    margin: 1em 0
+    code
+      padding: 0
+      font-size: 1em
+      +border-radius(0)
+      background-color: inherit
+  code
+    background-color: #f3f3f3
+    color: #333
+    padding: 2px 5px
+    +border-radius(3px)
+    font-size: 0.9em
+  blockquote
+    color: #777
+    border-left: 4px solid #999
+    margin: 0
+    padding-left: 1em
+
+  img, iframe
+    +image-box
+    margin: 0 auto
+    display: block
+    max-width: 750px
+    &.emoji
+      padding: 0
+      border: none
+      +single-box-shadow(#000, 0, 0, 0)
+      display: inline
+      margin: 0
+      background-color: inherit
+
+=image-box
+  background: #f3f3f3
+  padding: 5px
+  border: 1px solid #AAA
+  +single-box-shadow(#777, 0, 0, 2px, 0, true)
