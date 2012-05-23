@@ -22,8 +22,11 @@ PR.Comments.init = function(commentsPath){
         $(e.target).trigger('edit');
     }).bind('jeditable.editing', function(){
       MdPreview.buildPreviewTab($(this));
+      $(this).parents('div.comment').children('div.header').hide();
     }).bind('jeditable.reset', function(){
+      // TODO: DRY up this code
       PR.Comments.teardownPreview(this);
+      $(this).parents('div.comment').children('div.header').show();
     });
 
     $(el).children(".content").editable(commentsPath + id, {
@@ -38,7 +41,9 @@ PR.Comments.init = function(commentsPath){
       onblur:      'ignore',
       clicktoedit: false,
       callback:    function(value, settings) {
+        // TODO: DRY up this code
         PR.Comments.teardownPreview(this);
+        $(this).parents('div.comment').children('div.header').show();
       }
     });
   });
