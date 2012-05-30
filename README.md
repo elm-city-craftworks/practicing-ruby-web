@@ -10,6 +10,7 @@ This project is licensed under the [GNU Affero General Public License 3.0](http:
 Contributors retain copyright to their own code, but must agree to license any
 code submitted to us under the same license as the project itself.
 
+
 [![Build Status](https://secure.travis-ci.org/elm-city-craftworks/practicing-ruby-web.png?branch=master)](http://travis-ci.org/elm-city-craftworks/practicing-ruby-web)
 
 1. create config/database.yml
