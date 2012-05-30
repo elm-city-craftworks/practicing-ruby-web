@@ -20,19 +20,31 @@ PR.Comments.init = function(commentsPath){
     $(el).children(".content").click(function(e){
       if (e.target.tagName != "A")
         $(e.target).trigger('edit');
+    }).bind('jeditable.editing', function(){
+      MdPreview.buildPreviewTab($(this));
+      $(this).parents('div.comment').children('div.header').hide();
+    }).bind('jeditable.reset', function(){
+      // TODO: DRY up this code
+      PR.Comments.teardownPreview(this);
+      $(this).parents('div.comment').children('div.header').show();
     });
 
     $(el).children(".content").editable(commentsPath + id, {
-      type:      'textarea',
-      method:    'PUT',
-      indicator: 'Saving ...',
-      cancel:    'Cancel',
-      submit:    'Save',
-      loadurl:   commentsPath + id,
-      width:     '98%',
-      event:     'edit',
-      onblur:    'ignore',
-      clicktoedit: false
+      type:        'textarea',
+      method:      'PUT',
+      indicator:   'Saving ...',
+      cancel:      'Cancel',
+      submit:      'Save',
+      loadurl:     commentsPath + id,
+      width:       '98%',
+      event:       'edit',
+      onblur:      'ignore',
+      clicktoedit: false,
+      callback:    function(value, settings) {
+        // TODO: DRY up this code
+        PR.Comments.teardownPreview(this);
+        $(this).parents('div.comment').children('div.header').show();
+      }
     });
   });
 
@@ -40,4 +52,13 @@ PR.Comments.init = function(commentsPath){
     $('input[type=submit]', this).attr('disabled', 'disabled');
   })
 
+}
+
+PR.Comments.teardownPreview = function(content){
+  var content          = $(content);
+  var previewContainer = content.parents('div.markdown-preview');
+  var commentContainer = content.parents('div.comment');
+
+  content.appendTo(commentContainer);
+  previewContainer.remove();
 }
