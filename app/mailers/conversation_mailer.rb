@@ -1,12 +1,12 @@
 class ConversationMailer < ActionMailer::Base
-  default :from => "practicingruby@gmail.com"
+  default :from => "gregory@practicingruby.com"
 
   def started(article, users)
     @article = article
 
     batch(users) do |addresses|
       mail(
-        :to      => "practicingruby@gmail.com",
+        :to      => "gregory@practicingruby.com",
         :bcc     => addresses,
         :subject => "A conversation has started about Practicing Ruby #{article.issue_number}"
       ).deliver
@@ -18,7 +18,7 @@ class ConversationMailer < ActionMailer::Base
 
     batch(users) do |addresses|
       mail(
-        :to      => "practicingruby@gmail.com",
+        :to      => "gregory@practicingruby.com",
         :bcc     => addresses,
         :subject => "You've been mentioned in a conversation about Practicing Ruby #{@article.issue_number}"
       ).deliver
@@ -30,7 +30,7 @@ class ConversationMailer < ActionMailer::Base
 
     batch(users) do |addresses|
       mail(
-        :to      => "practicingruby@gmail.com",
+        :to      => "gregory@practicingruby.com",
         :bcc     => addresses,
         :subject => "A comment has been made about Practicing Ruby #{@article.issue_number}"
       ).deliver

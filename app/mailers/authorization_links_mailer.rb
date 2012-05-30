@@ -1,5 +1,5 @@
 class AuthorizationLinksMailer < ActionMailer::Base
-  default :from => "practicingruby@gmail.com"
+  default :from => "gregory@practicingruby.com"
 
   def email_confirmation(link)
     @link = link
