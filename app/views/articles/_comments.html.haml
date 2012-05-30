@@ -1,10 +1,10 @@
 #comments
   %hr
 
-  %p.message
-    Now that you've read this article, what is on your mind?
   - @comments.each do |comment|
     = render :partial => "comments/show", :locals => {:comment => comment}
+
+  %h3.new-comment Share your thoughts:
 
   = form_for @article.comments.build do |f|
     = f.hidden_field :commentable_type

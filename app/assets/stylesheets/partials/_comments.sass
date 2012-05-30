@@ -1,6 +1,6 @@
 #comments
-  p.message
-    font-weight: bold
+  h3.new-comment
+    border-bottom: none
   .comment
     border: 0.5em solid #eee
     margin: 1em 0
@@ -11,9 +11,11 @@
       color: #333
       a
         color: #222
+        display: inline-block
+        margin-top: 5px
       img
-        vertical-align: middle
-        margin-right: 5px
+        float: left
+        margin: -0.5em 10px 0 -0.5em
 
       .on
         display: inline-block
@@ -35,3 +37,9 @@
       padding: 0.5em
       p
         text-align: left
+    .markdown-preview
+      ul.tabs
+        margin-top: 0
+      div.tab-container
+        border: none
+        margin-bottom: 0
