@@ -45,7 +45,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
     get_authorization_link(uid)
 
-    assert_activated 
+    assert_activated
   end
 
   test "Github emails are downcased automatically" do
@@ -58,7 +58,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
     get_authorization_link(uid)
 
-    assert_activated 
+    assert_activated
   end
 
   test "Manually entered emails are downcased automatically" do
@@ -116,7 +116,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
     visit "/sessions/link/#{@auth_link.secret}"
 
-    assert page.has_content?("expired")  
+    assert page.has_content?("expired")
   end
 
   def get_authorization_link(uid)
@@ -135,7 +135,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
   end
 
   def create_user(params)
-    Factory(:user, params)
+    FactoryGirl.create(:user, params)
   end
 
   def assert_confirmation_sent(email)
@@ -149,7 +149,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
   def assert_email_manually_entered(email)
     assert_equal edit_authorization_link_path(@auth_link), current_path
-    fill_in "authorization_link_mailchimp_email", 
+    fill_in "authorization_link_mailchimp_email",
       :with => email
 
     click_button("Link this email address to my Github account")

@@ -2,9 +2,9 @@ require 'test_helper'
 
 class DisabledAccountsTest < ActionDispatch::IntegrationTest
   setup do
-    @authorization = Factory(:authorization)
+    @authorization = FactoryGirl.create(:authorization)
     @user          = @authorization.user
-    @article       = Factory(:article)
+    @article       = FactoryGirl.create(:article)
   end
 
   test "can log in normally when account is not disabled" do

@@ -27,7 +27,7 @@ class ActionDispatch::IntegrationTest
       'user_info' => { 'nickname' => 'frankpepelio' }
     }
 
-    Factory(:article)
+    FactoryGirl.create(:article)
   end
 
   teardown do

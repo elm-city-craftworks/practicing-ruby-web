@@ -2,9 +2,9 @@ require 'test_helper'
 
 class SharingTest < ActionDispatch::IntegrationTest
   setup do
-    @authorization = Factory(:authorization)
+    @authorization = FactoryGirl.create(:authorization)
     @user          = @authorization.user
-    @article       = Factory(:article)
+    @article       = FactoryGirl.create(:article)
 
     @share = SharedArticle.find_or_create_by_article_id_and_user_id(
       @article.id, @user.id)

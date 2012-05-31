@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NotificationEnabledTest < ActionDispatch::IntegrationTest
   setup do
-    @authorization = Factory(:authorization)
+    @authorization = FactoryGirl.create(:authorization)
     @user          = @authorization.user
     @user.update_attribute(:notifications_enabled, false)
   end
