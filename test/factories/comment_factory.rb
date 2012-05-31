@@ -1,7 +1,9 @@
-Factory.sequence(:comment_body) { |n| "Comment #{n}" }
+FactoryGirl.define do
+  sequence(:comment_body) { |n| "Comment #{n}" }
 
-Factory.define :comment do |c|
-  c.body { |_| Factory.next(:comment_body) }
-  c.commentable { Factory(:article) }
-  c.association :user
+  factory :comment do |c|
+    c.body { |_| FactoryGirl.generate(:comment_body) }
+    c.commentable { FactoryGirl.create(:article) }
+    c.association :user
+  end
 end

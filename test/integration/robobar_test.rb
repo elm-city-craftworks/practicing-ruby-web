@@ -4,9 +4,9 @@ class RobobarTest < ActionDispatch::IntegrationTest
   setup do
     Capybara.current_driver = :webkit # You know, for the javascripts
 
-    @authorization = Factory(:authorization)
+    @authorization = FactoryGirl.create(:authorization)
     @user          = @authorization.user
-    @article       = Factory(:article)
+    @article       = FactoryGirl.create(:article)
 
     sign_user_in
 
