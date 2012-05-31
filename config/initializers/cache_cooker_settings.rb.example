@@ -1,0 +1,3 @@
+CacheCooker.base_uri    "http://practicingruby.dev"
+CacheCooker.digest_auth 'cachecooker', 'supersecret'
+CacheCooker.realm       'Practicing Ruby'

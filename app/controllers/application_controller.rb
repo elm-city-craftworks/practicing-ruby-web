@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
+  include CacheCooker::Oven
+
   protect_from_forgery
+  before_filter :authenticate_cache_cooker!
   before_filter :authenticate
   before_filter :authenticate_user
   before_filter :enable_notifications
@@ -19,9 +22,15 @@ class ApplicationController < ActionController::Base
     redirect_to problems_sessions_path if current_user.account_disabled
   end
 
+  def authenticate_cache_cooker!
+    if authenticate_cache_cooker
+      session[:authorization_id] = Authorization.includes(:user).
+        where('users.admin is TRUE').first.id
+    end
+  end
+
   def current_authorization
-    @current_authorization ||=
-      Authorization.find_by_id(session[:authorization_id])
+    @current_authorization ||= Authorization.find_by_id(session[:authorization_id])
   end
 
   def current_user
