@@ -101,6 +101,9 @@ GEM
     highline (1.6.2)
     hike (1.2.1)
     hominid (3.0.2)
+    httparty (0.8.3)
+      multi_json (~> 1.0)
+      multi_xml
     i18n (0.6.0)
     jquery-rails (1.0.19)
       railties (~> 3.0)
@@ -266,6 +269,7 @@ DEPENDENCIES
   god
   haml
   hominid
+  httparty
   jquery-rails
   mailhopper (~> 0.0.4)
   md_emoji

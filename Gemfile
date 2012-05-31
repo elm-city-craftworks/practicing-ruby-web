@@ -18,6 +18,8 @@ gem 'sass'
 gem "jquery-rails"
 gem 'draper'
 
+gem 'httparty'
+
 gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
 
