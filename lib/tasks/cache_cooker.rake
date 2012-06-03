@@ -6,5 +6,7 @@ namespace :bake do
     Article.find_each do |article|
       CacheCooker.bake("/articles/#{article.id}")
     end
+
+    puts "#{Article.count} articles baked and ready to serve :)"
   end
 end
