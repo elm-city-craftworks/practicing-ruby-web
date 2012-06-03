@@ -1,3 +1,11 @@
+# Keep your caches piping hot with CacheCooker!
+#
+# CacheCooker hooks into your Rails app and helps you keep your caches up-to-date
+# after deployments or changes
+#
+# TODO: Setup
+# TODO: Usage
+#
 class CacheCooker
   include HTTParty
 

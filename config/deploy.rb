@@ -25,11 +25,12 @@ before 'deploy:update_code' do
 end
 
 after 'deploy:update_code' do
-  { "database.yml"          => "config/database.yml",
-    "secret_token.rb"       => "config/initializers/secret_token.rb",
-    "mail_settings.rb"      => "config/initializers/mail_settings.rb",
-    "mailchimp_settings.rb" => "config/initializers/mailchimp_settings.rb",
-    "omniauth.rb"           => "config/initializers/omniauth.rb" }.
+  { "database.yml"             => "config/database.yml",
+    "secret_token.rb"          => "config/initializers/secret_token.rb",
+    "mail_settings.rb"         => "config/initializers/mail_settings.rb",
+    "mailchimp_settings.rb"    => "config/initializers/mailchimp_settings.rb",
+    "omniauth.rb"              => "config/initializers/omniauth.rb",
+    "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb" }.
   each do |from, to|
     run "ln -nfs #{shared_path}/#{from} #{release_path}/#{to}"
   end
@@ -39,8 +40,9 @@ after "deploy", "deploy:migrate"
 after "deploy", 'deploy:cleanup'
 
 after 'deploy' do
-  run "sudo god load #{release_path}/config/delayed_job.god"
-  run "sudo god start practicing_ruby_delayed_job"
+  run  "sudo god load #{release_path}/config/delayed_job.god"
+  run  "sudo god start practicing_ruby_delayed_job"
+  rake "bake:articles"
 end
 
 load 'deploy/assets'
@@ -82,4 +84,9 @@ end
 def remote_database_config(db="production")
   remote_config = capture("cat #{shared_path}/database.yml")
   YAML::load(remote_config)[db]
+end
+
+def rake(cmd, options={}, &block)
+  command = "cd #{current_release} && /usr/bin/env bundle exec rake #{cmd} RAILS_ENV=#{rails_env}"
+  run(command, options, &block)
 end

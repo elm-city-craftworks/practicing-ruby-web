@@ -24,8 +24,9 @@ class ApplicationController < ActionController::Base
 
   def authenticate_cache_cooker!
     if authenticate_cache_cooker
-      session[:authorization_id] = Authorization.includes(:user).
-        where('users.admin is TRUE').first.id
+      @current_authorization = Authorization.includes(:user).
+        where('users.admin is TRUE').first
+      session[:authorization_id] = @current_authorization.try(:id)
     end
   end
 
