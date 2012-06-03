@@ -3,6 +3,8 @@
 namespace :bake do
   desc 'Refresh the articles cache'
   task :articles => :environment do
+    puts "Fire up the oven. It's time to start cookin!"
+
     Article.find_each do |article|
       CacheCooker.bake("/articles/#{article.id}")
     end
