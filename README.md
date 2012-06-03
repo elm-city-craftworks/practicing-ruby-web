@@ -1,4 +1,4 @@
-== Practicing Ruby
+# Practicing Ruby
 
 Sorry for how bad this README is, we will surely improve it in time. Right now
 this app is publicly available primarily for the sake of transparency, but
@@ -17,6 +17,7 @@ code submitted to us under the same license as the project itself.
 1. create config/initializers/mailchimp_settings.rb
 1. create config/initializers/secret_token.rb
 1. create config/initializers/omniauth.rb
+1. create config/initializers/cache_cooker_settings.rb
 1. run rake db:create
 1. run rake db:migrate
 1. install pygments easy_install Pygments
