@@ -42,7 +42,7 @@ after "deploy", 'deploy:cleanup'
 after 'deploy' do
   run  "sudo god load #{release_path}/config/delayed_job.god"
   run  "sudo god start practicing_ruby_delayed_job"
-  rake "bake:articles"
+  run_rake "bake:articles"
 end
 
 load 'deploy/assets'
@@ -86,7 +86,7 @@ def remote_database_config(db="production")
   YAML::load(remote_config)[db]
 end
 
-def rake(cmd, options={}, &block)
+def run_rake(cmd, options={}, &block)
   command = "cd #{current_release} && /usr/bin/env bundle exec rake #{cmd} RAILS_ENV=#{rails_env}"
   run(command, options, &block)
 end
