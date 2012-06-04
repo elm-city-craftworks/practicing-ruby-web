@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :find_user
+  before_filter :find_user, :except => :show
+
+  def show
+    @user = User.find_by_github_nickname(params[:id])
+
+    raise ActionController::RoutingError.new('Not Found') unless @user
+
+    @user = UserDecorator.decorate(@user)
+  end
 
   def edit
 
