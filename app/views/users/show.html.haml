@@ -1,0 +1,15 @@
+#profile
+  .header
+    .avatar= @user.icon(100)
+
+    %h1= @user.github_nickname
+
+    .info
+      = "Member since #{@user.member_since}"
+
+      - if @user.comments.any?
+        %br
+        = "#{@user.comments.count} comments made"
+
+    - #TODO Add website link
+    - #TODO Display comments made by user

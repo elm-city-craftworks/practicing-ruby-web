@@ -8,7 +8,8 @@
   .header Well hello there, stranger. Welcome to Practicing Ruby!
 
   .personal
-    It looks like #{link_to_github @user} has invited you here to check out Issue #{@article.issue_number}.
+    It looks like #{@user.link_to_github} has invited you here to check out
+    Issue #{@article.issue_number}.
 
   .subscribe
     %span.top
