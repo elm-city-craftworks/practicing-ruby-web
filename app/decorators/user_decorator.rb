@@ -20,4 +20,12 @@ class UserDecorator < ApplicationDecorator
     h.image_tag(image_path, :alt => user.name,
       :style => "width: #{size}px; height: #{size}px;")
   end
+
+  def link_to_github
+    h.link_to user.github_nickname, github_url
+  end
+
+  def github_url
+    "https://github.com/#{user.github_nickname}"
+  end
 end
