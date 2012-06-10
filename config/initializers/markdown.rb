@@ -3,7 +3,7 @@ module MdPreview
     extend self
 
     def parse(content)
-      markdown = Redcarpet::Markdown.new(MdMentions::Render,
+      markdown = Redcarpet::Markdown.new(MdEmoji::Render,
         :autolink            => true,
         :space_after_headers => true,
         :no_intra_emphasis   => true,
