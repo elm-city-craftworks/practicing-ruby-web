@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
       return render :text => "Article not found!", :status => 404
     else
       @share.viewed unless current_user
-      @user    = UserDecorator.decorate(@share.user)
+      @user  = @share.user
       @article = @share.article
     end
   end
