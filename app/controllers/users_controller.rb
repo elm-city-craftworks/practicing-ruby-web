@@ -7,8 +7,6 @@ class UsersController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') unless @user
 
     @user = UserDecorator.decorate(@user)
-
-    redirect_to @user.github_url
   end
 
   def edit
