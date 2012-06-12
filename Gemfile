@@ -4,7 +4,7 @@ gem 'rails', '~> 3.1.0'
 
 gem 'pg'
 gem 'hominid'
-gem 'omniauth'
+gem 'omniauth-github', '~> 1.0.1'
 
 gem 'redcarpet', "~> 2.1"
 gem "albino"
