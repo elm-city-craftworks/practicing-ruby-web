@@ -127,7 +127,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
   def authenticate(params)
     OmniAuth.config.add_mock(:github, {
       :uid => params[:uid],
-      :user_info => {
+      :info => {
         :nickname => params[:nickname],
         :email    => params[:email]
       }
