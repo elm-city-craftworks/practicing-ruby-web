@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     else
       authorization = Authorization.create(:github_uid => github_uid)
 
-      start_confirmation(authorization, auth["user_info"])
+      start_confirmation(authorization, auth["info"])
     end
   end
 
