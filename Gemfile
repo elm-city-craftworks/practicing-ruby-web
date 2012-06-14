@@ -35,6 +35,10 @@ group :assets do
   gem 'sassy-buttons'
 end
 
+group :development do
+  gem "pry"
+end
+
 group :test do
   gem "minitest",  "~> 2.12.1"
   gem "capybara"
