@@ -9,6 +9,7 @@ config/initializers/omniauth.rb
 config/initializers/mail_settings.rb
 config/initializers/secret_token.rb
 config/initializers/cache_cooker_settings.rb
+config/initializers/gollum_settings.rb
 lib/development_mail_interceptor.rb
 .sass-cache/
 public/assets

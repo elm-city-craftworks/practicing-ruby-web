@@ -19,6 +19,8 @@ class ArticlesController < ApplicationController
     authenticate_admin if @article.status == "draft"
 
     @comments = @article.comments.order("created_at")
+
+    decorate_article
   end
 
   def share
@@ -42,6 +44,7 @@ class ArticlesController < ApplicationController
       @share.viewed unless current_user
       @user  = @share.user
       @article = @share.article
+      decorate_article
     end
   end
 
@@ -70,4 +73,7 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def decorate_article
+    @article = ArticleDecorator.decorate(@article)
+  end
 end

@@ -1,0 +1,2 @@
+repo = File.expand_path("../../../../practicing-ruby", __FILE__)
+ArticleRepo = Gollum::Wiki.new(repo)
