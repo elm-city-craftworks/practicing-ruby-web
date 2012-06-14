@@ -36,5 +36,7 @@ code submitted to us under the same license as the project itself.
 1. start the server via `rails s`
 1. navigate to `localhost:3000`
 1. login via github
+1. start rails console again and associate your new github auth with user
+   created earlier
 1. navigate to `localhost:3000/admin/articles` and create a new article
 1. you can now navigate to `localhost:3000/library`
