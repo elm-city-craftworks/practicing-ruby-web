@@ -23,11 +23,10 @@ code submitted to us under the same license as the project itself.
 1. create config/initializers/omniauth.rb
   - you'll need to go to https://github.com/settings/applications/new and
     enter the following information to get your keys:
-  ```
-  application name: localhost  
-  main url: http://localhost:3000  
-  callback url: http://localhost:3000/auth/github/callback
-  ```
+   
+    > application name: localhost  
+    > main url: http://localhost:3000  
+    > callback url: http://localhost:3000/auth/github/callback
 1. create config/initializers/cache_cooker_settings.rb
 1. create config/gollum_settings.rb
 1. run rake db:create
