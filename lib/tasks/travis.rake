@@ -17,6 +17,9 @@ namespace :travis do
     FileUtils.cp initializers + "secret_token.rb.example",
                  initializers + "secret_token.rb"
 
+    FileUtils.cp initializers + "gollum_settings.rb.example",
+                 initializers + "gollum_settings.rb"
+
     # Setup our database.yml file
     #
     File.open(Rails.root.join("config", "database.yml"), 'w') do |f|
