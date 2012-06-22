@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       return redirect_to(current_authorization.authorization_link)
     end
 
-    redirect_to problems_sessions_path if current_user.account_disabled
+    render problems_sessions_path if current_user.account_disabled
   end
 
   def authenticate_cache_cooker!
