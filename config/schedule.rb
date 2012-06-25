@@ -1,5 +1,5 @@
 set :output, "~/practicing-ruby/current/log/cron_log.log"
 
-every 1.hour do
-  rake "mailchimp:update_subscribers"
+every 10.minutes do
+  rake "mailchimp:disable_unsubscribed"
 end

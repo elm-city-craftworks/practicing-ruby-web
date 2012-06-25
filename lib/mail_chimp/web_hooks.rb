@@ -4,8 +4,8 @@ module MailChimp
     attr_reader :params
 
     def initialize(params)
-      @params = params
-      @api    = MailChimp::Api.new
+      @params       = params
+      @user_manager = UserManager.new
     end
 
     def process
@@ -13,16 +13,14 @@ module MailChimp
       when "subscribe"
         subscribe
       when "unsubscribe"
-        if params[:data][:action] == "delete"
-          delete
-        else
-          unsubscribe
-        end
+        unsubscribe
       when "profile"
         profile
       else
-        "ok (unsupported)"
+        params[:type] = "unsupported"
       end
+
+      "ok {#{request_type}}"
     end
 
     def request_type
@@ -38,22 +36,14 @@ module MailChimp
                     :email            => params[:data][:email],
                     :mailchimp_web_id => params[:data][:web_id])
       end
-
-      "subscribed"
-    end
-
-    def delete
-      find_user.disable
-
-      "ok (delete unsubscribed user)"
     end
 
     def unsubscribe
       find_user.disable
 
-      @api.delete_user(params[:data][:email])
-
-      "ok (unsubscribe)"
+      unless params[:data][:action] == "delete"
+        @user_manager.delete_user(params[:data][:email])
+      end
     end
 
     def profile
@@ -62,8 +52,6 @@ module MailChimp
       user.update_attributes(:first_name => params[:data][:merges][:FNAME],
                              :last_name  => params[:data][:merges][:LNAME],
                              :email      => params[:data][:email])
-
-      "update profile"
     end
 
     private
