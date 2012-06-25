@@ -24,6 +24,7 @@ gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
 
 gem 'capistrano'
+gem 'whenever'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.0'

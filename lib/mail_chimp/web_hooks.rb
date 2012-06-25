@@ -5,6 +5,7 @@ module MailChimp
 
     def initialize(params)
       @params = params
+      @api    = MailChimp::Api.new
     end
 
     def process
@@ -50,9 +51,7 @@ module MailChimp
     def unsubscribe
       find_user.disable
 
-      client = Hominid::API.new(MailChimp::SETTINGS[:api_key])
-      client.list_unsubscribe(MailChimp::SETTINGS[:list_id],
-                              params[:data][:email], true)
+      @api.delete_user(params[:data][:email])
 
       "ok (unsubscribe)"
     end
