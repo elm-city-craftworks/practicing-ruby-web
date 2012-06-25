@@ -20,7 +20,7 @@ module MailChimp
         params[:type] = "unsupported"
       end
 
-      "ok {#{request_type}}"
+      "ok (#{request_type})"
     end
 
     def request_type
