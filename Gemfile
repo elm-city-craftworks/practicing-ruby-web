@@ -38,6 +38,7 @@ group :test do
   gem "minitest",  "~> 2.12.1"
   gem "capybara"
   gem "factory_girl_rails"
+  gem "mocha", :require => false
   gem "capybara-webkit"
   gem "database_cleaner"
   gem "test_notifier", "~> 1.0.0"
