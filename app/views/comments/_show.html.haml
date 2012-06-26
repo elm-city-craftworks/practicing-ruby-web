@@ -9,7 +9,7 @@
         = link_to 'Delete', comment_path(comment),
           :class   => "remove", :title  => "Delete",
           :method  => :delete,  :remote => true,
-          :confirm => "Are you sure you wish to delete this comment?"
+          :data => { :confirm => "Do you really want to delete this comment?" }
     .on
       = time_ago_in_words comment.created_at
       ago

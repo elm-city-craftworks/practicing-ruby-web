@@ -14,6 +14,6 @@
         %td= link_to "Show", article_path(article)
         %td= link_to "Destroy",
           admin_article_path(article),
-          :confirm => "Are you sure you wish to delete this article?",
+          :data => { :confirm => "Are you sure you wish to delete this article?" },
           :method  => 'DELETE',
           :class   => "delete"
