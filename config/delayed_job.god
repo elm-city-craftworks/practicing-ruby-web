@@ -25,6 +25,12 @@ God.watch do |w|
     end
   end
 
+  w.transition(:up, :start) do |on|
+    on.condition(:process_exits) do |c|
+      c.notify = 'jordan'
+    end
+  end
+
   w.lifecycle do |on|
     on.condition(:flapping) do |c|
       c.to_state     = [:start, :restart]
@@ -34,6 +40,7 @@ God.watch do |w|
       c.retry_in     = 10.minutes
       c.retry_times  = 5
       c.retry_within = 2.hours
+      c.notify       = 'jordan'
     end
   end
 end
