@@ -18,6 +18,6 @@ class CommentDecorator < ApplicationDecorator
   end
 
   def content
-    h.md(comment.body)
+    MdPreview::CustomParser.parse(comment.body, MdMentions::Render)
   end
 end

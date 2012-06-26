@@ -8,7 +8,7 @@ PracticingRubyWeb::Application.routes.draw do
   match "/volume/:volume/" => 'articles#index'
   match "/volume/:volume/issue/:issue" => 'articles#show'
   match "/collection/:collection/" => 'articles#index'
- 
+
   resources :articles do
     member do
       get 'share'
@@ -22,7 +22,11 @@ PracticingRubyWeb::Application.routes.draw do
     end
   end
 
-  resources :comments
+  resources :comments do
+    collection do
+      post 'parse'
+    end
+  end
 
   match '/sessions/link/:secret' => 'sessions#link'
   match '/auth/github/callback' => 'sessions#create'
