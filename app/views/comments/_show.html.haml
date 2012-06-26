@@ -1,19 +1,13 @@
 .comment{:data => { :id => comment.id,
                     :editable => (comment.editable_by?(current_user)).inspect }}
   .header
-    = gravatar(comment.user, 32)
-    = link_to_github comment.user
-    .controls
-      - if comment.editable_by? current_user
-        = link_to 'Edit', '#', :class => "edit", :title => "Edit"
-        = link_to 'Delete', comment_path(comment),
-          :class   => "remove", :title  => "Delete",
-          :method  => :delete,  :remote => true,
-          :data => { :confirm => "Do you really want to delete this comment?" }
+    = comment.user.icon
+    = link_to comment.user.github_nickname, user_path(comment.user.github_nickname)
+    .controls= comment.controls
     .on
-      = time_ago_in_words comment.created_at
+      = comment.time_ago
       ago
     .clear
   .content
     - cache("comment_body_#{comment.id}") do
-      = md(comment.body)
+      = comment.content

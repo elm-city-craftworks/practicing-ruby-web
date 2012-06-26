@@ -15,12 +15,6 @@ module ApplicationHelper
     yield if current_user.try(:beta_tester)
   end
 
-  def gravatar(user, size=64)
-    hash = Digest::MD5.hexdigest(user.email.downcase)
-
-    image_tag "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
-  end
-
   def error_messages_for(object)
     if object.errors.any?
       content_tag(:div, :id => "errorExplanation") do

@@ -2,8 +2,8 @@ module MdPreview
   module CustomParser
     extend self
 
-    def parse(content)
-      markdown = Redcarpet::Markdown.new(MdEmoji::Render,
+    def parse(content, renderer = MdEmoji::Render)
+      markdown = Redcarpet::Markdown.new(renderer,
         :autolink            => true,
         :space_after_headers => true,
         :no_intra_emphasis   => true,
