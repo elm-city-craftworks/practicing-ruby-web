@@ -21,6 +21,9 @@ gem 'httparty'
 
 gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
+gem 'delayed_job', '~> 3.0.3'
+gem 'delayed_job_active_record'
+gem 'daemons', :require => false
 
 gem 'capistrano'
 
