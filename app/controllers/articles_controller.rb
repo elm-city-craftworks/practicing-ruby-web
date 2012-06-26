@@ -11,14 +11,14 @@ class ArticlesController < ApplicationController
     elsif params["collection"]
       @article_groupings = Collection.where(:slug => params["collection"])
     else
-      redirect_to "/library" 
+      redirect_to "/library"
     end
   end
 
   def show
     authenticate_admin if @article.status == "draft"
 
-    @comments = @article.comments.order("created_at")
+    @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
   end
 
   def share
@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
       return render :text => "Article not found!", :status => 404
     else
       @share.viewed unless current_user
-      @user  = @share.user
+      @user    = UserDecorator.decorate(@share.user)
       @article = @share.article
     end
   end
