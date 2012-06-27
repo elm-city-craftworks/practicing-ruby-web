@@ -3,5 +3,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
+require File.expand_path('../lib/rake_exception_notification', __FILE__)
 
 PracticingRubyWeb::Application.load_tasks
