@@ -52,6 +52,22 @@ PR.Comments.init = function(commentsPath){
     $('input[type=submit]', this).attr('disabled', 'disabled');
   })
 
+  // Use custom markdown parsing for comments
+  // TODO: Fix this in MdPreview so it is easy to override the URL
+  //
+  MdPreview.convertMarkdown = function(tab) {
+    var text = tab.find('textarea').val();
+    var previewTab = tab.filter('.tab-content.preview');
+
+    previewTab.html("<p>Loading ...</p>");
+
+    $.post("/comments/parse.text", { text: text },
+      function(data){
+        previewTab.html(data);
+      }
+    );
+  }
+
 }
 
 PR.Comments.teardownPreview = function(content){

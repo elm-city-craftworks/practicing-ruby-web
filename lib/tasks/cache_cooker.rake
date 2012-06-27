@@ -5,7 +5,7 @@ namespace :bake do
   task :articles => :environment do
     puts "Fire up the oven. It's time to start cookin!"
 
-    Article.find_each do |article|
+    Article.order("published_time DESC").each do |article|
       CacheCooker.bake("/articles/#{article.id}")
     end
 

@@ -25,6 +25,8 @@ class CommentsController < ApplicationController
     @comment.update_attribute(:body, params[:value])
     expire_fragment("comment_body_#{@comment.id}")
 
+    decorate
+
     respond_to do |format|
       format.text
     end
@@ -38,10 +40,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  def parse
+    @comment = Comment.new(:body => params[:text])
+
+    decorate
+
+    render :text => @comment.content
+  end
+
   private
 
   def find_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def decorate
+    @comment = CommentDecorator.decorate(@comment)
   end
 
   def commentator_only

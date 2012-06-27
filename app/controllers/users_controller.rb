@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') unless @user
 
     @user = UserDecorator.decorate(@user)
+
+    redirect_to @user.github_url
   end
 
   def edit
@@ -14,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(cleaned_params)
       flash[:notice] = "Settings sucessfully updated!"
       redirect_to edit_user_path(@user)
     else
@@ -26,5 +28,12 @@ class UsersController < ApplicationController
 
   def find_user
     @user = current_user
+  end
+
+  def cleaned_params
+    approved_params = %w{notify_conversations notify_mentions notify_comment_made
+      beta_tester}
+
+    params[:user].select {|k,_| approved_params.include? k }
   end
 end
