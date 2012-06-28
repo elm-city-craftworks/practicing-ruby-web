@@ -10,8 +10,6 @@ namespace :mailchimp do
     exception_notify do
       user_manager = UserManager.new
       user_manager.disable_unsubscribed_users
-
-      raise "Wow"
     end
   end
 end
