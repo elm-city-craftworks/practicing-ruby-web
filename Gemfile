@@ -26,6 +26,7 @@ gem 'delayed_job_active_record'
 gem 'daemons', :require => false
 
 gem 'capistrano'
+gem 'whenever'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.0'
@@ -39,6 +40,7 @@ group :test do
   gem "minitest",  "~> 2.12.1"
   gem "capybara"
   gem "factory_girl_rails"
+  gem "mocha", :require => false
   gem "capybara-webkit"
   gem "database_cleaner"
   gem "test_notifier", "~> 1.0.0"

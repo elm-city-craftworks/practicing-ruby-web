@@ -1,4 +1,7 @@
 require 'bundler/capistrano'
+require 'whenever/capistrano'
+
+set :whenever_identifier, defer { application }
 
 set :application, "practicing-ruby"
 set :repository,  "git@github.com:elm-city-craftworks/practicing-ruby-web.git"
