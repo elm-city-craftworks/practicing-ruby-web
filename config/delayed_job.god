@@ -26,9 +26,11 @@ God.watch do |w|
   end
 
   w.transition(:up, :start) do |on|
-    on.condition(:process_exits) do |c|
-      c.notify = 'jordan'
-    end
+    on.condition(:process_exits) { |c| c.notify = 'jordan' }
+  end
+
+  w.transition(:init, :start) do |on|
+    on.condition(:process_exits) { |c| c.notify = 'jordan' }
   end
 
   w.lifecycle do |on|
