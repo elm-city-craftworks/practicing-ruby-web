@@ -27,11 +27,6 @@ God.watch do |w|
     end
   end
 
-<<<<<<< HEAD
-  w.transition(:up, :start) do |on|
-    on.condition(:process_exits) { |c| c.notify = 'jordan' }
-  end
-=======
   # determine the state on startup
   w.transition(:init, { true => :up, false => :start }) do |on|
     on.condition(:process_running) do |c|
@@ -45,7 +40,6 @@ God.watch do |w|
       c.running = true
       c.interval = 5.seconds
     end
->>>>>>> 6864ee6... Shiny new god script [ci skip]
 
     # failsafe
     on.condition(:tries) do |c|
