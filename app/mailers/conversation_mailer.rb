@@ -1,5 +1,5 @@
 class ConversationMailer < ActionMailer::Base
-  default :from => "gregory@practicingruby.com"
+  default :from => "Practicing Ruby <gregory@practicingruby.com>"
 
   def started(article, users)
     @article = article
