@@ -31,10 +31,11 @@ PracticingRubyWeb::Application.routes.draw do
   match '/sessions/link/:secret' => 'sessions#link'
   match '/auth/github/callback' => 'sessions#create'
   match '/logout' => 'sessions#destroy', :as => 'logout'
+  match '/auth/github', :as => 'login'
 
   resource :community, :controller => "community" do
     member do
-      get 'faq'
+      get 'faq', as: 'faq'
     end
   end
 

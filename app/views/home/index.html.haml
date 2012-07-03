@@ -1,70 +1,21 @@
-#header
-  .container
-    #robot
-      //CREDIT: The Practicing Ruby robot logo is inspired by http://www.flickr.com/photos/crystalflickr/392972359/
-    #title
-      Practicing Ruby
-      #byline with Gregory Brown
+%header
+  = link_to "Updates", announcements_path
+  = link_to "FAQ", faq_community_path
+  = link_to "Support", '#TODO'
+  %span.account
+    = link_to "Subscribe", '#TODO'
+    = link_to "Sign in", login_path
 
-#content
-  .container
-    #abstract An eclectic weekly journal for dedicated hackers.
-    #main
-      %p
-        Getting better at software development can be hard work. There is an
-        endless sea of learning materials out there, but just figuring out what
-        topics you should focus on could take up all of your time if you let it.
-        Don’t fall into that trap, instead, let me do the legwork for you!
-      %p
-        As a subscriber to Practicing Ruby, you'll get access to well-polished
-        weekly brain dumps about topics that will help you become a better
-        Ruby developer. You'll also be able to join a dedicated group of
-        Practicing Rubyists in lively conversations about the eclectic mix of
-        topics I'm writing about.
-      %p
-        Content varies from week to week, ranging from things like
-        %a{:href => "http://practicingruby.com/articles/shared/ggcwduoyfqmz", :target => "_blank"}implementing <tt>Enumerable</tt> and <tt>Enumerator</tt> in Ruby
-        to 
-        %a{:href => "http://practicingruby.com/articles/shared/vbmlgkdtahzd", :target => "_blank"} learning iterative development
-        by implementing a simple arcade game in 13 steps. But if you really want to
-        get a closer look at the diversity of topics this journal is meant to cover,
-        feel free to check out the publicly released
-        %a{:href => "http://blog.rubybestpractices.com/posts/gregory/index.html", :target => "_blank"} first volume of Practicing Ruby
-        before you subscribe.
-        
-      %p
-        By becoming a paid subscriber, you'll help make sure that
-        Practicing Ruby remains a sustainable project while
-        simultaneously making it easier for me to spend more and more time working
-        on&nbsp
-        %a{:href =>  "http://university.rubymendicant.com", :target => "_blank"}><
-          Mendicant University
-        , my free online school for software developers.
-        So in addition to getting access to a great learning
-        resource for yourself, you'll be helping me teach others as well.
-      %p
-        Feel free to contact me at gregory.t.brown@gmail.com with any questions
-        you have about this service. I'll do my best to get back to you as soon as I can.
+#title Practicing Ruby
 
-    #sidebar
-      #recent-topics
-        %h3
-          = image_tag "ruby.png"
-          Topics recently covered by Practicing Ruby
-
-        %ul
-          - @recent_topics.each do |a|
-            %li= "#{a.subject}"
-
-      #sign-up
-        :plain
-          <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-          	<label for="mce-EMAIL">Sign up for Practicing Ruby!</label>
-          	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-          	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-            <p id="payment">Subscribers pay $8/month via amazon payments</p>
-          </form>
-
-      #existing-subscribers
-        Already a subscriber?
-        = link_to "Log in here", community_path
+#banner
+  #top A unique trade journal curated by Gregory Brown
+  #side
+    %h2
+      For just
+      %span.green $8/month
+      you get access to:
+%footer
+  Practicing Ruby’s web app is open source.
+  = link_to "Fork the project on GitHub.",
+    "https://github.com/elm-city-craftworks/practicing-ruby-web"

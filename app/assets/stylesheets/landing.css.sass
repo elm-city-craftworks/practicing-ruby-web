@@ -6,114 +6,76 @@
 @import compass/css3/text-shadow
 @import partials/fonts
 
+$landing-dark-blue: #454C56
+$landing-light-blue: #AFC9D1
+
 body.landing
-  background-color: #f9f9f9
-  a
-    color: #800F0E
-    &:hover
-      color: #B91613
-
-  .container
+  background: $landing-dark-blue asset-url("backgrounds/random_grey_variations.png", "image")
+  #container
+    width: 850px
     margin: 0 auto
-    width: 970px
-    position: relative
-  #header
-    padding-top: 25px
-    text-align: left
-    border-bottom: 10px solid #14372A
-    background-color: #215742
-    #robot
-      width: 373px
-      height: 249px
-      display: inline-block
-      background-image: asset-url("robo-landing.png", image)
-      margin-bottom: -4px
-    #title
-      +single-text-shadow(#333, 0, 0, 8px)
-      color: #eee
-      font-family: "Sketchy"
-      position: absolute
-      bottom: 70px
-      right: 31px
-      font-size: 74px
-      line-height: 1.25em
-      text-align: center
-
-      #byline
-        font-size: 26px
-        margin-top: 20px
-        line-height: 26px
-        color: #ddd
-
-  #content
-    font-size: 13px
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif
-    margin-top: 40px
-    .container
-      +container
-    #abstract
-      +column(24, true)
-      font-size: 20px
-      margin-bottom: 1em
-
-    #main
-      +column(14)
-      +append(1)
-      p
-        margin-bottom: 1em
-        line-height: 20px
-        text-align: justify
+    header
+      font-size: 0.9em
+      padding: 10px 0
+      margin: 10px 0
+      font-family: "Roadgeek 2005 Transport Medium"
+      span.account
+        float: right
         a
-          color: #000
+          color: $landing-light-blue
+          margin-left: 20px
+          margin-right: inherit
           &:hover
-            color: #555
-    #sidebar
-      +column(9, true)
-
-      #sign-up
-        +single-box-shadow(#333, 0, 0, 5px)
-        margin: 0 5px
-        padding: 1.5em
+            color: #fff
+      a
         color: #fff
-        +background-image(linear-gradient(#2D74BA, #1E4C78))
-        +border-radius(10px)
-        text-align: center
-        label
-          font-size: 20px
-          margin-bottom: 1em
-          display: block
-        #mce-EMAIL, #mc-embedded-subscribe
-          font-size: 16px
-        #mce-EMAIL
-          width: 175px
-        p#payment
-          margin-top: 10px
-          font-size: 0.9em
-      #existing-subscribers
-        margin-top: 1.5em
-        margin-bottom: 1em
-        text-align: center
-      #recent-topics
-        margin: 0 5px
-        margin-top: 4px
-        +single-box-shadow(#333, 0, 0, 5px)
-        +border-radius(10px)
-        margin-bottom: 2em
-        text-align: center
-        h3
-          line-height: 1.3em
-          padding: 1em
-          +border-top-radius(10px)
-          background-color: #318364
-          color: #fff
-          img
-            vertical-align: bottom
-            margin-right: 0.5em
-        ul
-          +border-bottom-radius(10px)
-          padding: 1em
-          background-color: #D9FFDF
-          +background-image(linear-gradient(#B8DABF, #D9FFDF))
-          li
-            margin-bottom: 0.5em
-            text-align: left
+        text-decoration: none
+        margin-right: 20px
+        &:hover
+          color: #A0BDC8
+  #title
+    font-family: "Intro Inline"
+    color: #fff
+    font-size: 88px
+    text-align: center
+    margin: 10px 0
+
+  #banner
+    margin: 10px 0
+    padding: 20px
+    background: #eee asset-url("logo/dark.png", "image") no-repeat 60px 125px
+    background-size: 250px 343px
+    height: 400px
+    +border-radius(5px)
+    +single-box-shadow(#333, 0, 0, 6px)
+    position: relative
+    #top
+      font-family: "Roadgeek 2005 Transport Medium"
+      text-align: center
+      font-size: 34px
+      padding: 24px
+      color: $landing-dark-blue
+      +single-text-shadow($landing-light-blue, 2px, 2px, 0)
+    #side
+      position: absolute
+      left: 335px
+      text-align: center
+      width: 465px
+      h2
+        font-family: "Intro"
+        color: #4C5566
+        font-size: 20px
+        margin: 26px 0
+        span.green
+          color: #3D6E3C
+  footer
+    font-size: 0.8em
+    padding: 10px 0
+    margin: 10px 0
+    color: #f9f9f9
+    font-family: "Roadgeek 2005 Transport Medium"
+    text-align: center
+    a
+      color: $landing-light-blue
+      &:hover
+        color: #fff
