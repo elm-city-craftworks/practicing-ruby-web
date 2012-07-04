@@ -6,6 +6,8 @@
     = stylesheet_link_tag 'landing'
     = csrf_meta_tag
 
+    = render :partial => "shared/ios_icon"
+
     = yield(:header_bottom)
 
   %body.landing= yield
