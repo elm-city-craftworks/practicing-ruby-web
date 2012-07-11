@@ -23,7 +23,7 @@
         .tagline
           An eclectic journal for the dedicated hacker
           %br
-          lovingly curated by 
-          %a{:href=>"http://twitter.com/practicingruby", :style => "text-decoration: none; color: #327CCB"} Gregory Brown
+          lovingly curated by
+          = link_to "Gregory Brown", "http://twitter.com/practicingruby"
       = render :partial => "shared/broadcasts"
       = yield
