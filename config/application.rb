@@ -13,8 +13,8 @@ module PracticingRubyWeb
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Precomplie layout css
-    config.assets.precompile << 'landing.css'
+    # Precomplie layout assets
+    config.assets.precompile << %w{landing.css landing.js}
 
     # Partially load application for faster precompile time
     config.assets.initialize_on_precompile = false
