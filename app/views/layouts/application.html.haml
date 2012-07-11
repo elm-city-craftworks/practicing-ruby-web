@@ -9,6 +9,8 @@
     = javascript_include_tag 'application'
     = csrf_meta_tag
 
+    = render :partial => "shared/ios_icon"
+
     = yield(:header_bottom)
 
   %body
@@ -21,6 +23,7 @@
         .tagline
           An eclectic journal for the dedicated hacker
           %br
-          lovingly curated by Gregory Brown
+          lovingly curated by
+          = link_to "Gregory Brown", "http://twitter.com/practicingruby"
       = render :partial => "shared/broadcasts"
       = yield
