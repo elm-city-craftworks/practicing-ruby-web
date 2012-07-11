@@ -51,11 +51,12 @@ module PracticingRubyWeb
     config.filter_parameters += [:password]
     Haml::Template.options[:ugly] = true
 
-    config.action_mailer.default_url_options = { :host => "practicingruby.com" }
-
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.action_mailer.delivery_method = :mailhopper
+    # Action Mailer Defaults
+    config.action_mailer.delivery_method     = :mailhopper
+    config.action_mailer.default_url_options = { :host => "practicingruby.com" }
+    ActionMailer::Base.default :from => "Practicing Ruby <gregory@practicingruby.com>"
 
     config.generators do |g|
       g.test_framework nil
