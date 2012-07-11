@@ -7,5 +7,4 @@ class PR.ShareBox
       e.preventDefault()
 
     $('#facebox .subscribe button').on 'click', (e) ->
-      # Subscribe Link ???
-      window.location = "http://practicingruby.com"
+      window.location = "http://practicingruby.com/subscribe"
