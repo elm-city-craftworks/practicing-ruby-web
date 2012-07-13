@@ -7,11 +7,13 @@ class UserManager
   end
 
   def delete_user(email)
-    @client.list_unsubscribe(@list_id, email, true)
+    client.list_unsubscribe(list_id, email, true)
+
+    UnsubscribeMailer.unsubscribed(email)
   end
 
   def unsubscribed_users
-    @client.list_members(@list_id, "unsubscribed")["data"].map {|u| u["email"] }
+    client.list_members(list_id, "unsubscribed")["data"].map {|u| u["email"] }
   end
 
   def disable_unsubscribed_users
