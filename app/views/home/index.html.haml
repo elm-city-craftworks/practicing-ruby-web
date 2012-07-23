@@ -1,21 +1,36 @@
-%header
-  = link_to "Updates", announcements_path
-  = link_to "FAQ", faq_community_path
-  = link_to "Support", '#TODO'
-  %span.account
-    = link_to "Subscribe", '#TODO'
-    = link_to "Sign in", login_path
+#top-bar
+  %ul
+    %li= link_to "Subscribe", subscribe_path
+    %li= link_to "Sign in", login_path
 
-#title Practicing Ruby
+#content
+  #banner
+    %h1 Practicing Ruby
+    %h2 A unique journal curated by Gregory Brown
+    = image_tag "ruby-divider.png"
 
-#banner
-  #top A unique trade journal curated by Gregory Brown
-  #side
-    %h2
-      For just
-      %span.green $8/month
-      you get access to:
-%footer
-  Practicing Ruby’s web app is open source.
-  = link_to "Fork the project on GitHub.",
-    "https://github.com/elm-city-craftworks/practicing-ruby-web"
+  #details
+    %h3 Most of what you read about software development is garbage.
+
+    %p
+      There is no shortage of technical content out there, but finding the good stuff is getting harder and harder. Most programmers write about what is fresh and controversial, not what is relevant and essential to their readers. This
+      generates plenty of excitement, but it doesn't help people learn.
+
+    %p Practicing Ruby publishes excellent content on fundamental topics that matter.
+
+    %h3 To master your craft, you need better resources, not more effort.
+
+    %p
+      Programming books are great, but they involve a huge time investment that is hard to justify spending on all but the most important topics. Blog and forum posts can come in handy for studying specific areas of interest, but lack the kind of detailed narrative that is essential for navigating through complex problem spaces.
+
+      %b Practicing Ruby articles fit somewhere in between these two extremes: they are well-researched and heavily edited like book chapters, but tightly focused and readable in a single sitting like blog posts.
+
+    %h3 The best learning materials are built specifically for people like you.
+
+    %p
+      Some of the finest software is produced by people who have a life outside of coding. These are the kind of people who will take the time to study things that matter, but don’t want to spend tons of effort digging around on Twitter and Reddit to find content worth reading.
+
+      %b Practicing Ruby articles cut through the noise and get right to the good stuff so that you can get your job done well, and then spend the time you saved on the more important things in life.
+
+  #library
+    Does this sound like your kind of thing? If so, please #{link_to "browse through our library", library_path} to see what we’re offering.

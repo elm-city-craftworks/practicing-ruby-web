@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_filter :authenticate, :only => [:index]
+  skip_before_filter :authenticate,      :only => [:index]
   skip_before_filter :authenticate_user, :only => [:index]
 
   def index
@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       return redirect_to articles_path
     end
 
-    @recent_topics = Article.published.order("published_time DESC").limit(5)
+    @article_count = [Article.published.count / 10, "0+"].join
 
     render :index, :layout => "landing"
   end
