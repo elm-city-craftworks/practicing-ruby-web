@@ -1,30 +1,20 @@
-require 'bundler/capistrano'
-require 'whenever/capistrano'
+set :stages, %w(production staging)
+set :default_stage, "production"
 
-set :whenever_identifier, defer { application }
+require 'capistrano/ext/multistage'
+require 'bundler/capistrano'
 
 set :application, "practicing-ruby"
 set :repository,  "git@github.com:elm-city-craftworks/practicing-ruby-web.git"
-
 set :scm, :git
-set :deploy_to, "/var/rapp/#{application}"
-
 set :user, "git"
 set :use_sudo, false
-
 set :deploy_via, :remote_cache
-
-set :branch, "master"
-server "practicingruby.com", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_path}/tmp/restart.txt"
   end
-end
-
-before 'deploy:update_code' do
-  run "sudo god stop practicing_ruby_delayed_job"
 end
 
 after 'deploy:update_code' do
@@ -41,12 +31,6 @@ end
 
 after "deploy", "deploy:migrate"
 after "deploy", 'deploy:cleanup'
-
-after 'deploy' do
-  run  "sudo god load #{release_path}/config/delayed_job.god"
-  run  "sudo god start practicing_ruby_delayed_job"
-  run_rake "bake:articles"
-end
 
 load 'deploy/assets'
 
