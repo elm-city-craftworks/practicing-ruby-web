@@ -13,8 +13,8 @@ module PracticingRubyWeb
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Precomplie layout css
-    config.assets.precompile << 'landing.css'
+    # Precomplie layout assets
+    config.assets.precompile += %w{landing.css}
 
     # Partially load application for faster precompile time
     config.assets.initialize_on_precompile = false
@@ -51,11 +51,12 @@ module PracticingRubyWeb
     config.filter_parameters += [:password]
     Haml::Template.options[:ugly] = true
 
-    config.action_mailer.default_url_options = { :host => "practicingruby.com" }
-
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.action_mailer.delivery_method = :mailhopper
+    # Action Mailer Defaults
+    config.action_mailer.delivery_method     = :mailhopper
+    config.action_mailer.default_url_options = { :host => "practicingruby.com" }
+    ActionMailer::Base.default :from => "Practicing Ruby <gregory@practicingruby.com>"
 
     config.generators do |g|
       g.test_framework nil

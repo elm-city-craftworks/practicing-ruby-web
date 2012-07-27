@@ -1,6 +1,4 @@
 class AuthorizationLinksMailer < ActionMailer::Base
-  default :from => "Practicing Ruby <gregory@practicingruby.com>"
-
   def email_confirmation(link)
     @link = link
     mail(:to => @link.mailchimp_email,
