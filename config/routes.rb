@@ -9,6 +9,7 @@ PracticingRubyWeb::Application.routes.draw do
   match "/volume/:volume/" => 'articles#index'
   match "/volume/:volume/issue/:issue" => 'articles#show'
   match "/collection/:collection/" => 'articles#index'
+  match "/faq" => 'home#faq', :as => 'faq'
 
   match "articles/random" => 'articles#random', :as => 'random_article'
 
@@ -35,12 +36,6 @@ PracticingRubyWeb::Application.routes.draw do
   match '/auth/github/callback' => 'sessions#create'
   match '/logout' => 'sessions#destroy', :as => 'logout'
   match '/auth/github', :as => 'login'
-
-  resource :community, :controller => "community" do
-    member do
-      get 'faq', as: 'faq'
-    end
-  end
 
   resources :announcements
 
