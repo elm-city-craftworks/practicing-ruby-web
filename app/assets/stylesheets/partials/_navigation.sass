@@ -1,45 +1,21 @@
-#navigation
-  border-top: 1px solid #bbb
-  border-bottom: 1px solid #bbb
-  padding: 0.75em 0
-  margin-bottom: 1em
-
-  a
-    display: inline-block
-    margin-left: 0.25em
-    margin-right: 0.5em
-    text-decoration: none
-    color: #327CCB
-
-
-    &:visited
-      rolor: #327CCB
-    &:hover
-      text-decoration: underline
-      color: #666
-
-  div.right
+nav
+  line-height: 1.75em
+  width: $page-width
+  margin: 1em auto
+  span.right
     float: right
     a
       margin-right: 0
-
-  div.clear
-    clear: right
-
-// with apologies to 37signals.com
-#upper_navigation
-  padding-top: 10px
-  padding-bottom: 20px
-
-  div.right
-    float: right
-
+      margin-left: 2em
   a
     display: inline-block
-    margin-right: 0.5em
-    font-size: 0.85em
+    height: 1.75em
+    font-family: 'Folks-Light', 'Folks', sans-serif
     text-decoration: none
-    color: #327CCB
-
-  a.user_pages
-    color: #6496CC
+    margin-right: 2em
+    color: $dark-blue
+    &.home
+      font-family: 'Folks', sans-serif
+      color: $red
+      font-size: 1.25em
+      margin-right: 1.5em

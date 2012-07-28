@@ -1,11 +1,13 @@
-- if current_user
-  #navigation
-    %strong FREE:
-    = link_to "Volume 1", "/volume/1"
-    = link_to "Volume 2", "/volume/2"
-    %strong MEMBERS:
-    = link_to "Volume 3", "/volume/3"
-    .right
-      %strong SPECIAL:
-      Coming Soon!
-    .clear
+%nav
+  = link_to "Practicing Ruby", root_path, :class => "home"
+  = link_to "Library", library_path
+  = link_to "Updates", announcements_path # TODO Move to ECC Blog???
+  = link_to "FAQ", faq_community_path
+  = link_to "Support", '#TODO'
+  %span.right
+    - if current_user
+      = link_to "Settings", edit_user_path(current_user)
+      = link_to "Sign out", logout_path
+    - else
+      = link_to "Subscribe", subscribe_path, :class => "subscribe"
+      = link_to "Sign in", login_path

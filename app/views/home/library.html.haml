@@ -1,29 +1,31 @@
+- content_for(:title) { "Library" }
+- content_for(:header) { "Library" }
+
 %p
-  %em
-    As a subscriber to Practicing Ruby, you get full access to my library of back issues. The archives currently contain a total of
-    = Article.where(:status => "published").count
-    issues spread across
-    = Volume.count
-    volumes, and several new articles get added each month.
+  As a subscriber to Practicing Ruby, you get full access to my library of back issues. The archives currently contain a total of #{@article_count} issues spread across #{@volumes.count} volumes, and several new articles get added each month.
 
 %p Back issues are organized in two ways: by thematic collections and by chronologically-ordered volumes. Follow your interests and feel free to jump around the collections and volumes. The way you read this content is entirely up to you and your studies should happen on your own schedule, not mine!
 
-%h3 By Collection
+#library
+  #collections
+    - @collections.each do |collection|
+      = link_to articles_path(:collection => collection.slug), :class => "collection" do
+        %span.icon= image_tag "icons/#{collection.image_file_name}"
+        = collection.name
+  #volumes
+    - @volumes.each do |volume|
+      = link_to articles_path(:volume => volume.number), :class => "volume" do
+        %span.icon= volume.number
+        - if volume.articles.published.empty? || volume.start_date.nil?
+          Coming Soon ...
+        - else
+          #{volume.start_date.strftime("%B %Y")} - #{volume.end_date.strftime("%B %Y")}
+  .clear
 
-- Collection.all.each do |c|
-  %p
-    = link_to c.name, "/collection/#{c.slug}"
-    = c.description
-
-%h3 By Volume
-
-- Volume.all.each do |v|
-  %p
-    = link_to "Volume #{v.number}", "/volume/#{v.number}"
-    = v.description
-
-#footer
-  Not sure where to start? Try a
-  = link_to "randomly selected article.", article_path(Article.where(:status => "published").sample.id)
-
+%footer
+  - if current_user
+    Not sure where to start? Try a
+    = link_to "randomly selected article.", random_article_path
+  - else
+    All of these articles are available once you #{link_to "Subscribe", subscribe_path}
 

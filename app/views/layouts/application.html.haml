@@ -14,16 +14,10 @@
     = yield(:header_bottom)
 
   %body
-    = render :partial => "shared/flash", :locals => {:flash => flash}
+    #top-bar
+    // TODO Redesign Flash
+    //= render :partial => "shared/flash", :locals => {:flash => flash}
 
-    = render :partial => "shared/upper_navigation"
-    #content
-      #header
-        %h1= link_to "Practicing Ruby", home_path
-        .tagline
-          An eclectic journal for the dedicated hacker
-          %br
-          lovingly curated by
-          = link_to "Gregory Brown", "http://twitter.com/practicingruby"
-      = render :partial => "shared/broadcasts"
-      = yield
+    = render :partial => "shared/navigation"
+    %header= yield(:header)
+    #content= yield

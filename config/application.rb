@@ -14,7 +14,7 @@ module PracticingRubyWeb
     config.assets.version = '1.0'
 
     # Precomplie layout assets
-    config.assets.precompile += %w{landing.css}
+    # config.assets.precompile += %w{landing.css}
 
     # Partially load application for faster precompile time
     config.assets.initialize_on_precompile = false

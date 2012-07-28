@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
-  skip_before_filter :authenticate,      :only => [:index]
-  skip_before_filter :authenticate_user, :only => [:index]
+  skip_before_filter :authenticate
+  skip_before_filter :authenticate_user
 
   def index
     if current_user
@@ -10,5 +10,11 @@ class HomeController < ApplicationController
     @article_count = [Article.published.count / 10, "0+"].join
 
     render :index, :layout => "landing"
+  end
+
+  def library
+    @article_count = Article.where(:status => "published").count
+    @collections   = Collection.all #TODO Add manual order by
+    @volumes       = Volume.order("number")
   end
 end

@@ -1,14 +1,13 @@
 !!! 5
 %html{:lang => 'en'}
   %head
-    %title Practicing Ruby
+    %title Practicing Ruby | A unique journal curated by Gregory Brown
 
-    = stylesheet_link_tag 'landing'
+    = stylesheet_link_tag 'application'
     = csrf_meta_tag
 
     = render :partial => "shared/ios_icon"
 
     = yield(:header_bottom)
 
-  %body.landing
-    #container= yield
+  %body= yield

@@ -1,0 +1,65 @@
+#top-bar
+  height: 4px
+  background-color: $dark-blue
+  position: relative
+  ul
+    position: absolute
+    bottom: -33px
+    right: 100px
+    height: 36px
+    li
+      display: inline
+      float: left
+      list-style: none
+      margin-left: 10px
+      a
+        +single-transition(all, .10s, ease-out, 0)
+        background-color: $dark-blue
+        padding: 10px
+        +border-bottom-radius(3px)
+        display: block
+        color: #fff
+        text-decoration: none
+        font-family: 'Folks-Light', 'Folks', sans-serif
+        &:hover
+          padding-top: 15px
+#landing
+  width: 750px
+  margin: 50px auto
+  margin-top: 90px
+  #banner
+    img
+      margin: 30px 0
+    text-align: center
+    h1, h2, p
+      margin: 30px 0
+    h1
+      color: $red
+      font-size: 98px
+      margin-top: 0
+    h2
+      color: rgba(69, 76, 86, 0.77)
+      font-size: 32px
+      font-family: 'Folks-Light', 'Folks', sans-serif
+    p#description
+      color: #888
+      font-size: 20px
+  #details
+    color: rgba(69, 76, 86, 0.77)
+    text-align: justify
+    p, h3
+      margin: 30px 0
+    p
+      line-height: 1.4em
+      font-size: 1.1em
+    h3
+      font-size: 24px
+      text-align: center
+      color: #373D46
+  #library
+    margin: 30px 0
+    font-size: 16px
+    text-align: center
+    color: $dark-blue
+    a
+      color: $red

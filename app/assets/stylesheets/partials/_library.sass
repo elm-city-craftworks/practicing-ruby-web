@@ -1,0 +1,34 @@
+#library
+  #collections, #volumes
+    width: $page-width / 2
+    float: left
+  .clear
+    clear: left
+  .collection, .volume
+    text-decoration: none
+    $sb-padding: 0.3em 0.5em
+    +sassy-button("matte", 5px, 1.25em, #EEEEEE, #EEEEEE, $dark-blue, "inset")
+    margin: 0.5em 0
+    width: 350px
+    span.icon
+      text-shadow: none
+      color: #fff
+      height: 32px
+      width: 32px
+      display: inline-block
+      line-height: 32px
+      text-align: center
+      +border-radius(32px)
+      margin-right: 0.5em
+      vertical-align: middle
+      img
+        display: inline
+  .collection
+    color: $red
+    span.icon
+      background: $red
+  .volume
+    float: right
+    color: $dark-blue
+    span.icon
+      background: $dark-blue

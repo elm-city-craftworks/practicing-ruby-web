@@ -2,8 +2,8 @@ class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
   before_filter :create_visit, :only => [:show]
 
-  skip_before_filter :authenticate,      :only => [:shared]
-  skip_before_filter :authenticate_user, :only => [:shared]
+  skip_before_filter :authenticate,      :only => [:shared, :index]
+  skip_before_filter :authenticate_user, :only => [:shared, :index]
 
   def index
     if params["volume"]
@@ -11,9 +11,11 @@ class ArticlesController < ApplicationController
     elsif params["collection"]
       @article_groupings = Collection.where(:slug => params["collection"])
     else
-      redirect_to "/library"
+      redirect_to library_path
     end
   end
+
+  def
 
   def show
     authenticate_admin if @article.status == "draft"
@@ -43,6 +45,10 @@ class ArticlesController < ApplicationController
       @user    = UserDecorator.decorate(@share.user)
       @article = @share.article
     end
+  end
+
+  def random
+    redirect_to Article.where(:status => "published").sample
   end
 
   private
