@@ -13,6 +13,9 @@ PracticingRubyWeb::Application.routes.draw do
 
   match "articles/random" => 'articles#random', :as => 'random_article'
 
+  match "collections/:collection" => 'articles#index', :as => 'collection'
+  match "volumes/:volume"         => 'articles#index', :as => 'volume'
+
   resources :articles do
     member do
       get 'share'

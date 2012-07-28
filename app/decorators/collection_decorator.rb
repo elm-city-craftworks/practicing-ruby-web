@@ -12,6 +12,6 @@ class CollectionDecorator < ApplicationDecorator
   end
 
   def path
-    h.articles_path(:collection => collection.slug)
+    h.collection_path(collection.slug)
   end
 end

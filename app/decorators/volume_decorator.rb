@@ -12,7 +12,7 @@ class VolumeDecorator < ApplicationDecorator
   end
 
   def path
-    h.articles_path(:volume => volume.number)
+    h.volume_path(volume.number)
   end
 
   def publish_range
