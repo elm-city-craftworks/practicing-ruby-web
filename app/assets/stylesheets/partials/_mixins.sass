@@ -3,6 +3,22 @@ $light-blue: #73829E
 $red: #B03C2E
 $green: #3D6E3C
 
+=group-icon($size: 32px)
+  text-shadow: none
+  color: #fff
+  height: $size
+  width: $size
+  display: inline-block
+  line-height: $size
+  text-align: center
+  +border-radius($size)
+  margin-right: 0.5em
+  vertical-align: middle
+  img
+    display: inline
+    height: $size
+    width: $size
+
 =markdown
   p
     font-family: Helvetica, sans-serif

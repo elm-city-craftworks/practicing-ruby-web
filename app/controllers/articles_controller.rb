@@ -6,12 +6,16 @@ class ArticlesController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:shared, :index]
 
   def index
-    if params["volume"]
-      @article_groupings = Volume.where(:number => params["volume"].to_i)
-    elsif params["collection"]
-      @article_groupings = Collection.where(:slug => params["collection"])
+    if params[:volume]
+      @group = VolumeDecorator.find_by_number(params[:volume].to_i)
+    elsif params[:collection]
+      @group = CollectionDecorator.find_by_slug(params[:collection])
     else
-      redirect_to library_path
+      return redirect_to library_path
+    end
+
+    unless @group
+      return render :text => "Article listing not found!", :status => 404
     end
   end
 

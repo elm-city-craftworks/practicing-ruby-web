@@ -26,8 +26,25 @@ body
     width: $page-width
     margin: 0 auto
   header
-    margin: 0.25em auto
+    margin: 0.5em auto
     font-size: 3em
+    line-height: 48px
+    .volume, .collection
+      span.icon
+        +group-icon(48px)
+        vertical-align: top
+        margin-right: 0.25em
+    .collection
+      color: $red
+      span.icon
+        background-color: $red
+    .volume
+      span.icon
+        font-size: 0.75em
+        background-color: $dark-blue
+        color: #fff
+
+
   p, footer
     margin: 1em 0
   a

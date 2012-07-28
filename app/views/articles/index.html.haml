@@ -1,0 +1,19 @@
+- content_for(:header) { @group.header }
+- content_for(:title)  { @group.name   }
+
+- if current_user && current_user.admin?
+  #admin
+    = button_to "New article", new_admin_article_path, :method => :get
+
+%p= @group.description
+
+%ul#article_list
+  - @group.articles.published.order("published_time").each do |a|
+    %li= link_to a.full_subject, article_path(a)
+
+  - if current_user && current_user.admin?
+    - group.articles.drafts.each do |a|
+      %li= link_to "[DRAFT] #{a.full_subject}", article_path(a)
+
+%footer
+  TODO Replace with subway icons

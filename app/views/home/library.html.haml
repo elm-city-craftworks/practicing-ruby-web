@@ -9,17 +9,15 @@
 #library
   #collections
     - @collections.each do |collection|
-      = link_to articles_path(:collection => collection.slug), :class => "collection" do
-        %span.icon= image_tag "icons/#{collection.image_file_name}"
+      = link_to collection.path, :class => "collection" do
+        = collection.icon
         = collection.name
   #volumes
     - @volumes.each do |volume|
-      = link_to articles_path(:volume => volume.number), :class => "volume" do
-        %span.icon= volume.number
-        - if volume.articles.published.empty? || volume.start_date.nil?
-          Coming Soon ...
-        - else
-          #{volume.start_date.strftime("%B %Y")} - #{volume.end_date.strftime("%B %Y")}
+      = link_to volume.path, :class => "volume" do
+        = volume.icon
+        = volume.publish_range
+
   .clear
 
 %footer
