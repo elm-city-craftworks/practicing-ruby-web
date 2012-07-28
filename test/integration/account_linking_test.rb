@@ -9,7 +9,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     create_user(:email => email)
     authenticate(:nickname => "sandal", :email => email, :uid => uid)
 
-    visit community_url
+    visit login_path
     get_authorization_link(uid)
 
     assert_confirmation_sent(email)
@@ -25,7 +25,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     create_user(:email => mailchimp_email)
     authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
-    visit community_url
+    visit login_path
     get_authorization_link(uid)
 
     assert_email_manually_entered(mailchimp_email)
@@ -41,7 +41,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
     create_user(:email => email)
     authenticate(:nickname => "sandal", :email => "gregory.t.brown@gmail.com", :uid => uid)
-    visit community_url
+    visit login_path
 
     get_authorization_link(uid)
 
@@ -54,7 +54,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
 
     create_user(:email => email)
     authenticate(:nickname => "sandal", :email => "GREGORY.t.brown@gmail.com", :uid => uid)
-    visit community_url
+    visit login_path
 
     get_authorization_link(uid)
 
@@ -69,7 +69,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     create_user(:email => mailchimp_email)
     authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
-    visit community_url
+    visit login_path
     get_authorization_link(uid)
 
     assert_email_manually_entered("gregory.t.brown@GMAIL.COM")
@@ -87,7 +87,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     create_user(:email => mailchimp_email)
     authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
-    visit community_url
+    visit login_path
     get_authorization_link(uid)
 
     assert_email_manually_entered("gregory.t.brown@gmail.com")
@@ -105,7 +105,7 @@ class AccountLinkingTest < ActionDispatch::IntegrationTest
     create_user(:email => mailchimp_email)
     authenticate(:nickname => "sandal", :email => github_email, :uid => uid)
 
-    visit community_url
+    visit login_path
     get_authorization_link(uid)
 
     assert_email_manually_entered("gregory.t.brown@gmail.com")

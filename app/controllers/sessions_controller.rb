@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
 
   def link
     if AuthorizationLink.activate(params[:secret])
-      redirect_to community_url
+      redirect_to library_path
     else
       render("expired_link")
     end
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
     if authorization.confirmed?
       current_user.update_attribute(:notifications_enabled, true)
 
-      redirect_back_or_default(community_url)
+      redirect_back_or_default(library_path)
     elsif link = authorization.authorization_link
       redirect_to authorization_link_path(link)
     else
