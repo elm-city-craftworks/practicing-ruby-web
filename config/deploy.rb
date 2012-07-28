@@ -34,7 +34,7 @@ after "deploy", 'deploy:cleanup'
 
 load 'deploy/assets'
 
-desc "Import articles from the server"
+desc "Import articles, volumes, and collections from the server"
 namespace :import do
   task :articles do
     file  = "#{application}.#{Time.now.strftime '%Y-%m-%d_%H:%M:%S'}.sql.bz2"
@@ -42,7 +42,8 @@ namespace :import do
     remote_db   = remote_database_config
 
     run %{pg_dump --clean --no-owner --no-privileges -U#{remote_db['username']}
-          -h#{remote_db['host']} -t articles #{remote_db['database']} | bzip2 > #{remote_file}} do |ch, stream, out|
+          -h#{remote_db['host']} -t articles -t volumes -t collections
+           #{remote_db['database']} | bzip2 > #{remote_file}} do |ch, stream, out|
       ch.send_data "#{remote_db['password']}\n" if out =~ /^Password:/
       puts out
     end
@@ -60,7 +61,7 @@ namespace :import do
 
     `rake tmp:cache:clear`
 
-    puts "  * Articles Imported"
+    puts "  * Articles, Volumes, and Collections Imported"
   end
 end
 
