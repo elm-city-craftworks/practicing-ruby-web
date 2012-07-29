@@ -8,7 +8,7 @@ class VolumeDecorator < ApplicationDecorator
   end
 
   def icon
-    h.content_tag(:span, volume.number, :class => 'icon')
+    h.content_tag(:span, volume.number, :class => 'icon volume')
   end
 
   def path

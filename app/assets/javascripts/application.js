@@ -17,3 +17,7 @@ PR.setupNamespace = function(namespace){
 // Facebox Assets
 $.facebox.settings.closeImage   = '/assets/facebox/closelabel.png';
 $.facebox.settings.loadingImage = '/assets/facebox/loading.gif';
+
+$(function(){
+  $('a[rel=tooltip]').tooltip();
+});

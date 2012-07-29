@@ -19,4 +19,10 @@
       %li= link_to "[DRAFT] #{a.full_subject}", article_path(a)
 
 %footer
-  TODO Replace with subway icons
+  #subway
+    - @collections.each do |collection|
+      = link_to collection.icon, collection.path, :rel => "tooltip",
+        :title => collection.name
+    - @volumes.each do |volume|
+      = link_to volume.icon, volume.path, :rel => "tooltip",
+        :title => volume.name

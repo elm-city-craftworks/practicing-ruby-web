@@ -16,6 +16,9 @@ class ArticlesController < ApplicationController
 
     unless @group
       return render :text => "Article listing not found!", :status => 404
+    else
+      @collections = CollectionDecorator.decorate(Collection.all) #TODO Add manual order by
+      @volumes     = VolumeDecorator.decorate(Volume.order("number"))
     end
   end
 

@@ -8,7 +8,10 @@ class CollectionDecorator < ApplicationDecorator
   end
 
   def icon
-    h.content_tag(:span, h.image_tag("icons/#{collection.image_file_name}"), :class => 'icon')
+    h.content_tag(:span,
+      h.image_tag("icons/#{collection.image_file_name}"),
+      :class => 'icon collection'
+    )
   end
 
   def path
