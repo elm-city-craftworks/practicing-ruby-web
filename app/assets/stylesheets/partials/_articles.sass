@@ -1,29 +1,19 @@
 ul#articles
-  margin: 1.5em 0
+  background: #fff
+  +single-box-shadow(#aaa, 0, 0, 5px)
+  +border-radius(4px)
+  margin: 1em 0
+  padding: 0.5em 0
   li
-    margin: 0.75em 0
-    border-bottom: 1px solid rgba(76, 85, 102, 0.2)
-    font-size: 1.1em
-    +single-transition(border-color, 0.25s)
-    &:hover
-      border-color: rgba(76, 85, 102, 0.7)
+    padding: 0.5em 1em
     a
+      font-size: 1.1em
       text-decoration: none
       display: block
       color: $dark-blue
+      border-bottom: 1px solid rgba(76, 85, 102, 0.2)
+      +single-transition(border-color, 0.25s)
+      &:hover
+        border-color: rgba(76, 85, 102, 0.7)
       span.right
         float: right
-
-footer #subway
-  margin-top: 2em
-  text-align: center
-  a
-    display: inline-block
-  span.icon
-    +group-icon(48px)
-    margin: 0 7px
-    &.collection
-      background: $red
-    &.volume
-      background: $dark-blue
-      font-size: 34px
