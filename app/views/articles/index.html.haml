@@ -15,14 +15,7 @@
         %span.right= article.published_date
 
   - if current_user && current_user.admin?
-    - group.articles.drafts.each do |a|
-      %li= link_to "[DRAFT] #{a.full_subject}", article_path(a)
+    - @group.articles.drafts.each do |article|
+      %li= link_to "[DRAFT] #{article.full_subject}", article_path(article)
 
-%footer
-  #subway
-    - @collections.each do |collection|
-      = link_to collection.icon, collection.path, :rel => "tooltip",
-        :title => collection.name
-    - @volumes.each do |volume|
-      = link_to volume.icon, volume.path, :rel => "tooltip",
-        :title => volume.name
+%footer= render 'subway'

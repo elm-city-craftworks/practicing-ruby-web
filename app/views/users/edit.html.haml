@@ -1,4 +1,5 @@
-%h2 Settings for #{@user.github_nickname}
+- content_for(:title)  { "Settings" }
+- content_for(:header) { "Settings" }
 
 = form_for @user do |f|
   = error_messages_for(@user)
