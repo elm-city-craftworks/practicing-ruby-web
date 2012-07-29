@@ -1,61 +1,15 @@
-#article_bar
-  margin: 1em 0
-  font-family: 'Helvetica', sans-serif
-  padding-bottom: 0.8em
-  border-bottom: 2px solid #eee
-  font-weight: bold
-  font-size: 1.2em
-  .right
-    font-weight: normal
-    font-size: 0.9em
-    float: right
-    a
-      margin-left: 0.5em
-
-div#article
-  +markdown
-  ul.index a
-    color: #000
-    &:visited
-      color: #000
-
-  #share_alert
-    padding: 1em
-    background-color: #CBF5D0
-    border: 1px solid #252
-    color: #252
-    font-size: 1.1em
-    font-family: 'Helvetica', sans-serif
-    text-align: center
-    line-height: 1.3em
-    +border-radius(10px)
-    +single-box-shadow(#333, 0, 0, 5px)
-    margin: 1.5em 0
-    a
-      color: #428528
-      font-weight: bold
-      &:visited
-        color: #428528
-
-
+ul#articles
+  margin: 1.5em 0
   li
-    margin-bottom: 0.5em
-    line-height: 1.3em
-    font-family: 'Helvetica', sans-serif
-
-  p.bold
-    font-weight: bold
-
-  h1 a#share
-    float: right
-    font-size: 0.75em
-    font-weight: normal
-    text-decoration: none
-    display: inline-block
-    padding: 0.5em
-    border: 1px solid #aaa
-    color: #333
-
+    margin: 0.75em 0
+    border-bottom: 1px solid rgba(76, 85, 102, 0.2)
+    font-size: 1.1em
+    +single-transition(border-color, 0.25s)
     &:hover
-      background-color: #eee
-      border-color: #333
+      border-color: rgba(76, 85, 102, 0.7)
+    a
+      text-decoration: none
+      display: block
+      color: $dark-blue
+      span.right
+        float: right

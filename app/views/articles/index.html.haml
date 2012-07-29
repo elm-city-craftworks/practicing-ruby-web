@@ -7,9 +7,12 @@
 
 %p= @group.description
 
-%ul#article_list
-  - @group.articles.published.order("published_time").each do |a|
-    %li= link_to a.full_subject, article_path(a)
+%ul#articles
+  - @group.articles.published.order("published_time").each do |article|
+    %li
+      = link_to article_path(article) do
+        = article.subject
+        %span.right= article.published_date
 
   - if current_user && current_user.admin?
     - group.articles.drafts.each do |a|
