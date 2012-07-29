@@ -19,6 +19,14 @@ class ArticlesController < ApplicationController
     else
       @collections = CollectionDecorator.decorate(Collection.all) #TODO Add manual order by
       @volumes     = VolumeDecorator.decorate(Volume.order("number"))
+
+      @articles = if current_user && current_user.admin?
+        @group.articles
+      else
+        @group.articles.published
+      end.order("published_time")
+
+      @articles = ArticleDecorator.decorate(@articles)
     end
   end
 

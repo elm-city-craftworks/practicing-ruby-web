@@ -1,21 +1,12 @@
 - content_for(:header) { @group.header }
 - content_for(:title)  { @group.name   }
-
-- if current_user && current_user.admin?
-  #admin
-    = button_to "New article", new_admin_article_path, :method => :get
+- content_for(:admin) do
+  = button_to "New article", new_admin_article_path, :method => :get
 
 %p= @group.description
 
 %ul#articles
-  - @group.articles.published.order("published_time").each do |article|
-    %li
-      = link_to article_path(article) do
-        = article.subject
-        %span.right= article.published_date
-
-  - if current_user && current_user.admin?
-    - @group.articles.drafts.each do |article|
-      %li= link_to "[DRAFT] #{article.full_subject}", article_path(article)
+  - @articles.each do |article|
+    %li= article.list_link
 
 %footer= render 'subway'

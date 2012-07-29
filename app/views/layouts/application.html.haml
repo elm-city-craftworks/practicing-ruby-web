@@ -19,5 +19,8 @@
     //= render :partial => "shared/flash", :locals => {:flash => flash}
 
     = render :partial => "shared/navigation"
-    %header= yield(:header)
+    %header
+      - if current_user && current_user.admin?
+        #admin= yield :admin
+      = yield(:header)
     #content= yield
