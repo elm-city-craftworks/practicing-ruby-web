@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate
-    store_location
-    current_authorization || redirect_to("/auth/github")
+    current_authorization || (store_location && redirect_to("/auth/github"))
   end
 
   def authenticate_user
