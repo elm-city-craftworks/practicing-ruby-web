@@ -16,3 +16,23 @@ ul#articles
       text-decoration: none
       color: $dark-blue
       display: block
+
+#article
+  font-size: 1.1em
+  +markdown
+
+header
+  position: relative
+  div#title
+    position: absolute
+    bottom: 0
+    left: 75px
+    width: 750px
+  span.icon
+    +group-icon(48px)
+    margin: 0 7px
+    &.collection
+      background: $red
+    &.volume
+      background: $dark-blue
+      font-size: 34px

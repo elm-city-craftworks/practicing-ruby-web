@@ -1,5 +1,6 @@
 class ArticleDecorator < ApplicationDecorator
   decorates :article
+  decorates_association :volume
 
   def list_description
     subject = article.subject

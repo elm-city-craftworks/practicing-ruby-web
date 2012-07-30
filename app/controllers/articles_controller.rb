@@ -30,12 +30,12 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def
-
   def show
     authenticate_admin if @article.status == "draft"
 
     @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
+
+    @article = ArticleDecorator.decorate(@article)
   end
 
   def share

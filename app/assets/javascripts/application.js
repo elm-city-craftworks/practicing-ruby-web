@@ -20,4 +20,9 @@ $.facebox.settings.loadingImage = '/assets/facebox/loading.gif';
 
 $(function(){
   $('a[rel=tooltip]').tooltip();
+  $('.bigtext').each(function() {
+    var box      = $(this)
+    var fontsize = parseInt(box.css('font-size'));
+    box.bigtext({maxfontsize: fontsize});
+  });
 });
