@@ -1,4 +1,8 @@
 - content_for(:title) { @article.full_subject }
+- content_for(:header) do
+  = link_to @article.volume.icon, @article.volume.path
+  #title.bigtext
+    %div= @article.subject
 
 :coffeescript
   $ ->
@@ -14,7 +18,7 @@
   .subscribe
     %span.top
       This journal is a grassroots effort to produce
-      extraordinarily good content for ruby programmers.
+      amazing content for ruby programmers.
     %br
     %br
     If you like what you see here, please subscribe!
@@ -40,20 +44,16 @@
   .clear
 
 #article
-  #article_bar= "#{@article.full_subject} (#{@article.published_date})"
-
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
 
-  #comments
-    %hr
-    #share_alert
-      The discussion thread for this article is available to subscribers
-      only. If you want to share some feedback or ask me a question, please
-      = link_to "sign up", "/"
-      ,
-      = link_to "log in", article_path(@article.id)
-      , or send an email to
-      = link_to "gregory.t.brown@gmail.com", "mailto:gregory.t.brown@gmail.com"
+  #share-alert
+    The discussion thread for this article is available to subscribers
+    only. If you want to share some feedback or ask me a question, please
+    = link_to "sign up", "/"
+    ,
+    = link_to "log in", article_path(@article.id)
+    , or send an email to
+    = link_to "gregory.t.brown@gmail.com", "mailto:gregory.t.brown@gmail.com"
 
 

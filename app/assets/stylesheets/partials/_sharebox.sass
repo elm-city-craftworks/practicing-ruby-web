@@ -2,7 +2,6 @@
   display: none
 #facebox div.share-box
   width: 700px
-  font-family: Garamond, serif
   .header
     font-size: 1.5em
     text-align: center
@@ -14,12 +13,12 @@
     font-size: 1.25em
   div.subscribe, div.read
     span.top
-      font-variant: small-caps
-      font-size: 0.93em
+      font-family: 'Folks-Light', 'Folks', sans-serif
+      font-size: 0.88em
     font-size: 1.1em
     float: left
-    width: 250px
-    margin: 10px 50px
+    width: 300px
+    margin: 10px 25px
     text-align: justify
     .controls
       margin-top: 20px
@@ -33,3 +32,14 @@
 
   .clear
     clear: both
+
+#share-alert
+  background-color: $green
+  border: 2px solid #549955
+  font-size: 0.9em
+  color: #fff
+  text-align: center
+  padding: 1em 0.5em
+  +border-radius(4px)
+  a
+    color: #fff

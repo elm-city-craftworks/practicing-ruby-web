@@ -36,7 +36,7 @@ class ArticlesController < ApplicationController
 
     @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
 
-    @article = ArticleDecorator.decorate(@article)
+    decorate_article
   end
 
   def share
@@ -55,11 +55,13 @@ class ArticlesController < ApplicationController
     @share = SharedArticle.find_by_secret(params[:secret])
 
     unless @share
+      # TODO Something a little classier here
       return render :text => "Article not found!", :status => 404
     else
       @share.viewed unless current_user
       @user    = UserDecorator.decorate(@share.user)
       @article = @share.article
+      decorate_article
     end
   end
 
@@ -75,6 +77,10 @@ class ArticlesController < ApplicationController
     else
       @article = Article.find(params[:id])
     end
+  end
+
+  def decorate_article
+    @article = ArticleDecorator.decorate(@article)
   end
 
   def authenticate_admin
