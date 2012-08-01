@@ -9,4 +9,6 @@
   - @articles.each do |article|
     %li= article.list_link
 
-%footer= render 'subway'
+- content_for(:footer) do
+  = render 'subway'
+

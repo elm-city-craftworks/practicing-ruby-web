@@ -20,10 +20,9 @@
 
   .clear
 
-%footer
-  - if current_user
-    Not sure where to start? Try a
-    = link_to "randomly selected article.", random_article_path
-  - else
-    All of these articles are available once you #{link_to "Subscribe", subscribe_path}
+- if current_user
+  - content_for(:footer) do
+    %p.big
+      Not sure where to start? Try a
+      = link_to "randomly selected article.", random_article_path
 

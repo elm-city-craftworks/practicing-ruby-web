@@ -23,4 +23,9 @@
       - if current_user && current_user.admin?
         #admin= yield :admin
       = yield(:header)
-    #content= yield
+    #content
+      = yield
+      %footer
+        = yield(:footer)
+        - unless current_user
+          = render 'shared/public_footer'
