@@ -26,6 +26,7 @@ class ArticlesController < ApplicationController
         @group.articles.published
       end.order("published_time")
 
+      @articles = @articles.paginate(:page => params[:page], :per_page => 10)
       @articles = ArticleDecorator.decorate(@articles)
     end
   end

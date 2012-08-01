@@ -1,20 +1,38 @@
 ul#articles
   background: #fff
-  width: 700px
   +border-radius(4px)
-  border: 5px solid rgba(69, 76, 86, 0.27)
-  margin: 1em auto
+  border: 2px solid #ddd
+  margin: 1em 0
   li
     padding: 0.5em 1em
     font-size: 1.1em
-    border-bottom: 1px solid rgba(76, 85, 102, 0.2)
+    border-bottom: 1px solid #ddd
     +single-transition(border-color, 0.25s)
+    &:first-child
+      +border-top-radius(4px)
+    &:last-child
+      border: none
+      +border-bottom-radius(4px)
     span.right
       float: right
     a
       text-decoration: none
       color: $dark-blue
       display: block
+
+.paginated-list
+  position: relative
+  .controls a
+    position: absolute
+    top: 50%
+    margin-top: -21px
+    &.next
+      right: -50px
+    &.previous
+      left: -50px
+    &.disabled
+      +opacity(0.2)
+      cursor: default
 
 #article
   font-size: 1.1em

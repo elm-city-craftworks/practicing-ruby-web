@@ -12,6 +12,7 @@ gem "nokogiri"
 gem "md_preview"
 gem "md_emoji"
 
+gem 'will_paginate'
 gem 'haml'
 gem 'coffee-filter', '~> 0.1.1'
 gem "jquery-rails"

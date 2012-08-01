@@ -23,7 +23,7 @@ class VolumeDecorator < ApplicationDecorator
 
       [
         volume.start_date.strftime(date_format),
-        volume.end_date.strftime(date_format)
+        volume.finish_date.strftime(date_format)
       ].join(" - ")
     end
   end

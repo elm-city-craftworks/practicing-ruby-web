@@ -217,6 +217,7 @@ GEM
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
+    will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -260,3 +261,4 @@ DEPENDENCIES
   turn (~> 0.9.5)
   uglifier
   whenever
+  will_paginate
