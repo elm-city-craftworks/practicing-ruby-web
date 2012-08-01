@@ -17,14 +17,11 @@ class ArticlesController < ApplicationController
     unless @group
       return render :text => "Article listing not found!", :status => 404
     else
-      @collections = CollectionDecorator.decorate(Collection.all) #TODO Add manual order by
+      @collections = CollectionDecorator.decorate(Collection.order("position"))
       @volumes     = VolumeDecorator.decorate(Volume.order("number"))
 
-      @articles = if current_user && current_user.admin?
-        @group.articles
-      else
-        @group.articles.published
-      end.order("published_time")
+      @articles = @group.articles.order("published_time")
+      @articles = @articles.published unless current_user.try(:admin)
 
       @articles = @articles.paginate(:page => params[:page], :per_page => 10)
       @articles = ArticleDecorator.decorate(@articles)

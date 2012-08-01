@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 
   def library
     @article_count = Article.where(:status => "published").count
-    @collections   = CollectionDecorator.decorate(Collection.all) #TODO Add manual order by
+    @collections   = CollectionDecorator.decorate(Collection.order("position"))
     @volumes       = VolumeDecorator.decorate(Volume.order("number"))
   end
 end
