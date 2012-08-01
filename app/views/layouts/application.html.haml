@@ -15,10 +15,10 @@
 
   %body
     #top-bar
-    // TODO Redesign Flash
-    //= render :partial => "shared/flash", :locals => {:flash => flash}
 
+    = render :partial => "shared/flash", :locals => { :flash => flash }
     = render :partial => "shared/navigation"
+
     %header
       - if current_user && current_user.admin?
         #admin= yield :admin
