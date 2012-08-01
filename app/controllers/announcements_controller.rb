@@ -1,10 +1,10 @@
 class AnnouncementsController < ApplicationController
 
   def index
-    @announcements = Announcement.order("created_at DESC").all
+    redirect_to "http://elmcitycraftworks.org/"
   end
 
   def show
-    @announcement = Announcement.find(params[:id])
+    redirect_to "http://elmcitycraftworks.org/"
   end
 end

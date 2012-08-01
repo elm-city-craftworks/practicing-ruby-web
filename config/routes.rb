@@ -3,7 +3,7 @@ PracticingRubyWeb::Application.routes.draw do
 
   match "/hooks/#{MailChimp::SETTINGS[:webhook_key]}" => 'hooks#receive'
   match '/articles/shared/:secret' => 'articles#shared',    :as => "shared_article"
-  match '/subscribe'               => 'sessions#subscribe', :as => 'subscribe'
+  match '/subscribe'               => 'home#subscribe', :as => 'subscribe'
 
   match "/library" => 'home#library'
   match "/volume/:volume/" => 'articles#index'
