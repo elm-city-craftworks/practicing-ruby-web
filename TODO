@@ -1,13 +1,19 @@
-- Move MC interactions into their own module
-- Caching! See: http://guides.rubyonrails.org/caching_with_rails.html
-- Dashboard
-  - Activity feed
-    - Comments
-    - Articles
-    - Announcements
-- Follow conversation
-- Follow all conversations
-- Reply to comment button (adds a in-reply-to link)
-- Link to comment
+# Redesign
 
-Add Asset Pipeline (http://railscasts.com/episodes/282-upgrading-to-rails-3-1)
+## Jordan
+
+- Restore Flash Messages
+- Style MD Preview
+- Restore RoboBar
+- Review shared articles
+- Review problems page
+- Review account linking pages
+- Relink or style announcements
+- Style banner announcements
+- Style facebox on shared articles
+
+
+## Greg
+
+- Update FAQ Text
+- Finalize landing page text

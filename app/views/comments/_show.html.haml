@@ -1,8 +1,9 @@
 .comment{:data => { :id => comment.id,
                     :editable => (comment.editable_by?(current_user)).inspect }}
   .header
-    = comment.user.icon
-    = link_to comment.user.github_nickname, user_path(comment.user.github_nickname)
+    = comment.user.icon(48)
+    = link_to comment.user.github_nickname,
+      user_path(comment.user.github_nickname), :class => "user-profile"
     .controls= comment.controls
     .on
       = comment.time_ago

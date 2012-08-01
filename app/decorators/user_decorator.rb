@@ -18,7 +18,7 @@ class UserDecorator < ApplicationDecorator
     # loading
     #
     h.image_tag(image_path, :alt => user.name,
-      :style => "width: #{size}px; height: #{size}px;")
+      :style => "width: #{size}px; height: #{size}px;", :class => "user-icon")
   end
 
   def link_to_github
