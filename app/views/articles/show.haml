@@ -9,9 +9,9 @@
       PR.Comments.init('#{comments_path}/')
       new PR.RoboBar('#{share_article_path(@article)}')
 
-= link_to "Share this article", '#', :'data-share-link' => true
-- if current_user.admin?
-  = link_to "Edit", edit_admin_article_path(@article)
+/ = link_to "Share this article", '#', :'data-share-link' => true
+/ - if current_user.admin?
+/   = link_to "Edit", edit_admin_article_path(@article)
 
 #article
   - cache("article_body_#{@article.id}") do
