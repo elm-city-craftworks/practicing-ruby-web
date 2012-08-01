@@ -10,14 +10,14 @@
 
 %h3 By Collection
 
-- Collection.all.each do |c|
+- Collection.order("position").each do |c|
   %p
     = link_to c.name, "/collection/#{c.slug}"
     = c.description
 
 %h3 By Volume
 
-- Volume.all.each do |v|
+- Volume.order("number").each do |v|
   %p
     = link_to "Volume #{v.number}", "/volume/#{v.number}"
     = v.description
