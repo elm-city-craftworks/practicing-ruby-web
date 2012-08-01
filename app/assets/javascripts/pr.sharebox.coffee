@@ -7,4 +7,4 @@ class PR.ShareBox
       e.preventDefault()
 
     $('#facebox .subscribe button').on 'click', (e) ->
-      window.location = "/subscribe"
+      window.location = "/"
