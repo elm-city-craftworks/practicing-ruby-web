@@ -46,11 +46,47 @@
       p
         text-align: left
     .markdown-preview
+      border: none
+      margin: 0
       ul.tabs
         margin-top: 0
       div.tab-container
         border: none
         margin-bottom: 0
 
-div.markdown-preview div.tab-container textarea
-  font-family: monospace
+div.markdown-preview
+  margin-top: 1em
+  border: 1px solid #ddd
+  border-bottom: none
+  +border-top-radius(3px)
+  ul.tabs
+    +border-top-radius(3px)
+    margin-top: 0
+    li
+      font-family: inherit
+      &:not(.label), a
+        +border-radius(3px)
+  div.tab-container
+    border: none
+    background-color: #f9f9f9
+    margin-bottom: 0
+    button
+      +sassy-button("matte", 5px, 1em, #EEEEEE, #EEEEEE, #333, "inset")
+      font-family: inherit
+      margin-right: 1em
+      margin-top: 1em
+    div.preview.tab-content
+      +markdown
+    textarea
+      font-family: monospace
+
+#comments #submit-bar
+  padding: 0.5em
+  text-align: right
+  margin-bottom: 1em
+  border: 1px solid #ddd
+  border-top: none
+  +border-bottom-radius(3px)
+  background: #eee
+  input
+    +sassy-button("matte", 5px, 1em, $light-blue, $light-blue, #fff, "inset")
