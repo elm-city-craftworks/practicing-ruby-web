@@ -2,11 +2,18 @@
 - content_for(:title) { "Subscribe" }
 
 #subscribe
+  #left
+    = image_tag "preview.png", :id => "preview"
+  #right
+    %h2 You'll thank me later ...
 
-  :plain
-    <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-    	<label for="mce-EMAIL">Sign up for Practicing Ruby!</label>
-    	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-    	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-      <p id="payment">Subscribers pay $8/month via amazon payments</p>
-    </form>
+    %p
+      This is about as good as it gets people. You are so damn close to making the best decision of your life, so hurry and do it now.
+
+
+    :plain
+      <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+      	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+      	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+        <p id="payment">Subscribers pay $8/month via amazon payments</p>
+      </form>

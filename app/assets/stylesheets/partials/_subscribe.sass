@@ -1,0 +1,29 @@
+#subscribe
+  #left, #right
+    float: left
+  #left
+    width: $page-width * 0.60
+  #right
+    width: $page-width * 0.40
+    h2
+      font-size: 1.5em
+      margin-bottom: 1em
+    form
+      margin-top: 2em
+      input[type=email]
+        font-size: 1.25em
+        width: 190px
+        padding: 3px 5px
+        font-family: 'Folks', sans-serif
+        vertical-align: middle
+      input[type=submit]
+        +blue-button
+      #payment
+        text-align: center
+        font-size: 0.9em
+        font-family: 'Folks-Light', 'Folks', sans-serif
+  .clear
+    clear: left
+  #preview
+    +image-box
+    width: 90%
