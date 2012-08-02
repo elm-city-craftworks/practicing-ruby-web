@@ -6,7 +6,7 @@
 %p= @group.description
 
 - if @articles.any?
-  .paginated-list
+  .paginated-list{'data-pjax-container' => ''}
     .controls
       - #TODO DRY please
       = link_to image_tag("controls/next.png"),

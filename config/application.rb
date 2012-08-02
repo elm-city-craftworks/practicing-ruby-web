@@ -6,6 +6,7 @@ Bundler.require *Rails.groups(:assets => %w(development test))
 
 module PracticingRubyWeb
   class Application < Rails::Application
+    config.middleware.use Rack::Pjax
 
     # Enable the asset pipeline
     config.assets.enabled = true
