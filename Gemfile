@@ -40,6 +40,8 @@ end
 group :test do
   gem "minitest",  "~> 2.12.1"
   gem "capybara"
+  gem "capybara-screenshot"
+  gem "launchy"
   gem "factory_girl_rails"
   gem "mocha", :require => false
   gem "capybara-webkit"

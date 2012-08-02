@@ -40,7 +40,7 @@ class SharingTest < ActionDispatch::IntegrationTest
     visit shared_article_path(@share.secret)
 
     within "#facebox" do
-      assert_content "Subscribe Now"
+      assert_content "Learn More"
     end
   end
 

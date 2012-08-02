@@ -6,5 +6,13 @@ FactoryGirl.define do
     a.body          "Article Body"
     a.issue_number  "1"
     a.status        "published"
+    a.volume
+  end
+
+  sequence(:volume_number) { |n| n }
+
+  factory :volume do |v|
+    v.number { |_| FactoryGirl.generate(:volume_number) }
+    v.description "The Best Volume Evar"
   end
 end
