@@ -27,8 +27,6 @@
       = yield
       %footer
         = yield(:footer)
-        - unless current_user
-          = render 'shared/public_footer'
 
     :javascript
       PR.immediate();

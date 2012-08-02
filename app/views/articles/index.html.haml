@@ -21,4 +21,11 @@
 
 - content_for(:footer) do
   = render 'subway'
+  = render 'shared/public_footer'
 
+- unless current_user
+  - content_for(:header_bottom) do
+    :coffeescript
+      $ ->
+        $(document).on 'click', '#articles li', =>
+          $('footer p.big').addClass('highlight');

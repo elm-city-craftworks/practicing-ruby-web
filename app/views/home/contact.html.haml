@@ -1,0 +1,15 @@
+- content_for(:header) { "Contact" }
+- content_for(:title) { "Contact" }
+
+#contact
+  %p
+    %strong Email:
+    = mail_to "gregory@practicingruby.com", nil, :encode => "javascript"
+  %p
+    %strong Twitter:
+    = link_to "@practicingruby", "http://twitter.com/practicingruby"
+  %p
+    %strong IRC:
+    = link_to "#practicingruby", "irc://irc.freenode.net/#practicingruby"
+  %p
+    %strong= link_to "Elm City Craftworks", "http://elmcitycraftworks.org"

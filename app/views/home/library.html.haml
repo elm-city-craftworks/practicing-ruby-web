@@ -20,8 +20,9 @@
 
   .clear
 
-- if current_user
-  - content_for(:footer) do
+- content_for(:footer) do
+  = render 'shared/public_footer'
+  - if current_user
     %p.big
       Not sure where to start? Try a
       = link_to "randomly selected article.", random_article_path

@@ -1,5 +1,6 @@
-%p.big
-  To start reading
-  = link_to "subscribe", subscribe_path
-  now or check out a few
-  = link_to "free samples", '#TODO'
+- unless current_user
+  %p.big
+    To start reading
+    = link_to "subscribe", subscribe_path
+    now or check out a few
+    = link_to "free samples", '#TODO'
