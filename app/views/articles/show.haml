@@ -1,17 +1,10 @@
-- content_for(:title) { @article.full_subject }
-- content_for(:header) do
-  = link_to @article.volume.icon, @article.volume.path
-  #title.bigtext
-    %div= @article.subject
 - content_for(:header_bottom) do
   :coffeescript
     $ ->
       PR.Comments.init('#{comments_path}/')
       new PR.RoboBar('#{share_article_path(@article)}')
 
-/ = link_to "Share this article", '#', :'data-share-link' => true
-/ - if current_user.admin?
-/   = link_to "Edit", edit_admin_article_path(@article)
+= render "header"
 
 #article
   - cache("article_body_#{@article.id}") do

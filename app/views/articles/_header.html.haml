@@ -1,0 +1,22 @@
+- content_for(:title) { @article.full_subject }
+- content_for(:header) do
+  .bigtext
+    %div= @article.subject
+
+- #TODO a better admin edit = link_to "Edit", edit_admin_article_path(@article)
+
+#article-sub-nav
+  = @article.published_date
+  .right
+    = link_to @article.volume.icon, @article.volume.path,
+      :rel => "tooltip",
+      :title => @article.volume.name
+    - if @article.collection
+      = link_to @article.collection.icon, @article.collection.path,
+        :rel => "tooltip",
+        :title => @article.collection.name
+    - if current_user
+      = link_to '#', :'data-share-link' => true, :rel => "tooltip",
+        :title => "Share this article" do
+        %span.icon.share
+          = image_tag "icons/heart.png"

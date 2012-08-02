@@ -1,9 +1,3 @@
-- content_for(:title) { @article.full_subject }
-- content_for(:header) do
-  = link_to @article.volume.icon, @article.volume.path
-  #title.bigtext
-    %div= @article.subject
-
 :coffeescript
   $ ->
     new PR.ShareBox()
@@ -42,6 +36,8 @@
       %button Read Issue #{@article.issue_number} &raquo;
 
   .clear
+
+= render "header"
 
 #article
   - cache("article_body_#{@article.id}") do
