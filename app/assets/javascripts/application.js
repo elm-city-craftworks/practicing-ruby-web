@@ -18,11 +18,11 @@ PR.setupNamespace = function(namespace){
 $.facebox.settings.closeImage   = '/assets/facebox/closelabel.png';
 $.facebox.settings.loadingImage = '/assets/facebox/loading.gif';
 
-$(function(){
+PR.immediate = function(){
   $('a[rel=tooltip]').tooltip();
   $('.bigtext').each(function() {
     var box      = $(this)
     var fontsize = parseInt(box.css('font-size'));
     box.bigtext({maxfontsize: fontsize});
   });
-});
+};
