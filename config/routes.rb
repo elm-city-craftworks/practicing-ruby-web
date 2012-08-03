@@ -41,7 +41,7 @@ PracticingRubyWeb::Application.routes.draw do
   match '/logout' => 'sessions#destroy', :as => 'logout'
   match '/auth/github', :as => 'login'
 
-  resources :announcements
+  match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 
   match '/users/settings' => 'users#edit', :as => "user_settings"
   resources :users

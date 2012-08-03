@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user
   before_filter :enable_notifications
 
-  helper_method :current_user
+  helper_method :current_user, :active_broadcasts
 
   def authenticate
     current_authorization || (store_location && redirect_to("/auth/github"))
@@ -51,6 +51,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def active_broadcasts
+    if current_user
+      session[:dismissed_broadcasts] ||= [-1]
+      Announcement.broadcasts.where("id NOT IN (?)", session[:dismissed_broadcasts])
+    else
+      []
+    end
+  end
 
   def enable_notifications
     if current_user && !current_user.notifications_enabled

@@ -1,4 +1,4 @@
-%h1 New Announcement
+- content_for(:header) { "New Announcement" }
 
 = form_for @announcement, :url => admin_announcements_path,
   :html => { :'data-track-changes' => true } do |f|

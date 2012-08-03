@@ -1,5 +1,7 @@
-- if current_user && Announcement.broadcasts.any?
+- if active_broadcasts.any?
   #broadcasts
-    - Announcement.broadcasts.each do |broadcast|
+    = link_to "Dismiss", dismiss_broadcasts_path, :class => "dismiss",
+      :remote => true
+    - active_broadcasts.each do |broadcast|
       .broadcast
         = link_to broadcast.broadcast_message, broadcast.url

@@ -1,14 +1,14 @@
 
 = error_messages_for(@announcement)
 
-%p
-  = f.label :title
-  = f.text_field :title
-
-%p
-  = f.label :author_id
-  = f.select :author_id,
-    User.where(:admin => true).order("first_name").map {|c| [c.first_name, c.id]}
+/ %p
+/   = f.label :title
+/   = f.text_field :title
+/
+/ %p
+/   = f.label :author_id
+/   = f.select :author_id,
+/     User.where(:admin => true).order("first_name").map {|c| [c.first_name, c.id]}
 
 %p
   = f.check_box :broadcast
@@ -23,7 +23,7 @@
   = f.text_field :url
 
 
-#announcements= f.text_area :body, 'data-preview' => true
+/ #announcements= f.text_area :body, 'data-preview' => true
 
 %p
   = f.submit
