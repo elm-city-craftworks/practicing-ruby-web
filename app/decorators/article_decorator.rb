@@ -8,7 +8,8 @@ class ArticleDecorator < ApplicationDecorator
     subject = "[DRAFT] #{subject}" if article.status == "draft"
 
     [ subject,
-      h.content_tag(:span, article.published_date, :class => 'right')
+      h.content_tag(:span, article.published_date, :class => 'right'),
+      h.content_tag(:span, "Issue ##{article.issue_number}", :class => "issue-number")
     ].join("\n").html_safe
   end
 
