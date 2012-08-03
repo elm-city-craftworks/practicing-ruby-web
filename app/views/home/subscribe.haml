@@ -1,19 +1,31 @@
-- content_for(:header) { "Subscribe" }
+- content_for(:header) { "Become a Practicing Ruby subscriber" }
 - content_for(:title) { "Subscribe" }
 
 #subscribe
   #left
-    %h2 You'll thank me later ...
+    %p
+      So you've checked out some of our
+      %a{:href => ""} sample articles
+      and are ready to join Practicing Ruby? 
+      That's awesome! Here's what you'll 
+      get as a subscriber:
+
+    %ul
+      %li Immediate access to all our articles.
+      %li Fresh content every two weeks.
+      %li Conversations with Practicing Rubyists.
 
     %p
-      This is about as good as it gets people. You are so damn close to making the best decision of your life, so hurry and do it now.
-
+      By signing up, you'll also be supporting 
+      an independent publishing effort that is
+      100% reader-funded, and 100% reader-focused.
+      
 
     :plain
       <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
       	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
       	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-        <p id="payment">Subscribers pay $8/month via amazon payments</p>
+        <p id="payment">A subscription costs only $8/month</p>
       </form>
 
   #right
