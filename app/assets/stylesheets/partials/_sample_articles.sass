@@ -5,14 +5,12 @@
     float: left
     text-decoration: none
     .inner
-      +background-image(linear-gradient(#e9e9e9, #d9d9d9))
-      +border-radius(4px)
-      +single-box-shadow(#333, 0, 0, 3px)
+      +sassy-button("matte", 5px, 1em, #e9e9e9, #d9d9d9, #333, "inset")
+      font-family: inherit
       padding: 1em
       margin: 1em
       text-align: center
-      &:hover
-        +background-image(linear-gradient(#d9d9d9, #c9c9c9))
+      display: block
       .title
         color: $red
         font-size: 1.5em
