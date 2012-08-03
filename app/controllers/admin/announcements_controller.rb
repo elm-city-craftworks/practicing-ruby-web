@@ -15,7 +15,7 @@ class Admin::AnnouncementsController < ApplicationController
 
     if @announcement.save
       flash[:notice] = "Announcement successfully created."
-      redirect_to announcement_path(@announcement)
+      redirect_to root_path #announcement_path(@announcement)
     else
       render :action => :new
     end
@@ -28,7 +28,7 @@ class Admin::AnnouncementsController < ApplicationController
   def update
     if @announcement.update_attributes(params[:announcement])
       flash[:notice] = "Announcement successfully updated."
-      redirect_to announcement_path(@announcement)
+      redirect_to root_path #announcement_path(@announcement)
     else
       render :action => :edit
     end

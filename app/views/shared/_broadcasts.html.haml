@@ -2,4 +2,4 @@
   #broadcasts
     - Announcement.broadcasts.each do |broadcast|
       .broadcast
-        = link_to broadcast.broadcast_message, announcement_path(broadcast)
+        = link_to broadcast.broadcast_message, broadcast.url

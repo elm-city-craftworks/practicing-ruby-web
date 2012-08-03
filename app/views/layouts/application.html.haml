@@ -15,6 +15,7 @@
 
   %body
     #top-bar
+      = render "shared/broadcasts"
 
     = render :partial => "shared/flash", :locals => { :flash => flash }
     = render :partial => "shared/navigation"
