@@ -7,6 +7,7 @@ FactoryGirl.define do
     a.issue_number  "1"
     a.status        "published"
     a.volume
+    a.published_time { Time.now }
   end
 
   sequence(:volume_number) { |n| n }
