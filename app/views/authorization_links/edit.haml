@@ -1,14 +1,14 @@
-%hr
+- content_for(:header) { "You're almost done ..." }
 
 %p
   We weren't able to automatically link your github account to your email address. Usually this means one of two things: either your email address on github does not match the email address that you subscribed to the newsletter with, or you didn't subscribe to the newsletter yet.
 
 %p
-  %b
+  %strong
     If you are already subscribed, try manually linking your account.
 
 = form_for(@authorization_link) do |f|
-  = f.text_field :mailchimp_email
+  = f.email_field :mailchimp_email
   = f.submit "Link this email address to my Github account"
 %p
   %b

@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
 
   def link
     if AuthorizationLink.activate(params[:secret])
+      flash[:notice] = "Your account is setup and you are ready to go. Enjoy!"
       redirect_to library_path
     else
       render("expired_link")

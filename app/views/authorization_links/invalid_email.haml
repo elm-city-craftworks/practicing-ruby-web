@@ -1,6 +1,8 @@
+- content_for(:header) { "Drat!" }
+
 %p
   Sorry, we couldn't find a matching subscription for
-  = "#{@email}."
+  %strong #{@email}.
 
 %p
   = link_to("Please try again with a different email address", @authorization_link)

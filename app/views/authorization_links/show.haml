@@ -1,9 +1,11 @@
+- content_for(:header) { "You're almost done ..." }
+
 %p
   We sent a confirmation email to
-  = @authorization_link.mailchimp_email
+  %strong= @authorization_link.mailchimp_email
   that will allow you to link your subscription
   information to the github nickname you provided:
-  = @authorization_link.github_nickname
+  %strong= @authorization_link.github_nickname
 
 %p
   Please click the link in that email to complete your registration.
