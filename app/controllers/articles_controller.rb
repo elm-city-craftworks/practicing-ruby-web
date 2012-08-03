@@ -2,8 +2,8 @@ class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
   before_filter :create_visit, :only => [:show]
 
-  skip_before_filter :authenticate,      :only => [:shared, :index]
-  skip_before_filter :authenticate_user, :only => [:shared, :index]
+  skip_before_filter :authenticate,      :only => [:shared, :index, :samples]
+  skip_before_filter :authenticate_user, :only => [:shared, :index, :samples]
 
   def index
     if params[:volume]
@@ -60,6 +60,13 @@ class ArticlesController < ApplicationController
       @article = @share.article
       decorate_article
     end
+  end
+
+  def samples
+    @ivory_towers = CollectionDecorator.find_by_name("Ivory Towers")
+    @ruby         = CollectionDecorator.find_by_name("Our Beloved Ruby")
+    @strategery   = CollectionDecorator.find_by_name("Strategery")
+    @nuts_bolts   = CollectionDecorator.find_by_name("Nuts and Bolts")
   end
 
   def random

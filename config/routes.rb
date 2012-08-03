@@ -11,6 +11,7 @@ PracticingRubyWeb::Application.routes.draw do
   match "/collection/:collection/" => 'articles#index'
   match "/faq" => 'home#faq', :as => 'faq'
   match "/contact" => 'home#contact', :as => 'contact'
+  match "/articles/samples" => 'articles#samples', :as => 'sample_articles'
 
   match "articles/random" => 'articles#random', :as => 'random_article'
 

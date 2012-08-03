@@ -1,0 +1,31 @@
+- content_for(:header) { "Sample Articles" }
+- content_for(:title) { "Sample Articles" }
+
+%p
+  Before you subscribe we want to give you an idea of what to expect from an array of Practicing Ruby articles. Check out a few selections from our various collections:
+
+#sample-articles
+  = link_to 'http://practicingruby.com/articles/shared/eislpkhxolnr',
+    :class => "box" do
+    .inner
+      = @ruby.icon
+      .title Our Beloved Ruby
+      .article Building Enumerable & Enumerator in Ruby
+  = link_to 'http://practicingruby.com/articles/shared/yfildjshgzew',
+    :class => "box" do
+    .inner
+      = @ivory_towers.icon
+      .title Ivory Towers
+      .article "Unobtrusive Ruby" in Practice
+  = link_to 'http://practicingruby.com/articles/shared/iptocucwujtj',
+    :class => "box" do
+    .inner
+      = @strategery.icon
+      .title Strategery
+      .article Domain specific API construction
+  = link_to 'http://practicingruby.com/articles/shared/zmkztdzucsgv',
+    :class => "box" do
+    .inner
+      = @nuts_bolts.icon
+      .title Nuts and Bolts
+      .article Tricks for working with text and files
