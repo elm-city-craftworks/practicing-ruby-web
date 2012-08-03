@@ -22,4 +22,8 @@ class ArticleDecorator < ApplicationDecorator
       list_description
     end.html_safe
   end
+
+  def published_date
+    article.published_time.strftime("%B %e, %Y")
+  end
 end

@@ -6,7 +6,7 @@
 - #TODO a better admin edit = link_to "Edit", edit_admin_article_path(@article)
 
 #article-header
-  Issue ##{@article.issue_number}, published on #{@article.published_date}
+  Issue ##{@article.issue_number}, published on #{@article.published_date}.
   .right
     = link_to @article.volume.icon, @article.volume.path,
       :rel => "tooltip",
