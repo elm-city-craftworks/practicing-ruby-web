@@ -82,11 +82,17 @@ div.markdown-preview
 
 #comments #submit-bar
   padding: 0.5em
-  text-align: right
   margin-bottom: 1em
   border: 1px solid #ddd
   border-top: none
   +border-bottom-radius(3px)
   background: #eee
+  color: #888
+  span
+    display: inline-block
+    line-height: 2.5em
   input
+    float: right
     +blue-button
+  .clear
+    clear: right

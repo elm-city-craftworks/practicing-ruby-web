@@ -10,5 +10,6 @@
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
 
+= render "footer"
 
 = render :partial => "articles/comments"

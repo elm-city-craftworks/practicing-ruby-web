@@ -12,4 +12,7 @@
 
     = f.text_area :body, 'data-preview' => true
 
-    #submit-bar= f.submit "Comment"
+    #submit-bar
+      %span Each time you post a comment, a unicorn gets its horn!
+      = f.submit "Comment"
+      .clear

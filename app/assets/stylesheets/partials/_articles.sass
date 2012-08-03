@@ -49,17 +49,15 @@ ul#articles
   margin: 1.5em 0
   +markdown
 
-#article-sub-nav
+#article-header
   margin-bottom: 1.5em
   padding: 0.5em 0
-  // background-color: #fff
   border-bottom: 1px solid #ddd
   border-top: 1px solid #ddd
-  // +border-radius(4px)
   line-height: 24px
   font-size: 1.1em
   height: 24px
-  color: #777
+  color: #888
   .right
     float: right
     display: inline-block
@@ -71,7 +69,23 @@ ul#articles
     span.icon
       +group-icon(24px)
       margin-right: 0
-      &.share
-        background: $light-blue
       &.volume
         font-size: 17px
+
+#article-footer
+  padding-top: 1em
+  border-top: 1px solid #ddd
+  .right
+    float: right
+    display: inline-block
+  a.share
+    +classy-button
+    text-decoration: none
+  a[rel=tooltip]
+    display: inline-block
+    margin-left: 0.5em
+    color: #555
+    text-decoration: none
+    span.icon
+      +group-icon(32px)
+      margin-right: 0
