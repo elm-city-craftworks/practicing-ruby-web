@@ -26,19 +26,22 @@ $green: #3D6E3C
 =markdown
   p
     font-family: Helvetica,sans-serif
-    letter-spacing: normal
     text-align: justify
     &.bold
       font-weight: bold
 
-  ul
-    list-style: disc inside
+
+  ul, ol
     margin-left: 1em
     li
       font-family: Helvetica,sans-serif
       margin-bottom: 0.5em
       line-height: 1.3em
-
+  ul
+    list-style: disc outside none
+    margin-left: 1.5em
+  ol
+    list-style: decimal inside none
 
   h3
     font-size: 1.5em
@@ -51,7 +54,7 @@ $green: #3D6E3C
     clear: both
 
   pre
-    font-family: monospace
+    font-family: "Inconsolata", monospace
     //+image-box
     background: #fff
     padding: 1em
