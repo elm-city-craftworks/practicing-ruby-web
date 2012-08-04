@@ -2,18 +2,6 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate
   skip_before_filter :authenticate_user
 
-  def subscribe
-    url = "http://practicingruby.us2.list-manage.com/subscribe?u=8980fe01915375e99364fcdd0&id=281315c053"
-    url += "&MERGE0=#{params[:email]}" if params[:email]
-
-    # TODO: Add fancy logging here
-
-    respond_to do |format|
-      format.html { redirect_to url }
-      format.js   { render :text => "// OK #{params[:email]}" }
-    end
-  end
-
   def create
     auth = request.env['omniauth.auth']
     github_uid = auth["uid"].to_s
