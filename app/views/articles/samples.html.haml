@@ -29,3 +29,8 @@
       = @nuts_bolts.icon
       .title Nuts and Bolts
       .article Tricks for working with text and files
+
+- content_for(:footer) do
+  %p.big
+    If you like what you see, consider #{link_to "subscribing", subscribe_path}
+    for just $8/month
