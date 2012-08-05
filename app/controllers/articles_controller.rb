@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
       @articles = @group.articles.order("published_time")
       @articles = @articles.published unless current_user.try(:admin)
 
-      @articles = @articles.paginate(:page => params[:page], :per_page => 10)
+      @articles = @articles.paginate(:page => params[:page], :per_page => 8)
       @articles = ArticleDecorator.decorate(@articles)
     end
   end
