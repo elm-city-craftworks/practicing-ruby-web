@@ -1,6 +1,4 @@
 - unless current_user
   %p.big
-    To start reading
-    = link_to "subscribe", subscribe_path
-    now or check out a few
-    = link_to "sample articles", sample_articles_path
+    To start reading #{link_to "subscribe", subscribe_path} now or check out
+    a few #{link_to "sample articles", sample_articles_path}.
