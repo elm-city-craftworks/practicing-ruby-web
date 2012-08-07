@@ -1,15 +1,19 @@
-- content_for(:header) { "Contact" }
+- content_for(:header) { "Somebody set up us the contact" }
 - content_for(:title) { "Contact" }
 
-#subscribe
+#contact
   #left
+    No matter what, we are here to help you out. So if you have a
+    question about Practicing Ruby, problems with your account, or anything in
+    between don't hesitate to drop us a line. Gregory can be reached via email
+    at #{ mail_to "gregory@practicingruby.com", nil, :encode => "javascript"} or
+    #{link_to "@practicingruby", "http://twitter.com/practicingruby"} on
+    twitter.
+
     %p
-      %strong Email:
-      = mail_to "gregory@practicingruby.com", nil, :encode => "javascript"
-    %p
-      %strong Twitter:
-      = link_to "@practicingruby", "http://twitter.com/practicingruby"
-    %p
-      %strong= link_to "Elm City Craftworks", "http://elmcitycraftworks.org"
+      You might also be interested in checking out the
+      #{link_to "Elm City Craftworks", "http://elmcitycraftworks.org"} blog.
+      Inside, you'll find updates on Practicing Ruby and lessons learned from
+      running the business side of things.
   #right
-    = image_tag "logo/large.png"
+    = image_tag "contact.jpg"
