@@ -62,8 +62,6 @@ class ApplicationController < ActionController::Base
   end
 
   def enable_notifications
-    if current_user && !current_user.notifications_enabled
-      current_user.update_attribute(:notifications_enabled, true)
-    end
+    current_user.try(:enable_notifications)
   end
 end

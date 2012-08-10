@@ -25,4 +25,10 @@ class User < ActiveRecord::Base
                       :notifications_enabled => true,
                       :mailchimp_web_id      => mailchimp_web_id)
   end
+
+  def enable_notifications
+    unless account_disabled || notifications_enabled
+      update_attributes(:notifications_enabled => true)
+    end
+  end
 end

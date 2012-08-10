@@ -35,8 +35,6 @@ class SessionsController < ApplicationController
     session["authorization_id"] = authorization.id
 
     if authorization.confirmed?
-      current_user.update_attribute(:notifications_enabled, true)
-
       redirect_back_or_default(library_path)
     elsif link = authorization.authorization_link
       redirect_to authorization_link_path(link)
