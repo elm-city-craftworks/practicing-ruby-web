@@ -23,6 +23,19 @@ PR.Comments.init = function(commentsPath){
     }).bind('jeditable.editing', function(){
       MdPreview.buildPreviewTab($(this));
       $(this).parents('div.comment').children('div.header').hide();
+      var tabContainer = $(this).parents('div.comment').find('div.tab-container');
+      tabContainer.append(
+        '<button type="submit">Save</button>' +
+        '<button type="cancel">Cancel</button>');
+
+      $.each(['submit', 'cancel'], function(i, type){
+        tabContainer.children('button[type=' + type + ']').click(function(){
+          tabContainer.find('form button[type=' + type + ']').click();
+        });
+      });
+
+      $(this).parents('div.comment').find('form button').hide();
+
     }).bind('jeditable.reset', function(){
       // TODO: DRY up this code
       PR.Comments.teardownPreview(this);
