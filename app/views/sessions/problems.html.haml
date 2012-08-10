@@ -9,7 +9,7 @@
 
 %p
   I can definitely help you sort this out.
-  Just email #{mail_to "gregory@practicingruby.com", nil, :subject => "HELP! #{current_user.github_nickname} has a problem with their Practicing Ruby account"}
+  Just email #{mail_to "gregory@practicingruby.com", nil, :subject => "HELP! #{current_user.try(:github_nickname) || 'I'} encountered a problem with Practicing Ruby"}
   and I will look into the problem as soon as I can.
 
 %p
