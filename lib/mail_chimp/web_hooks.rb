@@ -39,7 +39,7 @@ module MailChimp
     end
 
     def unsubscribe
-      find_user.disable
+      find_user.try(:disable)
 
       unless params[:data][:action] == "delete"
         @user_manager.delete_user(params[:data][:email])

@@ -62,6 +62,18 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
     assert user.account_disabled, "User account was not disabled"
   end
 
+  test "delete users don't throw errors when being unsubscribed" do
+    UserManager.any_instance.stubs(:delete_user) # Don't bother MailChimp
+
+    user = FactoryGirl.build(:user)
+
+    params = user_to_mailchimp_params(user, "unsubscribe")
+
+    web_hook = MailChimp::WebHooks.new(params)
+
+    web_hook.process
+  end
+
   test "unsubscribed users accounts are deleted from mailchimp" do
     user = FactoryGirl.create(:user)
 
