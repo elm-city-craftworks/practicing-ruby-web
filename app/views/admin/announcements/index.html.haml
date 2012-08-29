@@ -12,8 +12,7 @@
     - @announcements.each do |announcement|
       %tr{:class => cycle('even','odd')}
         %td= link_to announcement.title, edit_admin_announcement_path(announcement)
-        %td= announcement.author.name
-        %td= link_to "Show", announcement_path(announcement)
+        %td= announcement.author.try(:name)
         %td.action= link_to "Destroy",
           admin_announcement_path(announcement),
           :data => { :confirm => "Are you sure you wish to delete this announcement?"} ,
