@@ -120,6 +120,19 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
     assert_equal params[:data][:email],          user.email
   end
 
+  test "find_user is not case sensative" do
+    user = FactoryGirl.create(:user)
+
+    params = user_to_mailchimp_params(user, "profile")
+
+    params[:data].delete(:web_id)
+    params[:data][:email] = params[:data][:email].upcase
+
+    web_hook = MailChimp::WebHooks.new(params)
+
+    web_hook.process
+  end
+
   private
 
   def user_to_mailchimp_params(user, request_type)
