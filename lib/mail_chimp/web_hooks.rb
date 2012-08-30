@@ -54,8 +54,6 @@ module MailChimp
                              :email      => params[:data][:email])
     end
 
-    private
-
     def find_user
       User.find_by_mailchimp_web_id(params[:data][:web_id]) ||
       User.where("LOWER(email) = ?", params[:data][:email].downcase).first
