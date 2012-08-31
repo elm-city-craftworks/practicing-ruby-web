@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803001039) do
+ActiveRecord::Schema.define(:version => 20120831190102) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(:version => 20120803001039) do
     t.boolean  "beta_tester",           :default => false
     t.boolean  "account_disabled",      :default => false
     t.boolean  "notifications_enabled", :default => false, :null => false
+    t.string   "status"
+    t.string   "contact_email"
   end
 
   create_table "volumes", :force => true do |t|
