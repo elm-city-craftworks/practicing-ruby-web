@@ -1,0 +1,11 @@
+- content_for(:header) { "Registration" }
+- content_for(:title) { "Registration" }
+
+%h3 Hey #{@user.github_nickname}. Welcome to Practicing Ruby!
+
+%p Before you jump right in, we need some information about you, including where we should send you emails and if you want to be emailed at all.
+
+= form_for @user, :url => {:controller => :registration, :action => :update_profile} do |f|
+  = render :partial => "users/form", :locals => {:f => f}
+  %p
+    = f.submit "Continue"

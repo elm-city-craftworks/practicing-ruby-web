@@ -38,6 +38,14 @@ PracticingRubyWeb::Application.routes.draw do
     end
   end
 
+  scope "/registration", :as => 'registration' do
+    get   'edit_profile'          => 'registration#edit_profile'
+    match 'update_profile'        => 'registration#update_profile'
+    get   'confirm_email/:secret' => 'registration#confirm_email',
+      :as => 'confirmation'
+    get   'payment'               => 'registration#payment'
+  end
+
   match '/sessions/link/:secret' => 'sessions#link'
   match '/auth/github/callback' => 'sessions#create'
   match '/logout' => 'sessions#destroy', :as => 'logout'

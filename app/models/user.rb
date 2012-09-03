@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of   :mailchimp_web_id, :email
   validates_uniqueness_of :mailchimp_web_id, :email
 
-  attr_protected :admin
+  attr_protected :admin, :status
 
   scope :to_notify, where(notifications_enabled: true)
 
@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   end
 
   def disable
-    update_attributes(:account_disabled => true, :notifications_enabled => false)
+    update_attributes(:account_disabled => true,
+      :notifications_enabled => false)
   end
 
   def enable(mailchimp_web_id)
@@ -30,5 +31,14 @@ class User < ActiveRecord::Base
     unless account_disabled || notifications_enabled
       update_attributes(:notifications_enabled => true)
     end
+  end
+
+  def create_access_token
+    update_attribute(:access_token, SecureRandom.hex(10))
+    access_token
+  end
+
+  def clear_access_token
+    update_attribute(:access_token, nil)
   end
 end
