@@ -9,13 +9,15 @@ class RegistrationController < ApplicationController
     @user = current_user
 
     if params[:user]
-      @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user])
+        @user.create_access_token
 
-      @user.create_access_token
+        @user.update_attribute(:status, "pending_confirmation")
 
-      @user.update_attribute(:status, "pending_confirmation")
-
-      RegistrationMailer.email_confirmation(@user).deliver
+        RegistrationMailer.email_confirmation(@user).deliver
+      else
+        render :edit_profile
+      end
     end
   end
 
@@ -26,7 +28,7 @@ class RegistrationController < ApplicationController
       user.clear_access_token
 
       # TODO swtich this to confirmed one we are doing payment processing
-      user.update_attribute(:status, "active")
+      user.update_attribute(:status, "payment_pending")
 
       return redirect_to(:action => :payment)
     end

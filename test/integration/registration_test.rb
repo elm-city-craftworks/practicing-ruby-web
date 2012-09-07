@@ -16,7 +16,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       edit_profile
     end
 
-    pending
+    assert_content "Contact email can't be blank"
   end
 
   def simulate(&block)

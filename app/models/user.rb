@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   validates_presence_of   :mailchimp_web_id, :email
   validates_uniqueness_of :mailchimp_web_id, :email
 
+  validates_presence_of   :contact_email, :on => :update
+  validates_uniqueness_of :contact_email, :on => :update
+
   attr_protected :admin, :status
 
   scope :to_notify, where(notifications_enabled: true)
