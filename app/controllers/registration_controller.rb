@@ -28,7 +28,7 @@ class RegistrationController < ApplicationController
       # TODO swtich this to confirmed one we are doing payment processing
       user.update_attribute(:status, "active")
 
-      return redirect_to(:payment)
+      return redirect_to(:action => :payment)
     end
   end
 
