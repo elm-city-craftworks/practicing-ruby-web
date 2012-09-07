@@ -5,15 +5,21 @@ module Support
       @user    = FactoryGirl.create(:user)
     end
 
-    def authenticate
-      FactoryGirl.create(:authorization, :user => @user) 
+    def authenticate(params)
+      OmniAuth.config.add_mock(:github, {
+        :uid => params[:uid],
+        :info => {
+          :nickname => params[:nickname],
+          :email    => params.fetch(:email, "")
+        }
+      })
 
       browser { visit login_path }
     end
 
     def edit_profile(params={})
       browser do
-        visit registration_edit_profile_path 
+        visit registration_edit_profile_path
         fill_in "Email:", :with => params.fetch(:email, "")
         click_button "Continue"
       end
@@ -33,6 +39,10 @@ module Support
 
     def make_payment
       browser { assert_current_path registration_payment_path }
+    end
+
+    def logout
+      browser { visit logout_path }
     end
 
     private

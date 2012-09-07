@@ -1,11 +1,8 @@
 class User < ActiveRecord::Base
   has_many :comments
 
-  validates_presence_of   :mailchimp_web_id, :email
-  validates_uniqueness_of :mailchimp_web_id, :email
-
   validates_presence_of   :contact_email, :on => :update
-  validates_uniqueness_of :contact_email, :on => :update
+  validates_uniqueness_of :contact_email, :on => :update, :allow_blank => true
 
   attr_protected :admin, :status
 
@@ -13,6 +10,10 @@ class User < ActiveRecord::Base
 
   before_save do
     write_attribute(:email, email.downcase) if changed.include?("email")
+  end
+
+  def active?
+    %w{active payment_pending}.include? status
   end
 
   def name

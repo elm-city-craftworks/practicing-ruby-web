@@ -1,5 +1,16 @@
 class RegistrationController < ApplicationController
+  skip_before_filter :authenticate_user
   # before_filter :ye_shall_not_pass, :except => [:payment]
+
+  def index
+    action = case current_user.status
+      when "authorized"           then :edit_profile
+      when "pending_confirmation" then :update_profile
+      when "confirmed"            then :payment
+    end
+
+    redirect_to :action => action
+  end
 
   def edit_profile
     @user = current_user

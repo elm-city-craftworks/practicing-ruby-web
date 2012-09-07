@@ -14,11 +14,13 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    unless current_user
-      return redirect_to(current_authorization.authorization_link)
-    end
+    return unless current_user
 
-    redirect_to problems_sessions_path if current_user.account_disabled
+    if current_user.account_disabled
+      redirect_to problems_sessions_path
+    elsif !current_user.active?
+      redirect_to registration_path
+    end
   end
 
   def authenticate_cache_cooker!

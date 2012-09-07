@@ -12,3 +12,4 @@ config/initializers/cache_cooker_settings.rb
 lib/development_mail_interceptor.rb
 .sass-cache/
 public/assets
+coverage
