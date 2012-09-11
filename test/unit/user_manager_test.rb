@@ -17,7 +17,7 @@ class UserManagerTest < ActiveSupport::TestCase
 
       to_be_disabled_user.reload # Load latest changes from the DB
 
-      assert to_be_disabled_user.account_disabled, "Account not disabled"
+      assert to_be_disabled_user.disabled?, "Account not disabled"
     end
 
     test "deletes users in mail chimp" do

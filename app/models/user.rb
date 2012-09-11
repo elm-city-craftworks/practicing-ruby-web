@@ -16,23 +16,31 @@ class User < ActiveRecord::Base
     %w{active payment_pending}.include? status
   end
 
+  def disabled?
+    status == 'disabled'
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
 
   def disable
-    update_attributes(:account_disabled => true,
-      :notifications_enabled => false)
+    self.notifications_enabled = false
+    self.status                = 'disabled'
+
+    save
   end
 
-  def enable(mailchimp_web_id)
-    update_attributes(:account_disabled      => false,
-                      :notifications_enabled => true,
-                      :mailchimp_web_id      => mailchimp_web_id)
+  def enable(mailchimp_web_id=nil)
+    self.notifications_enabled = true
+    self.mailchimp_web_id      = mailchimp_web_id unless mailchimp_web_id.blank?
+    self.status                = 'active'
+
+    save
   end
 
   def enable_notifications
-    unless account_disabled || notifications_enabled
+    unless disabled? || notifications_enabled
       update_attributes(:notifications_enabled => true)
     end
   end

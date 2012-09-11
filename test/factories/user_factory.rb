@@ -10,5 +10,6 @@ FactoryGirl.define do
     u.email                  { FactoryGirl.generate(:email) }
     u.contact_email          { email }
     u.mailchimp_web_id       { FactoryGirl.generate(:mailchimp_web_id) }
+    u.status                 'active'
   end
 end

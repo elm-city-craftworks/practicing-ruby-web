@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     return unless current_user
 
-    if current_user.account_disabled
+    if current_user.disabled?
       redirect_to problems_sessions_path
     elsif !current_user.active?
       redirect_to registration_path
