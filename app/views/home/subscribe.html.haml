@@ -20,13 +20,15 @@
       an independent publishing effort that is
       100% reader-funded, and 100% reader-focused.
 
+    %p
+      Here is what is going to happen next. Click
+      "Let's get started" and we will redirect you to
+      GitHub for authorization. From there we will ask you
+      to confirm your email, then get us payment information.
 
-    :plain
-      <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-      	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-      	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-        <p id="payment">A subscription costs only $8/month</p>
-      </form>
+    .subscribe
+      = button_to "Let's get started &raquo;".html_safe, registration_path,
+        :method => :get
 
   #right
     = image_tag "preview.png", :id => "preview"

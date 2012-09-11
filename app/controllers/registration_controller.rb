@@ -3,13 +3,14 @@ class RegistrationController < ApplicationController
   # before_filter :ye_shall_not_pass, :except => [:payment]
 
   def index
-    action = case current_user.status
-      when "authorized"           then :edit_profile
-      when "pending_confirmation" then :update_profile
-      when "confirmed"            then :payment
+    path = case current_user.status
+      when "authorized"           then {:action => :edit_profile }
+      when "pending_confirmation" then {:action => :update_profile }
+      when "confirmed"            then {:action => :payment }
+      else library_path
     end
 
-    redirect_to :action => action
+    redirect_to path
   end
 
   def edit_profile
