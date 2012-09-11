@@ -1,11 +1,11 @@
 %nav
   = link_to "Practicing Ruby", root_path, :class => "home"
-  = link_to "Library", library_path
-  / = link_to "FAQ", faq_path
-  = link_to "Contact", contact_path
+  - if (current_user && current_user.active?) || current_user.nil?
+    = link_to "Library", library_path
+    = link_to "Contact", contact_path
   %span.right
     - if current_user
-      = link_to "Settings", edit_user_path(current_user)
+      = link_to "Settings", edit_user_path(current_user) if current_user.active?
       = link_to "Sign out", logout_path
     - else
       = link_to "Subscribe", subscribe_path, :class => "subscribe"

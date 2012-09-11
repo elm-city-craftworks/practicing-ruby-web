@@ -8,8 +8,8 @@ class UserDecorator < ApplicationDecorator
   def icon(size=32)
     image_path = h.image_path("avatar.png")
 
-    unless user.email.blank?
-      hash       = Digest::MD5.hexdigest(user.email.downcase)
+    unless user.contact_email.blank?
+      hash       = Digest::MD5.hexdigest(user.contact_email.downcase)
       default    = CGI.escape("http://#{h.request.host_with_port}#{image_path}")
       image_path = "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=#{default}"
     end
