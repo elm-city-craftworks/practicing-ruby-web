@@ -127,12 +127,12 @@ ActiveRecord::Schema.define(:version => 20120831192230) do
     t.datetime "updated_at"
     t.text     "github_nickname"
     t.boolean  "admin",                 :default => false
-    t.boolean  "notify_conversations",  :default => true,             :null => false
-    t.boolean  "notify_mentions",       :default => true,             :null => false
-    t.boolean  "notify_comment_made",   :default => false,            :null => false
+    t.boolean  "notify_conversations",  :default => true,  :null => false
+    t.boolean  "notify_mentions",       :default => true,  :null => false
+    t.boolean  "notify_comment_made",   :default => false, :null => false
     t.boolean  "beta_tester",           :default => false
     t.boolean  "account_disabled",      :default => false
-    t.boolean  "notifications_enabled", :default => false,            :null => false
+    t.boolean  "notifications_enabled", :default => false, :null => false
     t.string   "status"
     t.string   "contact_email"
     t.string   "access_token"
