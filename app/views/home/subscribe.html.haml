@@ -4,7 +4,7 @@
 #subscribe
   #left
     %p
-      So you've checked out some of our
+      So you've checked out our
       #{link_to "sample articles", sample_articles_path}
       and are ready to join Practicing Ruby?
       That's awesome! Here's what you'll
@@ -21,13 +21,15 @@
       100% reader-funded, and 100% reader-focused.
 
     %p
-      Here is what is going to happen next. Click
-      "Let's get started" and we will redirect you to
-      GitHub for authorization. From there we will ask you
-      to confirm your email, then get us payment information.
+      Click the big red button below to become a
+      subscriber. We'll authorize you via Github,
+      send you a confirmation email, and collect 
+      your payment information. Once
+      that's taken care of, you'll be able to
+      start enjoying Practicing Ruby right away.
 
     .subscribe
-      = button_to "Let's get started &raquo;".html_safe, registration_path,
+      = button_to "Sign me up!".html_safe, registration_path,
         :method => :get
 
   #right
