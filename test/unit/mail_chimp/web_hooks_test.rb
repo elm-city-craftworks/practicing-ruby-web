@@ -16,7 +16,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
            "Invalid process result '#{process_result}'"
   end
 
-  test "creates new users when subscribe requests are made" do
+  test "does nothing when subscribe requests are made" do
     new_user = FactoryGirl.build(:user)
 
     params = user_to_mailchimp_params(new_user, "subscribe")
@@ -27,7 +27,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
 
     user = User.find_by_email(new_user.email)
 
-    assert user, "New subscriber was not created"
+    refute user, "New subscriber was created"
   end
 
   test "activates existing users if they subscribe again" do
