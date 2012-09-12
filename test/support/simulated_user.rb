@@ -2,7 +2,6 @@ module Support
   class SimulatedUser
     def initialize(browser)
       @browser = browser
-      @user    = FactoryGirl.create(:user)
     end
 
     def authenticate(params)
@@ -15,6 +14,8 @@ module Support
       })
 
       browser { visit login_path }
+
+      @user = Authorization.find_by_github_uid(params[:uid]).user
     end
 
     def edit_profile(params={})
@@ -25,10 +26,10 @@ module Support
       end
     end
 
-    # FIXME: Use dynamic routes
     def confirm_email
       mail   = ActionMailer::Base.deliveries.pop
-      base   = "http://practicingruby.com/registration/confirm_email/"
+      base   = Rails.application.routes.url_helpers.
+                 registration_confirmation_path(:secret => "")
 
       secret = mail.body.to_s[/#{base}(\h+)/,1]
 
@@ -39,6 +40,22 @@ module Support
 
     def make_payment
       browser { assert_current_path registration_payment_path }
+    end
+
+    def payment_failure
+      @user.disable
+
+      browser do
+        visit library_path
+        assert_current_path problems_sessions_path
+      end
+    end
+
+    def restart_registration
+      browser do
+        click_link "subscribing"
+        assert_current_path registration_edit_profile_path
+      end
     end
 
     def logout

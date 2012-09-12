@@ -1,6 +1,6 @@
 class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
-  # before_filter :ye_shall_not_pass, :except => [:payment]
+  before_filter :ye_shall_not_pass, :except => [:payment]
 
   def index
     path = case current_user.status
@@ -11,6 +11,13 @@ class RegistrationController < ApplicationController
     end
 
     redirect_to path
+  end
+
+  def restart
+    current_user.status = "authorized"
+    current_user.save
+
+    redirect_to :action => :edit_profile
   end
 
   def edit_profile

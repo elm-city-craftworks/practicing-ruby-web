@@ -32,6 +32,33 @@ class RegistrationTest < ActionDispatch::IntegrationTest
     assert_current_path registration_update_profile_path
   end
 
+  test "payment failure" do
+    user_params = {:nickname => "TestUser", :uid => "12345"}
+
+    simulate do
+      authenticate(user_params)
+      edit_profile(:email => "test@test.com")
+      confirm_email
+      logout
+      authenticate(user_params)
+      payment_failure
+    end
+  end
+
+  test "restarting registration process after payment failure" do
+    user_params = {:nickname => "TestUser", :uid => "12345"}
+
+    simulate do
+      authenticate(user_params)
+      edit_profile(:email => "test@test.com")
+      confirm_email
+      logout
+      authenticate(user_params)
+      payment_failure
+      restart_registration
+    end
+  end
+
   def simulate(&block)
     Support::SimulatedUser.new(self).instance_eval(&block)
   end

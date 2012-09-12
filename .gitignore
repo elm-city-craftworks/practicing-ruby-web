@@ -13,3 +13,4 @@ lib/development_mail_interceptor.rb
 .sass-cache/
 public/assets
 coverage
+.kick
