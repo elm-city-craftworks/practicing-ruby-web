@@ -4,7 +4,7 @@
 #subscribe
   #left
     %p
-      So you've checked out some of our
+      So you've checked out our
       #{link_to "sample articles", sample_articles_path}
       and are ready to join Practicing Ruby?
       That's awesome! Here's what you'll
@@ -20,13 +20,20 @@
       an independent publishing effort that is
       100% reader-funded, and 100% reader-focused.
 
+    #price
+      %p A subscription costs only $8/month
 
-    :plain
-      <form action="http://practicingruby.us2.list-manage1.com/subscribe/post?u=8980fe01915375e99364fcdd0&amp;id=281315c053" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-      	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-      	<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-        <p id="payment">A subscription costs only $8/month</p>
-      </form>
+    %p
+      Click the big red button below to become a
+      subscriber. We'll authorize you via Github,
+      send you a confirmation email, and collect 
+      your payment information. Once
+      that's taken care of, you'll be able to
+      start enjoying Practicing Ruby right away.
+
+    .subscribe
+      = button_to "Sign me up!".html_safe, registration_path,
+        :method => :get
 
   #right
     = image_tag "preview.png", :id => "preview"

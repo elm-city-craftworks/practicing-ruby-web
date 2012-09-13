@@ -4,7 +4,6 @@ PracticingRubyWeb::Application.routes.draw do
   match "/hooks/#{MailChimp::SETTINGS[:webhook_key]}" => 'hooks#receive'
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
-  match '/new_subscription'        => 'home#new_subscription'
 
   match "/library" => 'home#library'
   match "/volume/:volume/" => 'articles#index'
@@ -36,6 +35,16 @@ PracticingRubyWeb::Application.routes.draw do
     collection do
       post 'parse'
     end
+  end
+
+  scope "/registration", :as => 'registration' do
+    get   '/'                     => 'registration#index'
+    get   'edit_profile'          => 'registration#edit_profile'
+    match 'update_profile'        => 'registration#update_profile'
+    get   'confirm_email/:secret' => 'registration#confirm_email',
+      :as => 'confirmation'
+    get   'payment'               => 'registration#payment'
+    get   'restart'               => 'registration#restart'
   end
 
   match '/sessions/link/:secret' => 'sessions#link'

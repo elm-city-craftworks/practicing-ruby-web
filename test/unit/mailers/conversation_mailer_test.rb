@@ -13,8 +13,8 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       message = ActionMailer::Base.deliveries.first
 
-      assert message.bcc.include?(comment.user.email)
-      refute message.bcc.include?(no_email.email)
+      assert message.bcc.include?(comment.user.contact_email)
+      refute message.bcc.include?(no_email.contact_email)
     end
 
     test "comment emails include a link back to article comments" do
@@ -72,8 +72,8 @@ class ConversationMailerTest < ActionMailer::TestCase
                                          :user        => dont_notify_user,
                                          :commentable => first_comment.commentable)
 
-      refute ActionMailer::Base.deliveries.first.bcc.include?(dont_notify_user.email)
-      assert ActionMailer::Base.deliveries.first.bcc.include?(user.email)
+      refute ActionMailer::Base.deliveries.first.bcc.include?(dont_notify_user.contact_email)
+      assert ActionMailer::Base.deliveries.first.bcc.include?(user.contact_email)
     end
 
     test "emails are sent to mentioned users" do
@@ -93,9 +93,9 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       mentioned_email = ActionMailer::Base.deliveries.first
 
-      assert mentioned_email.bcc.include?(mentioned_user.email)
-      refute mentioned_email.bcc.include?(user.email)
-      refute mentioned_email.bcc.include?(dont_notify_user.email)
+      assert mentioned_email.bcc.include?(mentioned_user.contact_email)
+      refute mentioned_email.bcc.include?(user.contact_email)
+      refute mentioned_email.bcc.include?(dont_notify_user.contact_email)
     end
 
   end

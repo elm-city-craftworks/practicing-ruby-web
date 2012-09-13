@@ -49,6 +49,7 @@ group :test do
   gem 'database_cleaner'
   gem 'test_notifier', '~> 1.0.0'
   gem 'turn', '~> 0.9.5'
+  gem 'simplecov', :require => false
 end
 
 group :production do
