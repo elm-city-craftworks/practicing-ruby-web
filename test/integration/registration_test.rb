@@ -33,29 +33,30 @@ class RegistrationTest < ActionDispatch::IntegrationTest
   end
 
   test "payment failure" do
-    user_params = {:nickname => "TestUser", :uid => "12345"}
+    user_params = {
+      :nickname => "TestUser",
+      :uid      => "12345",
+      :email    => "test@test.com"
+    }
 
     simulate do
-      authenticate(user_params)
-      edit_profile(:email => "test@test.com")
-      confirm_email
-      logout
-      authenticate(user_params)
+      register(user_params)
       payment_failure
     end
   end
 
   test "restarting registration process after payment failure" do
-    user_params = {:nickname => "TestUser", :uid => "12345"}
+    user_params = {
+      :nickname => "TestUser",
+      :uid      => "12345",
+      :email    => "test@test.com"
+    }
 
     simulate do
-      authenticate(user_params)
-      edit_profile(:email => "test@test.com")
-      confirm_email
-      logout
-      authenticate(user_params)
+      register(user_params)
       payment_failure
       restart_registration
+      register(user_params)
     end
   end
 

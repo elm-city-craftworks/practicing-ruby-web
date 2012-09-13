@@ -18,6 +18,13 @@ module Support
       @user = Authorization.find_by_github_uid(params[:uid]).user
     end
 
+    def register(params)
+      authenticate(params)
+      edit_profile(params)
+      confirm_email
+      make_payment
+    end
+
     def edit_profile(params={})
       browser do
         visit registration_edit_profile_path
