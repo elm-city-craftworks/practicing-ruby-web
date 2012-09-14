@@ -60,6 +60,7 @@ PracticingRubyWeb::Application.routes.draw do
   namespace :admin do
     resources :announcements
     resources :articles
+    resources :broadcasts
   end
 
 end
