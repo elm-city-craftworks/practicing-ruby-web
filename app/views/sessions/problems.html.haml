@@ -8,9 +8,10 @@
   accidentally unsubscribed yourself from MailChimp.
 
 %p
-  I can definitely help you sort this out.
-  Just email #{mail_to "support@elmcitycraftworks.org", nil, :subject => "HELP! #{current_user.try(:github_nickname) || 'I'} encountered a problem with Practicing Ruby"}
-  and I will look into the problem as soon as I can.
+  To to fix this, you can try
+  #{link_to "subscribing", registration_restart_path} through our website
+  or email #{mail_to "support@elmcitycraftworks.org"} and we will get your
+  account all fixed up.
 
 %p
   While you are waiting for me to get back to you, you might want

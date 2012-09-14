@@ -39,7 +39,7 @@ class ConversationMailer < ActionMailer::Base
 
   def batch(users)
     users.to_notify.find_in_batches(:batch_size => 25) do |group|
-      yield group.map(&:email)
+      yield group.map(&:contact_email)
     end
   end
 end

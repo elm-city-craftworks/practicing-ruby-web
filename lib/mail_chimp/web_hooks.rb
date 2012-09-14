@@ -31,10 +31,7 @@ module MailChimp
       if user = find_user
         user.enable(params[:data][:web_id])
       else
-        User.create(:first_name       => params[:data][:merges][:FNAME],
-                    :last_name        => params[:data][:merges][:LNAME],
-                    :email            => params[:data][:email],
-                    :mailchimp_web_id => params[:data][:web_id])
+        # Don't create a user based on MailChimp's request.
       end
     end
 

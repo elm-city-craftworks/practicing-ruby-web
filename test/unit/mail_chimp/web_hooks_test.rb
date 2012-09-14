@@ -16,7 +16,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
            "Invalid process result '#{process_result}'"
   end
 
-  test "creates new users when subscribe requests are made" do
+  test "does nothing when subscribe requests are made" do
     new_user = FactoryGirl.build(:user)
 
     params = user_to_mailchimp_params(new_user, "subscribe")
@@ -27,15 +27,15 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
 
     user = User.find_by_email(new_user.email)
 
-    assert user, "New subscriber was not created"
+    refute user, "New subscriber was created"
   end
 
   test "activates existing users if they subscribe again" do
-    user = FactoryGirl.create(:user, :account_disabled => true)
+    user = FactoryGirl.create(:user, :status => 'disabled')
 
     params = user_to_mailchimp_params(user, "subscribe")
 
-    assert user.account_disabled, "User account is already active"
+    assert user.disabled?, "User account is already active"
 
     web_hook = MailChimp::WebHooks.new(params)
 
@@ -43,7 +43,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
 
     user.reload # Load latest changes from DB
 
-    refute user.account_disabled, "User account was not enabled"
+    refute user.disabled?, "User account was not enabled"
   end
 
   test "unsubscribed users accounts are disabled" do
@@ -59,7 +59,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
 
     user.reload # Load latest changes from DB
 
-    assert user.account_disabled, "User account was not disabled"
+    assert user.disabled?, "User account was not disabled"
   end
 
   test "delete users don't throw errors when being unsubscribed" do
@@ -126,7 +126,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
     params = user_to_mailchimp_params(user, "profile")
 
     params[:data].delete(:web_id)
-    params[:data][:email] = params[:data][:email].swapcase 
+    params[:data][:email] = params[:data][:email].swapcase
 
     web_hook = MailChimp::WebHooks.new(params)
     assert_equal web_hook.find_user, user

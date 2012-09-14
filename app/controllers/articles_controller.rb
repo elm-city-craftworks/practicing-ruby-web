@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_filter :create_visit, :only => [:show]
 
   skip_before_filter :authenticate,      :only => [:shared, :index, :samples]
-  skip_before_filter :authenticate_user, :only => [:shared, :index, :samples]
+  skip_before_filter :authenticate_user, :only => [:shared, :samples]
 
   def index
     if params[:volume]
