@@ -8,5 +8,7 @@ namespace :admin do
     User.select("status, count(*) as user_count").group("status").each do |g|
       puts "- #{g.status}: #{g.user_count}"
     end
+
+    puts "Total: #{User.count}"
   end
 end
