@@ -3,6 +3,10 @@
 
 = form_tag admin_broadcasts_path, :class => "broadcast-mailer" do
   %p
+    = label_tag :to, "To (for testing only)"
+    = text_field_tag :to, params[:to] || "support@elmcitycraftworks.com"
+
+  %p
     = label_tag :subject
     = text_field_tag :subject, params[:subject]
   %p
@@ -10,7 +14,11 @@
     %br
     = text_area_tag :body, params[:body], :cols => 72
 
-  %p= submit_tag "Send"
+  %p
+    = submit_tag "Send",
+      :data => {:confirm => "Are you sure you want to send this to all users?" }
+    or
+    = submit_tag "Test"
 
 - content_for :header_bottom do
   :javascript

@@ -12,7 +12,7 @@ class BroadcastMailerTest < ActionDispatch::IntegrationTest
     subject = "Weekly Update 1.5"
     body    = 100.times.map { "Long body content is long" }.join
 
-    send_message subject, body
+    send_message :subject => subject, :body => body
 
     message = ActionMailer::Base.deliveries.first
 
@@ -35,14 +35,24 @@ class BroadcastMailerTest < ActionDispatch::IntegrationTest
            "User was sent a broadcast message and their notfications are disabled"
   end
 
+  test "sending test copies" do
+    send_message(:to => "support@elmcitycraftworks.com", :button => "Test")
+
+    message = ActionMailer::Base.deliveries.first
+
+    assert_equal ["support@elmcitycraftworks.com"], message.bcc
+  end
+
   private
 
-  def send_message(subject="Subject", body="Body")
+  def send_message(options = {})
     visit new_admin_broadcast_path
 
-    fill_in 'Subject', :with => subject
-    fill_in 'Body',    :with => body
+    fill_in 'to',      :with => options[:to] if options[:to]
 
-    click_button "Send"
+    fill_in 'Subject', :with => options[:subject] || "Subject"
+    fill_in 'Body',    :with => options[:body]    || "Body"
+
+    click_button options[:button] || "Send"
   end
 end

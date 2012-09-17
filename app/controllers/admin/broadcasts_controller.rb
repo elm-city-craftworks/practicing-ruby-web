@@ -8,13 +8,14 @@ module Admin
 
     def create
       if params[:subject].blank? || params[:body].blank?
-        flash[:notice] = "Subject and body are required"
-        render :new
-      else
-        BroadcastMailer.deliver_broadcast(params)
-        flash[:notice] = "Message sent"
-        redirect_to :action => :new
+        flash[:error] = "Subject and body are required"
+        render(:new) && return
       end
+
+      BroadcastMailer.deliver_broadcast(params)
+      flash[:notice] = "Message sent"
+      redirect_to :action => :new
+
     end
   end
 end
