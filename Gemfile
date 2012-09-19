@@ -17,7 +17,7 @@ gem 'haml'
 gem 'coffee-filter', '~> 0.1.1'
 gem 'jquery-rails'
 gem 'draper'
-gem 'rack-pjax'
+gem 'rack-pjax', '~> 0.6.0'
 
 gem 'httparty'
 
