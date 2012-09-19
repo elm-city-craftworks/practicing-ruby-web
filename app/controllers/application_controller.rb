@@ -66,4 +66,8 @@ class ApplicationController < ActionController::Base
   def enable_notifications
     current_user.try(:enable_notifications)
   end
+  
+  def render_http_error(status)
+    render :file => "public/#{status}", :layout => false, :status => status
+  end
 end

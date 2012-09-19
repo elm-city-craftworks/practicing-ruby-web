@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     end
 
     unless @group.model
-      raise ActionController::RoutingError.new('Not Found')
+      render_http_error 404
     else
       @collections = CollectionDecorator.decorate(Collection.order("position"))
       @volumes     = VolumeDecorator.decorate(Volume.order("number"))
@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
     @share = SharedArticle.find_by_secret(params[:secret])
 
     unless @share
-      raise ActionController::RoutingError.new('Not Found')
+      render_http_error 404
     else
       @share.viewed unless current_user
       @user    = UserDecorator.decorate(@share.user)
@@ -78,8 +78,10 @@ class ArticlesController < ApplicationController
     if params[:volume] && params[:issue]
       @article = Article.find_by_issue_number("#{params[:volume]}.#{params[:issue]}")
     else
-      @article = Article.find(params[:id])
+      @article = Article.find_by_id(params[:id])
     end
+
+    render_http_error(404) unless @article
   end
 
   def decorate_article
