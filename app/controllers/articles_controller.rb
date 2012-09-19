@@ -14,8 +14,8 @@ class ArticlesController < ApplicationController
       return redirect_to library_path
     end
 
-    unless @group
-      return render :text => "Article listing not found!", :status => 404
+    unless @group.model
+      raise ActionController::RoutingError.new('Not Found')
     else
       @collections = CollectionDecorator.decorate(Collection.order("position"))
       @volumes     = VolumeDecorator.decorate(Volume.order("number"))
@@ -52,8 +52,7 @@ class ArticlesController < ApplicationController
     @share = SharedArticle.find_by_secret(params[:secret])
 
     unless @share
-      # TODO Something a little classier here
-      return render :text => "Article not found!", :status => 404
+      raise ActionController::RoutingError.new('Not Found')
     else
       @share.viewed unless current_user
       @user    = UserDecorator.decorate(@share.user)
