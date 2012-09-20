@@ -1,8 +1,22 @@
 - content_for(:header) { "Payment" }
 - content_for(:title) { "Payment" }
+- content_for :header_bottom do
+  = javascript_include_tag "https://js.stripe.com/v1/"
+  :coffeescript
+    $ -> new PR.PaymentProcessor('#{STRIPE_PUBLISHABLE_KEY}');
 
-%p Right now Practicing Ruby is transitioning payment providers. So what does that mean for you?
+.payment-errors
 
-%p Until we are ready to make the switch, you get access to the full site free of charge. Once we start accepting payments again, we'll ask you to enter your payment information to continue using the service, but you won't be charged for accessing our content between now and then. Not a bad deal, right?
-
-%p Your account is now set up, which means that you can enjoy everything that Practicing Ruby has to offer. You can start by #{link_to 'browsing through our library', library_path} or reading a #{link_to 'randomly selected article', random_article_path}. If you have any questions, please send an email to #{link_to 'gregory@practicingruby.com', 'mailto:gregory@practicingruby.com'}.
+= form_tag registration_create_payment_path, :id => "payment-form" do
+  .row
+    %label Card Number
+    %input.card-number{type: "text", size: 20, autocomplete: "off"}
+  .row
+    %label CVC
+    %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
+  .row
+    %label Expiration (MM/YYYY)
+    %input.card-expiry-month{type: "text", size: 2}
+    %span /
+    %input.card-expiry-year{type: "text", size: 4}
+  = submit_tag "Submit Payment", :class => "submit-button"

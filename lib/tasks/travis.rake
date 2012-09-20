@@ -6,16 +6,13 @@ namespace :travis do
 
     # Move configuration files into place
     #
-    initializers = Rails.root.join("config", "initializers")
+    initializer_dir = Rails.root.join("config", "initializers")
+    initializers    = %w{mailchimp_settings omniauth secret_token stripe}
 
-    FileUtils.cp initializers + "mailchimp_settings.rb.example",
-                 initializers + "mailchimp_settings.rb"
-
-    FileUtils.cp initializers + "omniauth.rb.example",
-                 initializers + "omniauth.rb"
-
-    FileUtils.cp initializers + "secret_token.rb.example",
-                 initializers + "secret_token.rb"
+    initializers.each do |initializer|
+      FileUtils.cp initializer_dir + "#{initializer}.rb.example",
+                   initializer_dir + "#{initializer}.rb"
+    end
 
     # Setup our database.yml file
     #

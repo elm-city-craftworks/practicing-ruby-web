@@ -44,6 +44,7 @@ PracticingRubyWeb::Application.routes.draw do
     get   'confirm_email/:secret' => 'registration#confirm_email',
       :as => 'confirmation'
     get   'payment'               => 'registration#payment'
+    post  'create_payment'        => 'registration#create_payment'
     get   'restart'               => 'registration#restart'
   end
 

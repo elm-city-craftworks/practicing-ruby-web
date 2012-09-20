@@ -54,7 +54,28 @@ class RegistrationController < ApplicationController
   end
 
   def payment
-    # TODO fancy payment stuffs
+
+  end
+
+  def create_payment
+    # TODO Push all of this down to the model layer
+
+    Stripe.api_key = STRIPE_SECRET_KEY
+
+    # get the credit card details submitted by the form
+    token = params[:stripeToken]
+
+    # create a Customer
+    customer = Stripe::Customer.create(
+      :card        => token,
+      :description => current_user.github_nickname
+    )
+
+    subscription = customer.update_subscription(
+      :plan => "practicing-ruby-monthly"
+    )
+
+    render :text => [customer, subscription].inspect
   end
 
   private
