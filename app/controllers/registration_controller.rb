@@ -1,12 +1,13 @@
 class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
-  before_filter :ye_shall_not_pass, :except => [:payment]
+  before_filter :ye_shall_not_pass, :except => [ :payment, :payment_pending,
+                                                 :create_payment, :complete ]
 
   def index
     path = case current_user.status
       when "authorized"           then {:action => :edit_profile }
       when "pending_confirmation" then {:action => :update_profile }
-      when "confirmed"            then {:action => :payment }
+      when "confirmed"            then {:action => :payment_pending }
       else library_path
     end
 
@@ -49,12 +50,35 @@ class RegistrationController < ApplicationController
       # TODO swtich this to confirmed one we are doing payment processing
       user.update_attribute(:status, "payment_pending")
 
-      return redirect_to(:action => :payment)
+      return redirect_to(:action => :payment_pending)
     end
   end
 
+  def payment_pending
+
+  end
+
   def payment
-    # TODO fancy payment stuffs
+    redirect_to(:action => :complete) unless current_user.status == "payment_pending"
+  end
+
+  def create_payment
+    payment_gateway = current_user.payment_gateway
+    payment_gateway.subscribe(params)
+
+    redirect_to :action => :complete
+  end
+
+  def complete
+
+  end
+
+  def coupon_valid
+    payment_gateway = current_user.payment_gateway
+
+    valid = payment_gateway.coupon_valid?(params[:coupon])
+
+    render :json => { :coupon_valid => valid }.to_json
   end
 
   private

@@ -44,13 +44,17 @@ PracticingRubyWeb::Application.routes.draw do
     get   'confirm_email/:secret' => 'registration#confirm_email',
       :as => 'confirmation'
     get   'payment'               => 'registration#payment'
+    get   'payment_pending'       => 'registration#payment_pending'
+    post  'create_payment'        => 'registration#create_payment'
+    get   'complete'              => 'registration#complete'
     get   'restart'               => 'registration#restart'
+    get   'coupon_valid'          => 'registration#coupon_valid'
   end
 
   match '/sessions/link/:secret' => 'sessions#link'
-  match '/auth/github/callback' => 'sessions#create'
-  match '/logout' => 'sessions#destroy', :as => 'logout'
-  match '/auth/github', :as => 'login'
+  match '/auth/github/callback'  => 'sessions#create'
+  match '/logout'                => 'sessions#destroy', :as => 'logout'
+  match '/login'                 => 'sessions#new',     :as => 'login'
 
   match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 

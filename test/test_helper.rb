@@ -41,3 +41,7 @@ class ActionDispatch::IntegrationTest
   end
 end
 
+def skip_on_travis
+  skip "Do not run this test on travis ci" if ENV["TRAVIS"]
+end
+

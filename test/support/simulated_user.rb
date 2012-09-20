@@ -32,6 +32,7 @@ module Support
       create_profile(params)
       confirm_email
       make_payment
+      read_article
     end
 
     def create_profile(params={})
@@ -43,6 +44,8 @@ module Support
     end
 
     def confirm_email
+      browser { assert_current_path registration_update_profile_path }
+
       mail   = ActionMailer::Base.deliveries.pop
       base   = Rails.application.routes.url_helpers.
                  registration_confirmation_path(:secret => "")
@@ -55,7 +58,57 @@ module Support
     end
 
     def make_payment
-      browser { assert_current_path registration_payment_path }
+      browser do
+        assert_current_path registration_payment_pending_path
+      end
+
+      # TODO Find a way to test this through the UI
+      #
+      @user.subscriptions.create(:start_date => Date.today)
+    end
+
+    def read_article
+      article = FactoryGirl.create(:article)
+
+      browser do
+        visit article_path(article)
+        assert_current_path article_path(article)
+      end
+
+      @browser.assert @user.subscriptions.active, "No active subscription"
+    end
+
+    def make_stripe_payment(params={})
+      @user.subscriptions.delete_all
+
+      browser do
+        skip_on_travis
+
+        Capybara.default_wait_time = 15
+
+        visit registration_payment_path
+
+        card  = find(:css, "input.card-number")
+        cvc   = find(:css, "input.card-cvc")
+        month = find(:css, "select.card-expiry-month")
+        year  = find(:css, "select.card-expiry-year")
+
+        card.set  "4242424242424242"
+        cvc.set   "123"
+        month.set "January"
+        year.set  Date.today.year + 1
+
+        fill_in "Coupon", :with => params.fetch(:coupon, "")
+
+        click_button "Submit Payment"
+
+        wait_until { current_path == registration_complete_path }
+
+        assert_content "Thanks for subscribing"
+
+        visit library_path
+        assert_current_path library_path
+      end
     end
 
     def payment_failure
@@ -82,6 +135,8 @@ module Support
         visit library_path
         assert_current_path problems_sessions_path
       end
+
+      @browser.refute @user.subscriptions.active, "Subscription was not ended"
     end
 
     def restart_registration

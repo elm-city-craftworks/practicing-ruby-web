@@ -63,7 +63,7 @@ module Support
     end
 
     def sign_user_in
-      visit "/auth/github"
+      visit login_path
     end
 
     def sign_out

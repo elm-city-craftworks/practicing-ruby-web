@@ -1,8 +1,43 @@
 - content_for(:header) { "Payment" }
 - content_for(:title) { "Payment" }
+- content_for :header_bottom do
+  = javascript_include_tag "https://js.stripe.com/v1/"
+  :coffeescript
+    $ -> new PR.PaymentProcessor('#{STRIPE_PUBLISHABLE_KEY}');
 
-%p Right now Practicing Ruby is transitioning payment providers. So what does that mean for you?
+%h3 You are so close. Just one last step.
 
-%p Until we are ready to make the switch, you get access to the full site free of charge. Once we start accepting payments again, we'll ask you to enter your payment information to continue using the service, but you won't be charged for accessing our content between now and then. Not a bad deal, right?
+%p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
 
-%p Your account is now set up, which means that you can enjoy everything that Practicing Ruby has to offer. You can start by #{link_to 'browsing through our library', library_path} or reading a #{link_to 'randomly selected article', random_article_path}. If you have any questions, please send an email to #{link_to 'gregory@practicingruby.com', 'mailto:gregory@practicingruby.com'}.
+.payment-errors= @errors
+
+= form_tag registration_create_payment_path, :id => "payment-form" do
+  .row
+    %label Card Number
+    %input.card-number{type: "text", size: 20, autocomplete: "off"}
+  .row
+    %label
+      CVC
+      %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
+    %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
+  .row
+    %label Card Expiration
+    = select_month nil, { add_month_numbers: true },
+      { name: nil, id: nil, class: "card-expiry-month" }
+    = select_year nil,
+      { start_year: Date.today.year, end_year: Date.today.year+15},
+      { name: nil, id: nil, class: "card-expiry-year"}
+
+  .row
+    = label_tag :coupon, "Coupon Code"
+    = text_field_tag :coupon, params[:coupon]
+  %hr
+  %p
+    = submit_tag "Submit Payment", :class => "submit-button"
+    %span#processing-spinner
+
+#cvc-help
+  %p
+    For added security, we verify your CVC, CVV, or CID code. This code isn't
+    stored and is checked before processing your payment.
+  %p= image_tag "payment/cvc.gif"

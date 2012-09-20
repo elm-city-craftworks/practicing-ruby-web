@@ -37,7 +37,7 @@
 
 #facebox .close{
   position:absolute;
-  top:5px;
+  top:-3px;
   right:5px;
   padding:2px;
 /*  background:#fff;*/
