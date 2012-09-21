@@ -62,6 +62,7 @@ PracticingRubyWeb::Application.routes.draw do
     resources :announcements
     resources :articles
     resources :broadcasts
+    resources :reports, :only => [:index]
   end
 
 end
