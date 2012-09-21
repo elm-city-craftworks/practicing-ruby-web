@@ -1,0 +1,17 @@
+- content_for(:header) { "Reports" }
+- content_for(:title)  { "Reports" }
+
+%h3 Subscribers by status
+
+%table#reports
+  %tr
+    %th Status
+    %th Users
+  - @statuses.each do |status|
+    %tr
+      %td= status.status.humanize
+      %td.num= status.user_count
+  %tr
+    %th Total
+    %th.num= @total_users
+
