@@ -68,6 +68,6 @@ class ApplicationController < ActionController::Base
   end
   
   def render_http_error(status)
-    render :file => "public/#{status}", :layout => false, :status => status
+    render :file => "public/#{status}.html", :layout => false, :status => status
   end
 end
