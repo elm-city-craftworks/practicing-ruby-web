@@ -5,8 +5,6 @@ class Article < ActiveRecord::Base
 
   validates_presence_of :issue_number
 
-  delegate :body, :to => :document
-
   def self.in_volume(number)
     includes(:volume)
       .where("volumes.number = ?", number)
@@ -32,18 +30,7 @@ class Article < ActiveRecord::Base
     (published_time || created_at).strftime('%Y.%m.%d')
   end
   
-  private
-
-  def document
-    volume, issue, part = issue_number.split(".")
-    
-    identifier = "v#{volume}/#{issue.rjust(3, '0')}"
-    identifier << ".#{part}" if part
-
-
-    filename = Dir.glob(Rails.root + "app/documents/#{identifier}*.md").first
-
-
-    Struct.new(:body).new(MdPreview::Parser.parse(File.read(filename)))
+  def body
+    Document.from_issue_number(issue_number).body
   end
 end
