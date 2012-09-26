@@ -6,6 +6,7 @@ class RegistrationController < ApplicationController
     path = case current_user.status
       when "authorized"           then {:action => :edit_profile }
       when "pending_confirmation" then {:action => :update_profile }
+      # TODO Redirect to payment_pending page
       when "confirmed"            then {:action => :payment }
       else library_path
     end
@@ -55,16 +56,18 @@ class RegistrationController < ApplicationController
       # TODO swtich this to confirmed one we are doing payment processing
       user.update_attribute(:status, "payment_pending")
 
+      # TODO Redirect to payment_pending page
       return redirect_to(:action => :payment)
     end
   end
 
   def payment
-
+    # TODO Show MailChimp message
   end
 
   def create_payment
     # TODO Push all of this down to the model layer
+    # TODO Cancel MailChimp Accounts
 
     Stripe.api_key = STRIPE_SECRET_KEY
 
