@@ -1,20 +1,26 @@
 class User < ActiveRecord::Base
+  STATUSES        = %w{authorized pending_confirmation confirmed payment_pending
+                       active disabled}
+  ACTIVE_STATUSES = %w{active payment_pending}
+
   has_many :comments
 
   validates_presence_of   :contact_email, :on => :update
   validates_uniqueness_of :contact_email, :on => :update, :allow_blank => true
+  validates :status,      :inclusion => {
+    :in => STATUSES, :message => "%{value} is not a valid status" }
 
   attr_protected :admin, :status
 
   scope :to_notify, where(notifications_enabled: true,
-    :status => %w{active payment_pending confirmed})
+    :status => ACTIVE_STATUSES)
 
   before_save do
     write_attribute(:email, email.downcase) if changed.include?("email")
   end
 
   def active?
-    %w{active payment_pending}.include? status
+    ACTIVE_STATUSES.include? status
   end
 
   def disabled?
