@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   ACTIVE_STATUSES = %w{active payment_pending}
 
   has_many :comments
+  has_many :subscriptions
+  has_many :payment_logs
 
   validates_presence_of   :contact_email, :on => :update
   validates_uniqueness_of :contact_email, :on => :update, :allow_blank => true
@@ -39,9 +41,15 @@ class User < ActiveRecord::Base
   end
 
   def enable(mailchimp_web_id=nil)
-    self.notifications_enabled = true
-    self.mailchimp_web_id      = mailchimp_web_id unless mailchimp_web_id.blank?
+
+    # TODO Move this to PaymentGateway
+    unless mailchimp_web_id.blank?
+      self.payment_provider_id = mailchimp_web_id
+      self.payment_provider    = "mailchimp"
+    end
+
     self.status                = 'active'
+    self.notifications_enabled = true
 
     save
   end

@@ -138,7 +138,7 @@ class MailChimpWebHooksTest < ActiveSupport::TestCase
     { :type => request_type,
       :data => {
         :email  => user.email,
-        :web_id => user.mailchimp_web_id,
+        :web_id => user.payment_provider_id,
         :merges => {
           :FNAME => user.first_name,
           :LNAME => user.last_name
