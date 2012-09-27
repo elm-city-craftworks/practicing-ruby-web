@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
 
   attr_protected :admin, :status
 
-  scope :to_notify, where(notifications_enabled: true)
+  scope :to_notify, where(notifications_enabled: true,
+    :status => %w{active payment_pending confirmed})
 
   before_save do
     write_attribute(:email, email.downcase) if changed.include?("email")
