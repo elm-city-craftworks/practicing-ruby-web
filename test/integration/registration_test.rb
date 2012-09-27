@@ -19,6 +19,17 @@ class RegistrationTest < ActionDispatch::IntegrationTest
     assert_content "Contact email can't be blank"
   end
 
+  test "failed registration due to invalid email" do
+    skip "Since tests don't push to MailHopper, I'm not sure how to reproduce this error"
+
+    simulate do
+      authenticate(:nickname => "TestUser", :uid => "12345")
+      edit_profile(:email => "Jordan dot Byron at Gmail dot com")
+    end
+
+    assert_content "Contact email doesn't appear to be valid"
+  end
+
   test "leaving registration process midstream" do
     user_params = {:nickname => "TestUser", :uid => "12345"}
 
