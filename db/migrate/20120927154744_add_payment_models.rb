@@ -27,8 +27,8 @@ class AddPaymentModels < ActiveRecord::Migration
   end
 
   def down
-    drop_table :subscription
-    drop_table :payment_log
+    drop_table :subscriptions
+    drop_table :payment_logs
 
     add_column :users, :mailchimp_web_id, :text
 
