@@ -8,7 +8,7 @@ FactoryGirl.define do
     u.github_nickname       'frankpepelio'
     u.notifications_enabled  true
     u.email                  { FactoryGirl.generate(:email) }
-    u.contact_email          { FactoryGirl.generate(:mailchimp_web_id) }
+    u.contact_email          { FactoryGirl.generate(:email) }
     u.mailchimp_web_id       { FactoryGirl.generate(:mailchimp_web_id) }
     u.status                 'active'
   end
