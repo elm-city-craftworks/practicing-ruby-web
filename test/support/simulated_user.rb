@@ -1,5 +1,14 @@
 module Support
   class SimulatedUser
+
+    def self.default
+      {
+        :nickname => "TestUser",
+        :uid      => "12345",
+        :email    => "test@test.com"
+      }
+    end
+
     def initialize(browser)
       @browser = browser
     end
@@ -20,12 +29,12 @@ module Support
 
     def register(params)
       authenticate(params)
-      edit_profile(params)
+      create_profile(params)
       confirm_email
       make_payment
     end
 
-    def edit_profile(params={})
+    def create_profile(params={})
       browser do
         visit registration_edit_profile_path
         fill_in "Email:", :with => params.fetch(:email, "")
@@ -62,6 +71,14 @@ module Support
       browser do
         click_link "subscribing"
         assert_current_path registration_edit_profile_path
+      end
+    end
+
+    def edit_profile(params={})
+      browser do
+        click_link "Settings"
+        fill_in "Email:", :with => params.fetch(:email, "")
+        click_button "Update Settings"
       end
     end
 

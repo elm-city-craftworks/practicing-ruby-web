@@ -32,13 +32,7 @@ class RegistrationController < ApplicationController
       if @user.update_attributes(params[:user])
         @user.create_access_token
 
-        begin
-          RegistrationMailer.email_confirmation(@user).deliver
-        rescue NoMethodError
-          @user.update_attribute(:contact_email, nil)
-          @user.errors.add(:contact_email, "doesn't appear to be valid.")
-          render(:edit_profile) && return
-        end
+        RegistrationMailer.email_confirmation(@user).deliver
 
         @user.update_attribute(:status, "pending_confirmation")
       else
