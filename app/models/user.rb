@@ -5,10 +5,16 @@ class User < ActiveRecord::Base
 
   has_many :comments
 
-  validates_presence_of   :contact_email, :on => :update
-  validates_uniqueness_of :contact_email, :on => :update, :allow_blank => true
+  validates_uniqueness_of :contact_email, :on => :update
   validates :status,      :inclusion => {
     :in => STATUSES, :message => "%{value} is not a valid status" }
+
+  # Email sanity check from Rails Docs
+  # http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#M000087
+  #
+  validates_format_of     :contact_email,
+    :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+    :on   => :update
 
   attr_protected :admin, :status
 
