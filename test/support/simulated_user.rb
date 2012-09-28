@@ -67,6 +67,18 @@ module Support
       end
     end
 
+    def cancel_account
+      browser do
+        click_link     "Settings"
+        click_link     "Cancel my account"
+
+        assert_content "Sorry to see you go"
+
+        visit library_path
+        assert_current_path problems_sessions_path
+      end
+    end
+
     def restart_registration
       browser do
         click_link "subscribing"

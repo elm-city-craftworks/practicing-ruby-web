@@ -3,18 +3,19 @@
 .field
   = f.label :contact_email, "Email:"
   = f.text_field :contact_email
-%p
-  = f.check_box :notify_updates
-  = f.label :notify_updates, "Notify me about content and website updates"
-%p
-  = f.check_box :notify_conversations
-  = f.label :notify_conversations, "Notify me when conversations start"
-%p
-  = f.check_box :notify_mentions
-  = f.label :notify_mentions, "Notify me when I am mentioned in a conversation"
-%p
-  = f.check_box :notify_comment_made
-  = f.label :notify_comment_made, "Notify me every time a comment is made"
-%p
-  = f.check_box :beta_tester
-  = f.label :beta_tester, "Give me early access to experimental website features"
+.field
+  %p
+    = f.check_box :notify_updates
+    = f.label :notify_updates, "Notify me about content and website updates"
+  %p
+    = f.check_box :notify_conversations
+    = f.label :notify_conversations, "Notify me when conversations start"
+  %p
+    = f.check_box :notify_mentions
+    = f.label :notify_mentions, "Notify me when I am mentioned in a conversation"
+  %p
+    = f.check_box :notify_comment_made
+    = f.label :notify_comment_made, "Notify me every time a comment is made"
+  %p
+    = f.check_box :beta_tester
+    = f.label :beta_tester, "Give me early access to experimental website features"

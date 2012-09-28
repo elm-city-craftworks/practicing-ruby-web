@@ -74,5 +74,9 @@ module Support
       scope = '#' << ActionController::RecordIdentifier.dom_id(scope, prefix) if scope.is_a?(ActiveRecord::Base)
       super(scope)
     end
+
+    def simulated_user(&block)
+      Support::SimulatedUser.new(self).instance_eval(&block)
+    end
   end
 end
