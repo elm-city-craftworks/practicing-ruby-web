@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_filter      :find_user,         :except => :show
-  skip_before_filter :authenticate_user, :only   => :destroy
+  before_filter :find_user, :except => :show
 
   def show
     @user = User.find_by_github_nickname(params[:id])
@@ -25,15 +24,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    # TODO Send unsubscribe email
-    # TODO Update payment provider
-
-    @user.disable
-
-    delete_mailchimp_account
-  end
-
   private
 
   def find_user
@@ -45,10 +35,5 @@ class UsersController < ApplicationController
       beta_tester contact_email notify_updates}
 
     params[:user].select {|k,_| approved_params.include? k }
-  end
-
-  def delete_mailchimp_account
-    return if @user.mailchimp_web_id.blank?
-    UserManager.delay.delete_user!(@user.email)
   end
 end

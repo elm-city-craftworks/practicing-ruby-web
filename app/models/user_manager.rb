@@ -1,25 +1,15 @@
 class UserManager
   attr_reader :client, :list_id
 
-  def self.delete_user!(email)
-    new.delete_user!(email)
-  rescue => e
-    raise unless e.message[/is not subscribed/]
-  end
-
   def initialize
     @client  = Hominid::API.new(MailChimp::SETTINGS[:api_key])
     @list_id = MailChimp::SETTINGS[:list_id]
   end
 
   def delete_user(email)
-    delete_user!(email)
+    client.list_unsubscribe(list_id, email, true)
 
     UnsubscribeMailer.unsubscribed(email)
-  end
-
-  def delete_user!(email)
-    client.list_unsubscribe(list_id, email, true)
   end
 
   def unsubscribed_users
