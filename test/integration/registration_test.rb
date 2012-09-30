@@ -4,7 +4,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
   test "successful registration" do
     simulate do
       authenticate(:nickname => "TestUser", :uid => "12345")
-      edit_profile(:email => "test@test.com")
+      create_profile(:email => "test@test.com")
       confirm_email
       make_payment
     end
@@ -13,10 +13,19 @@ class RegistrationTest < ActionDispatch::IntegrationTest
   test "failed registration due to missing email" do
     simulate do
       authenticate(:nickname => "TestUser", :uid => "12345")
-      edit_profile
+      create_profile
     end
 
-    assert_content "Contact email can't be blank"
+    assert_content "Contact email is invalid"
+  end
+
+  test "failed registration due to invalid email" do
+    simulate do
+      authenticate(:nickname => "TestUser", :uid => "12345")
+      create_profile(:email => "Jordan dot Byron at Gmail dot com")
+    end
+
+    assert_content "Contact email is invalid"
   end
 
   test "leaving registration process midstream" do
@@ -24,7 +33,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
 
     simulate do
       authenticate(user_params)
-      edit_profile(:email => "test@test.com")
+      create_profile(:email => "test@test.com")
       logout
       authenticate(user_params)
     end
@@ -33,30 +42,18 @@ class RegistrationTest < ActionDispatch::IntegrationTest
   end
 
   test "payment failure" do
-    user_params = {
-      :nickname => "TestUser",
-      :uid      => "12345",
-      :email    => "test@test.com"
-    }
-
     simulate do
-      register(user_params)
+      register(Support::SimulatedUser.default)
       payment_failure
     end
   end
 
   test "restarting registration process after payment failure" do
-    user_params = {
-      :nickname => "TestUser",
-      :uid      => "12345",
-      :email    => "test@test.com"
-    }
-
     simulate do
-      register(user_params)
+      register(Support::SimulatedUser.default)
       payment_failure
       restart_registration
-      register(user_params)
+      register(Support::SimulatedUser.default)
     end
   end
 

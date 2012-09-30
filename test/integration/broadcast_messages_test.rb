@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BroadcastMailerTest < ActionDispatch::IntegrationTest
+class BroadcastMessagesTest < ActionDispatch::IntegrationTest
   setup do
     ActionMailer::Base.deliveries.clear
 

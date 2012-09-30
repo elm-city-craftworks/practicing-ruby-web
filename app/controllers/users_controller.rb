@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def cleaned_params
     approved_params = %w{notify_conversations notify_mentions notify_comment_made
-      beta_tester}
+      beta_tester contact_email notify_updates}
 
     params[:user].select {|k,_| approved_params.include? k }
   end
