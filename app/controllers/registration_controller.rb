@@ -31,9 +31,9 @@ class RegistrationController < ApplicationController
       if @user.update_attributes(params[:user])
         @user.create_access_token
 
-        @user.update_attribute(:status, "pending_confirmation")
-
         RegistrationMailer.email_confirmation(@user).deliver
+
+        @user.update_attribute(:status, "pending_confirmation")
       else
         render :edit_profile
       end

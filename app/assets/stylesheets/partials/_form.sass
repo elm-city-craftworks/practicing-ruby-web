@@ -2,6 +2,28 @@ form
   input[type=submit]
     +classy-button
 
+#errorExplanation
+  margin: 1em 0
+  padding: 1em
+  background-color: rgba(204, 136, 136, 0.45)
+  +border-radius(3px)
+  h2
+    color: #333
+    font-size: 1.25em
+  p
+    color: #9E4040
+  ul
+    list-style-type: disc
+    margin-left: 2em
+    li
+      color: #522
+
+div.field_with_errors
+  display: inline-block
+  color: #522
+  input
+    border: 1px solid #522
+
 #admin
   font-size: 0.4em
   float: right
