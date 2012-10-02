@@ -7,5 +7,6 @@
 
 = form_for @user, :url => {:controller => :registration, :action => :update_profile} do |f|
   = render :partial => "users/form", :locals => {:f => f}
+  %hr
   %p
     = f.submit "Continue"
