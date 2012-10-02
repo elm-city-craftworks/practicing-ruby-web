@@ -67,6 +67,23 @@ module Support
       end
     end
 
+    def cancel_account
+      browser do
+        click_link     "Settings"
+        click_link     "Cancel my account"
+
+        assert_content "Sorry to see you go"
+
+        message = ActionMailer::Base.deliveries.first
+
+        assert message.to.include?("support@elmcitycraftworks.org")
+        assert message.subject[/cancelation/]
+
+        visit library_path
+        assert_current_path problems_sessions_path
+      end
+    end
+
     def restart_registration
       browser do
         click_link "subscribing"

@@ -3,5 +3,10 @@
 
 = form_for @user do |f|
   = render :partial => "form", :locals => {:f => f}
+  %hr
   %p
     = f.submit "Update Settings"
+    = link_to "Cancel my account", user_path(@user), :method => :delete,
+      :data => {:confirm => "Are you sure you wish to cancel your account?\n\nPlease note that it may take up to 24 hours to fully cancel your account"},
+      :id => "cancel"
+    %span.cancel-notice It may take up to 24 hours to fully cancel your account

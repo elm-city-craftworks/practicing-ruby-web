@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :find_user, :except => :show
+  before_filter      :find_user,         :except => :show
+  skip_before_filter :authenticate_user, :only   => :destroy
 
   def show
     @user = User.find_by_github_nickname(params[:id])
@@ -22,6 +23,12 @@ class UsersController < ApplicationController
     else
       render :action => :edit
     end
+  end
+
+  def destroy
+    UnsubscribeMailer.canceled(@user) unless @user.disabled?
+
+    @user.disable
   end
 
   private
