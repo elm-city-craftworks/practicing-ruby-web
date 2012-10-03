@@ -11,7 +11,7 @@ class BroadcastMailerTest < ActionMailer::TestCase
 
     message = ActionMailer::Base.deliveries.first
 
-    assert_equal "It's working\n", message.body.to_s
+    assert message.body.to_s[/\AIt's working\n/]
   end
 
   test "users without confirmed emails are not notified" do
