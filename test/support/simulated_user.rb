@@ -70,14 +70,14 @@ module Support
     def cancel_account
       browser do
         click_link     "Settings"
-        click_link     "Cancel my account"
+        click_link     "Unsubscribe from Practicing Ruby"
 
         assert_content "Sorry to see you go"
 
         message = ActionMailer::Base.deliveries.first
 
         assert message.to.include?("support@elmcitycraftworks.org")
-        assert message.subject[/cancelation/]
+        assert message.subject[/cancellation/]
 
         visit library_path
         assert_current_path problems_sessions_path
