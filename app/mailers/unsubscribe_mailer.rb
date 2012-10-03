@@ -10,6 +10,6 @@ class UnsubscribeMailer < ActionMailer::Base
     @user = user
 
     mail(:to      => "support@elmcitycraftworks.org",
-         :subject => "[Practicing Ruby] Account cancelation").deliver
+         :subject => "[Practicing Ruby] Account cancellation").deliver
   end
 end
