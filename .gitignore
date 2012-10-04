@@ -14,3 +14,4 @@ lib/development_mail_interceptor.rb
 public/assets
 coverage
 .kick
+.pow*
