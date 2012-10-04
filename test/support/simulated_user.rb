@@ -55,7 +55,7 @@ module Support
     end
 
     def make_payment
-      browser { assert_current_path registration_payment_path }
+      browser { assert_current_path registration_payment_pending_path }
     end
 
     def payment_failure

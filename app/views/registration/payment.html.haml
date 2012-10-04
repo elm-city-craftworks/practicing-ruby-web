@@ -5,6 +5,10 @@
   :coffeescript
     $ -> new PR.PaymentProcessor('#{STRIPE_PUBLISHABLE_KEY}');
 
+%h3 You are so close. Just one last step.
+
+%p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
+
 .payment-errors
 
 = form_tag registration_create_payment_path, :id => "payment-form" do
@@ -15,8 +19,13 @@
     %label CVC
     %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
   .row
-    %label Expiration (MM/YYYY)
-    %input.card-expiry-month{type: "text", size: 2}
-    %span /
-    %input.card-expiry-year{type: "text", size: 4}
-  = submit_tag "Submit Payment", :class => "submit-button"
+    %label Card Expiration
+    = select_month nil, { add_month_numbers_true: true },
+      { name: nil, id: nil, class: "card-expiry-month" }
+    = select_year nil,
+      { start_year: Date.today.year, end_year: Date.today.year+15},
+      { name: nil, id: nil, class: "card-expiry-year"}
+  %hr
+  %p
+    = submit_tag "Submit Payment", :class => "submit-button"
+    %span#processing-spinner

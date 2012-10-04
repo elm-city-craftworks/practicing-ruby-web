@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     status == 'disabled'
   end
 
+  def payment_gateway
+    PaymentGateway.for_user(self)
+  end
+
   def name
     "#{first_name} #{last_name}"
   end

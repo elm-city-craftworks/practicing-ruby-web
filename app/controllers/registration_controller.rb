@@ -1,13 +1,13 @@
 class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
-  before_filter :ye_shall_not_pass, :except => [:payment]
+  before_filter :ye_shall_not_pass, :except => [ :payment, :payment_pending,
+                                                 :create_payment ]
 
   def index
     path = case current_user.status
       when "authorized"           then {:action => :edit_profile }
       when "pending_confirmation" then {:action => :update_profile }
-      # TODO Redirect to payment_pending page
-      when "confirmed"            then {:action => :payment }
+      when "confirmed"            then {:action => :payment_pending }
       else library_path
     end
 
@@ -50,35 +50,29 @@ class RegistrationController < ApplicationController
       # TODO swtich this to confirmed one we are doing payment processing
       user.update_attribute(:status, "payment_pending")
 
-      # TODO Redirect to payment_pending page
-      return redirect_to(:action => :payment)
+      return redirect_to(:action => :payment_pending)
     end
   end
 
+  def payment_pending
+
+  end
+
   def payment
-    # TODO Show MailChimp message
+    redirect_to(:action => :complete) if current_user.subscriptions.active.any?
   end
 
   def create_payment
-    # TODO Push all of this down to the model layer
-    # TODO Cancel MailChimp Accounts
+    # TODO MailChimp Accounts when moving to stripe???
 
-    Stripe.api_key = STRIPE_SECRET_KEY
+    payment_gateway = current_user.payment_gateway
+    payment_gateway.subscribe(params)
 
-    # get the credit card details submitted by the form
-    token = params[:stripeToken]
+    redirect_to :action => :complete
+  end
 
-    # create a Customer
-    customer = Stripe::Customer.create(
-      :card        => token,
-      :description => current_user.github_nickname
-    )
+  def complete
 
-    subscription = customer.update_subscription(
-      :plan => "practicing-ruby-monthly"
-    )
-
-    render :text => [customer, subscription].inspect
   end
 
   private
