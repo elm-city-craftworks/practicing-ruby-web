@@ -6,6 +6,21 @@ class PR.PaymentProcessor
   formSubmit: (event) =>
     # disable the submit button to prevent repeated clicks
     $('.submit-button').attr "disabled", "disabled"
+    $(".payment-errors").text ""
+
+    target  = document.getElementById('processing-spinner')
+
+    spinnerOpts = {
+      lines: 9,
+      length: 4,
+      width: 3,
+      radius: 5,
+      corners: 0.8,
+      hwaccel: true,
+      speed: 1.6
+    };
+
+    @spinner = new Spinner(spinnerOpts).spin(target)
 
     Stripe.createToken {
         number:    $('.card-number').val(),
@@ -18,6 +33,7 @@ class PR.PaymentProcessor
     event.preventDefault();
   responseHandler: (status, response) =>
     if (response.error)
+      @spinner.stop()
       $(".payment-errors").text      response.error.message
       $(".submit-button").removeAttr "disabled"
     else

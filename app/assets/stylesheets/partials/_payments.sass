@@ -1,0 +1,39 @@
+div.payment-errors
+  color: #9E4040
+  font-size: 1.5em
+
+form#payment-form
+  margin: 1em 0
+  label, input[type=text], select
+    font-size: 14px
+    font-weight: normal
+    line-height: 20px
+  label
+    display: block
+    margin-bottom: 5px
+  input[type=text], select
+    display: inline-block
+    height: 20px
+    padding: 4px 6px
+    margin-bottom: 9px
+    font-size: 14px
+    line-height: 20px
+    color: #555
+    +border-radius(3px)
+  input[type=text]
+    background-color: #fff
+    border: 1px solid #CCC
+    +single-box-shadow(rgba(0,0,0,0.075), 0, 1px, 1px, false, true)
+    &:focus
+      outline: 0
+      outline: thin dotted 9
+      border-color: $dark-blue
+  select
+    height: 30px
+    line-height: 30px
+    background-color: #fff
+    border: 1px solid #CCC
+  span#processing-spinner
+    display: inline-block
+    margin-left: 30px
+    height: 5px
