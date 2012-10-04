@@ -11,6 +11,7 @@ module PaymentGateway
 
       customer = find_or_create_customer(token)
 
+      # TODO Log Response
       subscription = customer.update_subscription(
         :plan => "practicing-ruby-monthly"
       )
@@ -27,6 +28,22 @@ module PaymentGateway
       )
 
       user.enable
+    end
+
+    def unsubscribe
+      customer = find_customer
+
+      begin
+        customer.cancel_subscription
+      rescue ::Stripe::InvalidRequestError => e
+        raise unless e.message[/No active subscription/]
+      end
+
+      if user.subscriptions.active
+        user.subscriptions.active.update_attributes(:finish_date => Date.today)
+      end
+
+      user.disable
     end
 
     private
@@ -54,6 +71,7 @@ module PaymentGateway
     end
 
     def create_customer(token)
+      # TODO Log Response
       ::Stripe::Customer.create(
         :card        => token,
         :description => user.github_nickname,

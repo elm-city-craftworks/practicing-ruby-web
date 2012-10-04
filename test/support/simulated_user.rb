@@ -43,6 +43,8 @@ module Support
     end
 
     def confirm_email
+      browser { assert_current_path registration_update_profile_path }
+
       mail   = ActionMailer::Base.deliveries.pop
       base   = Rails.application.routes.url_helpers.
                  registration_confirmation_path(:secret => "")
@@ -56,6 +58,31 @@ module Support
 
     def make_payment
       browser { assert_current_path registration_payment_pending_path }
+    end
+
+    def make_stripe_payment
+      browser do
+        visit registration_payment_path
+
+        card  = find(:css, "input.card-number")
+        cvc   = find(:css, "input.card-cvc")
+        month = find(:css, "select.card-expiry-month")
+        year  = find(:css, "select.card-expiry-year")
+
+        card.set  "4242424242424242"
+        cvc.set   "123"
+        month.set "January"
+        year.set  Date.today.year + 1
+
+        click_button "Submit Payment"
+
+        wait_until { current_path == registration_complete_path }
+
+        assert_content "Thanks for subscribing"
+
+        visit library_path
+        assert_current_path library_path
+      end
     end
 
     def payment_failure

@@ -1,7 +1,7 @@
 class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
   before_filter :ye_shall_not_pass, :except => [ :payment, :payment_pending,
-                                                 :create_payment ]
+                                                 :create_payment, :complete ]
 
   def index
     path = case current_user.status
@@ -59,7 +59,7 @@ class RegistrationController < ApplicationController
   end
 
   def payment
-    redirect_to(:action => :complete) if current_user.subscriptions.active.any?
+    redirect_to(:action => :complete) if current_user.subscriptions.active
   end
 
   def create_payment
