@@ -59,12 +59,10 @@ class RegistrationController < ApplicationController
   end
 
   def payment
-    redirect_to(:action => :complete) if current_user.subscriptions.active
+    redirect_to(:action => :complete) unless current_user.status == "payment_pending"
   end
 
   def create_payment
-    # TODO MailChimp Accounts when moving to stripe???
-
     payment_gateway = current_user.payment_gateway
     payment_gateway.subscribe(params)
 

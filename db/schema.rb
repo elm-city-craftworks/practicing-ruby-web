@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(:version => 20120928194334) do
     t.date    "start_date",       :null => false
     t.date    "finish_date"
     t.text    "payment_provider"
-    t.decimal "monthly_rate"
+    t.integer "monthly_rate_cents"
   end
 
   create_table "users", :force => true do |t|

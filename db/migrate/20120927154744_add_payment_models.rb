@@ -5,7 +5,7 @@ class AddPaymentModels < ActiveRecord::Migration
       t.date       :start_date, :null => false
       t.date       :finish_date
       t.text       :payment_provider
-      t.decimal    :monthly_rate
+      t.integer    :monthly_rate_cents
     end
 
     create_table :payment_logs do |t|

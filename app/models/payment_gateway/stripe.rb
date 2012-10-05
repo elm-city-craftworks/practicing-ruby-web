@@ -17,9 +17,9 @@ module PaymentGateway
       )
 
       user.subscriptions.create(
-        :start_date       => Date.today,
-        :payment_provider => 'stripe',
-        :monthly_rate     => subscription.plan.amount / 100.0 # Convert to dollars
+        :start_date         => Date.today,
+        :payment_provider   => 'stripe',
+        :monthly_rate_cents => subscription.plan.amount
       )
 
       user.update_attributes(
@@ -52,17 +52,8 @@ module PaymentGateway
 
     def find_customer
       if user.payment_provider == 'stripe' && !user.payment_provider_id.blank?
-        begin
-          customer = ::Stripe::Customer.retrieve(user.payment_provider_id)
-          if customer["deleted"]
-            nil
-          else
-            customer
-          end
-        rescue ::Stripe::InvalidRequestError => e
-          # Don't raise an exception if the customer doesn't exist in Stripe
-          raise unless e.message[/No such customer/]
-        end
+        customer = ::Stripe::Customer.retrieve(user.payment_provider_id)
+        customer unless customer["deleted"]
       end
     end
 
