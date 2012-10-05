@@ -20,7 +20,7 @@
     %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
   .row
     %label Card Expiration
-    = select_month nil, { add_month_numbers_true: true },
+    = select_month nil, { add_month_numbers: true },
       { name: nil, id: nil, class: "card-expiry-month" }
     = select_year nil,
       { start_year: Date.today.year, end_year: Date.today.year+15},
