@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(:version => 20120928194334) do
 
   create_table "subscriptions", :force => true do |t|
     t.integer "user_id"
-    t.date    "start_date",       :null => false
+    t.date    "start_date",         :null => false
     t.date    "finish_date"
     t.text    "payment_provider"
     t.integer "monthly_rate_cents"

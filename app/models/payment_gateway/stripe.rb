@@ -11,10 +11,11 @@ module PaymentGateway
 
       customer = find_or_create_customer(token)
 
-      # TODO Log Response
       subscription = customer.update_subscription(
         :plan => "practicing-ruby-monthly"
       )
+
+      PaymentLog.create(:user_id => user.id, :raw_data => subscription.to_json)
 
       user.subscriptions.create(
         :start_date         => Date.today,
@@ -58,12 +59,15 @@ module PaymentGateway
     end
 
     def create_customer(token)
-      # TODO Log Response
-      ::Stripe::Customer.create(
+      customer = ::Stripe::Customer.create(
         :card        => token,
         :description => user.github_nickname,
         :email       => user.contact_email
       )
+
+      PaymentLog.create(:user_id => user.id, :raw_data => customer.to_json)
+
+      customer
     end
   end
 end
