@@ -32,6 +32,7 @@ module Support
       create_profile(params)
       confirm_email
       make_payment
+      read_article
     end
 
     def create_profile(params={})
@@ -57,10 +58,29 @@ module Support
     end
 
     def make_payment
-      browser { assert_current_path registration_payment_pending_path }
+      browser do
+        assert_current_path registration_payment_pending_path
+      end
+
+      # TODO Find a way to test this through the UI
+      #
+      @user.subscriptions.create(:start_date => Date.today)
+    end
+
+    def read_article
+      article = FactoryGirl.create(:article)
+
+      browser do
+        visit article_path(article)
+        assert_current_path article_path(article)
+      end
+
+      @browser.assert @user.subscriptions.active, "No active subscription"
     end
 
     def make_stripe_payment
+      @user.subscriptions.delete_all
+
       browser do
         visit registration_payment_path
 
@@ -109,6 +129,8 @@ module Support
         visit library_path
         assert_current_path problems_sessions_path
       end
+
+      @browser.refute @user.subscriptions.active, "Subscription was not ended"
     end
 
     def restart_registration

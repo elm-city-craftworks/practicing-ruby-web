@@ -39,10 +39,6 @@ module PaymentGateway
         raise unless e.message[/No active subscription/]
       end
 
-      if user.subscriptions.active
-        user.subscriptions.active.update_attributes(:finish_date => Date.today)
-      end
-
       user.disable
     end
 

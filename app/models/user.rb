@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
     self.notifications_enabled = false
     self.status                = 'disabled'
 
+    subscriptions.cancel_account
+
     save
   end
 
