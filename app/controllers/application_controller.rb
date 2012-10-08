@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :active_broadcasts
 
+  private
+
   def authenticate
     current_authorization || (store_location && redirect_to("/auth/github"))
   end
@@ -52,7 +54,9 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  private
+  def redirect_to_https
+    redirect_to :protocol => "https://" unless (request.ssl? || !Rails.env.production?)
+  end
 
   def active_broadcasts
     if current_user
@@ -66,9 +70,9 @@ class ApplicationController < ActionController::Base
   def enable_notifications
     current_user.try(:enable_notifications)
   end
-  
+
   def render_http_error(status)
-    render :file   => "public/#{status}", :layout  => false, 
+    render :file   => "public/#{status}", :layout  => false,
            :status => status,             :formats => [:html]
   end
 end
