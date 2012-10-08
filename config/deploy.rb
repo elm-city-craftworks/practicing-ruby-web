@@ -23,7 +23,8 @@ after 'deploy:update_code' do
     "mail_settings.rb"         => "config/initializers/mail_settings.rb",
     "mailchimp_settings.rb"    => "config/initializers/mailchimp_settings.rb",
     "omniauth.rb"              => "config/initializers/omniauth.rb",
-    "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb" }.
+    "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb",
+    "stripe.rb"                => "config/initializers/stripe.rb" }.
   each do |from, to|
     run "ln -nfs #{shared_path}/#{from} #{release_path}/#{to}"
   end
