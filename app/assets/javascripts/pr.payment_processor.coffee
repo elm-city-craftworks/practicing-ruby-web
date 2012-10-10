@@ -3,6 +3,11 @@ class PR.PaymentProcessor
     Stripe.setPublishableKey @key
     @form = $("#payment-form");
     @form.submit this.formSubmit
+
+    $('a#show-cvc-help').click (e) ->
+      $.facebox { div: '#cvc-help' }, 'cvc-help'
+      e.preventDefault()
+
   formSubmit: (event) =>
     # disable the submit button to prevent repeated clicks
     $('.submit-button').attr "disabled", "disabled"
