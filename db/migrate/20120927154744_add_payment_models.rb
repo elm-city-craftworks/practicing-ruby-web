@@ -23,14 +23,15 @@ class AddPaymentModels < ActiveRecord::Migration
 
     User.connection.execute(migrate_sql)
 
-    remove_column :users, :mailchimp_web_id
+    # TODO: Drop mailchimp_web_id column
+    #remove_column :users, :mailchimp_web_id
   end
 
   def down
     drop_table :subscriptions
     drop_table :payment_logs
 
-    add_column :users, :mailchimp_web_id, :text
+    #add_column :users, :mailchimp_web_id, :text
 
     migrate_sql = %{UPDATE users
       SET   mailchimp_web_id = users.payment_provider_id

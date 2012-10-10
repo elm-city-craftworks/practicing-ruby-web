@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20120928194334) do
     t.string   "contact_email"
     t.string   "access_token"
     t.boolean  "notify_updates",              :default => true,  :null => false
-    t.boolean  "requires_mailchimp_deletion", :default => false, :null => false
+    t.text     "mailchimp_web_id"
     t.text     "payment_provider"
     t.text     "payment_provider_id"
   end
