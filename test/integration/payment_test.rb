@@ -7,8 +7,6 @@ class PaymentTest < ActionDispatch::IntegrationTest
   end
 
   test "valid payments activate user account" do
-    skip_on_travis
-
     simulated_user do
       register(Support::SimulatedUser.default)
       make_stripe_payment

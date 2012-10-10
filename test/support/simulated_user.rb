@@ -82,6 +82,8 @@ module Support
       @user.subscriptions.delete_all
 
       browser do
+        skip_on_travis
+
         visit registration_payment_path
 
         card  = find(:css, "input.card-number")
