@@ -4,6 +4,8 @@ class PR.PaymentProcessor
     @form = $("#payment-form");
     @form.submit this.formSubmit
 
+    $('.card-number').focus()
+
     $('a#show-cvc-help').click (e) ->
       $.facebox { div: '#cvc-help' }, 'cvc-help'
       e.preventDefault()
@@ -38,13 +40,29 @@ class PR.PaymentProcessor
     event.preventDefault();
   responseHandler: (status, response) =>
     if (response.error)
-      @spinner.stop()
-      $(".payment-errors").text      response.error.message
-      $(".submit-button").removeAttr "disabled"
+      this.logError response.error.message
     else
       # token contains id, last4, and card type
       token = response['id']
       # insert the token into the form so it gets submitted to the server
       @form.append "<input type='hidden' name='stripeToken' value='#{token}'/>"
-      # and submit
-      @form.get(0).submit()
+
+      if @couponCode == ""
+        this.submitPayment()
+      else
+        this.checkCoupon()
+
+  couponCode: =>
+    return $('#coupon').val()
+  checkCoupon: =>
+    $.getJSON '/registration/coupon_valid', { coupon: @couponCode }, (data) =>
+      if data.coupon_valid
+        this.submitPayment()
+      else
+        this.logError "Coupon code is not valid"
+  submitPayment: =>
+    @form.get(0).submit()
+  logError: (message) =>
+    @spinner.stop()
+    $(".payment-errors").text      message
+    $(".submit-button").removeAttr "disabled"

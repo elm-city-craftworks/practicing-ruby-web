@@ -48,6 +48,7 @@ PracticingRubyWeb::Application.routes.draw do
     post  'create_payment'        => 'registration#create_payment'
     get   'complete'              => 'registration#complete'
     get   'restart'               => 'registration#restart'
+    get   'coupon_valid'          => 'registration#coupon_valid'
   end
 
   match '/sessions/link/:secret' => 'sessions#link'

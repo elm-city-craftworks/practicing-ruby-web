@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928194334) do
+ActiveRecord::Schema.define(:version => 20121011002134) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20120928194334) do
     t.date    "finish_date"
     t.text    "payment_provider"
     t.integer "monthly_rate_cents"
+    t.text    "coupon_code"
   end
 
   create_table "users", :force => true do |t|

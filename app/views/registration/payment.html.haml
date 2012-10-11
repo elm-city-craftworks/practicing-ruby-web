@@ -9,7 +9,7 @@
 
 %p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
 
-.payment-errors
+.payment-errors= @errors
 
 = form_tag registration_create_payment_path, :id => "payment-form" do
   .row
@@ -19,7 +19,7 @@
   .row
     %label
       CVC
-      %a#show-cvc-help{:href => "#cvc"} ?
+      %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
     %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
   .row
     %label Card Expiration
@@ -28,6 +28,10 @@
     = select_year nil,
       { start_year: Date.today.year, end_year: Date.today.year+15},
       { name: nil, id: nil, class: "card-expiry-year"}
+
+  .row
+    = label_tag :coupon, "Coupon Code"
+    = text_field_tag :coupon, params[:coupon]
   %hr
   %p
     = submit_tag "Submit Payment", :class => "submit-button"

@@ -74,6 +74,14 @@ class RegistrationController < ApplicationController
 
   end
 
+  def coupon_valid
+    payment_gateway = current_user.payment_gateway
+
+    valid = payment_gateway.coupon_valid?(params[:coupon])
+
+    render :json => { :coupon_valid => valid }.to_json
+  end
+
   private
 
   def ye_shall_not_pass

@@ -6,21 +6,35 @@ module PaymentGateway
       ::Stripe.api_key = STRIPE_SECRET_KEY
     end
 
+    def coupon_valid?(coupon)
+      return true if coupon.blank?
+
+      begin
+        !!::Stripe::Coupon.retrieve(coupon)
+      rescue ::Stripe::InvalidRequestError => e
+        false
+      end
+    end
+
     def subscribe(params = {})
-      token = params[:stripeToken]
+      token  = params[:stripeToken]
+      coupon = params[:coupon]
 
       customer = find_or_create_customer(token)
 
-      subscription = customer.update_subscription(
-        :plan => "practicing-ruby-monthly"
-      )
+      subscription_options = { :plan => "practicing-ruby-monthly" }
+
+      subscription_options[:coupon] = coupon unless coupon.blank?
+
+      subscription = customer.update_subscription(subscription_options)
 
       PaymentLog.create(:user_id => user.id, :raw_data => subscription.to_json)
 
       user.subscriptions.create(
         :start_date         => Date.today,
         :payment_provider   => 'stripe',
-        :monthly_rate_cents => subscription.plan.amount
+        :monthly_rate_cents => subscription.plan.amount,
+        :coupon_code        => coupon
       )
 
       user.update_attributes(

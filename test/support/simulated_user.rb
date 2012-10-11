@@ -78,11 +78,13 @@ module Support
       @browser.assert @user.subscriptions.active, "No active subscription"
     end
 
-    def make_stripe_payment
+    def make_stripe_payment(params={})
       @user.subscriptions.delete_all
 
       browser do
         skip_on_travis
+
+        timeout = 15
 
         visit registration_payment_path
 
@@ -95,6 +97,8 @@ module Support
         cvc.set   "123"
         month.set "January"
         year.set  Date.today.year + 1
+
+        fill_in "Coupon", :with => params.fetch(:coupon, "")
 
         click_button "Submit Payment"
 
