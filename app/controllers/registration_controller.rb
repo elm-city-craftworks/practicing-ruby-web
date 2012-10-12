@@ -2,7 +2,6 @@ class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
   before_filter :ye_shall_not_pass, :except => [ :payment, :payment_pending,
                                                  :create_payment, :complete ]
-  before_filter :redirect_to_https, :only   => [ :payment, :create_payment ]
 
   def index
     path = case current_user.status

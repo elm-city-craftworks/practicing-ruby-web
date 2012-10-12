@@ -19,8 +19,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     return unless current_user
 
-    redirect_to_https
-
     if current_user.disabled?
       redirect_to problems_sessions_path
     elsif !current_user.active?
@@ -55,14 +53,6 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
-  end
-
-  def redirect_to_https(path = nil)
-    if Rails.env.production? && !request.ssl?
-      redirect_to path, :protocol => "https://"
-    elsif path
-      redirect_to path
-    end
   end
 
   def active_broadcasts

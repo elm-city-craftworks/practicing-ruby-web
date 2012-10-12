@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate_user
 
   def new
-    redirect_to_https '/auth/github'
+    redirect_to '/auth/github'
   end
 
   def create
