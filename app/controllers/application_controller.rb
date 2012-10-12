@@ -58,7 +58,11 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_https
-    redirect_to :protocol => "https://" if Rails.env.production? && !request.ssl?
+    if Rails.env.production? && !request.ssl?
+      redirect_to(:protocol => "https://") && false
+    else
+      true
+    end
   end
 
   def active_broadcasts
