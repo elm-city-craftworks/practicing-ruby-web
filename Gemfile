@@ -47,7 +47,7 @@ group :test do
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'mocha', :require => false
-  gem 'capybara-webkit', :git => "git://github.com/thoughtbot/capybara-webkit.git"
+  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'test_notifier'
   gem 'turn', '~> 0.9.5'

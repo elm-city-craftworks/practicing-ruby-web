@@ -84,6 +84,8 @@ module Support
       browser do
         skip_on_travis
 
+        Capybara.default_wait_time = 10
+
         timeout = 15
 
         visit registration_payment_path
