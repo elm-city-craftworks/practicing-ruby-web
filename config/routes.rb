@@ -54,7 +54,7 @@ PracticingRubyWeb::Application.routes.draw do
   match '/sessions/link/:secret' => 'sessions#link'
   match '/auth/github/callback' => 'sessions#create'
   match '/logout' => 'sessions#destroy', :as => 'logout'
-  match '/auth/github', :as => 'login'
+  match '/login'  => 'sessions#new',     :as => 'login'
 
   match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 
