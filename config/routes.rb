@@ -52,9 +52,9 @@ PracticingRubyWeb::Application.routes.draw do
   end
 
   match '/sessions/link/:secret' => 'sessions#link'
-  match '/auth/github/callback' => 'sessions#create'
-  match '/logout' => 'sessions#destroy', :as => 'logout'
-  match '/login'  => 'sessions#new',     :as => 'login'
+  match '/auth/github/callback'  => 'sessions#create'
+  match '/logout'                => 'sessions#destroy', :as => 'logout'
+  match '/login'                 => 'sessions#new',     :as => 'login'
 
   match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 

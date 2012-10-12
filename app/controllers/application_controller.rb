@@ -57,11 +57,11 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  def redirect_to_https
+  def redirect_to_https(path = nil)
     if Rails.env.production? && !request.ssl?
-      redirect_to(:protocol => "https://") && false
-    else
-      true
+      redirect_to path, :protocol => "https://"
+    elsif path
+      redirect_to path
     end
   end
 
