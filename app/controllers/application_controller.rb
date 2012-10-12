@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include CacheCooker::Oven
 
   protect_from_forgery
+
   before_filter :authenticate_cache_cooker!
   before_filter :authenticate
   before_filter :authenticate_user
@@ -9,8 +10,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :active_broadcasts
 
+  private
+
   def authenticate
-    current_authorization || (store_location && redirect_to("/auth/github"))
+    current_authorization || (store_location && redirect_to(login_path))
   end
 
   def authenticate_user
@@ -52,8 +55,6 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  private
-
   def active_broadcasts
     if current_user
       session[:dismissed_broadcasts] ||= [-1]
@@ -66,9 +67,9 @@ class ApplicationController < ActionController::Base
   def enable_notifications
     current_user.try(:enable_notifications)
   end
-  
+
   def render_http_error(status)
-    render :file   => "public/#{status}", :layout  => false, 
+    render :file   => "public/#{status}", :layout  => false,
            :status => status,             :formats => [:html]
   end
 end

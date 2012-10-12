@@ -2,7 +2,7 @@ require 'whenever/capistrano'
 
 set :whenever_identifier, defer { application }
 
-set :branch, "master"
+set :branch, "stripe"
 set :deploy_to, "/var/rapp/#{application}"
 
 server "practicingruby.com", :app, :web, :db, :primary => true

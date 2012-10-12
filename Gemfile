@@ -12,6 +12,8 @@ gem 'nokogiri'
 gem 'md_preview'
 gem 'md_emoji'
 
+gem 'stripe'
+
 gem 'will_paginate'
 gem 'haml'
 gem 'coffee-filter', '~> 0.1.1'
@@ -45,10 +47,9 @@ group :test do
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'mocha', :require => false
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', "0.10.1"
   gem 'database_cleaner'
-  gem 'test_notifier' #, :git => "git://github.com/jordanbyron/test_notifier.git",
-                      # :branch => "minitest-errors"
+  gem 'test_notifier'
   gem 'turn', '~> 0.9.5'
   gem 'simplecov', :require => false
 end

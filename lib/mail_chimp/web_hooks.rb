@@ -52,8 +52,10 @@ module MailChimp
     end
 
     def find_user
-      User.find_by_mailchimp_web_id(params[:data][:web_id]) ||
-      User.where("LOWER(email) = ?", params[:data][:email].downcase).first
+      User.where(%{
+        (payment_provider = ? AND payment_provider_id = ?) OR LOWER(email) = ?},
+        'mailchimp', params[:data][:web_id], params[:data][:email].downcase
+      ).first
     end
   end
 end
