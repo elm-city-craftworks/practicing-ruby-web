@@ -37,11 +37,13 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:current_page] ||= :edit
+
     if @user.update_attributes(cleaned_params)
-      flash[:notice] = "Settings sucessfully updated!"
-      redirect_to :back
+      flash[:notice] = "#{params[:current_page].humanize} settings updated!"
+      redirect_to :action => params[:current_page]
     else
-      render :action => :account
+      render :action => params[:current_page]
     end
   end
 

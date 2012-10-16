@@ -4,6 +4,7 @@
   = render :partial => 'sidebar', :locals => {:current => 'account'}
 
   = form_for @user, :html => {:class => "setting-panel edit_user"} do |f|
+    = hidden_field_tag :current_page, :account
     = error_messages_for(@user)
     .field
       = f.label :contact_email, "Email:"
