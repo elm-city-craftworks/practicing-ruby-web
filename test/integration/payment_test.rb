@@ -18,4 +18,12 @@ class PaymentTest < ActionDispatch::IntegrationTest
       make_stripe_payment(:coupon => "test")
     end
   end
+
+  test "credit card can be updated" do
+    simulated_user do
+      register(Support::SimulatedUser.default)
+      make_stripe_payment
+      update_credit_card
+    end
+  end
 end

@@ -1,43 +1,39 @@
 class PR.PaymentProcessor
   constructor: (@key) ->
     Stripe.setPublishableKey @key
-    @form = $("#payment-form");
-    @form.submit this.formSubmit
+    $(document).on 'submit', "#payment-form", this.formSubmit
 
     $('.card-number').focus()
 
-    $('a#show-cvc-help').click (e) ->
+    $(document).on 'click', 'a#show-cvc-help', (e) ->
       $.facebox { div: '#cvc-help' }, 'cvc-help'
       e.preventDefault()
 
+    $(document).on 'click', 'a.update-cc', (e) ->
+      $.facebox { div: '#update-credit-card' }, 'update-credit-card'
+      e.preventDefault()
+
+    $(document).on 'click', 'a.current-cc', (e) ->
+      $.facebox { ajax: $(this).attr('href') }, 'current-credit-card'
+      e.preventDefault()
+
   formSubmit: (event) =>
+    event.preventDefault();
+
+    @form = $(event.currentTarget)
+
     # disable the submit button to prevent repeated clicks
     $('.submit-button').attr "disabled", "disabled"
     $(".payment-errors").text ""
 
-    target  = document.getElementById('processing-spinner')
-
-    spinnerOpts = {
-      lines: 9,
-      length: 4,
-      width: 3,
-      radius: 5,
-      corners: 0.8,
-      hwaccel: true,
-      speed: 1.6
-    };
-
-    @spinner = new Spinner(spinnerOpts).spin(target)
+    this.createSpinner()
 
     Stripe.createToken {
-        number:    $('.card-number').val(),
-        cvc:       $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year:  $('.card-expiry-year').val()
+        number:    @form.find('.card-number').val(),
+        cvc:       @form.find('.card-cvc').val(),
+        exp_month: @form.find('.card-expiry-month').val(),
+        exp_year:  @form.find('.card-expiry-year').val()
     }, this.responseHandler
-
-    # prevent the form from submitting with the default action
-    event.preventDefault();
   responseHandler: (status, response) =>
     if (response.error)
       this.logError response.error.message
@@ -47,13 +43,17 @@ class PR.PaymentProcessor
       # insert the token into the form so it gets submitted to the server
       @form.append "<input type='hidden' name='stripeToken' value='#{token}'/>"
 
-      if @couponCode == ""
-        this.submitPayment()
-      else
+      if this.couponExists()
         this.checkCoupon()
-
+      else
+        this.submitPayment()
   couponCode: =>
     return $('#coupon').val()
+  couponExists: =>
+    if $('#coupon').length && @couponCode != ""
+      return true
+    else
+      return false
   checkCoupon: =>
     $.getJSON '/registration/coupon_valid', { coupon: @couponCode }, (data) =>
       if data.coupon_valid
@@ -66,3 +66,17 @@ class PR.PaymentProcessor
     @spinner.stop()
     $(".payment-errors").text      message
     $(".submit-button").removeAttr "disabled"
+  createSpinner: =>
+    spinnerTarget  = @form.find('#processing-spinner')[0]
+
+    spinnerOpts = {
+      lines: 9,
+      length: 4,
+      width: 3,
+      radius: 5,
+      corners: 0.8,
+      hwaccel: true,
+      speed: 1.6
+    };
+
+    @spinner = new Spinner(spinnerOpts).spin(spinnerTarget)

@@ -9,25 +9,8 @@
 
 %p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
 
-.payment-errors= @errors
-
 = form_tag registration_create_payment_path, :id => "payment-form" do
-  .row
-    %label Card Number
-    %input.card-number{type: "text", size: 20, autocomplete: "off"}
-  .row
-    %label
-      CVC
-      %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
-    %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
-  .row
-    %label Card Expiration
-    = select_month nil, { add_month_numbers: true },
-      { name: nil, id: nil, class: "card-expiry-month" }
-    = select_year nil,
-      { start_year: Date.today.year, end_year: Date.today.year+15},
-      { name: nil, id: nil, class: "card-expiry-year"}
-
+  = render 'shared/credit_card'
   .row
     = label_tag :coupon, "Coupon Code"
     = text_field_tag :coupon, params[:coupon]
@@ -36,8 +19,3 @@
     = submit_tag "Submit Payment", :class => "submit-button"
     %span#processing-spinner
 
-#cvc-help
-  %p
-    For added security, we verify your CVC, CVV, or CID code. This code isn't
-    stored and is checked before processing your payment.
-  %p= image_tag "payment/cvc.gif"

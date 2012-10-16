@@ -57,6 +57,20 @@ module PaymentGateway
       user.disable
     end
 
+    def update_credit_card(params)
+      token    = params[:stripeToken]
+      customer = find_customer
+
+      customer.card = token
+      customer.save
+    end
+
+    def current_credit_card
+      customer = find_customer
+
+      customer.active_card
+    end
+
     private
 
     attr_reader :user

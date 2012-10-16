@@ -12,14 +12,34 @@ class UsersController < ApplicationController
     redirect_to @user.github_url
   end
 
-  def edit
+  def edit; end
+  def account; end
+  def notifications; end
 
+  def billing
+    @subscriptions = SubscriptionDecorator.decorate(
+      @user.subscriptions.order("start_date"))
+  end
+
+  def update_credit_card
+    payment_gateway = current_user.payment_gateway
+    payment_gateway.update_credit_card(params)
+
+    flash[:notice] = "Your credit card was sucessfully updated!"
+    redirect_to billing_settings_path
+  end
+
+  def current_credit_card
+    payment_gateway = current_user.payment_gateway
+    @card = payment_gateway.current_credit_card
+
+    render :layout => false
   end
 
   def update
     if @user.update_attributes(cleaned_params)
       flash[:notice] = "Settings sucessfully updated!"
-      redirect_to edit_user_path(@user)
+      redirect_to :back
     else
       render :action => :edit
     end
