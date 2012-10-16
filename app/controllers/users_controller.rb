@@ -41,7 +41,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Settings sucessfully updated!"
       redirect_to :back
     else
-      render :action => :edit
+      render :action => :account
     end
   end
 
