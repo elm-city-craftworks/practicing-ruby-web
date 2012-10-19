@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914175304) do
+ActiveRecord::Schema.define(:version => 20121011002134) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -109,6 +109,11 @@ ActiveRecord::Schema.define(:version => 20120914175304) do
     t.datetime "updated_at"
   end
 
+  create_table "payment_logs", :force => true do |t|
+    t.integer "user_id"
+    t.text    "raw_data"
+  end
+
   create_table "shared_articles", :force => true do |t|
     t.integer  "user_id"
     t.integer  "article_id"
@@ -118,25 +123,36 @@ ActiveRecord::Schema.define(:version => 20120914175304) do
     t.datetime "updated_at"
   end
 
+  create_table "subscriptions", :force => true do |t|
+    t.integer "user_id"
+    t.date    "start_date",         :null => false
+    t.date    "finish_date"
+    t.text    "payment_provider"
+    t.integer "monthly_rate_cents"
+    t.text    "coupon_code"
+  end
+
   create_table "users", :force => true do |t|
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.text     "mailchimp_web_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "github_nickname"
-    t.boolean  "admin",                 :default => false
-    t.boolean  "notify_conversations",  :default => true,  :null => false
-    t.boolean  "notify_mentions",       :default => true,  :null => false
-    t.boolean  "notify_comment_made",   :default => false, :null => false
-    t.boolean  "beta_tester",           :default => false
-    t.boolean  "account_disabled",      :default => false
-    t.boolean  "notifications_enabled", :default => false, :null => false
+    t.boolean  "admin",                       :default => false
+    t.boolean  "notify_conversations",        :default => true,  :null => false
+    t.boolean  "notify_mentions",             :default => true,  :null => false
+    t.boolean  "notify_comment_made",         :default => false, :null => false
+    t.boolean  "beta_tester",                 :default => false
+    t.boolean  "account_disabled",            :default => false
+    t.boolean  "notifications_enabled",       :default => false, :null => false
     t.string   "status"
     t.string   "contact_email"
     t.string   "access_token"
-    t.boolean  "notify_updates",        :default => true,  :null => false
+    t.boolean  "notify_updates",              :default => true,  :null => false
+    t.text     "mailchimp_web_id"
+    t.text     "payment_provider"
+    t.text     "payment_provider_id"
   end
 
   create_table "volumes", :force => true do |t|

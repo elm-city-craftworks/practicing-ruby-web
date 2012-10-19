@@ -23,16 +23,50 @@ after 'deploy:update_code' do
     "mail_settings.rb"         => "config/initializers/mail_settings.rb",
     "mailchimp_settings.rb"    => "config/initializers/mailchimp_settings.rb",
     "omniauth.rb"              => "config/initializers/omniauth.rb",
-    "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb" }.
+    "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb",
+    "stripe.rb"                => "config/initializers/stripe.rb" }.
   each do |from, to|
     run "ln -nfs #{shared_path}/#{from} #{release_path}/#{to}"
   end
 end
 
-after "deploy", "deploy:migrate"
-after "deploy", 'deploy:cleanup'
+before "deploy:update_code", "deploy:confirm"
+after  "deploy",             "deploy:migrate"
+after  "deploy",             "deploy:cleanup"
+after  "deploy",             "deploy:update_current_branch"
 
 load 'deploy/assets'
+
+namespace :deploy do
+  desc 'Confirms deployment when switching deployed branches'
+  task :confirm do
+    deployed_branch       = nil
+    pending_deploy_branch = fetch(:branch)
+
+    run %{cat #{shared_path}/current_branch} do |ch, stream, out|
+      deployed_branch = out.strip
+    end
+
+    if deployed_branch != pending_deploy_branch
+      Capistrano::CLI.ui.say %{
+        ============ Changing deployed branches ============
+        Deployed Branch:       #{deployed_branch}
+        Pending Deploy Branch: #{pending_deploy_branch}
+        ====================================================
+
+      }
+
+      abort unless Capistrano::CLI.ui.agree(
+        "Do you wish to continue deploying #{pending_deploy_branch}?"
+      )
+    end
+  end
+
+  desc 'Updates the file which tracks the currently deployed branch'
+  task :update_current_branch do
+    run %{echo "#{fetch(:branch)}" > #{shared_path}/current_branch}
+  end
+end
 
 desc "Import articles, volumes, and collections from the server"
 namespace :import do

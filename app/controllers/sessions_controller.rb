@@ -2,6 +2,10 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate
   skip_before_filter :authenticate_user
 
+  def new
+    redirect_to '/auth/github'
+  end
+
   def create
     auth = request.env['omniauth.auth']
     github_uid = auth["uid"].to_s

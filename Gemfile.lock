@@ -192,6 +192,8 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.1)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rubyzip (0.9.4)
     sass (3.1.19)
     sass-rails (3.2.5)
@@ -213,6 +215,9 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    stripe (1.7.0)
+      multi_json (~> 1.1)
+      rest-client (~> 1.4)
     test_notifier (1.0.1)
       notifier
     thor (0.16.0)
@@ -241,7 +246,7 @@ DEPENDENCIES
   capistrano
   capybara
   capybara-screenshot
-  capybara-webkit
+  capybara-webkit (= 0.10.1)
   coffee-filter (~> 0.1.1)
   coffee-rails (~> 3.2.0)
   compass-rails
@@ -273,6 +278,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.0)
   sassy-buttons
   simplecov
+  stripe
   test_notifier
   turn (~> 0.9.5)
   uglifier
