@@ -1,10 +1,10 @@
 - content_for(:title)  { "Account Settings" }
 
 - content_for :settings_panel do
-  = render :partial => 'sidebar', :locals => {:current => 'account'}
+  = render :partial => 'sidebar', :locals => {:current => 'profile'}
 
   = form_for @user, :html => {:class => "setting-panel edit_user"} do |f|
-    = hidden_field_tag :current_page, :account
+    = hidden_field_tag :current_page, :profile
     = error_messages_for(@user)
     .field
       = f.label :contact_email, "Email:"

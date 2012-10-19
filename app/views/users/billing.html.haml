@@ -8,8 +8,9 @@
 
     - if @subscriptions.empty?
       %p
-        It looks like you haven't subscribed to Practicing Ruby or your
-        subscription history isn't available.
+        Your subscription history is not available. If you have any questions
+        about your account, please email
+        #{mail_to "support@elmcitycraftworks.org"}.
     - else
       %table.table-bordered.table.table-hover
         %tr

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def edit; end
-  def account; end
+  def profile; end
   def notifications; end
 
   def billing

@@ -5,7 +5,7 @@
     = link_to "Contact", contact_path
   %span.right
     - if current_user
-      = link_to "Settings", account_settings_path if current_user.active?
+      = link_to "Settings", profile_settings_path if current_user.active?
       = link_to "Sign out", logout_path
     - else
       = link_to "Subscribe", subscribe_path, :class => "subscribe"
