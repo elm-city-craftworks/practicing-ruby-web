@@ -22,6 +22,8 @@ module PaymentGateway
 
       customer = find_or_create_customer(token)
 
+      save_credit_card(customer.active_card)
+
       subscription_options = { :plan => "practicing-ruby-monthly" }
 
       subscription_options[:coupon] = coupon unless coupon.blank?
@@ -63,6 +65,8 @@ module PaymentGateway
 
       customer.card = token
       customer.save
+
+      save_credit_card(customer.active_card)
     end
 
     def current_credit_card
@@ -96,6 +100,16 @@ module PaymentGateway
       PaymentLog.create(:user_id => user.id, :raw_data => customer.to_json)
 
       customer
+    end
+
+    def save_credit_card(stripe_card)
+      card = CreditCard.find_or_create_by_user_id(@user.id)
+
+      card.last_four        = stripe_card.last4
+      card.expiration_month = stripe_card.exp_month
+      card.expiration_year  = stripe_card.exp_year
+
+      card.save
     end
   end
 end

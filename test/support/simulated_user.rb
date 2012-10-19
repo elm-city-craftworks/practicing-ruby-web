@@ -121,11 +121,7 @@ module Support
 
         wait_until { assert_flash("Your credit card was sucessfully updated!") }
 
-        click_link "Show which card we are currently billing"
-
-        wait_until { assert_content "Current credit card" }
-
-        assert_content "Expiration: 1/#{Date.today.year + 2}"
+        assert_content "1/#{Date.today.year + 2}"
       end
     end
 
