@@ -10,7 +10,8 @@ class SubscriptionDecorator < ApplicationDecorator
   end
 
   def amount
-    currency = h.number_to_currency(subscription.monthly_rate_cents / 100.0)
+    rate     = subscription.monthly_rate_cents || 0.0
+    currency = h.number_to_currency(rate / 100.0)
 
     "#{currency}/month"
   end
