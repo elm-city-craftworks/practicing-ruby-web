@@ -1,0 +1,13 @@
+%h1 Current credit card
+%hr
+
+%p
+  %strong Card #:
+  ************#{@card.last4}
+
+%p
+  %strong Expiration:
+  #{@card.exp_month}/#{@card.exp_year}
+
+%hr
+= link_to "Change your credit card", '#', :class => "btn update-cc"

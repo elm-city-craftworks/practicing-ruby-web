@@ -78,5 +78,17 @@ module Support
     def simulated_user(&block)
       Support::SimulatedUser.new(self).instance_eval(&block)
     end
+
+    def fill_in_card(params = {})
+      card  = find(:css, "input.card-number")
+      cvc   = find(:css, "input.card-cvc")
+      month = find(:css, "select.card-expiry-month")
+      year  = find(:css, "select.card-expiry-year")
+
+      card.set  params.fetch(:card,  "4242424242424242")
+      cvc.set   params.fetch(:cvc,   "123")
+      month.set params.fetch(:month, "January")
+      year.set  params.fetch(:year,  Date.today.year + 2)
+    end
   end
 end

@@ -1,6 +1,8 @@
 - content_for(:title)  { "Settings" }
 - content_for(:header) { "Settings" }
 
+= render :partial => 'sidebar', :locals => {:current => 'account'}
+
 = form_for @user do |f|
   = render :partial => "form", :locals => {:f => f}
   %hr

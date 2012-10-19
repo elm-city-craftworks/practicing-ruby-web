@@ -88,15 +88,7 @@ module Support
 
         visit registration_payment_path
 
-        card  = find(:css, "input.card-number")
-        cvc   = find(:css, "input.card-cvc")
-        month = find(:css, "select.card-expiry-month")
-        year  = find(:css, "select.card-expiry-year")
-
-        card.set  "4242424242424242"
-        cvc.set   "123"
-        month.set "January"
-        year.set  Date.today.year + 1
+        fill_in_card
 
         fill_in "Coupon", :with => params.fetch(:coupon, "")
 
@@ -108,6 +100,28 @@ module Support
 
         visit library_path
         assert_current_path library_path
+      end
+    end
+
+    def update_credit_card
+      browser do
+        skip_on_travis
+
+        Capybara.default_wait_time = 15
+
+        visit billing_settings_path
+
+        click_link 'Update your credit card'
+
+        exp_year = Date.today.year + 2
+
+        fill_in_card(:year => exp_year)
+
+        click_button "Update"
+
+        wait_until { assert_flash("Your credit card was sucessfully updated!") }
+
+        assert_content "1/#{Date.today.year + 2}"
       end
     end
 

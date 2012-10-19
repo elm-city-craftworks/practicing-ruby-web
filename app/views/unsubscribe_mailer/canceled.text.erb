@@ -1,5 +1,5 @@
 Name: <%= @user.name || 'Unknown' %>
 Github: <%= @user.github_nickname %>
 Email: <%= @user.contact_email %>
-Payment Provider: <%= @user.mailchimp_web_id.blank? ? 'None' : 'Mailchimp' %>
-Provider Id: <%= @user.mailchimp_web_id || "N/A" %>
+Payment Provider: <%= @user.payment_provider || 'None' %>
+Provider Id: <%= @user.payment_provider_id || "N/A" %>

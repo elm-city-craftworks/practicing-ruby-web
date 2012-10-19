@@ -12,16 +12,32 @@ class UsersController < ApplicationController
     redirect_to @user.github_url
   end
 
-  def edit
+  def edit; end
+  def profile; end
+  def notifications; end
 
+  def billing
+    @subscriptions = SubscriptionDecorator.decorate(
+      @user.subscriptions.order("start_date"))
+    @credit_card   = current_user.credit_card
+  end
+
+  def update_credit_card
+    payment_gateway = current_user.payment_gateway
+    payment_gateway.update_credit_card(params)
+
+    flash[:notice] = "Your credit card was sucessfully updated!"
+    redirect_to billing_settings_path
   end
 
   def update
+    params[:current_page] ||= :edit
+
     if @user.update_attributes(cleaned_params)
-      flash[:notice] = "Settings sucessfully updated!"
-      redirect_to edit_user_path(@user)
+      flash[:notice] = "#{params[:current_page].humanize} settings updated!"
+      redirect_to :action => params[:current_page]
     else
-      render :action => :edit
+      render :action => params[:current_page]
     end
   end
 
