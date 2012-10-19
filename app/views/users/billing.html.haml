@@ -27,9 +27,8 @@
     - if @user.payment_provider == "stripe"
       %p
         = link_to "Update your credit card", '#', :class => "btn update-cc"
-        = link_to "Show which card we are currently billing",
-          current_credit_card_path,
-          :class => "current-cc", :rel => "facebox"
+        - if @credit_card
+          %span#current-credit-card Current Card: #{@credit_card.description}
 
     #update-credit-card
       %h1 Update your credit card

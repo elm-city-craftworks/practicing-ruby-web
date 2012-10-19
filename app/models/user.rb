@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :payment_logs
 
+  has_one :credit_card
+
   validates_uniqueness_of :contact_email, :on => :update
   validates :status,      :inclusion => {
     :in => STATUSES, :message => "%{value} is not a valid status" }

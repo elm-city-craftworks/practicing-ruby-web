@@ -13,10 +13,6 @@ class PR.PaymentProcessor
       $.facebox { div: '#update-credit-card' }, 'update-credit-card'
       e.preventDefault()
 
-    $(document).on 'click', 'a.current-cc', (e) ->
-      $.facebox { ajax: $(this).attr('href') }, 'current-credit-card'
-      e.preventDefault()
-
   formSubmit: (event) =>
     event.preventDefault();
 

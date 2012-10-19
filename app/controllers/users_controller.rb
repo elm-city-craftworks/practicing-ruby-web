@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def billing
     @subscriptions = SubscriptionDecorator.decorate(
       @user.subscriptions.order("start_date"))
+    @credit_card   = current_user.credit_card
   end
 
   def update_credit_card
@@ -27,13 +28,6 @@ class UsersController < ApplicationController
 
     flash[:notice] = "Your credit card was sucessfully updated!"
     redirect_to billing_settings_path
-  end
-
-  def current_credit_card
-    payment_gateway = current_user.payment_gateway
-    @card = payment_gateway.current_credit_card
-
-    render :layout => false
   end
 
   def update
