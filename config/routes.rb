@@ -59,7 +59,7 @@ PracticingRubyWeb::Application.routes.draw do
   match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 
   # Legacy route for old notification emails
-  match '/users/settings' => 'users#account', :as => "user_settings"
+  match '/users/settings' => 'users#profile', :as => "user_settings"
 
   scope '/settings' do
     get 'profile'       => 'users#profile',       :as => 'profile_settings'
