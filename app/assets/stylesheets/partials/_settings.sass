@@ -32,7 +32,12 @@ form.edit_user
 .setting-panel
   margin: 1em 0
   float: left
-  width: 560px
+  width: 537px
+  padding: 20px
+  border: 2px solid #ccc
+  +border-radius(3px)
+  background: #fff
+  +single-box-shadow(#d6d6d6, 0, 0, 4px, false, true)
   #errorExplanation
     margin-top: 0
 
@@ -63,26 +68,24 @@ img.sad_pinkie
 
 #settings-sidebar
   margin: 1em 0
-  height: 300px
-  width: 150px
-  +single-box-shadow(#7E7777, 0, 0, 9px, false, true)
+  width: 125px
+  border: 2px solid #ccc
+  border-bottom: 1px solid #ccc
   +border-radius(3px)
-  background-color: rgba(150, 150, 150, .1)
+  background-color: #fff
   float: left
   margin-right: 40px
   a
     display: block
-    padding: 10px 15px
+    padding: 5px 10px
     text-decoration: none
-    font-size: 20px
+    color: $dark-blue
+    border-bottom: 1px solid #ccc
     &:hover
       background: rgba(95, 95, 95, 0.15)
-    &:first-child
-      +border-top-radius(4px)
+      border-color: rgba(95, 95, 95, 0.15)
     &.active
-      background: rgba(160, 32, 16, 0.7)
-      color: #fff
-      +single-text-shadow(rgba(51, 51, 51, 0.63), 1px, 1px, 0)
+      background: rgba(95, 95, 95, 0.15)
+      color: #111
       &:hover
-        background: rgba(160, 32, 16, 0.7)
         cursor: default
