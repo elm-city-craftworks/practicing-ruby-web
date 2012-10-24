@@ -25,7 +25,7 @@
             %td= subscription.status
             %td= subscription.amount
 
-    - if @user.payment_provider == "stripe"
+    - if @user.subscriptions.active && @user.subscriptions.active.payment_provider == "stripe"
       %p
         = link_to "Update your credit card", '#', :class => "btn update-cc"
         - if @credit_card
