@@ -1,6 +1,15 @@
 module PaymentGateway
   class Stripe
 
+    def self.for_customer(customer_id)
+      user = User.where(
+        :payment_provider    => provider,
+        :payment_provider_id => provider_id
+      ).first
+
+      new user if user
+    end
+
     def initialize(user)
       @user            = user
       ::Stripe.api_key = STRIPE_SECRET_KEY
@@ -30,7 +39,7 @@ module PaymentGateway
 
       subscription = customer.update_subscription(subscription_options)
 
-      PaymentLog.create(:user_id => user.id, :raw_data => subscription.to_json)
+      log subscription
 
       user.subscriptions.create(
         :start_date         => Date.today,
@@ -55,6 +64,18 @@ module PaymentGateway
       rescue ::Stripe::InvalidRequestError => e
         raise unless e.message[/No active subscription/]
       end
+
+      user.disable
+    end
+
+    def charge_failed(charge)
+      log charge
+
+      AccountMailer.failed_payment(user, charge)
+    end
+
+    def subscription_ended
+      # TODO Notify user they have been unsubscribed
 
       user.disable
     end
@@ -97,7 +118,7 @@ module PaymentGateway
         :email       => user.contact_email
       )
 
-      PaymentLog.create(:user_id => user.id, :raw_data => customer.to_json)
+      log customer
 
       customer
     end
@@ -110,6 +131,10 @@ module PaymentGateway
       card.expiration_year  = stripe_card.exp_year
 
       card.save
+    end
+
+    def log(object)
+      PaymentLog.create(:user_id => user.id, :raw_data => object.to_json)
     end
   end
 end

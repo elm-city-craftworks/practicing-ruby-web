@@ -13,6 +13,7 @@ gem 'md_preview'
 gem 'md_emoji'
 
 gem 'stripe'
+gem 'stripe_event'
 
 gem 'will_paginate'
 gem 'haml'

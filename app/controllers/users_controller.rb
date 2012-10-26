@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    UnsubscribeMailer.canceled(@user) unless @user.disabled?
+    AccountMailer.canceled(@user) unless @user.disabled?
 
     @user.disable
   end

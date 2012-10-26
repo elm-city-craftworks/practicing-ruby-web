@@ -1,4 +1,4 @@
-class UnsubscribeMailer < ActionMailer::Base
+class AccountMailer < ActionMailer::Base
   def unsubscribed(address)
     @address = address
 
@@ -11,5 +11,13 @@ class UnsubscribeMailer < ActionMailer::Base
 
     mail(:to      => "support@elmcitycraftworks.org",
          :subject => "[Practicing Ruby] Account cancellation").deliver
+  end
+
+  def failed_payment(user, charge)
+    @user   = user
+    @charge = charge
+
+    mail(:to      => user.contact_email,
+         :subject => "There was a problem with your payment for Practicing Ruby :(").deliver
   end
 end

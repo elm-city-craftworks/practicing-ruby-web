@@ -218,6 +218,9 @@ GEM
     stripe (1.7.0)
       multi_json (~> 1.1)
       rest-client (~> 1.4)
+    stripe_event (0.4.0)
+      rails (~> 3.1)
+      stripe (~> 1.6)
     test_notifier (1.0.1)
       notifier
     thor (0.16.0)
@@ -279,6 +282,7 @@ DEPENDENCIES
   sassy-buttons
   simplecov
   stripe
+  stripe_event
   test_notifier
   turn (~> 0.9.5)
   uglifier

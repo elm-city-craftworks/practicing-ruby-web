@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UnsubscribeMailerTest < ActionMailer::TestCase
+class AccountMailerTest < ActionMailer::TestCase
   context "mailchimp account is deleted" do
 
     test "user is notified they have been unsubscribed" do
