@@ -74,8 +74,8 @@ module PaymentGateway
       AccountMailer.failed_payment(user, charge)
     end
 
-    def subscription_ended
-      # TODO Notify user they have been unsubscribed
+    def subscription_ended(subscription)
+      log subscription
 
       user.disable
     end

@@ -14,6 +14,6 @@ StripeEvent.setup do
 
     gateway = PaymentGateway::Stripe.for_customer(subscription.customer)
 
-    gateway.subscription_ended if gateway
+    gateway.subscription_ended(subscription) if gateway
   end
 end

@@ -11,16 +11,22 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     @user.subscriptions.create(:start_date => Date.today)
   end
 
+  test 'for_customer' do
+    gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
+
+    assert gateway
+  end
+
   test 'subscription_ended' do
+    subscription = Stripe::Charge.new
+
     assert @user.subscriptions.active, "User does not have any active subscriptions"
 
-    @payment_gateway.subscription_ended
+    @payment_gateway.subscription_ended(subscription)
 
     assert @user.disabled?, "User is still enabled after their subscription ended"
 
     refute @user.subscriptions.active, "User's subscription was not ended"
-
-    # TODO test mail message
   end
 
   test 'charge_failed' do
@@ -36,7 +42,6 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
     message = ActionMailer::Base.deliveries.first
 
-    assert message.body.to_s[/#{charge.card.last4}/],      "Card number missing"
-    assert message.body.to_s[/#{charge.failure_message}/], "Failure message missing"
+    assert message.body.to_s[/#{charge.card.last4}/], "Card number missing"
   end
 end
