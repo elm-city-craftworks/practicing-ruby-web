@@ -4,7 +4,7 @@ module PaymentGateway
     def self.for_customer(customer_id)
       user = User.where(
         :payment_provider    => 'stripe',
-        :payment_provider_id => provider_id
+        :payment_provider_id => customer_id
       ).first
 
       new user if user
