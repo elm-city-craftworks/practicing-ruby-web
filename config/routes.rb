@@ -1,6 +1,8 @@
 PracticingRubyWeb::Application.routes.draw do
   root :to => 'home#index'
 
+  mount StripeEvent::Engine => STRIPE_WEBHOOK_PATH
+
   match "/hooks/#{MailChimp::SETTINGS[:webhook_key]}" => 'hooks#receive'
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
@@ -80,5 +82,4 @@ PracticingRubyWeb::Application.routes.draw do
     resources :broadcasts
     resources :reports, :only => [:index]
   end
-
 end
