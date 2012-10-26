@@ -1,0 +1,16 @@
+Shucks! Your last payment to Practicing Ruby didn't work! Here is what the bank
+said:
+
+"<%= @charge.failure_message %>"
+
+We tried charging your card ending in <%= @charge.card.last4 %> which expires on
+<%= "#{@charge.card.exp_month}/#{@charge.card.exp_year}" %>. If this card is no
+longer valid, please update it by visiting the following URL and clicking
+'Update your credit card':
+
+<%= billing_settings_url %>
+
+If you aren't sure why your payment failed don't hesitate to get in touch with
+us so we can help you out.
+
+Thanks for subscribing to Practicing Ruby! <3 <3 <3
