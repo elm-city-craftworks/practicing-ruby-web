@@ -1,8 +1,9 @@
-require 'simplecov'
-SimpleCov.start 'rails'
+# require 'simplecov'
+# SimpleCov.start 'rails'
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+require 'minitest/autorun'
 require 'rails/test_help'
 require 'support/integration'
 require 'support/simulated_user'
@@ -10,6 +11,7 @@ require 'support/mini_contest'
 require 'test_notifier/runner/minitest'
 require 'capybara/rails'
 require 'database_cleaner'
+require 'minitest/autorun'
 
 TestNotifier.silence_no_notifier_warning = true
 DatabaseCleaner.strategy                 = :truncation
@@ -44,4 +46,3 @@ end
 def skip_on_travis
   skip "Do not run this test on travis ci" if ENV["TRAVIS"]
 end
-

@@ -270,7 +270,7 @@ DEPENDENCIES
   mailhopper (~> 0.0.4)
   md_emoji
   md_preview
-  minitest (~> 2.12.1)
+  minitest
   mocha
   nokogiri
   omniauth-github (~> 1.0.1)

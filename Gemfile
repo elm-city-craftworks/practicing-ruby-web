@@ -42,7 +42,7 @@ group :assets do
 end
 
 group :test do
-  gem 'minitest',  '~> 2.12.1'
+  gem 'minitest'
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'launchy'
