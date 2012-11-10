@@ -16,7 +16,7 @@ module Admin
 
       report = {}
       
-      [7,14,21,28].each do |days|
+      [1,3,7,14,21,28].each do |days|
         date = Date.today - days
         
         q="start_date < :date and (finish_date is null or finish_date > :date)"
