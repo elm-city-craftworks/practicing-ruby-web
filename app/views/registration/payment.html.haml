@@ -11,8 +11,6 @@
 
 %p Your payment details are sent directly to Stripe: For security reasons, we do not store your credit card number or other sensitive information.
 
-.payment-errors= @errors
-
 = form_tag registration_create_payment_path, :id => "payment-form" do
   = render 'shared/credit_card'
   .row

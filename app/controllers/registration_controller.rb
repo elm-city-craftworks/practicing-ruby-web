@@ -64,9 +64,14 @@ class RegistrationController < ApplicationController
 
   def create_payment
     payment_gateway = current_user.payment_gateway
-    payment_gateway.subscribe(params)
+    begin
+      payment_gateway.subscribe(params)
 
-    redirect_to :action => :complete
+      redirect_to :action => :complete
+    rescue Stripe::CardError => e
+      @errors = e.message
+      render :action => :payment
+    end
   end
 
   def complete

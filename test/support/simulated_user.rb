@@ -88,7 +88,7 @@ module Support
 
         visit registration_payment_path
 
-        fill_in_card
+        fill_in_card(params)
 
         fill_in "Coupon", :with => params.fetch(:coupon, "")
 
