@@ -103,7 +103,7 @@ module Support
       end
     end
 
-    def update_credit_card
+    def update_credit_card(params={})
       browser do
         skip_on_travis
 
@@ -115,11 +115,11 @@ module Support
 
         exp_year = Date.today.year + 2
 
-        fill_in_card(:year => exp_year)
+        fill_in_card(params.merge(:year => exp_year))
 
         click_button "Update"
 
-        wait_until { assert_flash("Your credit card was sucessfully updated!") }
+        wait_until { has_css?('#flash', :text => "Your credit card was sucessfully updated!") }
 
         assert_content "1/#{Date.today.year + 2}"
       end
