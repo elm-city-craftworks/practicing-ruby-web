@@ -37,6 +37,15 @@ class ActionDispatch::IntegrationTest
   end
 
   teardown do
+    # Clean up generated stripe customers
+    #
+    stripe_customers = User.where(%{payment_provider = 'stripe' and
+                                    payment_provider_id is not null})
+    stripe_customers.each do |user|
+      payment_gateway = user.payment_gateway
+      payment_gateway.customer.delete
+    end
+
     DatabaseCleaner.clean
     Capybara.reset_sessions!
     Capybara.use_default_driver

@@ -26,4 +26,33 @@ class PaymentTest < ActionDispatch::IntegrationTest
       update_credit_card
     end
   end
+
+  test "failed credit card updates" do
+    begin
+      simulated_user do
+        register(Support::SimulatedUser.default)
+        make_stripe_payment
+        update_credit_card(:card => "4000000000000002")
+      end
+
+      flunk "Invalid credit card was accepted"
+    rescue Capybara::TimeoutError => e
+      assert_flash "Your card was declined"
+    end
+  end
+
+  test "failed payments" do
+    begin
+      simulated_user do
+        register(Support::SimulatedUser.default)
+        make_stripe_payment(:card => "4000000000000002")
+      end
+
+      flunk "Payment did not fail"
+
+    rescue Capybara::TimeoutError => e
+      assert_current_path registration_create_payment_path
+      assert_content "Your card was declined"
+    end
+  end
 end
