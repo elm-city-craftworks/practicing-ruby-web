@@ -7,3 +7,7 @@ job_type :rake, "cd :path && RAILS_ENV=:environment bundle exec rake :task --sil
 every 10.minutes do
   rake "mailchimp:disable_unsubscribed"
 end
+
+every 1.month do
+  rake "stripe:card_exipration_notice"
+end

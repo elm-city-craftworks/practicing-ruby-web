@@ -20,4 +20,12 @@ class AccountMailer < ActionMailer::Base
     mail(:to      => user.contact_email,
          :subject => "There was a problem with your payment for Practicing Ruby :(").deliver
   end
+
+  def card_expiring(card)
+    @card = card
+    user  = card.user
+
+    mail(:to      => user.contact_email,
+         :subject => "Oh No! Your credit card is expiring next month.").deliver
+  end
 end
