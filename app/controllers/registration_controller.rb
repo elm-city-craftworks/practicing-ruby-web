@@ -7,7 +7,8 @@ class RegistrationController < ApplicationController
     path = case current_user.status
       when "authorized"           then {:action => :edit_profile }
       when "pending_confirmation" then {:action => :update_profile }
-      when "confirmed"            then {:action => :payment_pending }
+      when "confirmed"            then {:action => :payment }
+      when "payment_pending"      then {:action => :payment }
       else library_path
     end
 
@@ -47,10 +48,9 @@ class RegistrationController < ApplicationController
     if user || current_user.try(:status) == "confirmed"
       user.clear_access_token
 
-      # TODO swtich this to confirmed one we are doing payment processing
-      user.update_attribute(:status, "payment_pending")
+      user.update_attribute(:status, "confirmed")
 
-      return redirect_to(:action => :payment_pending)
+      return redirect_to(:action => :payment)
     end
   end
 
@@ -59,7 +59,9 @@ class RegistrationController < ApplicationController
   end
 
   def payment
-    redirect_to(:action => :complete) unless current_user.status == "payment_pending"
+    unless current_user.status == "payment_pending" || current_user.status == "confirmed"
+      redirect_to(:action => :complete)
+    end
   end
 
   def create_payment

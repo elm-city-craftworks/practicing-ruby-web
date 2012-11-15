@@ -56,4 +56,11 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       register(Support::SimulatedUser.default)
     end
   end
+
+  test "payment pending accounts" do
+    simulated_user do
+      register(Support::SimulatedUser.default)
+      payment_pending
+    end
+  end
 end

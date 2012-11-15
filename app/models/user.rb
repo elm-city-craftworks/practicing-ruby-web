@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   STATUSES        = %w{authorized pending_confirmation confirmed payment_pending
                        active disabled}
-  ACTIVE_STATUSES = %w{active payment_pending}
+  ACTIVE_STATUSES = %w{active}
 
   has_many :comments
   has_many :subscriptions
