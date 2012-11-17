@@ -54,6 +54,7 @@ module Support
 
       browser do
         visit registration_confirmation_path(:secret => secret)
+        return registration_confirmation_path(:secret => secret)
       end
     end
 

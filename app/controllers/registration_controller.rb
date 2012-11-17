@@ -45,13 +45,12 @@ class RegistrationController < ApplicationController
   def confirm_email
     user = User.find_by_access_token(params[:secret])
 
-    if user || current_user.try(:status) == "confirmed"
-      user.clear_access_token
+    return redirect_to(:action => :index) unless user
 
-      user.update_attribute(:status, "confirmed")
+    user.clear_access_token
+    user.update_attribute(:status, "confirmed")
 
-      return redirect_to(:action => :payment)
-    end
+    return redirect_to(:action => :payment)
   end
 
   def payment_pending
