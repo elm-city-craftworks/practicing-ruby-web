@@ -62,4 +62,5 @@ end
 group :production do
   gem 'god', :require => false
   gem 'exception_notification'
+  gem 'rack-google_analytics'
 end
