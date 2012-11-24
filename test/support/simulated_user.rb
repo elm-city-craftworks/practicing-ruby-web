@@ -54,17 +54,25 @@ module Support
 
       browser do
         visit registration_confirmation_path(:secret => secret)
+        return registration_confirmation_path(:secret => secret)
       end
     end
 
     def make_payment
       browser do
-        assert_current_path registration_payment_pending_path
+        assert_current_path registration_payment_path
       end
 
       # TODO Find a way to test this through the UI
       #
       @user.subscriptions.create(:start_date => Date.today)
+      @user.status = "active"
+      @user.save
+
+      browser do
+        visit registration_complete_path
+        #assert_current_path registration_complete_path
+      end
     end
 
     def read_article
@@ -81,6 +89,9 @@ module Support
     def make_stripe_payment(params={})
       @user.subscriptions.delete_all
 
+      @user.status = "confirmed"
+      @user.save
+
       browser do
         skip_on_travis
 
@@ -88,7 +99,7 @@ module Support
 
         visit registration_payment_path
 
-        fill_in_card
+        fill_in_card(params)
 
         fill_in "Coupon", :with => params.fetch(:coupon, "")
 
@@ -103,7 +114,7 @@ module Support
       end
     end
 
-    def update_credit_card
+    def update_credit_card(params={})
       browser do
         skip_on_travis
 
@@ -115,13 +126,23 @@ module Support
 
         exp_year = Date.today.year + 2
 
-        fill_in_card(:year => exp_year)
+        fill_in_card(params.merge(:year => exp_year))
 
         click_button "Update"
 
-        wait_until { assert_flash("Your credit card was sucessfully updated!") }
+        wait_until { has_css?('#flash', :text => "Your credit card was sucessfully updated!") }
 
         assert_content "1/#{Date.today.year + 2}"
+      end
+    end
+
+    def payment_pending
+      @user.status = "payment_pending"
+      @user.save
+
+      browser do
+        visit library_path
+        assert_current_path registration_payment_path
       end
     end
 

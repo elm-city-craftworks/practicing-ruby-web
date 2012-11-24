@@ -23,11 +23,16 @@ class UsersController < ApplicationController
   end
 
   def update_credit_card
-    payment_gateway = current_user.payment_gateway
-    payment_gateway.update_credit_card(params)
+    begin
+      payment_gateway = current_user.payment_gateway
+      payment_gateway.update_credit_card(params)
 
-    flash[:notice] = "Your credit card was sucessfully updated!"
-    redirect_to billing_settings_path
+      flash[:notice] = "Your credit card was sucessfully updated!"
+      redirect_to billing_settings_path
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to billing_settings_path
+    end
   end
 
   def update

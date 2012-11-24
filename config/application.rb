@@ -8,6 +8,11 @@ module PracticingRubyWeb
   class Application < Rails::Application
     config.middleware.use Rack::Pjax
 
+    if Rails.env == "production"
+      config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-33127211-2")
+    end
+        
+
     # Enable the asset pipeline
     config.assets.enabled = true
 

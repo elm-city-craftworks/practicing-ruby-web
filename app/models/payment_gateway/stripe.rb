@@ -29,7 +29,11 @@ module PaymentGateway
       token  = params[:stripeToken]
       coupon = params[:coupon]
 
-      customer = find_or_create_customer(token)
+      if customer = find_customer
+        update_credit_card(params)
+      else
+        customer = create_customer(token)
+      end
 
       save_credit_card(customer.active_card)
 
@@ -94,6 +98,10 @@ module PaymentGateway
       customer = find_customer
 
       customer.active_card
+    end
+
+    def customer
+      find_customer
     end
 
     private

@@ -7,11 +7,16 @@
 
 %h3 You are so close. Just one last step.
 
+%p.note
+  %strong Existing subscribers:
+  As of the 15th of November we officially cut over our payment processor to
+  Stripe payments. If you had a temporary free account and for any reason can't
+  afford a paid account, email us at #{mail_to "support@elmcitycraftworks.org"}.
+  Otherwise, thanks for subscribing!
+
 %p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
 
 %p Your payment details are sent directly to Stripe: For security reasons, we do not store your credit card number or other sensitive information.
-
-.payment-errors= @errors
 
 = form_tag registration_create_payment_path, :id => "payment-form" do
   = render 'shared/credit_card'
