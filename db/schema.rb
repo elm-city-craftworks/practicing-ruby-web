@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "title"
     t.text     "body"
     t.integer  "author_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.boolean  "broadcast",         :default => false, :null => false
     t.text     "broadcast_message"
     t.string   "url"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.integer  "user_id"
     t.integer  "article_id"
     t.integer  "views",      :default => 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "articles", :force => true do |t|
@@ -50,15 +50,15 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "github_nickname"
     t.text     "secret"
     t.integer  "authorization_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "authorizations", :force => true do |t|
     t.text     "github_uid"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "collections", :force => true do |t|
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.string   "commentable_type"
     t.integer  "user_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "credit_cards", :force => true do |t|
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "queue"
   end
 
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "subject"
     t.text     "content"
     t.datetime "sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "payment_logs", :force => true do |t|
@@ -128,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.integer  "article_id"
     t.text     "secret"
     t.integer  "views"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -145,20 +145,21 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "mailchimp_web_id"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.text     "github_nickname"
-    t.boolean  "admin",                       :default => false
-    t.boolean  "notify_conversations",        :default => true,  :null => false
-    t.boolean  "notify_mentions",             :default => true,  :null => false
-    t.boolean  "notify_comment_made",         :default => false, :null => false
-    t.boolean  "beta_tester",                 :default => false
-    t.boolean  "account_disabled",            :default => false
-    t.boolean  "notifications_enabled",       :default => false, :null => false
+    t.boolean  "admin",                 :default => false
+    t.boolean  "notify_conversations",  :default => true,  :null => false
+    t.boolean  "notify_mentions",       :default => true,  :null => false
+    t.boolean  "notify_comment_made",   :default => false, :null => false
+    t.boolean  "beta_tester",           :default => false
+    t.boolean  "account_disabled",      :default => false
+    t.boolean  "notifications_enabled", :default => false, :null => false
     t.string   "status"
     t.string   "contact_email"
     t.string   "access_token"
-    t.boolean  "notify_updates",              :default => true,  :null => false
+    t.boolean  "notify_updates",        :default => true,  :null => false
     t.text     "payment_provider"
     t.text     "payment_provider_id"
   end
