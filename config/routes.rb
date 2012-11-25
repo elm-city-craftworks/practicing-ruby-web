@@ -1,6 +1,8 @@
 PracticingRubyWeb::Application.routes.draw do
   root :to => 'home#index'
 
+  mount StripeEvent::Engine => STRIPE_WEBHOOK_PATH
+
   match "/hooks/#{MailChimp::SETTINGS[:webhook_key]}" => 'hooks#receive'
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
@@ -58,7 +60,20 @@ PracticingRubyWeb::Application.routes.draw do
 
   match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 
-  match '/users/settings' => 'users#edit', :as => "user_settings"
+  # Legacy route for old notification emails
+  match '/users/settings' => 'users#profile', :as => "user_settings"
+
+  scope '/settings' do
+    get 'profile'       => 'users#profile',       :as => 'profile_settings'
+    get 'notifications' => 'users#notifications', :as => 'notification_settings'
+    get 'billing'       => 'users#billing',       :as => 'billing_settings'
+
+    # Billing
+    post 'update_credit_card' => 'users#update_credit_card',
+      :as => 'update_credit_card'
+    get 'current_credit_card' => 'users#current_credit_card',
+      :as => 'current_credit_card'
+  end
   resources :users
 
   namespace :admin do
@@ -67,5 +82,4 @@ PracticingRubyWeb::Application.routes.draw do
     resources :broadcasts
     resources :reports, :only => [:index]
   end
-
 end

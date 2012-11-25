@@ -7,29 +7,19 @@
 
 %h3 You are so close. Just one last step.
 
+%p.note
+  %strong Existing subscribers:
+  As of the 15th of November we officially cut over our payment processor to
+  Stripe payments. If you had a temporary free account and for any reason can't
+  afford a paid account, email us at #{mail_to "support@elmcitycraftworks.org"}.
+  Otherwise, thanks for subscribing!
+
 %p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
 
 %p Your payment details are sent directly to Stripe: For security reasons, we do not store your credit card number or other sensitive information.
 
-.payment-errors= @errors
-
 = form_tag registration_create_payment_path, :id => "payment-form" do
-  .row
-    %label Card Number
-    %input.card-number{type: "text", size: 20, autocomplete: "off"}
-  .row
-    %label
-      CVC
-      %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
-    %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
-  .row
-    %label Card Expiration
-    = select_month nil, { add_month_numbers: true },
-      { name: nil, id: nil, class: "card-expiry-month" }
-    = select_year nil,
-      { start_year: Date.today.year, end_year: Date.today.year+15},
-      { name: nil, id: nil, class: "card-expiry-year"}
-
+  = render 'shared/credit_card'
   .row
     = label_tag :coupon, "Coupon Code"
     = text_field_tag :coupon, params[:coupon]
@@ -38,8 +28,3 @@
     = submit_tag "Submit Payment", :class => "submit-button"
     %span#processing-spinner
 
-#cvc-help
-  %p
-    For added security, we verify your CVC, CVV, or CID code. This code isn't
-    stored and is checked before processing your payment.
-  %p= image_tag "payment/cvc.gif"

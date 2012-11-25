@@ -8,4 +8,8 @@ class Subscription < ActiveRecord::Base
   def self.cancel_account
     active.update_attributes(:finish_date => Date.today) if active
   end
+
+  def active?
+    finish_date.blank?
+  end
 end

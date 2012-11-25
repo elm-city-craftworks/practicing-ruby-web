@@ -1,6 +1,15 @@
 module PaymentGateway
   class Stripe
 
+    def self.for_customer(customer_id)
+      user = User.where(
+        :payment_provider    => 'stripe',
+        :payment_provider_id => customer_id
+      ).first
+
+      new user if user
+    end
+
     def initialize(user)
       @user            = user
       ::Stripe.api_key = STRIPE_SECRET_KEY
@@ -20,7 +29,13 @@ module PaymentGateway
       token  = params[:stripeToken]
       coupon = params[:coupon]
 
-      customer = find_or_create_customer(token)
+      if customer = find_customer
+        update_credit_card(params)
+      else
+        customer = create_customer(token)
+      end
+
+      save_credit_card(customer.active_card)
 
       subscription_options = { :plan => "practicing-ruby-monthly" }
 
@@ -28,7 +43,7 @@ module PaymentGateway
 
       subscription = customer.update_subscription(subscription_options)
 
-      PaymentLog.create(:user_id => user.id, :raw_data => subscription.to_json)
+      log subscription
 
       user.subscriptions.create(
         :start_date         => Date.today,
@@ -57,6 +72,38 @@ module PaymentGateway
       user.disable
     end
 
+    def charge_failed(charge)
+      log charge
+
+      AccountMailer.failed_payment(user, charge)
+    end
+
+    def subscription_ended(subscription)
+      log subscription
+
+      user.disable
+    end
+
+    def update_credit_card(params)
+      token    = params[:stripeToken]
+      customer = find_customer
+
+      customer.card = token
+      customer.save
+
+      save_credit_card(customer.active_card)
+    end
+
+    def current_credit_card
+      customer = find_customer
+
+      customer.active_card
+    end
+
+    def customer
+      find_customer
+    end
+
     private
 
     attr_reader :user
@@ -79,9 +126,23 @@ module PaymentGateway
         :email       => user.contact_email
       )
 
-      PaymentLog.create(:user_id => user.id, :raw_data => customer.to_json)
+      log customer
 
       customer
+    end
+
+    def save_credit_card(stripe_card)
+      card = CreditCard.find_or_create_by_user_id(@user.id)
+
+      card.last_four        = stripe_card.last4
+      card.expiration_month = stripe_card.exp_month
+      card.expiration_year  = stripe_card.exp_year
+
+      card.save
+    end
+
+    def log(object)
+      PaymentLog.create(:user_id => user.id, :raw_data => object.to_json)
     end
   end
 end

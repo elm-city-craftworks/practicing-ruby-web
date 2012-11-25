@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011002134) do
+ActiveRecord::Schema.define(:version => 20121019183135) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(:version => 20121011002134) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "credit_cards", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "last_four"
+    t.integer  "expiration_month"
+    t.integer  "expiration_year"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -150,7 +159,6 @@ ActiveRecord::Schema.define(:version => 20121011002134) do
     t.string   "contact_email"
     t.string   "access_token"
     t.boolean  "notify_updates",              :default => true,  :null => false
-    t.text     "mailchimp_web_id"
     t.text     "payment_provider"
     t.text     "payment_provider_id"
   end

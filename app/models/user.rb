@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
   STATUSES        = %w{authorized pending_confirmation confirmed payment_pending
                        active disabled}
-  ACTIVE_STATUSES = %w{active payment_pending}
+  ACTIVE_STATUSES = %w{active}
 
   has_many :comments
   has_many :subscriptions
   has_many :payment_logs
+
+  has_one :credit_card
 
   validates_uniqueness_of :contact_email, :on => :update
   validates :status,      :inclusion => {

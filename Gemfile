@@ -13,6 +13,7 @@ gem 'md_preview'
 gem 'md_emoji'
 
 gem 'stripe'
+gem 'stripe_event'
 
 gem 'will_paginate'
 gem 'haml'
@@ -29,8 +30,12 @@ gem 'delayed_job', '~> 3.0.3'
 gem 'delayed_job_active_record'
 gem 'daemons', :require => false
 
-gem 'capistrano'
 gem 'whenever'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano_confirm_branch'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.0'
@@ -41,7 +46,7 @@ group :assets do
 end
 
 group :test do
-  gem 'minitest',  '~> 2.12.1'
+  gem 'minitest'
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'launchy'
@@ -57,4 +62,5 @@ end
 group :production do
   gem 'god', :require => false
   gem 'exception_notification'
+  gem 'rack-google_analytics'
 end

@@ -1,0 +1,13 @@
+We just wanted to let you know that your credit card ending in
+<%= @card.last_four %> will expire on
+<%= "#{@card.expiration_month}/#{@card.expiration_year}" %>. Please update your
+billing information by visiting the following URL and
+clicking 'Update your credit card':
+
+<%= billing_settings_url %>
+
+If you don't update your card before it expires, the billing gremlins may
+disable your account and that makes us sad. As always if you have any questions
+or problems don't hesitate to contact us.
+
+Thanks for subscribing to Practicing Ruby! <3 <3 <3

@@ -9,7 +9,7 @@ class UserManager
   def delete_user(email)
     client.list_unsubscribe(list_id, email, true)
 
-    UnsubscribeMailer.unsubscribed(email)
+    AccountMailer.unsubscribed(email)
   end
 
   def unsubscribed_users

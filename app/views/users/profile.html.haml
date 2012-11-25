@@ -1,0 +1,27 @@
+- content_for(:title)  { "Account Settings" }
+
+- content_for :settings_panel do
+  = render :partial => 'sidebar', :locals => {:current => 'profile'}
+
+  = form_for @user, :html => {:class => "setting-panel edit_user"} do |f|
+    = hidden_field_tag :current_page, :profile
+    = error_messages_for(@user)
+    .field
+      = f.label :contact_email, "Email:"
+      = f.text_field :contact_email
+    %p#gravatar
+      = UserDecorator.decorate(@user).icon(32)
+      = link_to "Change your avatar at Gravatar.com", "http://gravatar.com/"
+    %p
+      = f.check_box :beta_tester
+      = f.label :beta_tester,
+        "Give me early access to experimental website features"
+    %hr
+    %p
+      = f.submit "Update Settings"
+      = link_to "Unsubscribe from Practicing Ruby", user_path(@user), :method => :delete,
+        :data => {:confirm => "Are you sure you want to unsubscribe?"},
+        :id => "cancel"
+      %span.cancel-notice.info Cancellation may take up to 24 hours
+
+= render 'settings_page'

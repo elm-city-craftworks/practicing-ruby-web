@@ -1,45 +1,8 @@
-:coffeescript
-  $ ->
-    new PR.ShareBox()
-
-#share-box
-  .header Well hello there, stranger. Welcome to Practicing Ruby!
-
-  .personal
-    It looks like #{@user.link_to_github} has invited you here to check out
-    Issue #{@article.issue_number}.
-
-  .subscribe
-    %span.top
-      This journal is a grassroots effort to produce
-      amazing content for ruby programmers.
-    %br
-    %br
-    If you like what you see here, please subscribe!
-    It only costs $8/month for full access to an
-    ever-growing library of articles, and that
-    money supports the
-    sustainability of this project.
-    .controls
-      %button Learn More &raquo;
-  .read
-    %span.top
-      If you're itching to start reading right away,
-      just click the big button below and dive right in.
-    %br
-    %br
-    Although the discussion thread for
-    this article is available to subscribers only,
-    my contact information is listed at the bottom of this page.
-    Please feel free to email me your questions!
-    .controls
-      %button Read Issue #{@article.issue_number} &raquo;
-
-  .clear
-
 = render "header"
 
 #article
+  - # TODO Show Share Box Message
+
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
 

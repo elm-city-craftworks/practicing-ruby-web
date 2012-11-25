@@ -9,13 +9,88 @@ form.edit_user
       font-size: 1.1em
       margin: 2px
       color:  #333
+  input[type="checkbox"]
+    margin-right: 10px
   a#cancel
-    margin: 0 2em
+    float: right
+    line-height: 36px
   span.cancel-notice
+    float: right
+    clear: right
+  p#gravatar
+    img
+      +image-box
+      vertical-align: middle
+      margin-right: 10px
+      padding: 3px
+    a
+      line-height: 38px
+  .info
     color: #888
     font-style: italic
+
+.setting-panel
+  margin: 1em 0
+  float: left
+  width: 537px
+  padding: 20px
+  border: 2px solid #ccc
+  +border-radius(3px)
+  background: #fff
+  +single-box-shadow(#d6d6d6, 0, 0, 4px, false, true)
+  #errorExplanation
+    margin-top: 0
+
+#billing-settings
+  p
+    text-align: left
+  h2
+    font-size: 1.5em
+    color: #777
+  a.btn
+    +classy-button
+    text-decoration: none
+  table
+    margin: 1em 0
+    font-family: Helvetica, sans-serif
+  #update-credit-card
+    display: none
+  a.current-cc
+    margin-left: 10px
+  #current-credit-card
+    margin-left: 1em
+    font-size: 0.9em
+
+#facebox
+  .update-credit-card, .current-credit-card
+    h1
+      font-size: 2em
 
 img.sad_pinkie
   width: 600px
   margin: 2em 0
   display: block
+
+#settings-sidebar
+  margin: 1em 0
+  width: 125px
+  border: 2px solid #ccc
+  border-bottom: 1px solid #ccc
+  +border-radius(3px)
+  background-color: #fff
+  float: left
+  margin-right: 40px
+  a
+    display: block
+    padding: 5px 10px
+    text-decoration: none
+    color: $dark-blue
+    border-bottom: 1px solid #ccc
+    &:hover
+      background: rgba(95, 95, 95, 0.15)
+      border-color: rgba(95, 95, 95, 0.15)
+    &.active
+      background: rgba(95, 95, 95, 0.15)
+      color: #111
+      &:hover
+        cursor: default

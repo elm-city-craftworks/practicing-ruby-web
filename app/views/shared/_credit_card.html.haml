@@ -1,0 +1,23 @@
+.payment-errors= @errors
+
+.row
+  %label Card Number
+  %input.card-number{type: "text", size: 20, autocomplete: "off"}
+.row
+  %label
+    CVC
+    %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
+  %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
+.row
+  %label Card Expiration
+  = select_month nil, { add_month_numbers: true },
+    { name: nil, id: nil, class: "card-expiry-month" }
+  = select_year nil,
+    { start_year: Date.today.year, end_year: Date.today.year+15},
+    { name: nil, id: nil, class: "card-expiry-year"}
+
+#cvc-help
+  %p
+    For added security, we verify your CVC, CVV, or CID code. This code isn't
+    stored and is checked before processing your payment.
+  %p= image_tag "payment/cvc.gif"

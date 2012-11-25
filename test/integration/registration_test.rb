@@ -56,4 +56,21 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       register(Support::SimulatedUser.default)
     end
   end
+
+  test "attempting to confirm twice" do
+    simulated_user do
+      authenticate(:nickname => "TestUser", :uid => "12345")
+      create_profile(:email => "test@test.com")
+      confirmation_path = confirm_email
+      browser { visit confirmation_path } # this attempts to hit the secret URL again 
+      make_payment
+    end
+  end
+
+  test "payment pending accounts" do
+    simulated_user do
+      register(Support::SimulatedUser.default)
+      payment_pending
+    end
+  end
 end

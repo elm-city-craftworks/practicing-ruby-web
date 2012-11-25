@@ -34,16 +34,6 @@ class SharingTest < ActionDispatch::IntegrationTest
     assert_equal 404, page.status_code
   end
 
-  test "share-box is displayed when a shared article is viewed" do
-    Capybara.current_driver = :webkit # You know, for the javascripts
-
-    visit shared_article_path(@share.secret)
-
-    within "#facebox" do
-      assert_content "Learn More"
-    end
-  end
-
   def assert_shared_article_accessible
     visit shared_article_path(@share.secret)
 
