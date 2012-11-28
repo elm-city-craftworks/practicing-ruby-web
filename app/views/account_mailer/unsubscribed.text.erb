@@ -1,40 +1,38 @@
 Hello there!
 
-You are now unsubscribed from Practicing Ruby.
-If you actually meant to cancel your subscription,
-you won't be billed further, and you won't receive
-further notifications about Practicing Ruby content.
-You are of course welcome to respond to this email
-with some feedback, but that's totally optional.
-It was awesome to have you as a subscriber, even
-if you're ready to move on now.
+You are now unsubscribed from Practicing Ruby. If you actually 
+meant to cancel your subscription, you won't be billed 
+further, and you won't receive further notifications about 
+Practicing Ruby content. You are of course welcome to 
+respond to this email with some feedback, but that's 
+totally optional. It was awesome to have you as a subscriber, 
+even if you're ready to move on now.
 
-But there's also a chance that you're receiving
-this email and DIDN'T intentionally cancel your
-account. If that's the case, I have some bad news
-and good news for you.
+But there's also a chance that you're receiving this email 
+and DIDN'T intentionally cancel your account. If that's the 
+case, I have some bad news and good news for you.
 
-The bad news is that MailChimp's integration with
-Amazon Payments isn't great, and so it never updates
-people's expiration dates or card numbers unless they
-cancel their subscription and sign up again. There
-isn't a way for me to detect this, because Mailchimp
-handles your payment, not me. I would love to change
-payment providers, but it's tough to make the switch
-at this point, and so we're stuck with this problem.
+The bad news is that MailChimp's integration with Amazon Payments 
+isn't great, and so it never updates people's expiration 
+dates or card numbers unless they cancel their subscription and 
+sign up again. There isn't a way for me to detect this, because 
+Mailchimp handles your payment, not me.
 
-The good news is that resubscribing is easy. You
-just need to click the link below, and it should take
-you through the same process as when you signed up for
-Practicing Ruby.
+The good news is that we have switched to Stripe for payments,
+which gives us the ability to make sure this problem will
+never happen for you again. When you resubscribe, you'll
+be able to update your billing information whenever you want,
+and you'll also get a warning about any failed payments BEFORE 
+your account is disabled, not afterwards.
+
+To resubscribe, please visit the following link:
 
 <%= subscribe_url :email => @address %>
 
-Once you've done that, within a couple minutes a
-webhook will fire and restore your access to
-practicingruby.com. If you run into *any problems at all*
-during this process, or  if you have questions, simply
-reply to this email and I'll respond as soon as I can.
+Once you've updated your billing information, your account should be 
+reactivated immediately. But if you run into  *any problems at all* 
+during this process, or if you have questions, simply reply to this 
+email and I'll respond as soon as I can.
 
 Thanks!
 -greg
