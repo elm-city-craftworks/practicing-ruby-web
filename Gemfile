@@ -35,6 +35,7 @@ gem 'whenever'
 group :development do
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
+  gem 'rails_setup'
 end
 
 group :assets do
