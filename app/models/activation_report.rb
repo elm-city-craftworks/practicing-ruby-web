@@ -9,6 +9,6 @@ ActivationReport = ->() {
 
   percentage = "%.2f" % (active_accounts.count.to_f / new_subscribers.count)
 
-  "Activation: #{active_accounts.count} / #{new_subscribers.count} ~= #{percentage}"
+  "#{active_accounts.count} / #{new_subscribers.count} ~= #{percentage}"
 }
 
