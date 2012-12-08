@@ -1,7 +1,12 @@
 = render "header"
 
 #article
-  - # TODO Show Share Box Message
+  #share-alert
+    Practicing Ruby has been producing great content for software developers
+    on a regular basis since 2010. Please support reader-focused,
+    reader-funded indie publishing by 
+    %a{:href => "/subscribe"} becoming a paid subscriber today.
+
 
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
@@ -9,7 +14,7 @@
   #share-alert
     The discussion thread for this article is available to subscribers
     only. If you want to share some feedback or ask me a question, please
-    = link_to "sign up", "/"
+    = link_to "subscribe", "/subscribe"
     ,
     = link_to "log in", article_path(@article.id)
     , or send an email to
