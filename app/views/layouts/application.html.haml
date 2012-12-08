@@ -14,7 +14,7 @@
     = yield(:header_bottom)
 
   %body
-    #top-bar= render "shared/broadcasts"
+    = yield(:nudge)
 
     = render :partial => "shared/flash", :locals => { :flash => flash }
     = render :partial => "shared/navigation"
