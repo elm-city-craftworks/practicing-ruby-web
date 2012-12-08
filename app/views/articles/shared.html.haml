@@ -1,13 +1,12 @@
+#share-alert
+  Practicing Ruby has been producing great content for software developers
+  on a regular basis since 2010. Please support reader-focused,
+  reader-funded indie publishing by 
+  %a{:href => "/subscribe"} becoming a paid subscriber today.
+
 = render "header"
 
 #article
-  #share-alert
-    Practicing Ruby has been producing great content for software developers
-    on a regular basis since 2010. Please support reader-focused,
-    reader-funded indie publishing by 
-    %a{:href => "/subscribe"} becoming a paid subscriber today.
-
-
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
 
