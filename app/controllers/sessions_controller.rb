@@ -31,5 +31,9 @@ class SessionsController < ApplicationController
     session.delete("authorization_id")
     redirect_to "/"
   end
+  
+  def failure
+    @message = params[:message].humanize if params[:message]
+  end
 
 end
