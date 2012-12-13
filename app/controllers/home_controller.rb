@@ -9,11 +9,6 @@ class HomeController < ApplicationController
 
     @article_count = [Article.published.count / 10, "0+"].join
 
-    @ivory_towers = CollectionDecorator.find_by_name("Ivory Towers")
-    @ruby         = CollectionDecorator.find_by_name("Our Beloved Ruby")
-    @strategery   = CollectionDecorator.find_by_name("Strategery")
-    @nuts_bolts   = CollectionDecorator.find_by_name("Nuts and Bolts")
-
     render :index, :layout => "landing"
   end
 

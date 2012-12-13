@@ -1,6 +1,13 @@
 class CollectionDecorator < ApplicationDecorator
   decorates :collection
 
+  def self.icon(name)
+    h.content_tag(:span,
+      h.image_tag("icons/#{name}"),
+      :class => 'icon collection'
+    )
+  end
+
   def header
     h.content_tag(:div, :class => 'collection') do
       [ icon, collection.name ].join("\n").html_safe
@@ -8,10 +15,7 @@ class CollectionDecorator < ApplicationDecorator
   end
 
   def icon
-    h.content_tag(:span,
-      h.image_tag("icons/#{collection.image_file_name}"),
-      :class => 'icon collection'
-    )
+    self.class.icon(collection.image_file_name)
   end
 
   def path
