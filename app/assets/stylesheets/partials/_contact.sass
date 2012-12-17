@@ -1,8 +1,18 @@
 #contact
-  +two-panel
+  #right, #left
+    float: left
   #left
-    margin-top: 2em
+    width: $page-width * 0.50
+    text-align: left
+  #right
+    width: $page-width * 0.50
+  .clear
+    clear: right
+
+  #right
+    margin-top: 1em
     text-align: justify
+    font-size: 1.1em
   img
     +image-box
     width: 90%

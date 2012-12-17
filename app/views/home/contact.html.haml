@@ -1,33 +1,20 @@
-#top-bar
-  %ul
-    %li= link_to "Subscribe", subscribe_path
-    %li= link_to "Sign in", login_path
-
+- content_for(:header) { "Sharing your questions and feedback" }
 - content_for(:title) { "Contact" }
 
-#landing
-  #banner
-    %h2 Practicing Ruby: How to get in touch with us
-    = image_tag "ruby-divider.png"
+#contact
+  #left
+    = image_tag "contact.jpg"
+  #right
+    No matter what, we are here to help you out. So if you have a
+    question about Practicing Ruby, problems with your account, or anything in
+    between don't hesitate to drop us a line. We'd love to hear from you.
+    Gregory can be reached via email at
+    #{ mail_to "gregory@practicingruby.com", nil, :encode => "javascript"}.
+    If twitter is more your style then direct your tweets to
+    #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
 
-  #contact
-    #left
-      = image_tag "contact.jpg"
-    #right
-      %br
-      %p
-        Practicing Ruby is a tiny business, and that makes it easy for us to
-        treat each and every one of our subscribers as
-        if they were not just our friends, but our best friends.
-      %p 
-        No matter what the question or problem is, Gregory can be reached via email at
-        #{ mail_to "gregory@practicingruby.com", nil, :encode => "javascript"}.
-        If twitter is more your style then direct your tweets to
-        #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
-
-      %p
-        You should also check out the
-        #{link_to "Elm City Craftworks", "http://elmcitycraftworks.org"} blog.
-        Inside, you'll find updates on Practicing Ruby and lessons learned from
-        running the business side of things.
-
+    %p
+      You might also be interested in checking out the
+      #{link_to "Elm City Craftworks", "http://elmcitycraftworks.org"} blog.
+      Inside, you'll find updates on Practicing Ruby and lessons learned from
+      running the business side of things.
