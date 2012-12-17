@@ -13,8 +13,6 @@ class SharingTest < ActionDispatch::IntegrationTest
   test "shared article visible without logging in" do
     assert_shared_article_accessible
 
-    assert_no_content("Log out")
-
     assert_equal 200, page.status_code
   end
 
@@ -22,8 +20,6 @@ class SharingTest < ActionDispatch::IntegrationTest
     sign_user_in
 
     assert_shared_article_accessible
-
-    assert_content("Sign out")
 
     assert_equal 200, page.status_code
   end
