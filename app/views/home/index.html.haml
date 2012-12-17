@@ -56,4 +56,20 @@
         able to participate in great discussions with Gregory
         and your fellow Practicing Rubyists. Not a bad deal, right?
 
-  #library= link_to "Subscribe to Practicing Ruby".html_safe, subscribe_path
+      %p
+        Click the big red button below to become a
+        subscriber. We'll authorize you via Github,
+        send you a confirmation email, and collect 
+        your payment information via Stripe. Once
+        that's taken care of, you'll be able to
+        start enjoying Practicing Ruby right away.
+
+      #library= link_to "Subscribe to Practicing Ruby".html_safe, subscribe_path
+
+      %p
+        If you have any questions, email 
+        = mail_to "gregory@practicingruby.com"
+        or send a tweet to
+        #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
+
+

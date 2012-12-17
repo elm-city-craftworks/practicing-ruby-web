@@ -2,6 +2,10 @@ class HomeController < ApplicationController
   skip_before_filter :authenticate, :except => [:library]
   layout "landing", :except => [:library]
 
+  def subscribe
+    redirect_to registration_path    
+  end
+
   def index
     if current_user
       return redirect_to articles_path
