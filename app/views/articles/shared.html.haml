@@ -1,9 +1,10 @@
 - content_for(:nudge) do
   #share-banner
+    %h3 Welcome to Practicing Ruby!
     Support reader-focused and
     reader-funded indie publishing by 
-    %a{:href => "/subscribe"} becoming a paid subscriber
-    to Practicing Ruby today.
+    = link_to "becoming a paid subscriber", root_path
+    today.
 
 = render "header"
 
@@ -14,7 +15,7 @@
   #share-alert
     The discussion thread for this article is available to subscribers
     only. If you want to share some feedback or ask me a question, please
-    = link_to "subscribe", "/subscribe"
+    = link_to "subscribe", root_path
     ,
     = link_to "log in", article_path(@article.id)
     , or send an email to
