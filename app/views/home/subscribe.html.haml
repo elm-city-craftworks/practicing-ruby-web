@@ -1,39 +1,46 @@
-- content_for(:header) { "Become a Practicing Ruby subscriber" }
-- content_for(:title) { "Subscribe" }
+#landing
+  #banner
+    %h2 Practicing Ruby: Becoming a subscriber
+    = image_tag "ruby-divider.png"
 
-#subscribe
-  #left
-    %p
-      So you've checked out our
-      #{link_to "sample articles", sample_articles_path}
-      and are ready to join Practicing Ruby?
-      That's awesome! Here's what you'll
-      get as a subscriber:
+  #subscribe
+    #left
 
-    %ul
-      %li Immediate access to all our articles.
-      %li Fresh content every two weeks.
-      %li Conversations with Practicing Rubyists.
+      %p
+        So you've checked out our
+        #{link_to "sample articles", sample_articles_path}
+        and are ready to join Practicing Ruby?
+        That's awesome! Here's what you'll
+        get as a subscriber:
 
-    %p
-      By signing up, you'll also be supporting
-      an independent publishing effort that is
-      100% reader-funded, and 100% reader-focused.
+      %ul
+        %li Immediate access to all our articles.
+        %li Fresh content every two weeks.
+        %li Conversations with Practicing Rubyists.
 
-    #price
-      %p A subscription costs only $8/month
+      %p
+        By signing up, you'll also be supporting
+        an independent publishing effort that is
+        100% reader-funded, and 100% reader-focused.
 
-    %p
-      Click the big red button below to become a
-      subscriber. We'll authorize you via Github,
-      send you a confirmation email, and collect 
-      your payment information. Once
-      that's taken care of, you'll be able to
-      start enjoying Practicing Ruby right away.
+      #price
+        %p A subscription costs only $8/month
 
-    .subscribe
-      = button_to "Sign me up!".html_safe, registration_path,
-        :method => :get
+      %p
+        Click the big red button below to become a
+        subscriber. We'll authorize you via Github,
+        send you a confirmation email, and collect 
+        your payment information. Once
+        that's taken care of, you'll be able to
+        start enjoying Practicing Ruby right away.
 
-  #right
-    = image_tag "preview.png", :id => "preview"
+      .subscribe
+        = button_to "Shut up and take my money!".html_safe, registration_path,
+          :method => :get
+
+    #right
+      = image_tag "preview.png", :id => "preview"
+
+      %p{:style => "text-align: right"}
+        If you have questions at all, don't hesitate to 
+        %a{:href => "/contact"} contact us

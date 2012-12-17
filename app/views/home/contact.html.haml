@@ -1,8 +1,10 @@
-- content_for(:header) { "Somebody set up us the contact" }
+- content_for(:header) { "Sharing your questions and feedback" }
 - content_for(:title) { "Contact" }
 
 #contact
   #left
+    = image_tag "contact.jpg"
+  #right
     No matter what, we are here to help you out. So if you have a
     question about Practicing Ruby, problems with your account, or anything in
     between don't hesitate to drop us a line. We'd love to hear from you.
@@ -16,5 +18,8 @@
       #{link_to "Elm City Craftworks", "http://elmcitycraftworks.org"} blog.
       Inside, you'll find updates on Practicing Ruby and lessons learned from
       running the business side of things.
-  #right
-    = image_tag "contact.jpg"
+
+  .clear
+
+  %p.footer
+    We absolutely love hearing from our subscribers. Please contact us any time!
