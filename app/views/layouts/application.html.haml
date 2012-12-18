@@ -14,10 +14,14 @@
     = yield(:header_bottom)
 
   %body
-    #top-bar= render "shared/broadcasts"
+    = yield(:nudge)
+    - if active_broadcasts.any?
+      #top-bar= render "shared/broadcasts"
 
     = render :partial => "shared/flash", :locals => { :flash => flash }
-    = render :partial => "shared/navigation"
+
+    - unless request.url[/shared/]
+      = render :partial => "shared/navigation"
 
     %header
       - if current_user && current_user.admin?

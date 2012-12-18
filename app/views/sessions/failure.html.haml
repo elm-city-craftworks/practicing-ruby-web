@@ -1,0 +1,14 @@
+- content_for(:title) { "GitHub is broken"}
+- content_for(:header) { "GitHub is broken#{': ' + @message if @message}" }
+
+%h3
+  Sorry but you can't sign in right now because of problems with GitHub
+%p
+  Check out 
+  #{link_to "GitHub's status page", "http://status.github.com"} for the most
+  up-to-date information and 
+  = mail_to "support@elmcitycraftworks.org", "contact us", 
+    :subject => "GitHub is down and I can't sign in :("
+  if the problem persists.
+
+= render "shared/sad_pinkie"
