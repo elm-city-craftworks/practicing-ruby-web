@@ -31,11 +31,11 @@ gem 'delayed_job_active_record'
 gem 'daemons', :require => false
 
 gem 'whenever'
+gem 'rails_setup'
 
 group :development do
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
-  gem 'rails_setup'
 end
 
 group :assets do

@@ -1,8 +1,10 @@
+require 'rails_setup'
+
 namespace :setup do
   desc 'Create initializers from example files'
   setup_task :initializers do
     initializers_dir = Rails.root.join('config', 'initializers')
-    secret_token     = initializers_dir.join('secret_token.rb')
+    secret_token     = initializers_dir.join('secret_token.rb').to_s
 
     unless File.exists?(secret_token)
       secret   = SecureRandom.hex(64)
