@@ -25,13 +25,14 @@
       you to try out:
 
     #sample-articles
+      %h2#sample-header Sample articles
       = link_to 'http://practicingruby.com/articles/shared/eislpkhxolnr',
         :class => "box" do
         .inner
           = CollectionDecorator.icon("ruby.png")
           .article Building Enumerable & Enumerator in Ruby
       = link_to 'http://practicingruby.com/articles/shared/yfildjshgzew',
-        :class => "box left" do
+        :class => "box" do
         .inner
           = CollectionDecorator.icon("tower.png")
           .article "Unobtrusive Ruby" in Practice
@@ -41,33 +42,38 @@
           = CollectionDecorator.icon("chess.png")
           .article Domain specific API construction
       = link_to 'http://practicingruby.com/articles/shared/zmkztdzucsgv',
-        :class => "box left" do
+        :class => "box" do
         .inner
           = CollectionDecorator.icon("nuts_bolts.png")
-          .article Tricks for working with text and files
+          .article
+            Tricks for working with
+            %br
+            text and files
 
-      %p
-        For only $8/month, you'll get instant access to
-        = @article_count
-        articles just like these, and will receive newly
-        published content every other week. You'll also be
-        able to participate in great discussions with Gregory
-        and your fellow Practicing Rubyists. Not a bad deal, right?
+      .clear
+    
+    %p
+      For only $8/month, you'll get instant access to
+      = @article_count
+      articles just like these, and will receive newly
+      published content every other week. You'll also be
+      able to participate in great discussions with Gregory
+      and your fellow Practicing Rubyists. Not a bad deal, right?
 
-      %p
-        Click the big red button below to become a
-        subscriber. We'll authorize you via Github,
-        send you a confirmation email, and collect 
-        your payment information via Stripe. Once
-        that's taken care of, you'll be able to
-        start enjoying Practicing Ruby right away.
+    %p
+      Click the big red button below to become a
+      subscriber. We'll authorize you via Github,
+      send you a confirmation email, and collect 
+      your payment information via Stripe. Once
+      that's taken care of, you'll be able to
+      start enjoying Practicing Ruby right away.
 
-      #library= link_to "Subscribe to Practicing Ruby".html_safe, subscribe_path
+    #library= link_to "Subscribe to Practicing Ruby".html_safe, subscribe_path
 
-      %p
-        If you have any questions, email 
-        = mail_to "gregory@practicingruby.com"
-        or send a tweet to
-        #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
+    %p
+      If you have any questions, email 
+      = mail_to "gregory@practicingruby.com"
+      or send a tweet to
+      #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
 
 

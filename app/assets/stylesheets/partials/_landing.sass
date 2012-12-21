@@ -62,3 +62,45 @@ body.landing #top-bar
       +money-button
       font-size: 1.5em
       text-decoration: none
+
+  h2#sample-header
+    display: none
+    margin: 0
+    text-align: center
+    //display: block
+    padding: 10px
+    +background-image(linear-gradient(#545E6B, $dark-blue))
+    color: #fff
+    font-size: 32px
+    font-family: 'Folks-Light', 'Folks', sans-serif
+    +border-top-radius(5px)
+  
+  #sample-articles
+    background: rgba(69, 76, 86, 0.85)
+    +border-radius(5px)
+    +single-box-shadow(#999, 0, 0, 4px, false, true)
+    .clear
+      clear: both
+    .box
+      display: block
+      width: ($page-width / 2) - 30px
+      float: left
+      text-decoration: none
+      margin: 15px
+      .inner
+        +sassy-button("matte", 5px, 1em, #e9e9e9, #d9d9d9, #333, "inset")
+        font-family: inherit
+        padding: 0.5em
+        margin-left: 0
+        text-align: center
+        display: block
+        .article
+          color: #333
+          vertical-align: middle
+          font-size: 1.1em
+          display: inline-block
+          width: 259px
+          text-align: center
+        span.icon
+          +group-icon(48px)
+          margin: 0.5em
