@@ -3,11 +3,11 @@
 [![Build Status](https://secure.travis-ci.org/elm-city-craftworks/practicing-ruby-web.png?branch=master)](http://travis-ci.org/elm-city-craftworks/practicing-ruby-web)
 
 This app is publicly available primarily for the sake of transparency, but
-there is very little code in here specific to practicingruby.com, so we
+there is very little code in here specific to [practicingruby.com][pr], so we
 definitely want to generalize it eventually. Do feel free to email
 **gregory@practicingruby.com** with any questions you have about this app.
 
-To find out more about Practicing Ruby visit <practicingruby.com>.
+To find out more about Practicing Ruby visit [practicingruby.com][pr].
 
 ## Installation
 
@@ -83,6 +83,7 @@ project itself.
 
 Practicing Ruby - an [Elm City Craftworks](http://elmcitycraftworks.org) project
 
+[pr]: https://practicingruby.com
 [gpl]: http://www.gnu.org/licenses/agpl.html
 [contributors]: https://github.com/elm-city-craftworks/practicing-ruby-web/contributors
 [issue-tracker]: https://github.com/elm-city-craftworks/practicing-ruby-web/issues
