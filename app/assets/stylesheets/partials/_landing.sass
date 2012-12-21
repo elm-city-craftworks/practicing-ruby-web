@@ -64,9 +64,10 @@ body.landing #top-bar
       text-decoration: none
 
   h2#sample-header
+    display: none
     margin: 0
     text-align: center
-    display: block
+    //display: block
     padding: 10px
     +background-image(linear-gradient(#545E6B, $dark-blue))
     color: #fff
@@ -75,7 +76,7 @@ body.landing #top-bar
     +border-top-radius(5px)
   
   #sample-articles
-    background: rgba(100,100,100, 0.1)
+    background: rgba(69, 76, 86, 0.85)
     +border-radius(5px)
     +single-box-shadow(#999, 0, 0, 4px, false, true)
     .clear
@@ -94,9 +95,12 @@ body.landing #top-bar
         text-align: center
         display: block
         .article
-          color: #000
-          margin: 0.5em 0
+          color: #333
+          vertical-align: middle
+          font-size: 1.1em
+          display: inline-block
+          width: 259px
+          text-align: center
         span.icon
           +group-icon(48px)
-          margin: 0
-          margin: 0.5em 0
+          margin: 0.5em
