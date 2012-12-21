@@ -4,15 +4,7 @@ namespace :travis do
   desc 'Create database.yml for testing'
   task :setup do
 
-    # Move configuration files into place
-    #
-    initializer_dir = Rails.root.join("config", "initializers")
-    initializers    = %w{mailchimp_settings omniauth secret_token stripe}
-
-    initializers.each do |initializer|
-      FileUtils.cp initializer_dir + "#{initializer}.rb.example",
-                   initializer_dir + "#{initializer}.rb"
-    end
+    Rake::Task["setup:initializers"].invoke
 
     # Setup our database.yml file
     #

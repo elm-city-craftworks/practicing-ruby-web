@@ -31,6 +31,7 @@ gem 'delayed_job_active_record'
 gem 'daemons', :require => false
 
 gem 'whenever'
+gem 'rails_setup'
 
 group :development do
   gem 'capistrano'
