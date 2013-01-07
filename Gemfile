@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.10'
+gem 'rake', '~> 0.9.0'
 
 gem 'pg'
 gem 'hominid'
