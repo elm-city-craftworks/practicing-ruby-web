@@ -1,9 +1,8 @@
-# SQLite version 3.x
-#   gem install sqlite3
 development:
   adapter: postgresql
   database: practicing-ruby-devel
-  username: seacreature
+  username: 
+  password: 
   host: localhost
   min_messages: error
 
@@ -13,13 +12,15 @@ development:
 test:
   adapter: postgresql
   database: practicing-ruby-test
-  username: seacreature
+  username: 
+  password: 
   host: localhost
   min_messages: error
 
 production:
   adapter: postgresql
   database: practicing-ruby-production
-  username: seacreature
+  username:
+  password:  
   host: localhost
  

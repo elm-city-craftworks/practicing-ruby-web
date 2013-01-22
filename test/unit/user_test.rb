@@ -5,6 +5,18 @@ class UserTest < ActiveSupport::TestCase
     @user = FactoryGirl.create(:user)
   end
 
+  context "email" do
+    test "surpresses whitespace" do
+      address = "gregory@practicingruby.com"
+
+      assert @user.update_attributes(:contact_email => "#{address} ")
+     
+      @user.reload
+
+      assert_equal address, @user.contact_email
+    end
+  end
+
   context "status" do
     test "can not be updated through update_attributes" do
       @user.update_attributes(:status => "disabled")

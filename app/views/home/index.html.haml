@@ -5,24 +5,17 @@
 #landing
   #banner
     %h1 Practicing Ruby
-    %h2 A unique journal curated by Gregory Brown
+    %h2 Delightful coding lessons published every two weeks
     = image_tag "ruby-divider.png"
   #details
-    %h3 We publish fantastic articles for Ruby programmers every two weeks
-
     %p
-      Practicing Ruby exists to help you become a better programmer, not
-      to get you to click advertisements or to hire us as consultants. With
-      that in mind, we don't just focus on what is trendy; we publish 
-      content that will truly level up your skills. You will also find
-      that Practicing Ruby articles are more polished than the average blog
-      post in pretty much every imaginable way.
-
+      Practicing Ruby articles are jam-packed with meaningful code samples and clear
+      explanations that help you level up your programming skills. Since 2010, 
+      our carefully designed content has helped countless Ruby programmers get 
+      better at their craft in a fun and efficient way.
     %p
-      But please don't accept these claims on blind faith, look through a 
-      few of our articles right now and decide for yourself! I've hand 
-      picked four great articles from our collections for 
-      you to try out:
+      If you're new to Practicing Ruby, check out the following
+      free samples to see what it's all about:
 
     #sample-articles
       = link_to 'http://practicingruby.com/articles/shared/eislpkhxolnr',
@@ -47,27 +40,32 @@
           .article Tricks for working with text and files
 
       %p
-        For only $8/month, you'll get instant access to
+        For only $8/month, you can get instant access to
         = @article_count
         articles just like these, and will receive newly
         published content every other week. You'll also be
-        able to participate in great discussions with Gregory
-        and your fellow Practicing Rubyists. Not a bad deal, right?
+        able to have great conversations with
+        your fellow Practicing Rubyists. Not a bad deal, right?
 
-      %p
-        Click the big red button below to become a
-        subscriber. We'll authorize you via Github,
+      %p{:style => "font-variant: small-caps; text-align: center"}
+        Click the big red button below to subscribe. We'll authorize you via Github,
         send you a confirmation email, and collect 
-        your payment information via Stripe. Once
-        that's taken care of, you'll be able to
-        start enjoying Practicing Ruby right away.
+        your payment information securely via Stripe. Once
+        that's taken care of, you'll gain immediate access
+        to Practicing Ruby's complete collection of articles.
 
-      #library= link_to "Subscribe to Practicing Ruby".html_safe, subscribe_path
+      #library= link_to "Subscribe to Practicing Ruby ($8/month)".html_safe, subscribe_path
 
       %p
+        Practicing Ruby is curated by Gregory Brown, with contributions from the Ruby community.
         If you have any questions, email 
         = mail_to "gregory@practicingruby.com"
         or send a tweet to
         #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
 
-
+      %p{:style => "font-size: 0.8em; text-align: center"}
+        %small We believe that Practicing Ruby offers tremendous value for the price,
+        but we know that "affordable" is a relative term that depends on individual 
+        circumstances. If you have to think twice about whether you'd be financially comfortable with paying our
+        full subscription fee, please email us and request
+        a discounted or free account. We'll set you up with one, no questions asked.

@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.0'
+gem 'rails', '~> 3.2.11'
+gem 'rake', '~> 0.9.0'
 
 gem 'pg'
 gem 'hominid'
@@ -31,6 +32,7 @@ gem 'delayed_job_active_record'
 gem 'daemons', :require => false
 
 gem 'whenever'
+gem 'rails_setup'
 
 group :development do
   gem 'capistrano'

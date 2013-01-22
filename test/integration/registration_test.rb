@@ -10,6 +10,16 @@ class RegistrationTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "successful registration with extraneous whitespace in email" do
+    simulated_user do
+      authenticate(:nickname => "TestUser", :uid => "12345")
+      create_profile(:email => "test@test.com ")
+      confirm_email
+      make_payment
+    end
+  end
+
+
   test "failed registration due to missing email" do
     simulated_user do
       authenticate(:nickname => "TestUser", :uid => "12345")
