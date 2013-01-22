@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   # http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#M000087
   #
   validates_format_of     :contact_email,
-    :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+    :with => /\A\s*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\s*\Z/i,
     :on   => :update
 
   attr_protected :admin, :status
@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
     :status => ACTIVE_STATUSES)
 
   before_save do
-    write_attribute(:email, email.downcase) if changed.include?("email")
+    if changed.include?("contact_email")
+      write_attribute(:contact_email, contact_email.strip.downcase) 
+    end
   end
 
   def active?
