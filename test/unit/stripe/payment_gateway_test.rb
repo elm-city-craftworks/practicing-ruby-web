@@ -44,4 +44,20 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
     assert message.body.to_s[/#{charge.card.last4}/], "Card number missing"
   end
+
+  test 'payment_created' do
+    invoice = FactoryGirl.build('support/stripe/invoice')
+
+    @payment_gateway.payment_created(invoice)
+
+    payment = @user.payments.where(:stripe_invoice_id => invoice.id).first
+
+    assert_equal 100.0, payment.amount
+
+    assert payment.email_sent, "Email not sent"
+
+    message = ActionMailer::Base.deliveries.first
+
+    assert message.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+  end
 end

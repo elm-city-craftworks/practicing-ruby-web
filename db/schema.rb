@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019183135) do
+ActiveRecord::Schema.define(:version => 20130215174537) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
     t.text     "body"
     t.integer  "author_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "broadcast",         :default => false, :null => false
     t.text     "broadcast_message"
     t.string   "url"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.integer  "user_id"
     t.integer  "article_id"
     t.integer  "views",      :default => 1
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "articles", :force => true do |t|
@@ -50,15 +50,15 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "github_nickname"
     t.text     "secret"
     t.integer  "authorization_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "authorizations", :force => true do |t|
     t.text     "github_uid"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "collections", :force => true do |t|
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.string   "commentable_type"
     t.integer  "user_id"
     t.text     "body"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "credit_cards", :force => true do |t|
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "queue"
   end
 
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "subject"
     t.text     "content"
     t.datetime "sent_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "payment_logs", :force => true do |t|
@@ -123,13 +123,24 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text    "raw_data"
   end
 
+  create_table "payments", :force => true do |t|
+    t.integer  "user_id"
+    t.date     "invoice_date"
+    t.decimal  "amount"
+    t.string   "stripe_invoice_id"
+    t.string   "credit_card_last_four"
+    t.boolean  "email_sent",            :default => false, :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
   create_table "shared_articles", :force => true do |t|
     t.integer  "user_id"
     t.integer  "article_id"
     t.text     "secret"
     t.integer  "views"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -145,9 +156,8 @@ ActiveRecord::Schema.define(:version => 20121019183135) do
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.text     "mailchimp_web_id"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "github_nickname"
     t.boolean  "admin",                 :default => false
     t.boolean  "notify_conversations",  :default => true,  :null => false

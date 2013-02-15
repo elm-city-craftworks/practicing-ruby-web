@@ -16,4 +16,12 @@ StripeEvent.setup do
 
     gateway.subscription_ended(subscription) if gateway
   end
+
+  subscribe 'invoice.payment_succeeded' do |event|
+    invoice = event.data.object
+
+    gateway = PaymentGateway::Stripe.for_customer(invoice.customer)
+
+    gateway.payment_created(invoice) if gateway
+  end
 end

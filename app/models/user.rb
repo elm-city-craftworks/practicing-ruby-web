@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :subscriptions
   has_many :payment_logs
+  has_many :payments
 
   has_one :credit_card
 
@@ -27,7 +28,7 @@ class User < ActiveRecord::Base
 
   before_save do
     if changed.include?("contact_email")
-      write_attribute(:contact_email, contact_email.strip.downcase) 
+      write_attribute(:contact_email, contact_email.strip.downcase)
     end
   end
 

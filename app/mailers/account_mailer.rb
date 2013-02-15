@@ -21,6 +21,15 @@ class AccountMailer < ActionMailer::Base
          :subject => "There was a problem with your payment for Practicing Ruby :(").deliver
   end
 
+  def payment_created(user, payment)
+    @payment = payment
+
+    mail(:to      => user.contact_email,
+         :subject => "Receipt for your payment to practicingruby.com").deliver
+
+    @payment.update_attributes(:email_sent => true)
+  end
+
   def card_expiring(card)
     @card = card
     user  = card.user

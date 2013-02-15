@@ -84,6 +84,20 @@ module PaymentGateway
       user.disable
     end
 
+    def payment_created(invoice)
+      raise "Invoice #{invoice.id} has not been paid" unless invoice.paid
+
+      payment = user.payments.where(:stripe_invoice_id => invoice.id).first_or_create
+
+      payment.update_attributes(
+        :invoice_date          => Time.at(invoice.date).to_date,
+        :amount                => invoice.total / 100.0,
+        :credit_card_last_four => user.credit_card.try(:last_four)
+      )
+
+      AccountMailer.payment_created(user, payment) unless payment.email_sent?
+    end
+
     def update_credit_card(params)
       token    = params[:stripeToken]
       customer = find_customer
