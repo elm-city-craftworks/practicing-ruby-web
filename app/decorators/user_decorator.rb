@@ -11,7 +11,7 @@ class UserDecorator < ApplicationDecorator
     unless user.contact_email.blank?
       hash       = Digest::MD5.hexdigest(user.contact_email.downcase)
       default    = CGI.escape("http://#{h.request.host_with_port}#{image_path}")
-      image_path = "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=#{default}"
+      image_path = "https://www.gravatar.com/avatar/#{hash}?s=#{size}&d=#{default}"
     end
 
     # Manually set height / width so layouts don't collapse while gravatars are
