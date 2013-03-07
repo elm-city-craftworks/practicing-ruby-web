@@ -3,9 +3,11 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.2.12'
 gem 'rake', '~> 0.9.0'
 gem 'json', '~> 1.7.7'
+gem 'multi_xml', '>= 0.5.2'
 
 gem 'pg'
 gem 'hominid'
+gem 'omniauth-oauth2', '~> 1.1.1'
 gem 'omniauth-github', '~> 1.0.1'
 
 gem 'redcarpet', '~> 2.1'
@@ -24,7 +26,7 @@ gem 'jquery-rails'
 gem 'draper'
 gem 'rack-pjax', '~> 0.6.0'
 
-gem 'httparty'
+gem 'httparty', '>= 0.10.0'
 
 gem 'mailhopper', '~> 0.0.4'
 gem 'delayed_mailhopper'
