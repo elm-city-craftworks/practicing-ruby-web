@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.12'
+gem 'rails', '~> 3.2.13'
 gem 'rake', '~> 0.9.0'
 gem 'json', '~> 1.7.7'
 gem 'multi_xml', '>= 0.5.2'
