@@ -138,7 +138,7 @@ GEM
       redcarpet (>= 2.0.0)
     metaclass (0.0.1)
     mime-types (1.21)
-    minitest (2.12.1)
+    minitest (4.7.0)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.7.1)
