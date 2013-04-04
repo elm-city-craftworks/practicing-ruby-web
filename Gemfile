@@ -40,6 +40,7 @@ gem 'rails_setup'
 group :development do
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
+  gem 'capistrano-maintenance'
 end
 
 group :assets do

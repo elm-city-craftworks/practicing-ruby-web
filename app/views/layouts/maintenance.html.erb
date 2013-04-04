@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maintenance - Practicing Ruby</title>
+  <style type="text/css">
+  body {
+    background-color: #eee;
+    color: #666;
+    font-family: arial, sans-serif;
+  }
+  div#content {
+    width: 500px;
+    margin: 5em auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 2em;
+
+    /* Border Radius */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+
+    /* Shadow */
+    -moz-box-shadow: 0 0 5px #333333;
+    -webkit-box-shadow: 0 0 5px #333333;
+    -o-box-shadow: 0 0 5px #333333;
+    box-shadow: 0 0 5px #333333;
+
+  }
+  a { color: #BD0010; }
+  h1 { font-size: 100%; color: #333; line-height: 1.5em; }
+  h1 span.red { color: #b03c2e; }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <h1><span class="red">Practicing Ruby</span>: Down for Maintenance</h1>
+    <p>
+      Hi Folks! We are down for <%= reason ? reason : "maintenance" %>
+      as of <%= Time.now.utc.strftime("%H:%M %Z") %>.
+    </p>
+    <p>
+      We will be back <%= deadline ? deadline : "shortly" %>.
+      Thanks for visiting!
+    </p>
+  </div>
+</body>
+</html>

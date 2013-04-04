@@ -4,6 +4,7 @@ set :default_stage, "production"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'capistrano/confirm_branch'
+require 'capistrano/maintenance'
 
 set :application, "practicing-ruby"
 set :repository,  "git@github.com:elm-city-craftworks/practicing-ruby-web.git"
@@ -13,6 +14,9 @@ set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
 
 set :use_sudo, false
 set :deploy_via, :remote_cache
+
+set :maintenance_template_path, 'app/views/layouts/maintenance.html.erb'
+set :maintenance_config_warning, false
 
 namespace :deploy do
   task :restart, :roles => :app do
