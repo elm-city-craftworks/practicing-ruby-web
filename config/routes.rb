@@ -82,5 +82,8 @@ PracticingRubyWeb::Application.routes.draw do
     resources :articles
     resources :broadcasts
     resources :reports, :only => [:index]
+
+    match "/magic/freebie/:nickname" => "magic#freebie"
   end
+
 end
