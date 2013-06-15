@@ -87,7 +87,7 @@ module Support
 
       card.set  params.fetch(:card,  "4242424242424242")
       cvc.set   params.fetch(:cvc,   "123")
-      month.set params.fetch(:month, "January")
+      month.set params.fetch(:month, "1")
       year.set  params.fetch(:year,  Date.today.year + 2)
     end
   end
