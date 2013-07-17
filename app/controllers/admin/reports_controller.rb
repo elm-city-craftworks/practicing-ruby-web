@@ -7,7 +7,7 @@ module Admin
                               .where("finish_date is null")
                               .group("payment_provider")
 
-      @total_users = Subscription.where("finish_date is null").count
+      @total_users = Subscription.where("finish_date is null and payment_provider <> 'free'").count
       @activity    = ActivityReport.call
       @activation  = ActivationReport.call
     end

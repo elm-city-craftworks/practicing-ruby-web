@@ -9,10 +9,10 @@
     %th Count
   - @statuses.each do |e|
     %tr
-      %td= e.payment_provider
+      %td= e.payment_provider.humanize
       %td.num= e.user_count
   %tr
-    %th Total
+    %th Total paid accounts
     %th.num= @total_users
 
 %p 
