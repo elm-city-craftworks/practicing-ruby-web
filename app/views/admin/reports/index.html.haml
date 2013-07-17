@@ -1,16 +1,16 @@
 - content_for(:header) { "Reports" }
 - content_for(:title)  { "Reports" }
 
-%h3 Subscribers by status
+%h3 Active subscribers by payment method
 
 %table#reports
   %tr
-    %th Status
-    %th Users
-  - @statuses.each do |status|
+    %th Payment method
+    %th Count
+  - @statuses.each do |e|
     %tr
-      %td= status.status.humanize
-      %td.num= status.user_count
+      %td= e.payment_provider
+      %td.num= e.user_count
   %tr
     %th Total
     %th.num= @total_users

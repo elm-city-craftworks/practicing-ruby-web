@@ -2,9 +2,12 @@ module Admin
   class ReportsController < ApplicationController
     before_filter :admin_only
 
-    def index
-      @statuses    = User.select("status, count(*) as user_count").group("status")
-      @total_users = User.count
+    def index 
+      @statuses = Subscription.select("payment_provider, count(*) as user_count")
+                              .where("finish_date is null")
+                              .group("payment_provider")
+
+      @total_users = Subscription.where("finish_date is null").count
       @activity    = ActivityReport.call
       @activation  = ActivationReport.call
     end
