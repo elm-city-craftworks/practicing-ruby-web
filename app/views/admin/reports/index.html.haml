@@ -7,18 +7,33 @@
   %tr
     %th Payment method
     %th Count
-  - @statuses.each do |e|
+  - Reports.payment_provider_counts.each do |e|
     %tr
       %td= e.payment_provider.humanize
       %td.num= e.user_count
   %tr
     %th Total paid accounts
-    %th.num= @total_users
+    %th.num= Reports.paid_subscriber_count
+
+%h3 Activity and Activation
 
 %p 
   Activity:
-  = @activity
+  = Reports.activity
 
 %p 
   Activation:
-  = @activation
+  = Reports.activation
+
+%h3 Recent signups
+
+%ul
+  - Reports.recent_signups.each do |e|
+    %li= e
+
+
+%h3 Recent cancellations
+
+%ul
+  - Reports.recent_cancellations.each do |e|
+    %li= e
