@@ -3,6 +3,7 @@ require 'fileutils'
 namespace :travis do
   desc 'Create database.yml for testing'
   task :setup do
+    MIXPANEL_API_TOKEN = "..."
 
     Rake::Task["setup:initializers"].invoke
 
