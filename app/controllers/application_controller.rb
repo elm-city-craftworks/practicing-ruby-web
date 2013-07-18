@@ -72,4 +72,8 @@ class ApplicationController < ActionController::Base
     render :file   => "public/#{status}", :layout  => false,
            :status => status,             :formats => [:html]
   end
+
+  def mixpanel
+    @mixpanel ||= Mixpanel::Tracker.new(MIXPANEL_API_TOKEN, { :env => request.env })
+  end
 end

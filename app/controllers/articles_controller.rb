@@ -29,6 +29,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    mixpanel.track("Article Visit", :title   => @article.subject,
+                                    :user_id => current_user.hashed_id)
+
     authenticate_admin if @article.status == "draft"
 
     @comments = CommentDecorator.decorate(@article.comments.order("created_at"))

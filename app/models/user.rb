@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def hashed_id
+    Digest::SHA256.hexdigest(github_nickname)
+  end
+
   def active?
     ACTIVE_STATUSES.include? status
   end
