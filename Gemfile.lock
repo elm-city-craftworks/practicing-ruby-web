@@ -90,6 +90,7 @@ GEM
       actionpack (~> 3.2)
       activesupport (~> 3.2)
     erubis (2.7.0)
+    escape (0.0.4)
     exception_notification (2.5.2)
       actionmailer (>= 3.0.4)
     execjs (1.2.13)
@@ -139,6 +140,10 @@ GEM
     metaclass (0.0.1)
     mime-types (1.21)
     minitest (4.7.0)
+    mixpanel (4.0.2)
+      escape
+      json
+      rack
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.7.1)
@@ -290,6 +295,7 @@ DEPENDENCIES
   md_emoji
   md_preview
   minitest
+  mixpanel
   mocha
   multi_xml (>= 0.5.2)
   nokogiri

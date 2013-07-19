@@ -29,6 +29,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    mixpanel.track("Article Visit", :title   => @article.subject,
+                                    :user_id => current_user.hashed_id)
+
     authenticate_admin if @article.status == "draft"
 
     @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
@@ -54,6 +57,8 @@ class ArticlesController < ApplicationController
     unless @share
       render_http_error 404
     else
+      mixpanel.track("Shared Article Visit", :title     => @share.article.subject,
+                                             :shared_by => @share.user.hashed_id)
       @share.viewed unless current_user
       @user    = UserDecorator.decorate(@share.user)
       @article = @share.article

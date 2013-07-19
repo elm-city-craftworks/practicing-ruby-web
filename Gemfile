@@ -37,6 +37,8 @@ gem 'daemons', :require => false
 gem 'whenever'
 gem 'rails_setup'
 
+gem 'mixpanel'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
