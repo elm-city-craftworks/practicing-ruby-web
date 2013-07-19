@@ -35,6 +35,8 @@ class RegistrationController < ApplicationController
 
         RegistrationMailer.email_confirmation(@user).deliver
 
+        mixpanel.track("Confirmation email sent", :user_id => @user.hashed_id)
+
         @user.update_attribute(:status, "pending_confirmation")
       else
         render :edit_profile
@@ -58,6 +60,8 @@ class RegistrationController < ApplicationController
   end
 
   def payment
+    mixpanel.track("Payment requested", :user_id => current_user.hashed_id)
+
     unless current_user.status == "payment_pending" || current_user.status == "confirmed"
       redirect_to(:action => :complete)
     end
@@ -76,7 +80,7 @@ class RegistrationController < ApplicationController
   end
 
   def complete
-
+    mixpanel.track("Payment complete", :user_id => current_user.hashed_id)
   end
 
   def coupon_valid
