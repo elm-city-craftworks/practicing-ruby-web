@@ -73,6 +73,7 @@ class RegistrationController < ApplicationController
     payment_gateway = current_user.payment_gateway
     begin
       payment_gateway.subscribe(params)
+      mixpanel.track("Payment complete", :user_id => current_user.hashed_id)
 
       redirect_to :action => :complete
     rescue Stripe::CardError => e
@@ -82,7 +83,6 @@ class RegistrationController < ApplicationController
   end
 
   def complete
-    mixpanel.track("Payment complete", :user_id => current_user.hashed_id)
   end
 
   def coupon_valid
