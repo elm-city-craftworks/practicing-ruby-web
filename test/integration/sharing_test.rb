@@ -2,37 +2,31 @@ require 'test_helper'
 
 class SharingTest < ActionDispatch::IntegrationTest
   setup do
+    Capybara.current_driver = :webkit # You know, for the javascripts
+
     @authorization = FactoryGirl.create(:authorization)
     @user          = @authorization.user
     @article       = FactoryGirl.create(:article)
 
-    @share = SharedArticle.find_or_create_by_article_id_and_user_id(
-      @article.id, @user.id)
-  end
-
-  test "shared article visible without logging in" do
-    assert_shared_article_accessible
-
-    assert_equal 200, page.status_code
-  end
-
-  test "shared article visible to logged in users" do
     sign_user_in
 
-    assert_shared_article_accessible
-
-    assert_equal 200, page.status_code
+    visit article_path(@article)
   end
 
-  test "requesting invalid share key causes a 404 response" do
-    visit shared_article_path("notarealkey")
+  test "share button opens the share panel and loads the share url" do
+    find('a.share').click
 
-    assert_equal 404, page.status_code
-  end
+    assert find('#robo-share').visible?, "Share panel isn't visible"
 
-  def assert_shared_article_accessible
-    visit shared_article_path(@share.secret)
+    within("#robo-share") do
+      share_link = find('input').value || '' # So the test fails gracefully
 
-    assert_equal shared_article_path(@share.secret), current_path
+      share = SharedArticle.where(
+        :article_id => @article.id, :user_id => @user.id
+      ).first
+
+      assert share_link[/#{shared_article_path(share.secret)}/],
+        "Share URL appears invalid: #{share_link}"
+    end
   end
 end

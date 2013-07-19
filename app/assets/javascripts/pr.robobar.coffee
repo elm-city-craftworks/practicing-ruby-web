@@ -13,6 +13,7 @@ class PR.RoboBar
   hide: ->
     height = @bar.css('height')
     @bar.css "bottom", "-" + height
+    @visible = false
 
   toggle: =>
     if @visible
@@ -82,6 +83,7 @@ class PR.RoboBar.Panel
 
     if @visible
       @panel.css 'bottom', "-#{height}px"
+      @robobar.hide()
     else
       @robobar.toggle() unless @robobar.visible
       @panel.css 'bottom', "#{robobarHeight}px"
