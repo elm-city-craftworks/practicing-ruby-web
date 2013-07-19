@@ -8,7 +8,7 @@
 
 #article
   - cache("article_body_#{@article.id}") do
-    = md(@article.body)
+    = @article.body
 
 = render "footer"
 

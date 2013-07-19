@@ -29,4 +29,8 @@ class Article < ActiveRecord::Base
   def published_date
     (published_time || created_at).strftime('%Y.%m.%d')
   end
+  
+  def body
+    Document.from_issue_number(issue_number).body
+  end
 end
