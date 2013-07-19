@@ -23,6 +23,8 @@ class RegistrationController < ApplicationController
   end
 
   def edit_profile
+    mixpanel.track("Contact info requested", :user_id => current_user.hashed_id)
+
     @user = current_user
   end
 
