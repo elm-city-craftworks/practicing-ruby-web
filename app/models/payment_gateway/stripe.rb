@@ -75,7 +75,7 @@ module PaymentGateway
     def charge_failed(charge)
       log charge
 
-      AccountMailer.failed_payment(user, charge)
+      AccountMailer.failed_payment(user, charge) if user.active?
     end
 
     def subscription_ended(subscription)
