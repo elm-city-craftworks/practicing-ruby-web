@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   layout "landing", :except => [:library, :contact]
 
   def subscribe
+    mixpanel.track("Click Subscribe Button") 
+
     redirect_to registration_path    
   end
 
@@ -10,6 +12,8 @@ class HomeController < ApplicationController
     if current_user
       return redirect_to articles_path
     end
+
+    mixpanel.track("Visit Landing Page") 
 
     @article_count = [Article.published.count / 10, "0+"].join
 
