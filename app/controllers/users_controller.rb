@@ -50,8 +50,6 @@ class UsersController < ApplicationController
     mixpanel.track("Account cancelled", :user_id => @user.hashed_id)
 
     AccountMailer.canceled(@user) unless @user.disabled?
-
-    @user.disable
   end
 
   private

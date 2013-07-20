@@ -167,6 +167,16 @@ module Support
         assert message.to.include?("support@elmcitycraftworks.org")
         assert message.subject[/cancellation/]
 
+        # Cancellation is manual, so the subscriber will still have access
+        # temporarily...
+        visit library_path
+        assert_current_path library_path
+      end
+
+      # once Jia gets around to it...
+      @user.disable
+
+      browser do
         visit library_path
         assert_current_path problems_sessions_path
       end
