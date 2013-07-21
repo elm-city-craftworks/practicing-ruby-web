@@ -3,6 +3,9 @@ require "test_helper"
 class CardExpirerTest < ActiveSupport::TestCase
   setup do
     #FIXME: Less duplication, push into factories w. better names?
+    
+    ActionMailer::Base.deliveries.clear
+
 
     @users = {}
     @users[:active_expiring]   = FactoryGirl.create(:user, :status => "active")
