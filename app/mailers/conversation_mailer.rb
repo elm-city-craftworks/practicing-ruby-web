@@ -1,5 +1,7 @@
 class ConversationMailer < ActionMailer::Base
   def started(article, users)
+    return unless users.any?
+
     @article = article
 
     batch(users) do |addresses|
@@ -12,6 +14,8 @@ class ConversationMailer < ActionMailer::Base
   end
 
   def mentioned(comment, users)
+    return unless users.any?
+
     @article = comment.commentable
 
     batch(users) do |addresses|
@@ -24,6 +28,8 @@ class ConversationMailer < ActionMailer::Base
   end
 
   def comment_made(comment, users)
+    return unless users.any?
+
     @article = comment.commentable
 
     batch(users) do |addresses|
