@@ -34,6 +34,7 @@ class SessionsController < ApplicationController
   
   def failure
     @message = params[:message].humanize if params[:message]
+    mixpanel.track("Github failure")
   end
 
 end
