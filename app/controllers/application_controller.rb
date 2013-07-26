@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate
-    current_authorization || (store_location && redirect_to(login_path))
+    return if current_authorization 
+    
+    flash[:notice] = "That page is protected. Please sign in or sign up to continue"
+    store_location
+    redirect_to(root_path)
   end
 
   def authenticate_user

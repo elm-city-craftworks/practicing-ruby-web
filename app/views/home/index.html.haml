@@ -3,6 +3,8 @@
     %li= link_to "Sign in", login_path
 
 #landing
+  - if flash[:notice]
+    #share-alert= flash[:notice]
   #banner
     %h1 Practicing Ruby
     %h2 Delightful coding lessons published monthly
