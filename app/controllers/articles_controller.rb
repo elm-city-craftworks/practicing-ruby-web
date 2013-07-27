@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
     elsif params[:collection]
       @group = CollectionDecorator.find_by_slug(params[:collection])
     else
-      return redirect_to library_path
+      return redirect_to archives_path
     end
 
     unless @group.model

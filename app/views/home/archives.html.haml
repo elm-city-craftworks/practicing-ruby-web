@@ -1,0 +1,10 @@
+%header Archives
+
+- @articles.each do |month, articles|
+  %h2= month
+
+  %ul
+    - articles.each do |article|
+      %li
+        .title= article.list_link text: article.list_title
+        .description= article.body.split(/\s/).take(50).join(' ')
