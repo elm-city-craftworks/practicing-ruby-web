@@ -95,6 +95,11 @@ class RegistrationController < ApplicationController
 
   private
 
+  # Called by ApplicationController#authenticate
+  def redirect_on_auth_failure
+    redirect_to login_path 
+  end
+
   def ye_shall_not_pass
     if current_user && current_user.status == "active"
       redirect_to root_path, :notice => "Your account is already setup."
