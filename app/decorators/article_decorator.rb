@@ -18,14 +18,13 @@ class ArticleDecorator < ApplicationDecorator
 
   def list_link(options={:text => list_description})
     link_text = options.delete(:text)
-
-    if h.current_user
-      h.link_to(h.article_path(article), options) do
-        link_text
-      end
+    path = if h.current_user
+      h.article_path(article)
     else
-      link_text
-    end.html_safe
+      h.root_path
+    end
+
+    h.link_to(link_text, path, options)
   end
 
   def issue_number
