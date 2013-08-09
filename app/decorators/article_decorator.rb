@@ -31,10 +31,6 @@ class ArticleDecorator < ApplicationDecorator
     "Issue ##{article.issue_number}"
   end
 
-  def short_description
-    article.body[0..400] + "..."
-  end
-
   def published_date
     article.published_time.strftime("%B %e, %Y")
   end

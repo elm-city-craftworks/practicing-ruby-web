@@ -14,4 +14,4 @@
     - articles.each do |article|
       %li
         .title= link_to article.list_title, article_path(article)
-        .description= strip_tags md(article.short_description)
+        .description= strip_tags md(article.summary)
