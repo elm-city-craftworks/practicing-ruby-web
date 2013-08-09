@@ -3,6 +3,8 @@
     %li= link_to "Sign in", login_path
 
 #landing
+  - if flash[:notice]
+    #share-alert= flash[:notice]
   #banner
     %h1 Practicing Ruby
     %h2 Delightful coding lessons published monthly
@@ -54,7 +56,7 @@
         that's taken care of, you'll gain immediate access
         to Practicing Ruby's complete collection of articles.
 
-      #library= link_to "Subscribe to Practicing Ruby ($8/month)".html_safe, subscribe_path
+      #library= link_to "Subscribe to Practicing Ruby ($8/month)".html_safe, subscribe_path, :id => "subscribe"
 
       %p
         Practicing Ruby is curated by Gregory Brown, with contributions from the Ruby community.

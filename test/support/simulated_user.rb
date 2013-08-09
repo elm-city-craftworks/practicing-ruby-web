@@ -203,6 +203,26 @@ module Support
       browser { visit logout_path }
     end
 
+    def click_subscribe
+      default = self.class.default
+
+      # FIXME: This is a bit of a hack, and duplicates the authenticate() method
+      OmniAuth.config.add_mock(:github, {
+        :uid => default[:uid],
+        :info => {
+          :nickname => default[:nickname],
+          :email    => default.fetch(:email, "")
+        }
+      })
+
+      browser do
+        visit "/"
+        click_link "subscribe"
+
+        assert_current_path "/registration/edit_profile"
+      end
+    end
+
     private
 
     def browser(&block)
