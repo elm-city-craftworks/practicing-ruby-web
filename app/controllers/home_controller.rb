@@ -29,8 +29,8 @@ class HomeController < ApplicationController
   def archives
     mixpanel.track("Visit Archives")
 
-    @articles = Article.where(:status => "published").order("published_time")
+    @articles = Article.where(:status => "published").order("published_time DESC")
     @articles = ArticleDecorator.decorate(@articles)
-    @articles = @articles.group_by {|a| a.published_time.strftime("%B, %Y") }
+    @articles = @articles.group_by {|a| a.published_time.strftime("%B %Y") }
   end
 end

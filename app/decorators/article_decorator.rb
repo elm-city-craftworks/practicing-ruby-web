@@ -6,7 +6,7 @@ class ArticleDecorator < ApplicationDecorator
   def list_description
     [ list_title,
       h.content_tag(:span, article.published_date, :class => 'right'),
-      h.content_tag(:span, "Issue ##{article.issue_number}", :class => "issue-number")
+      h.content_tag(:span, issue_number, :class => "issue-number")
     ].join("\n").html_safe
   end
 
@@ -26,6 +26,14 @@ class ArticleDecorator < ApplicationDecorator
     else
       link_text
     end.html_safe
+  end
+
+  def issue_number
+    "Issue ##{article.issue_number}"
+  end
+
+  def short_description
+    article.body[0..400] + "..."
   end
 
   def published_date
