@@ -53,9 +53,6 @@ GEM
       xpath (~> 0.1.4)
     capybara-screenshot (0.2)
       capybara (>= 1.0)
-    capybara-webkit (0.10.1)
-      capybara (>= 1.0.0, < 1.2)
-      json
     childprocess (0.2.2)
       ffi (~> 1.0.6)
     chronic (0.6.7)
@@ -272,7 +269,6 @@ DEPENDENCIES
   capistrano_confirm_branch
   capybara
   capybara-screenshot
-  capybara-webkit (= 0.10.1)
   coffee-filter (~> 0.1.1)
   coffee-rails (~> 3.2.0)
   compass-rails
