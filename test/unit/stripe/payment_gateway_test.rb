@@ -8,7 +8,6 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     @user            = FactoryGirl.create(:user, :payment_provider => 'stripe')
     @payment_gateway = @user.payment_gateway
 
-    @user.subscriptions.create(:start_date => Date.today)
   end
 
   test 'for_customer' do
@@ -17,9 +16,50 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     assert gateway
   end
 
+  test 'subscribe (success)' do
+    refute @user.subscriptions.active, 
+           "Should not have an active subscription before payment"
+
+    gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
+
+    token =  Stripe::Token.create( :card => { :number => "4242424242424242", 
+                                              :exp_month => 8, 
+                                              :exp_year => Date.today.year + 2, 
+                                              :cvc => "314" })
+
+    gateway.subscribe(:stripeToken => token.id)
+
+    assert @user.subscriptions.active, 
+          "Should have an active subscription after successful payment"
+  end
+
+  test 'subscribe (failure)' do
+    refute @user.subscriptions.active, 
+           "Should not have an active subscription before payment"
+
+    gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
+
+    # The card number below is a specific stripe card number that will succeed
+    # in being attached to a customer, but the charge will fail.
+    #
+    # See: https://stripe.com/docs/testing
+    token =  Stripe::Token.create( :card => { :number => "4000000000000341", 
+                                              :exp_month => 8, 
+                                              :exp_year => Date.today.year + 2, 
+                                              :cvc => "313" })
+
+    assert_raises(Stripe::CardError) do
+      gateway.subscribe(:stripeToken => token.id)
+    end
+
+    refute @user.subscriptions.active, 
+          "Should not have an active subscription after failed payment"
+  end
+
   test 'subscription_ended' do
     subscription = Stripe::Charge.new
 
+    @user.subscriptions.create(:start_date => Date.today)
     assert @user.subscriptions.active, "User does not have any active subscriptions"
 
     @payment_gateway.subscription_ended(subscription)
@@ -35,7 +75,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
       :card => {
         :last4     => "5612",
         :exp_month => 1,
-        :exp_year  => 2013
+        :exp_year  => Date.today.year + 2
       })
 
     @payment_gateway.charge_failed(charge)
