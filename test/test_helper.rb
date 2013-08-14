@@ -5,9 +5,9 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'minitest/autorun'
 require 'rails/test_help'
-require 'support/integration'
-require 'support/simulated_user'
-require 'support/mini_contest'
+require_relative 'support/integration'
+require_relative 'support/simulated_user'
+require_relative 'support/mini_contest'
 require 'test_notifier/runner/minitest'
 require 'capybara/rails'
 require 'database_cleaner'
