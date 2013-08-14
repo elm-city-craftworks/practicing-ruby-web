@@ -55,7 +55,7 @@ end
 
 group :test do
   gem 'minitest'
-  gem 'capybara'
+  gem 'capybara', '=2.0.3'
   gem 'capybara-screenshot'
   gem 'launchy'
   gem 'factory_girl_rails'
