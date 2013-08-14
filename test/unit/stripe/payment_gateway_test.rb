@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class StripePaymentGatewayTest < ActiveSupport::TestCase
 
@@ -18,26 +18,26 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
   test 'subscribe (success)' do
     skip_on_travis
 
-    refute @user.subscriptions.active, 
+    refute @user.subscriptions.active,
            "Should not have an active subscription before payment"
 
     gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
 
-    token =  Stripe::Token.create( :card => { :number => "4242424242424242", 
-                                              :exp_month => 8, 
-                                              :exp_year => Date.today.year + 2, 
+    token =  Stripe::Token.create( :card => { :number => "4242424242424242",
+                                              :exp_month => 8,
+                                              :exp_year => Date.today.year + 2,
                                               :cvc => "314" })
 
     gateway.subscribe(:stripeToken => token.id)
 
-    assert @user.subscriptions.active, 
+    assert @user.subscriptions.active,
           "Should have an active subscription after successful payment"
   end
 
   test 'subscribe (failure)' do
     skip_on_travis
 
-    refute @user.subscriptions.active, 
+    refute @user.subscriptions.active,
            "Should not have an active subscription before payment"
 
     gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
@@ -46,16 +46,16 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     # in being attached to a customer, but the charge will fail.
     #
     # See: https://stripe.com/docs/testing
-    token =  Stripe::Token.create( :card => { :number => "4000000000000341", 
-                                              :exp_month => 8, 
-                                              :exp_year => Date.today.year + 2, 
+    token =  Stripe::Token.create( :card => { :number => "4000000000000341",
+                                              :exp_month => 8,
+                                              :exp_year => Date.today.year + 2,
                                               :cvc => "313" })
 
     assert_raises(Stripe::CardError) do
       gateway.subscribe(:stripeToken => token.id)
     end
 
-    refute @user.subscriptions.active, 
+    refute @user.subscriptions.active,
           "Should not have an active subscription after failed payment"
   end
 
