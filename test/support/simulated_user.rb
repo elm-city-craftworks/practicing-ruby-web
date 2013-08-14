@@ -86,56 +86,6 @@ module Support
       @browser.assert @user.subscriptions.active, "No active subscription"
     end
 
-    def make_stripe_payment(params={})
-      @user.subscriptions.delete_all
-
-      @user.status = "confirmed"
-      @user.save
-
-      browser do
-        skip_on_travis
-
-        Capybara.default_wait_time = 15
-
-        visit registration_payment_path
-
-        fill_in_card(params)
-
-        fill_in "Coupon", :with => params.fetch(:coupon, "")
-
-        click_button "Submit Payment"
-
-        wait_until { current_path == registration_complete_path }
-
-        assert_content "Thanks for subscribing"
-
-        visit library_path
-        assert_current_path library_path
-      end
-    end
-
-    def update_credit_card(params={})
-      browser do
-        skip_on_travis
-
-        Capybara.default_wait_time = 15
-
-        visit billing_settings_path
-
-        click_link 'Update your credit card'
-
-        exp_year = Date.today.year + 2
-
-        fill_in_card(params.merge(:year => exp_year))
-
-        click_button "Update"
-
-        wait_until { has_css?('#flash', :text => "Your credit card was sucessfully updated!") }
-
-        assert_content "1/#{Date.today.year + 2}"
-      end
-    end
-
     def payment_pending
       @user.status = "payment_pending"
       @user.save
