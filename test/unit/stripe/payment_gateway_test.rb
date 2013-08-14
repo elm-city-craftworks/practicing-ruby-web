@@ -7,7 +7,6 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
     @user            = FactoryGirl.create(:user, :payment_provider => 'stripe')
     @payment_gateway = @user.payment_gateway
-
   end
 
   test 'for_customer' do
@@ -17,6 +16,8 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
   end
 
   test 'subscribe (success)' do
+    skip_on_travis
+
     refute @user.subscriptions.active, 
            "Should not have an active subscription before payment"
 
@@ -34,6 +35,8 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
   end
 
   test 'subscribe (failure)' do
+    skip_on_travis
+
     refute @user.subscriptions.active, 
            "Should not have an active subscription before payment"
 
