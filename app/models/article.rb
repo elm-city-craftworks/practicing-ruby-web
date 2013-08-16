@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   belongs_to :collection
 
   validates_presence_of   :issue_number
-  validates_uniqueness_of :slug
+  validates_uniqueness_of :slug, :allow_blank => true
 
   def self.in_volume(number)
     includes(:volume)
@@ -27,7 +27,7 @@ class Article < ActiveRecord::Base
     if slug.present?
       slug
     else
-      id
+      id.to_s
     end
   end
 

@@ -106,6 +106,8 @@ class ArticlesController < ApplicationController
   end
 
   def redirect_to_slug
-    redirect_to @article if params[:id] != @article.to_param.to_s
+    return unless @article.slug.present?
+
+    redirect_to article_path(@article.slug) unless params[:id] == @article.slug
   end
 end
