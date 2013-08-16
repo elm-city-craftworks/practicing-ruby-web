@@ -55,12 +55,11 @@ end
 
 group :test do
   gem 'minitest'
-  gem 'capybara'
+  gem 'capybara', '=2.0.3'
   gem 'capybara-screenshot'
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'mocha', :require => false
-  gem 'capybara-webkit', "0.10.1"
   gem 'database_cleaner'
   gem 'test_notifier'
   gem 'turn', '~> 0.9.5'

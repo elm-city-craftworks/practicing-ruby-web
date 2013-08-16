@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate_user
 
   def new
+    mixpanel.track("Github auth")
     redirect_to '/auth/github'
   end
 
@@ -34,6 +35,7 @@ class SessionsController < ApplicationController
   
   def failure
     @message = params[:message].humanize if params[:message]
+    mixpanel.track("Github failure")
   end
 
 end

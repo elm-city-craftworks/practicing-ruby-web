@@ -69,6 +69,9 @@ class RegistrationController < ApplicationController
     end
   end
 
+  # FIXME: THIS CODE IS NOT FULLY UNDER TEST!
+  # there are unit tests for PaymentGateway#subscribe(),
+  # but no acceptance tests walk this path. Tread lightly!
   def create_payment
     payment_gateway = current_user.payment_gateway
     begin
@@ -94,6 +97,11 @@ class RegistrationController < ApplicationController
   end
 
   private
+
+  # Called by ApplicationController#authenticate
+  def redirect_on_auth_failure
+    redirect_to login_path 
+  end
 
   def ye_shall_not_pass
     if current_user && current_user.status == "active"

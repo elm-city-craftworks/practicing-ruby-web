@@ -46,6 +46,7 @@ class BroadcastMessagesTest < ActionDispatch::IntegrationTest
   private
 
   def send_message(options = {})
+    sign_user_in
     visit new_admin_broadcast_path
 
     fill_in 'to',      :with => options[:to] if options[:to]

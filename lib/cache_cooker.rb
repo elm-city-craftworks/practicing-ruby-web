@@ -51,8 +51,12 @@ class CacheCooker
   module Oven
     private
 
+    def cache_cooker?
+      !!request.env["HTTP_CACHE_COOKER"]
+    end
+
     def authenticate_cache_cooker
-      return false unless request.env["HTTP_CACHE_COOKER"]
+      return false unless cache_cooker?
 
       authenticate_or_request_with_http_digest(CacheCooker.realm) do |user|
         unless user == CacheCooker.default_options[:digest_auth][:username]

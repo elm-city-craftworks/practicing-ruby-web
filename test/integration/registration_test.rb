@@ -1,6 +1,12 @@
 require "test_helper"
 
 class RegistrationTest < ActionDispatch::IntegrationTest
+  test "initiates the signup process" do
+    simulated_user do
+      click_subscribe
+    end
+  end
+
   test "successful registration" do
     simulated_user do
       authenticate(:nickname => "TestUser", :uid => "12345")
