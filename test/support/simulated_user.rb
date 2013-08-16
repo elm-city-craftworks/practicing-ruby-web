@@ -86,6 +86,15 @@ module Support
       @browser.assert @user.subscriptions.active, "No active subscription"
     end
 
+    def add_comment(message)
+      browser do
+        fill_in "comment_body", :with => message
+        click_button "Comment"
+
+        assert_content(message)
+      end
+    end
+
     def payment_pending
       @user.status = "payment_pending"
       @user.save
