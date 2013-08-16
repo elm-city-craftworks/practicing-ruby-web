@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
+  before_filter :redirect_to_slug, :only => [:show]
   before_filter :create_visit, :only => [:show]
 
   skip_before_filter :authenticate,      :only => [:shared, :samples]
@@ -80,11 +81,7 @@ class ArticlesController < ApplicationController
   private
 
   def find_article
-    if params[:volume] && params[:issue]
-      @article = Article.find_by_issue_number("#{params[:volume]}.#{params[:issue]}")
-    else
-      @article = Article.find_by_id(params[:id])
-    end
+    @article = Article[params[:id]]
 
     render_http_error(404) unless @article
   end
@@ -108,4 +105,7 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def redirect_to_slug
+    redirect_to @article if params[:id] != @article.to_param.to_s
+  end
 end

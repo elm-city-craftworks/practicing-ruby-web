@@ -3,7 +3,8 @@ class Article < ActiveRecord::Base
   belongs_to :volume
   belongs_to :collection
 
-  validates_presence_of :issue_number
+  validates_presence_of   :issue_number
+  validates_uniqueness_of :slug
 
   def self.in_volume(number)
     includes(:volume)
@@ -16,6 +17,18 @@ class Article < ActiveRecord::Base
 
   def self.drafts
     where(:status => "draft")
+  end
+
+  def self.[](key)
+    find_by_slug(key) || find_by_id(key)
+  end
+
+  def to_param
+    if slug.present?
+      slug
+    else
+      id
+    end
   end
 
   def full_subject
