@@ -20,4 +20,16 @@ class ArticleRoutingTest < ActionDispatch::IntegrationTest
 
     assert_current_path "/articles/awesome-article"
   end
+
+  test "with invalid slug" do
+    visit "/articles/i-do-no-exist"
+
+    assert_equal 404, page.status_code
+  end
+
+  test "with invalid id" do
+    visit "/articles/99999"
+
+    assert_equal 404, page.status_code
+  end
 end
