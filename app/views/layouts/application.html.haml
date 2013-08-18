@@ -13,7 +13,7 @@
 
     = yield(:header_bottom)
 
-  %body
+  %body{class: "#{controller.controller_name}-#{controller.action_name}"}
     = yield(:nudge)
     - if active_broadcasts.any?
       #top-bar= render "shared/broadcasts"
