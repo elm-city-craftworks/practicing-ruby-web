@@ -33,7 +33,6 @@ class ActionDispatch::IntegrationTest
       'user_info' => { 'nickname' => 'frankpepelio' }
     }
 
-    FactoryGirl.create(:article)
   end
 
   teardown do
