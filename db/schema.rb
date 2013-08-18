@@ -12,7 +12,6 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20130816174433) do
-
   create_table "announcements", :force => true do |t|
     t.text     "title"
     t.text     "body"
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.text     "issue_number"
     t.integer  "volume_id"
     t.integer  "collection_id"
+    t.text     "summary"
     t.string   "slug"
   end
 
@@ -184,5 +184,4 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 end

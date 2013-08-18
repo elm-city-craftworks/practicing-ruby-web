@@ -3,5 +3,6 @@
   .bigtext
     %div= @article.subject
 
-- #TODO a better admin edit = link_to "Edit", edit_admin_article_path(@article)
+- if current_user && current_user.admin?
+  = link_to "Edit", edit_admin_article_path(@article)
 

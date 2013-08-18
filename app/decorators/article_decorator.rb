@@ -4,23 +4,31 @@ class ArticleDecorator < ApplicationDecorator
   decorates_association :collection
 
   def list_description
-    subject = article.subject
-    subject = "[DRAFT] #{subject}" if article.status == "draft"
-
-    [ subject,
+    [ list_title,
       h.content_tag(:span, article.published_date, :class => 'right'),
-      h.content_tag(:span, "Issue ##{article.issue_number}", :class => "issue-number")
+      h.content_tag(:span, issue_number, :class => "issue-number")
     ].join("\n").html_safe
   end
 
-  def list_link
-    if h.current_user
-      h.link_to(h.article_path(article)) do
-        list_description
-      end
+  def list_title
+    title = article.subject
+    title = "[DRAFT] #{subject}" if article.status == "draft"
+    title
+  end
+
+  def list_link(options={:text => list_description})
+    link_text = options.delete(:text)
+    path = if h.current_user
+      h.article_path(article)
     else
-      list_description
-    end.html_safe
+      h.root_path
+    end
+
+    h.link_to(link_text, path, options)
+  end
+
+  def issue_number
+    "Issue ##{article.issue_number}"
   end
 
   def published_date

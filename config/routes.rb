@@ -7,7 +7,8 @@ PracticingRubyWeb::Application.routes.draw do
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
 
-  match "/library" => 'home#library'
+  match "/library"  => 'home#library'
+  match "/archives" => 'home#archives'
   match "/volume/:volume/" => 'articles#index'
   match "/volume/:volume/issue/:issue" => 'articles#show'
   match "/collection/:collection/" => 'articles#index'
