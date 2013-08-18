@@ -1,0 +1,17 @@
+- content_for(:title) { "Archives" }
+- content_for(:header) { "Archives" }
+
+%p
+  Here you can browse all of Practicing Ruby's articles in chronological order.
+  Don't be afraid to dig far back into the archives, we try to keep the
+  articles as up-to-date as possible.
+
+- @articles.each do |month, articles|
+  %hr
+  %h2= month
+
+  %ul
+    - articles.each do |article|
+      %li
+        .title= link_to article.list_title, article_path(article)
+        .description= strip_tags md(article.summary)
