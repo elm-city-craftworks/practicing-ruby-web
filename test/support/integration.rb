@@ -79,6 +79,10 @@ module Support
       Support::SimulatedUser.new(self).instance_eval(&block)
     end
 
+    def outbox
+      Support::Outbox.new(self, ActionMailer::Base.deliveries)
+    end
+
     def fill_in_card(params = {})
       card  = find(:css, "input.card-number")
       cvc   = find(:css, "input.card-cvc")

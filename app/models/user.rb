@@ -23,13 +23,15 @@ class User < ActiveRecord::Base
 
   attr_protected :admin, :status
 
-  scope :to_notify, where(notifications_enabled: true,
-    :status => ACTIVE_STATUSES)
 
   before_save do
     if changed.include?("contact_email")
       write_attribute(:contact_email, contact_email.strip.downcase)
     end
+  end
+
+  def self.to_notify
+    where(notifications_enabled: true, :status => ACTIVE_STATUSES)
   end
 
   def hashed_id
