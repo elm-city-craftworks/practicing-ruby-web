@@ -47,7 +47,7 @@ module Admin
     private
 
     def find_article
-      @article = Article.find(params[:id])
+      @article = Article[params[:id]]
     end
   end
 end
