@@ -9,12 +9,7 @@ class ConversationMailerTest < ActionMailer::TestCase
       comment  = FactoryGirl.create(:comment, :body => "No mentions here")
       no_email = FactoryGirl.create(:user, :notify_conversations => false)
 
-      refute ActionMailer::Base.deliveries.empty?
-
-      message = ActionMailer::Base.deliveries.first
-
-      assert message.bcc.include?(comment.user.contact_email)
-      refute message.bcc.include?(no_email.contact_email)
+      assert ActionMailer::Base.deliveries.empty?
     end
 
     test "comment emails include a link back to article comments" do
@@ -58,11 +53,11 @@ class ConversationMailerTest < ActionMailer::TestCase
     test "emails are sent to users who wish to be notified" do
       assert ActionMailer::Base.deliveries.empty?
 
-      user             = FactoryGirl.create(:user, :notify_comment_made => true )
+      notify_user      = FactoryGirl.create(:user, :notify_comment_made => true )
       dont_notify_user = FactoryGirl.create(:user, :notify_comment_made => false)
 
       first_comment = FactoryGirl.create(:comment, :body => "First Comment",
-                                        :user => user)
+                                        :user => notify_user)
 
       ActionMailer::Base.deliveries.clear # Remove conversation started email
 
@@ -72,8 +67,14 @@ class ConversationMailerTest < ActionMailer::TestCase
                                          :user        => dont_notify_user,
                                          :commentable => first_comment.commentable)
 
-      refute ActionMailer::Base.deliveries.first.bcc.include?(dont_notify_user.contact_email)
-      assert ActionMailer::Base.deliveries.first.bcc.include?(user.contact_email)
+      messages = ActionMailer::Base.deliveries
+
+      assert_equal 0, messages.count { |msg| 
+                        msg.bcc.include?(dont_notify_user.contact_email) }
+
+      assert_equal 1, messages.count { |msg|
+                        msg.bcc.include?(notify_user.contact_email) }
+
     end
 
     test "emails are sent to mentioned users" do
