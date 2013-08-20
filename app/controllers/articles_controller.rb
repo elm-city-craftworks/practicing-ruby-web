@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
-  before_filter :redirect_to_slug, :only => [:show]
+  before_filter :update_url, :only => [:show]
   before_filter :create_visit, :only => [:show]
 
   skip_before_filter :authenticate,      :only => [:shared, :samples]
@@ -105,9 +105,15 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def redirect_to_slug
-    return unless @article.slug.present?
+  def update_url
+    return if params[:u]
 
-    redirect_to article_path(@article.slug) unless params[:id] == @article.slug
+    if @article.slug.present?
+      return if params[:id] == @article.slug && params[:u]
+
+      redirect_to article_path(@article.slug, :u => current_user.share_token)
+    else
+      redirect_to article_path(@article.id, :u => current_user.share_token)
+    end
   end
 end

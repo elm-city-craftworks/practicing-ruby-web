@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816174433) do
+ActiveRecord::Schema.define(:version => 20130820143254) do
+
   create_table "announcements", :force => true do |t|
     t.text     "title"
     t.text     "body"
@@ -37,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.text     "status",                :default => "draft"
     t.text     "mailchimp_campaign_id"
     t.datetime "published_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.text     "issue_number"
     t.integer  "volume_id"
     t.integer  "collection_id"
@@ -67,8 +68,8 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.text     "description"
     t.string   "image_file_name"
     t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "position"
   end
 
@@ -174,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.boolean  "notify_updates",        :default => true,  :null => false
     t.text     "payment_provider"
     t.text     "payment_provider_id"
+    t.string   "share_token"
   end
 
   create_table "volumes", :force => true do |t|
@@ -181,7 +183,8 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.text     "description"
     t.date     "start_date"
     t.date     "finish_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
 end
