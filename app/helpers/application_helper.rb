@@ -1,14 +1,14 @@
 module ApplicationHelper
+  def article_url(article, params={})
+    return super unless current_user
+
+    ArticleLink.url(article, current_user.share_token)
+  end
+
   def article_path(article, params={})
-    return super unless article.kind_of?(Article)
+    return super unless current_user
 
-    params[:u] = current_user.share_token if current_user
-
-    if article.slug.present?
-      super(article.slug, params) 
-    else
-      super(article.id, params)
-    end
+    ArticleLink.path(article, current_user.share_token)
   end
 
   def home_path
