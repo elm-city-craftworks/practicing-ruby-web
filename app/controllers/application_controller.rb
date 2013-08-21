@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include CacheCooker::Oven
+  include ApplicationHelper
 
   protect_from_forgery
 
