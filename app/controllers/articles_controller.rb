@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
-  before_filter :update_url, :only => [:show]
   before_filter :create_visit, :only => [:show]
+  before_filter :update_url, :only => [:show]
+
 
   skip_before_filter :authenticate,      :only => [:shared, :samples]
   skip_before_filter :authenticate_user, :only => [:shared, :samples]
@@ -86,6 +87,15 @@ class ArticlesController < ApplicationController
     render_http_error(404) unless @article
   end
 
+  # NOTE: This method uses our custom override of article_path in ApplicationHelper
+
+  def update_url
+    slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
+    missing_token       = params[:u].blank?
+
+    redirect_to(article_path(@article)) if slug_needs_updating || missing_token
+  end
+
   def decorate_article
     @article = ArticleDecorator.decorate(@article)
   end
@@ -102,18 +112,6 @@ class ArticlesController < ApplicationController
       article_visit.first.viewed
     else
       article_visit.create
-    end
-  end
-
-  def update_url
-    return if params[:u]
-
-    if @article.slug.present?
-      return if params[:id] == @article.slug && params[:u]
-
-      redirect_to article_path(@article.slug, :u => current_user.share_token)
-    else
-      redirect_to article_path(@article.id, :u => current_user.share_token)
     end
   end
 end

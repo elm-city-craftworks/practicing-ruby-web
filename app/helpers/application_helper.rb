@@ -1,4 +1,16 @@
 module ApplicationHelper
+  def article_path(article, params={})
+    return super unless article.kind_of?(Article)
+
+    params[:u] = current_user.share_token if current_user
+
+    if article.slug.present?
+      super(article.slug, params) 
+    else
+      super(article.id, params)
+    end
+  end
+
   def home_path
     if current_user
       library_path
