@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class ConversationMailerTest < ActionMailer::TestCase
   context "conversation started" do
@@ -68,7 +68,7 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       messages = ActionMailer::Base.deliveries
 
-      assert_equal 0, messages.count { |msg| 
+      assert_equal 0, messages.count { |msg|
                         msg.bcc.include?(dont_notify_user.contact_email) }
 
       assert_equal 1, messages.count { |msg|
