@@ -1,17 +1,24 @@
-class << (ArticleLink = Object.new)
+class ArticleLink
   include Rails.application.routes.url_helpers
 
-  def path(article, token, params={})
-    article_path(article, tokenize(token, params))
+  def initialize(article, params)
+    self.article = article
+    self.params  = params
   end
 
-  def url(article, token, params={})
-    article_url(article, tokenize(token, params))
+  def path(token)
+    article_path(article, params_with_token(token))
+  end
+
+  def url(token)
+    article_url(article, params_with_token(token))
   end
 
   private
 
-  def tokenize(token, params)
+  attr_accessor :params, :article
+
+  def params_with_token(token)
     {:u => token}.merge(params)
   end
 end

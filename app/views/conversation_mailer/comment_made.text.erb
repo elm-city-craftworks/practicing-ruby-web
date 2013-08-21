@@ -1,6 +1,6 @@
 You can see what has been said and share your own thoughts via the link below:
 
-<%= ArticleLink.url(@article, "placeholder_token", :anchor => "comments") %>
+<%= ArticleLink.new(@article, :anchor => "comments").url("placeholder_token") %>
 
 ----
 

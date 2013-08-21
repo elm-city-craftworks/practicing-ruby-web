@@ -21,9 +21,8 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       email_bodies = ActionMailer::Base.deliveries.map {|e| e.body.to_s }
 
-      article_url = ArticleLink.url(first_comment.commentable,
-                     "placeholder_token",
-                     :anchor    => "comments")
+      article_url = ArticleLink.new(first_comment.commentable, :anchor => "comments")
+                               .url("placeholder_token")
 
       email_bodies.each do |body|
         assert body[article_url]
