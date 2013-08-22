@@ -4,7 +4,9 @@ class BroadcastMailer < ActionMailer::Base
   end
 
   def broadcast(message, email)
-    @body = message[:body]
+    article_finder = ->(e) { article_url(Article[e]) }
+
+    @body = Mustache.render(message[:body], :article => article_finder)
 
     mail(:to      => email,
          :subject => message[:subject])

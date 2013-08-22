@@ -13,11 +13,9 @@ module Admin
       end
 
       if params[:commit] == "Test"
-        BroadcastMailer.broadcast(params, params[:to]).deliver
+        Broadcaster.notify_testers(params)
       else
-        BroadcastMailer.recipients.each do |email|
-          BroadcastMailer.broadcast(params, email).deliver
-        end
+        Broadcaster.notify_subscribers(params)
       end
 
       flash[:notice] = "Message sent"

@@ -61,7 +61,12 @@ module PracticingRubyWeb
 
     # Action Mailer Defaults
     config.action_mailer.delivery_method     = :mailhopper
-    config.action_mailer.default_url_options = { :host => "practicingruby.com" }
+    
+    url_options = { :host => "practicingruby.com" }
+
+    config.action_mailer.default_url_options = url_options
+    Rails.application.routes.default_url_options = url_options 
+
     ActionMailer::Base.default :from => "Practicing Ruby <gregory@practicingruby.com>"
 
     config.generators do |g|

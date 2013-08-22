@@ -146,6 +146,7 @@ GEM
     multi_json (1.7.1)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
+    mustache (0.99.4)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -296,6 +297,7 @@ DEPENDENCIES
   mixpanel
   mocha
   multi_xml (>= 0.5.2)
+  mustache
   nokogiri
   omniauth-github (~> 1.0.1)
   omniauth-oauth2 (~> 1.1.1)
