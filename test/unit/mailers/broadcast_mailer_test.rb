@@ -1,17 +1,6 @@
 require_relative '../../test_helper'
 
 class BroadcastMailerTest < ActionMailer::TestCase
-  test "emails should not be escaped" do
-    assert ActionMailer::Base.deliveries.empty?
-
-    BroadcastMailer.broadcast({:body    => "It's working", :subject => "TEST"}, "test@test.com").deliver
-
-    message = ActionMailer::Base.deliveries.first
-
-
-    assert message.body.to_s[/\AIt's working\n/], "fill this in"
-  end
-
   test "users without confirmed emails are not notified" do
     do_not_mail = %w{authorized pending_confirmation}.map do |status|
       FactoryGirl.create(:user, :status => status)
