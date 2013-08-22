@@ -1,17 +1,15 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class BroadcastMailerTest < ActionMailer::TestCase
   test "emails should not be escaped" do
     assert ActionMailer::Base.deliveries.empty?
 
-    BroadcastMailer.deliver_broadcast(:body    => "It's working",
-                                      :subject => "TEST",
-                                      :to      => "test@test.com",
-                                      :commit  => "Test")
+    BroadcastMailer.broadcast({:body    => "It's working", :subject => "TEST"}, "test@test.com").deliver
 
     message = ActionMailer::Base.deliveries.first
 
-    assert message.body.to_s[/\AIt's working\n/]
+
+    assert message.body.to_s[/\AIt's working\n/], "fill this in"
   end
 
   test "users without confirmed emails are not notified" do
@@ -19,17 +17,20 @@ class BroadcastMailerTest < ActionMailer::TestCase
       FactoryGirl.create(:user, :status => status)
     end
 
-    5.times { FactoryGirl.create(:user) }
+    5.times.map { FactoryGirl.create(:user) }
 
-    BroadcastMailer.deliver_broadcast(:body    => "Only you can see this",
-                                      :subject => "TEST",
-                                      :to      => "test@test.com")
+    BroadcastMailer.recipients.each do |email|
+      BroadcastMailer.broadcast({:body    => "Only you all can see this",
+                                :subject => "TEST"}, email).deliver
+    end
 
-    message = ActionMailer::Base.deliveries.first
+    messages = ActionMailer::Base.deliveries
+
+    assert_equal 5, messages.count
 
     do_not_mail.each do |user|
-      refute message.bcc.include?(user.contact_email),
-        "User with status '#{user.status}' was sent a broadcast"
+     refute messages.any? { |m| m.to.include?(user.contact_email) },
+           "User with status '#{user.status}' was sent a broadcast"
     end
   end
 end
