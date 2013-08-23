@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816174433) do
+ActiveRecord::Schema.define(:version => 20130820143254) do
+
   create_table "announcements", :force => true do |t|
     t.text     "title"
     t.text     "body"
@@ -174,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.boolean  "notify_updates",        :default => true,  :null => false
     t.text     "payment_provider"
     t.text     "payment_provider_id"
+    t.string   "share_token"
   end
 
   create_table "volumes", :force => true do |t|
@@ -184,4 +186,5 @@ ActiveRecord::Schema.define(:version => 20130816174433) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end

@@ -4,12 +4,18 @@ class ArticleRoutingTest < ActionDispatch::IntegrationTest
   setup do
     @article = FactoryGirl.create(:article, :slug => "awesome-article")
     simulated_user.register(Support::SimulatedUser.default)
+
+    # FIXME: Another simulated user oddity
+    @user    = User.first
   end
 
   test "by slug" do
     visit "/articles/awesome-article"
 
     assert_content @article.subject
+
+    assert_current_path "/articles/awesome-article"
+    assert_url_has_param "u", @user.share_token
   end
 
   test "by id" do
@@ -19,6 +25,7 @@ class ArticleRoutingTest < ActionDispatch::IntegrationTest
     assert_content @article.subject
 
     assert_current_path "/articles/awesome-article"
+    assert_url_has_param "u", @user.share_token
   end
 
   test "with invalid slug" do

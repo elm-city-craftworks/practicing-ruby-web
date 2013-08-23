@@ -70,6 +70,13 @@ module Support
       click_link 'Log out'
     end
 
+    # FIXME: THIS IS ALMOST CERTAINLY A HACK.
+    def assert_url_has_param(key, value)
+      params =  Rack::Utils.parse_query(URI.parse(current_url).query)
+
+      assert_equal params[key], value
+    end
+
     def within(scope, prefix=nil)
       scope = '#' << ActionController::RecordIdentifier.dom_id(scope, prefix) if scope.is_a?(ActiveRecord::Base)
       super(scope)

@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../../test_helper'
 
 class ConversationMailerTest < ActionMailer::TestCase
   context "conversation started" do
@@ -21,10 +21,8 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       email_bodies = ActionMailer::Base.deliveries.map {|e| e.body.to_s }
 
-      article_url = Rails.application.routes.url_helpers.
-        article_url( first_comment.commentable,
-                     :anchor    => "comments",
-                     :only_path => true )
+      article_url = ArticleLink.new(first_comment.commentable, :anchor => "comments")
+                               .url("placeholder_token")
 
       email_bodies.each do |body|
         assert body[article_url]
@@ -69,7 +67,7 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       messages = ActionMailer::Base.deliveries
 
-      assert_equal 0, messages.count { |msg| 
+      assert_equal 0, messages.count { |msg|
                         msg.bcc.include?(dont_notify_user.contact_email) }
 
       assert_equal 1, messages.count { |msg|

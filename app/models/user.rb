@@ -23,11 +23,14 @@ class User < ActiveRecord::Base
 
   attr_protected :admin, :status
 
-
   before_save do
     if changed.include?("contact_email")
       write_attribute(:contact_email, contact_email.strip.downcase)
     end
+  end
+
+  before_create do
+    write_attribute(:share_token, SecureRandom.hex(5))
   end
 
   def self.to_notify
