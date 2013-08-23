@@ -16,14 +16,14 @@ class BroadcastMailerTest < ActionMailer::TestCase
     assert_equal 5, messages.count
 
     do_not_mail.each do |user|
-     refute messages.any? { |m| m.to.include?(user.contact_email) },
-           "User with status '#{user.status}' was sent a broadcast"
+      refute messages.any? { |m| m.to.include?(user.contact_email) },
+            "User with status '#{user.status}' was sent a broadcast"
     end
   end
 
 
   test "article links can be generated from template" do
-    FactoryGirl.create(:user) 
+    user = FactoryGirl.create(:user) 
 
     article = FactoryGirl.create(:article, :slug => "a-fancy-article")
 
@@ -33,7 +33,7 @@ class BroadcastMailerTest < ActionMailer::TestCase
 
     message = ActionMailer::Base.deliveries.first
 
-    url  = Rails.application.routes.url_helpers.article_url(article)
+    url  = ArticleLink.new(article).url(user.share_token)
 
     expected_body = "Here's an amazing article\n#{url}"
 
