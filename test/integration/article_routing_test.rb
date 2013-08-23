@@ -3,7 +3,7 @@ require_relative "../test_helper"
 class ArticleRoutingTest < ActionDispatch::IntegrationTest
   setup do
     @article = FactoryGirl.create(:article, :slug => "awesome-article")
-    simulated_user { register Support::SimulatedUser.default }
+    simulated_user.register(Support::SimulatedUser.default)
   end
 
   test "by slug" do

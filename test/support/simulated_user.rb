@@ -1,5 +1,15 @@
 module Support
   class SimulatedUser
+    class Proxy
+      def initialize(target)
+        @target = target
+      end
+
+      def method_missing(*a, &b)
+        @target.send(*a, &b)
+        self
+      end
+    end
 
     def self.default
       {
@@ -7,6 +17,10 @@ module Support
         :uid      => "12345",
         :email    => "test@test.com"
       }
+    end
+
+    def self.new(browser)
+      Proxy.new(super)
     end
 
     def initialize(browser)
@@ -43,7 +57,7 @@ module Support
       end
     end
 
-    def confirm_email
+    def confirm_email(attempts=1)
       browser { assert_current_path registration_update_profile_path }
 
       mail   = ActionMailer::Base.deliveries.pop
@@ -53,8 +67,7 @@ module Support
       secret = mail.body.to_s[/#{base}(\h+)/,1]
 
       browser do
-        visit registration_confirmation_path(:secret => secret)
-        return registration_confirmation_path(:secret => secret)
+        attempts.times { visit registration_confirmation_path(:secret => secret) }
       end
     end
 
