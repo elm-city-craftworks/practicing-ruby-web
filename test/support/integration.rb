@@ -75,12 +75,12 @@ module Support
       super(scope)
     end
 
-    def simulated_user(&block)
-      simulator = Support::SimulatedUser.new(self)
-      
-      simulator.instance_eval(&block) if block
+    def simulated_user
+      if block_given?
+        raise "Block interface has been removed. Make direct method calls instead" 
+      end
 
-      simulator
+      Support::SimulatedUser.new(self)
     end
 
     def outbox

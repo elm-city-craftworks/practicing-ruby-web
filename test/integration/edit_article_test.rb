@@ -2,7 +2,8 @@ require_relative '../test_helper'
 
 class EditArticleTest < ActionDispatch::IntegrationTest
   setup do
-    simulated_user { register Support::SimulatedUser.default }
+    simulated_user.register(Support::SimulatedUser.default)
+
     @article = FactoryGirl.create(:article, :slug => "awesome-article")
     User.first.update_attribute(:admin, true)
   end
