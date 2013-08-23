@@ -20,10 +20,7 @@ module Support
     end
 
     def self.new(browser)
-      obj = allocate
-      obj.send(:initialize, browser)
-
-      Proxy.new(obj)
+      Proxy.new(super)
     end
 
     def initialize(browser)
