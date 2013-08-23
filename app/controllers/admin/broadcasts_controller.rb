@@ -12,7 +12,12 @@ module Admin
         render(:new) && return
       end
 
-      BroadcastMailer.deliver_broadcast(params)
+      if params[:commit] == "Test"
+        Broadcaster.notify_testers(params)
+      else
+        Broadcaster.notify_subscribers(params)
+      end
+
       flash[:notice] = "Message sent"
       redirect_to :action => :new
 
