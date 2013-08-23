@@ -71,10 +71,9 @@ module Support
 
       browser do
         visit registration_confirmation_path(:secret => secret)
-        return registration_confirmation_path(:secret => secret)
-      end
 
-      self
+        yield registration_confirmation_path(:secret => secret) if block_given?
+      end
     end
 
     def make_payment

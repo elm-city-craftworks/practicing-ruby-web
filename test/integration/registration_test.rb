@@ -77,8 +77,9 @@ class RegistrationTest < ActionDispatch::IntegrationTest
     simulated_user do
       authenticate(:nickname => "TestUser", :uid => "12345")
       create_profile(:email => "test@test.com")
-      confirmation_path = confirm_email
-      browser { visit confirmation_path } # this attempts to hit the secret URL again 
+      confirm_email do |confirmation_path|
+        browser { visit confirmation_path } 
+      end
       make_payment
     end
   end
