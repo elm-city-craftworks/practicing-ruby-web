@@ -70,13 +70,24 @@ module Support
       click_link 'Log out'
     end
 
+    # FIXME: THIS IS ALMOST CERTAINLY A HACK.
+    def assert_url_has_param(key, value)
+      params =  Rack::Utils.parse_query(URI.parse(current_url).query)
+
+      assert_equal params[key], value
+    end
+
     def within(scope, prefix=nil)
       scope = '#' << ActionController::RecordIdentifier.dom_id(scope, prefix) if scope.is_a?(ActiveRecord::Base)
       super(scope)
     end
 
-    def simulated_user(&block)
-      Support::SimulatedUser.new(self).instance_eval(&block)
+    def simulated_user
+      if block_given?
+        raise "Block interface has been removed. Make direct method calls instead" 
+      end
+
+      Support::SimulatedUser.new(self)
     end
 
     def outbox
