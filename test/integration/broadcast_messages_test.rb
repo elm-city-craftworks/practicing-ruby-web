@@ -2,14 +2,13 @@ require_relative '../test_helper'
 
 class BroadcastMessagesTest < ActionDispatch::IntegrationTest
   setup do
-    ActionMailer::Base.deliveries.clear
-
-    @admin = FactoryGirl.create(:user, :admin => true)
+    @admin = FactoryGirl.create(:user, :admin => true, 
+                                       :notify_updates => false)
     FactoryGirl.create(:authorization, :user => @admin)
   end
 
   test "messages are broadcast to users" do
-    users = 3.times.map { FactoryGirl.create(:user) } + [@admin]
+    users = 3.times.map { FactoryGirl.create(:user) } 
 
     subject = "Weekly Update 1.5"
     body    = 100.times.map { "Long body content is long" }.join
@@ -32,7 +31,10 @@ class BroadcastMessagesTest < ActionDispatch::IntegrationTest
     no_updates_user = FactoryGirl.create(:user, :notify_updates => false)
     nothing_user    = FactoryGirl.create(:user, :notifications_enabled => false)
 
+    updated_users = 5.times.map { FactoryGirl.create(:user) }
     send_message
+
+    assert_equal 5, ActionMailer::Base.deliveries.count
 
     ActionMailer::Base.deliveries.each do |message|
       refute message.to.include?(no_updates_user.contact_email),
@@ -67,6 +69,10 @@ class BroadcastMessagesTest < ActionDispatch::IntegrationTest
       click_button "Test"
     when nil
       click_button "Send"
+
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy
     else
       raise NotImplementedError, "Don't know how to click #{options[:button]}"
     end

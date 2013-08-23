@@ -12,10 +12,15 @@ module Admin
         render(:new) && return
       end
 
+      message = { :subject => params[:subject],
+                  :body    => params[:body] }
+
       if params[:commit] == "Test"
-        Broadcaster.notify_testers(params)
+        message[:to] = params[:to]
+
+        Broadcaster.notify_testers(message)
       else
-        Broadcaster.delay.notify_subscribers(params)
+        Broadcaster.delay.notify_subscribers(message)
       end
 
       flash[:notice] = "Message sent"
