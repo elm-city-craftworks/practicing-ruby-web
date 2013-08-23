@@ -37,6 +37,8 @@ gem 'daemons', :require => false
 gem 'whenever'
 gem 'rails_setup'
 
+gem 'mustache'
+
 gem 'mixpanel'
 
 group :development do

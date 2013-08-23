@@ -18,6 +18,7 @@ TestNotifier.silence_no_notifier_warning = true
 DatabaseCleaner.strategy                 = :truncation
 OmniAuth.config.test_mode                = true
 Turn.config.natural                      = true
+#Delayed::Worker.delay_jobs               = false
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
@@ -34,6 +35,7 @@ class ActionDispatch::IntegrationTest
       'user_info' => { 'nickname' => 'frankpepelio' }
     }
 
+    ActionMailer::Base.deliveries.clear
   end
 
   teardown do
