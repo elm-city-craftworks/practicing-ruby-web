@@ -1,5 +1,15 @@
 module Support
   class SimulatedUser
+    class Proxy
+      def initialize(target)
+        @target = target
+      end
+
+      def method_missing(*a, &b)
+        @target.send(*a, &b)
+        self
+      end
+    end
 
     def self.default
       {
@@ -7,6 +17,13 @@ module Support
         :uid      => "12345",
         :email    => "test@test.com"
       }
+    end
+
+    def self.new(browser)
+      obj = allocate
+      obj.send(:initialize, browser)
+
+      Proxy.new(obj)
     end
 
     def initialize(browser)
@@ -56,6 +73,8 @@ module Support
         visit registration_confirmation_path(:secret => secret)
         return registration_confirmation_path(:secret => secret)
       end
+
+      self
     end
 
     def make_payment
