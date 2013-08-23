@@ -17,26 +17,22 @@ class ConversationTest < ActionDispatch::IntegrationTest
 
   end
   test "creating a comment" do
-    simulated_user do
-      register(Support::SimulatedUser.default)
-      read_article
-
-      add_comment "This is wonderful!"
-    end
+    simulated_user
+      .register(Support::SimulatedUser.default)
+      .read_article
+      .add_comment("This is wonderful!")
 
     outbox.has_message_with(:subject => /conversation has started/,
                              :bcc     => @expected_contacted_emails)
   end
 
   test "creating multiple comments" do
-    simulated_user do
-      register(Support::SimulatedUser.default)
-      read_article
-
-      add_comment "This is wonderful!"
-      add_comment "And so is talking to myself!"
-      add_comment "Yaay!"
-    end
+    simulated_user
+      .register(Support::SimulatedUser.default)
+      .read_article
+      .add_comment("This is wonderful!")
+      .add_comment("And so is talking to myself!")
+      .add_comment("Yaay!")
 
     outbox.has_message_with(:subject => /comment has been made/,
                             :bcc     => @expected_contacted_emails,

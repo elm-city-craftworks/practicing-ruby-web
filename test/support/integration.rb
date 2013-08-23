@@ -76,7 +76,11 @@ module Support
     end
 
     def simulated_user(&block)
-      Support::SimulatedUser.new(self).instance_eval(&block)
+      simulator = Support::SimulatedUser.new(self)
+      
+      simulator.instance_eval(&block) if block
+
+      simulator
     end
 
     def outbox

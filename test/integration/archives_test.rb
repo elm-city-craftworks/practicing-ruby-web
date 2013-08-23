@@ -64,10 +64,8 @@ class ArchivesTest < ActionDispatch::IntegrationTest
 
     return if state == :guest
 
-    simulated_user do 
-      register(Support::SimulatedUser.default)
-
-      logout unless state == :logged_in
-    end
+    simulated_user
+      .register(Support::SimulatedUser.default)
+      .logout unless state == :logged_in
   end
 end

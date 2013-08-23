@@ -60,7 +60,7 @@ module Support
       end
     end
 
-    def confirm_email
+    def confirm_email(attempts=1)
       browser { assert_current_path registration_update_profile_path }
 
       mail   = ActionMailer::Base.deliveries.pop
@@ -70,9 +70,7 @@ module Support
       secret = mail.body.to_s[/#{base}(\h+)/,1]
 
       browser do
-        visit registration_confirmation_path(:secret => secret)
-
-        yield registration_confirmation_path(:secret => secret) if block_given?
+        attempts.times { visit registration_confirmation_path(:secret => secret) }
       end
     end
 
