@@ -15,7 +15,7 @@ module Admin
       if params[:commit] == "Test"
         Broadcaster.notify_testers(params)
       else
-        Broadcaster.notify_subscribers(params)
+        Broadcaster.delay.notify_subscribers(params)
       end
 
       flash[:notice] = "Message sent"
