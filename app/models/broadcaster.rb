@@ -6,8 +6,9 @@ class Broadcaster
   end
 
   def self.notify_testers(params)
-    subscriber = Struct.new(:contact_email)
+    subscriber = Struct.new(:contact_email, :share_token)  
+                       .new(params[:to], "testtoken")
 
-    BroadcastMailer.broadcast(params, subscriber.new(params[:to])).deliver
+    BroadcastMailer.broadcast(params, subscriber).deliver
   end
 end
