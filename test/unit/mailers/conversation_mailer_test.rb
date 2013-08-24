@@ -21,12 +21,10 @@ class ConversationMailerTest < ActionMailer::TestCase
 
       email_bodies = ActionMailer::Base.deliveries.map {|e| e.body.to_s }
 
-      article_url = ArticleLink.new(first_comment.commentable, :anchor => "comments")
-                               .url("placeholder_token")
+      url = Rails.application.routes.url_helpers
+                 .article_url(first_comment.commentable)
 
-      email_bodies.each do |body|
-        assert body[article_url]
-      end
+      email_bodies.each { |body| assert body[url] }
     end
 
     test "emails are not sent for non-published articles" do
