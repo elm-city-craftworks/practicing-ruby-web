@@ -5,9 +5,10 @@ require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'capistrano/confirm_branch'
 require 'capistrano/maintenance'
+require 'capistrano-unicorn'
 
 set :application, "practicing-ruby"
-set :repository,  "git@github.com:elm-city-craftworks/practicing-ruby-web.git"
+set :repository,  "https://github.com/elm-city-craftworks/practicing-ruby-web.git"
 set :scm, :git
 set :user, "git"
 set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
