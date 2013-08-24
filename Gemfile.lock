@@ -42,6 +42,8 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-maintenance (0.0.3)
       capistrano (>= 2.0.0)
+    capistrano-unicorn (0.1.10)
+      capistrano
     capistrano_confirm_branch (0.0.2)
       capistrano
     capybara (2.0.3)
@@ -269,6 +271,7 @@ DEPENDENCIES
   albino
   capistrano
   capistrano-maintenance
+  capistrano-unicorn
   capistrano_confirm_branch
   capybara (= 2.0.3)
   capybara-screenshot

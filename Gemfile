@@ -44,6 +44,7 @@ gem 'mixpanel'
 group :development do
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
+  gem 'capistrano-unicorn', :require => false
   gem 'capistrano-maintenance'
 end
 
