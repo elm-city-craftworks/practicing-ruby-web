@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class SharedArticleTest < ActionDispatch::IntegrationTest
   setup do
@@ -15,6 +15,12 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
 
     assert_equal 200, page.status_code
   end
+
+  test "shared article includes link to internal comments section" do
+    visit shared_article_path(@share.secret)
+    assert_match article_path(@article, :anchor => "comments"), page.body
+  end
+
 
   test "shared article visible to logged in users" do
     sign_user_in
