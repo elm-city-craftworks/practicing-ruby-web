@@ -89,7 +89,7 @@ class ArticlesController < ApplicationController
 
   def update_url
     opts = {}
-    opts[:anchor] = "comments" if params[:a]
+    opts[:anchor] = params[:a] if params[:a].present?
 
     needs_anchor        = opts.present?
     slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
