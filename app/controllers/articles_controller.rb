@@ -1,9 +1,10 @@
 class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
   before_filter :update_url, :only => [:show]
+  before_filter :validate_token, :only => [:show]
 
-  skip_before_filter :authenticate,      :only => [:shared, :samples]
-  skip_before_filter :authenticate_user, :only => [:shared, :samples]
+  skip_before_filter :authenticate,      :only => [:show, :shared, :samples]
+  skip_before_filter :authenticate_user, :only => [:show, :shared, :samples]
 
   def index
     if params[:volume]
@@ -29,14 +30,20 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    mixpanel.track("Article Visit", :title   => @article.subject,
-                                    :user_id => current_user.hashed_id)
+    store_location
 
     authenticate_admin if @article.status == "draft"
 
     @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
 
     decorate_article
+
+    if current_user
+      mixpanel.track("Article Visit", :title   => @article.subject,
+                                      :user_id => current_user.hashed_id)
+    else
+      render "shared"
+    end
   end
 
   def share
@@ -89,9 +96,17 @@ class ArticlesController < ApplicationController
 
   def update_url
     slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
-    missing_token       = params[:u].blank?
+    missing_token       = current_user && params[:u].blank?
 
     redirect_to(article_path(@article)) if slug_needs_updating || missing_token
+  end
+
+  def validate_token
+    return if current_user.try(:active?)
+
+    unless params[:u].present? && User.find_by_share_token_and_status(params[:u], "active")
+      attempt_user_login
+    end
   end
 
   def decorate_article

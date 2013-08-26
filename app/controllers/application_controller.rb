@@ -35,6 +35,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def attempt_user_login
+    authenticate
+    authenticate_user
+  end
+
   def authenticate_cache_cooker!
     if authenticate_cache_cooker
       @current_authorization = Authorization.includes(:user).

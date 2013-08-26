@@ -20,7 +20,7 @@
 
     = render :partial => "shared/flash", :locals => { :flash => flash }
 
-    - unless request.url[/shared/]
+    - if current_user
       = render :partial => "shared/navigation"
 
     %header
