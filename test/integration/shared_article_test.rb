@@ -18,7 +18,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
 
   test "shared article includes link to internal comments section" do
     visit shared_article_path(@share.secret)
-    assert_match article_path(@article, :anchor => "comments"), page.body
+    assert_match article_path(@article, :a => "comments"), page.body
   end
 
 
