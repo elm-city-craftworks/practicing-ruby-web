@@ -1,7 +1,7 @@
 class ArticleLink
   include Rails.application.routes.url_helpers
 
-  def initialize(article, params)
+  def initialize(article, params={})
     self.article = article
     self.params  = params
   end

@@ -42,6 +42,12 @@ class ArticlesController < ApplicationController
       mixpanel.track("Article Visit", :title   => @article.subject,
                                       :user_id => current_user.hashed_id)
     else
+      shared_by = User.find_by_share_token(params[:u]).hashed_id
+
+
+      mixpanel.track("Shared Aricle Visit", :title => @article.subject,
+                                            :shared_by => shared_by)
+
       render "shared"
     end
   end
@@ -56,7 +62,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => shared_article_url(@share.secret).to_json
+        render :json => article_url(@article).to_json
       end
     end
   end
@@ -64,15 +70,10 @@ class ArticlesController < ApplicationController
   def shared
     @share = SharedArticle.find_by_secret(params[:secret])
 
-    unless @share
-      render_http_error 404
+    if @share
+      redirect_to ArticleLink.new(@share.article).path(@share.user.share_token)
     else
-      mixpanel.track("Shared Article Visit", :title     => @share.article.subject,
-                                             :shared_by => @share.user.hashed_id)
-      @share.viewed unless current_user
-      @user    = UserDecorator.decorate(@share.user)
-      @article = @share.article
-      decorate_article
+      render_http_error 404
     end
   end
 
