@@ -88,10 +88,17 @@ class ArticlesController < ApplicationController
   # NOTE: This method uses our custom override of article_path in ApplicationHelper
 
   def update_url
+    opts = {}
+    opts[:anchor] = params[:a] if params[:a].present?
+
+    needs_anchor        = opts.present?
     slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
     missing_token       = params[:u].blank?
 
-    redirect_to(article_path(@article)) if slug_needs_updating || missing_token
+
+    if slug_needs_updating || missing_token || needs_anchor
+      redirect_to(article_path(@article, opts)) 
+    end
   end
 
   def decorate_article
