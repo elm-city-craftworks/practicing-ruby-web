@@ -5,7 +5,7 @@ set :whenever_identifier, defer { application }
 set :deploy_to, "/home/deploy"
 set :user, "deploy"
 
-server "173.246.40.123", :app, :web, :db, :primary => true
+server "new.practicingruby.com", :app, :web, :db, :primary => true
 
 before 'deploy:update_code' do
   #run "sudo god stop practicing_ruby_delayed_job"
