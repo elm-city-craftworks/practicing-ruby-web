@@ -12,7 +12,7 @@ gem 'omniauth-github', '~> 1.0.1'
 
 gem 'redcarpet', '~> 2.1'
 gem 'albino'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.5.9'
 gem 'md_preview'
 gem 'md_emoji'
 
