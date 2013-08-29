@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete("authorization_id")
+    clear_location
     redirect_to "/"
   end
   
