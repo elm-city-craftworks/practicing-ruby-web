@@ -54,6 +54,7 @@ group :assets do
   gem 'uglifier'
   gem 'compass-rails'
   gem 'sassy-buttons'
+  gem 'turbo-sprockets-rails3'
 end
 
 group :test do

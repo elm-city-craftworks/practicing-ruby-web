@@ -250,6 +250,9 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    turbo-sprockets-rails3 (0.3.9)
+      railties (> 3.2.8, < 4.0.0)
+      sprockets (>= 2.0.0)
     turn (0.9.5)
       ansi
     tzinfo (0.3.37)
@@ -321,6 +324,7 @@ DEPENDENCIES
   stripe
   stripe_event
   test_notifier
+  turbo-sprockets-rails3
   turn (~> 0.9.5)
   uglifier
   unicorn
