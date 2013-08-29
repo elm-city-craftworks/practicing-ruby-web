@@ -173,7 +173,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    pg (0.11.0)
+    pg (0.16.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     rack (1.4.5)
@@ -308,7 +308,7 @@ DEPENDENCIES
   nokogiri (~> 1.5.9)
   omniauth-github (~> 1.0.1)
   omniauth-oauth2 (~> 1.1.1)
-  pg
+  pg (= 0.16.0)
   rack-google_analytics
   rack-pjax (~> 0.6.0)
   rails (~> 3.2.13)
