@@ -1,14 +1,14 @@
 class BroadcastMailer < ActionMailer::Base
   def self.recipients
-    User.where(:notify_updates => true).to_notify.map(&:contact_email)
+    User.where(:notify_updates => true).to_notify
   end
 
-  def broadcast(message, email)
-    article_finder = ->(e) { article_url(Article[e]) }
+  def broadcast(message, subscriber)
+    article_finder = ->(e) { ArticleLink.new(Article[e]).url(subscriber.share_token) }
 
     @body = Mustache.render(message[:body], :article => article_finder)
 
-    mail(:to      => email,
+    mail(:to      => subscriber.contact_email,
          :subject => message[:subject])
   end
 end
