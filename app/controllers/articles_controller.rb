@@ -31,21 +31,17 @@ class ArticlesController < ApplicationController
 
   def show
     store_location
-
-    authenticate_admin if @article.status == "draft"
-
-    @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
-
     decorate_article
 
     if current_user
       mixpanel.track("Article Visit", :title   => @article.subject,
                                       :user_id => current_user.hashed_id)
+
+      @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
     else
       shared_by = User.find_by_share_token(params[:u]).hashed_id
 
-
-      mixpanel.track("Shared Aricle Visit", :title => @article.subject,
+      mixpanel.track("Shared Article Visit", :title => @article.subject,
                                             :shared_by => shared_by)
 
       render "shared"
