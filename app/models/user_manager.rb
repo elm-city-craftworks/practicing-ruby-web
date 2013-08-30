@@ -2,13 +2,13 @@ class UserManager
   attr_reader :client, :list_id
 
   def initialize
-    @client  = Mailchimp::API.new(MailChimp::SETTINGS[:api_key])
-    @list_id = MailChimp::SETTINGS[:list_id]
+    @client  = Mailchimp::API.new(MailChimpSettings[:api_key])
+    @list_id = MailChimpSettings[:list_id]
   end
 
   def delete_user(email)
-    client.list_unsubscribe(:id            => list_id, 
-                            :email_address => email, 
+    client.list_unsubscribe(:id            => list_id,
+                            :email_address => email,
                             :delete_member => true)
 
     AccountMailer.unsubscribed(email)

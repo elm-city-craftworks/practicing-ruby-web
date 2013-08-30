@@ -1,8 +1,7 @@
-module MailChimp
-  SETTINGS = { :list_id      => 'YOUR-LIST-ID',
-               :api_key      => 'YOUR-API-KEY',
-               :testers      => ["your@email.com"],
-               :sender_name  => "Your Sender Name",
-               :sender_email => "Your Sender Email",
-               :webhook_key  => "Your webhook key" }
-end
+MailChimpSettings = { 
+  :list_id      => 'YOUR-LIST-ID',
+  :api_key      => 'YOUR-API-KEY',
+  :testers      => ["your@email.com"],
+  :sender_name  => "Your Sender Name",
+  :sender_email => "Your Sender Email",
+  :webhook_key  => "Your webhook key" }
