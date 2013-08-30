@@ -1,4 +1,4 @@
-set :output, "~/practicing-ruby/current/log/cron_log.log"
+set :output, "/home/deploy/current/log/cron_log.log"
 
 # Make sure +bundle exec+ is used when executing rake tasks
 #
