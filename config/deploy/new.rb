@@ -14,7 +14,7 @@ end
 after 'deploy' do
   run  "sudo god load #{release_path}/config/delayed_job.god"
   run  "sudo god start practicing_ruby_delayed_job"
-  # run_rake "bake:articles"
+  run_rake "bake:articles"
 end
 
 after 'deploy:restart', 'unicorn:restart'
