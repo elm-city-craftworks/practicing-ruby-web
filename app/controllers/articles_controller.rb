@@ -1,9 +1,10 @@
 class ArticlesController < ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :share]
   before_filter :update_url, :only => [:show]
+  before_filter :validate_token, :only => [:show]
 
-  skip_before_filter :authenticate,      :only => [:shared, :samples]
-  skip_before_filter :authenticate_user, :only => [:shared, :samples]
+  skip_before_filter :authenticate,      :only => [:show, :shared, :samples]
+  skip_before_filter :authenticate_user, :only => [:show, :shared, :samples]
 
   def index
     if params[:volume]
@@ -29,14 +30,22 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    mixpanel.track("Article Visit", :title   => @article.subject,
-                                    :user_id => current_user.hashed_id)
-
-    authenticate_admin if @article.status == "draft"
-
-    @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
-
+    store_location
     decorate_article
+
+    if current_user
+      mixpanel.track("Article Visit", :title   => @article.subject,
+                                      :user_id => current_user.hashed_id)
+
+      @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
+    else
+      shared_by = User.find_by_share_token(params[:u]).hashed_id
+
+      mixpanel.track("Shared Article Visit", :title => @article.subject,
+                                            :shared_by => shared_by)
+
+      render "shared"
+    end
   end
 
   def share
@@ -49,7 +58,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => shared_article_url(@share.secret).to_json
+        render :json => article_url(@article).to_json
       end
     end
   end
@@ -57,15 +66,10 @@ class ArticlesController < ApplicationController
   def shared
     @share = SharedArticle.find_by_secret(params[:secret])
 
-    unless @share
-      render_http_error 404
+    if @share
+      redirect_to ArticleLink.new(@share.article).path(@share.user.share_token)
     else
-      mixpanel.track("Shared Article Visit", :title     => @share.article.subject,
-                                             :shared_by => @share.user.hashed_id)
-      @share.viewed unless current_user
-      @user    = UserDecorator.decorate(@share.user)
-      @article = @share.article
-      decorate_article
+      render_http_error 404
     end
   end
 
@@ -89,9 +93,17 @@ class ArticlesController < ApplicationController
 
   def update_url
     slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
-    missing_token       = params[:u].blank?
+    missing_token       = current_user && params[:u].blank?
 
     redirect_to(article_path(@article)) if slug_needs_updating || missing_token
+  end
+
+  def validate_token
+    return if current_user.try(:active?)
+
+    unless params[:u].present? && User.find_by_share_token_and_status(params[:u], "active")
+      attempt_user_login
+    end
   end
 
   def decorate_article

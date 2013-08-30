@@ -35,6 +35,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def attempt_user_login
+    authenticate
+    authenticate_user
+  end
+
   def authenticate_cache_cooker!
     if authenticate_cache_cooker
       @current_authorization = Authorization.includes(:user).
@@ -59,9 +64,13 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.fullpath
   end
 
+  def clear_location
+    session[:return_to] = nil
+  end
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
-    session[:return_to] = nil
+    clear_location
   end
 
   def active_broadcasts
