@@ -3,6 +3,7 @@ class UserManager
 
   def initialize
     @client  = Mailchimp::API.new(MailChimpSettings[:api_key])
+    @client.throws_exceptions = true
     @list_id = MailChimpSettings[:list_id]
   end
 
