@@ -108,7 +108,6 @@ GEM
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
-    hominid (3.0.2)
     httparty (0.10.2)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
@@ -128,6 +127,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailchimp (0.0.9)
+      httparty
     mailhopper (0.0.9)
       rails (>= 3.1.0)
     md_emoji (0.0.8)
@@ -295,11 +296,11 @@ DEPENDENCIES
   factory_girl_rails
   god
   haml
-  hominid
   httparty (>= 0.10.0)
   jquery-rails
   json (~> 1.7.7)
   launchy
+  mailchimp
   mailhopper (~> 0.0.4)
   md_emoji
   md_preview

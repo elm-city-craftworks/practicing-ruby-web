@@ -3,7 +3,7 @@ PracticingRubyWeb::Application.routes.draw do
 
   mount StripeEvent::Engine => STRIPE_WEBHOOK_PATH
 
-  match "/hooks/#{MailChimp::SETTINGS[:webhook_key]}" => 'hooks#receive'
+  match "/hooks/#{MailChimpSettings[:webhook_key]}" => 'hooks#receive'
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
 

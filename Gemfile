@@ -6,7 +6,7 @@ gem 'json', '~> 1.7.7'
 gem 'multi_xml', '>= 0.5.2'
 
 gem 'pg', '0.16.0'
-gem 'hominid'
+gem 'mailchimp'
 gem 'omniauth-oauth2', '~> 1.1.1'
 gem 'omniauth-github', '~> 1.0.1'
 
