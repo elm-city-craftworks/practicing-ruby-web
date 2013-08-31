@@ -1,5 +1,5 @@
 - if current_user.try(:admin)
-  - content_for(:header) do
+  - content_for(:header_bottom) do
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
   = link_to '#', :id => 'admin-bar-toggle', :data => {:toggle => "#admin-bar"} do
     %i.icon-cog
