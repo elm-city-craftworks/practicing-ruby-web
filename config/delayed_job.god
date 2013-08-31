@@ -5,8 +5,8 @@ God.watch do |w|
   w.name          = "practicing_ruby_delayed_job"
   w.group         = "practicing_ruby"
   w.interval      = 60.seconds
-  w.start         = "#{script} start"
-  w.restart       = "#{script} restart"
+  w.start         = "#{script} -n 4 start"
+  w.restart       = "#{script} -n 4 restart"
   w.stop          = "#{script} stop"
   w.start_grace   = 20.seconds
   w.restart_grace = 20.seconds
