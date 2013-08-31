@@ -5,14 +5,14 @@ gem 'rake', '~> 0.9.0'
 gem 'json', '~> 1.7.7'
 gem 'multi_xml', '>= 0.5.2'
 
-gem 'pg'
+gem 'pg', '0.16.0'
 gem 'hominid'
 gem 'omniauth-oauth2', '~> 1.1.1'
 gem 'omniauth-github', '~> 1.0.1'
 
 gem 'redcarpet', '~> 2.1'
 gem 'albino'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.5.9'
 gem 'md_preview'
 gem 'md_emoji'
 
@@ -44,6 +44,7 @@ gem 'mixpanel'
 group :development do
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
+  gem 'capistrano-unicorn', :require => false
   gem 'capistrano-maintenance'
 end
 
@@ -53,6 +54,7 @@ group :assets do
   gem 'uglifier'
   gem 'compass-rails'
   gem 'sassy-buttons'
+  gem 'turbo-sprockets-rails3'
 end
 
 group :test do
@@ -72,4 +74,5 @@ group :production do
   gem 'god', :require => false
   gem 'exception_notification'
   gem 'rack-google_analytics'
+  gem 'unicorn'
 end

@@ -42,6 +42,8 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-maintenance (0.0.3)
       capistrano (>= 2.0.0)
+    capistrano-unicorn (0.1.10)
+      capistrano
     capistrano_confirm_branch (0.0.2)
       capistrano
     capybara (2.0.3)
@@ -119,6 +121,7 @@ GEM
     json (1.7.7)
     jwt (0.1.7)
       multi_json (>= 1.5)
+    kgio (2.8.0)
     launchy (2.1.0)
       addressable (~> 2.2.6)
     mail (2.5.3)
@@ -135,7 +138,6 @@ GEM
       redcarpet (>= 2.0.0)
     metaclass (0.0.1)
     mime-types (1.23)
-    mini_portile (0.5.1)
     minitest (4.7.0)
     mixpanel (4.0.2)
       escape
@@ -154,8 +156,7 @@ GEM
     net-ssh (2.6.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.5.10)
     notifier (0.4.0)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -172,7 +173,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    pg (0.11.0)
+    pg (0.16.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     rack (1.4.5)
@@ -207,6 +208,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rainbow (1.1.4)
+    raindrops (0.11.0)
     rake (0.9.6)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -248,12 +250,19 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    turbo-sprockets-rails3 (0.3.9)
+      railties (> 3.2.8, < 4.0.0)
+      sprockets (>= 2.0.0)
     turn (0.9.5)
       ansi
     tzinfo (0.3.37)
     uglifier (1.2.1)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    unicorn (4.6.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     websocket (1.0.7)
     whenever (0.7.3)
       activesupport (>= 2.3.4)
@@ -269,6 +278,7 @@ DEPENDENCIES
   albino
   capistrano
   capistrano-maintenance
+  capistrano-unicorn
   capistrano_confirm_branch
   capybara (= 2.0.3)
   capybara-screenshot
@@ -298,10 +308,10 @@ DEPENDENCIES
   mocha
   multi_xml (>= 0.5.2)
   mustache
-  nokogiri
+  nokogiri (~> 1.5.9)
   omniauth-github (~> 1.0.1)
   omniauth-oauth2 (~> 1.1.1)
-  pg
+  pg (= 0.16.0)
   rack-google_analytics
   rack-pjax (~> 0.6.0)
   rails (~> 3.2.13)
@@ -314,7 +324,9 @@ DEPENDENCIES
   stripe
   stripe_event
   test_notifier
+  turbo-sprockets-rails3
   turn (~> 0.9.5)
   uglifier
+  unicorn
   whenever
   will_paginate
