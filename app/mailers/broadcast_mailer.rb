@@ -7,7 +7,6 @@ class BroadcastMailer < ActionMailer::Base
     article_finder = ->(e) { ArticleLink.new(Article[e]).url(subscriber.share_token) }
 
     @body = Mustache.render(message[:body], :article => article_finder)
-
     mail(:to      => subscriber.contact_email,
          :subject => message[:subject])
   end
