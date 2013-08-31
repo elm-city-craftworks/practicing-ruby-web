@@ -1,4 +1,4 @@
-set :stages, %w(production staging new)
+set :stages, %w(production old_production)
 set :default_stage, "production"
 
 require 'capistrano/ext/multistage'
@@ -6,24 +6,20 @@ require 'bundler/capistrano'
 require 'capistrano/confirm_branch'
 require 'capistrano/maintenance'
 require 'capistrano-unicorn'
+require 'whenever/capistrano'
 
 set :application, "practicing-ruby"
 set :repository,  "https://github.com/elm-city-craftworks/practicing-ruby-web.git"
 set :scm, :git
-set :user, "git"
 set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
 
 set :use_sudo, false
 set :deploy_via, :remote_cache
 
+set :whenever_identifier, defer { application }
+
 set :maintenance_template_path, 'app/views/layouts/maintenance.html.erb'
 set :maintenance_config_warning, false
-
-namespace :deploy do
-  task :restart, :roles => :app do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-end
 
 after 'deploy:update_code' do
   { "database.yml"             => "config/database.yml",
@@ -39,10 +35,20 @@ after 'deploy:update_code' do
   end
 end
 
-after  "deploy",             "deploy:migrate"
-after  "deploy",             "deploy:cleanup"
+after  "deploy", "deploy:migrate"
+after  "deploy", "deploy:cleanup"
 
 load 'deploy/assets'
+
+before 'deploy:update_code' do
+  run "sudo god stop practicing_ruby_delayed_job"
+end
+
+after 'deploy' do
+  run  "sudo god load #{release_path}/config/delayed_job.god"
+  run  "sudo god start practicing_ruby_delayed_job"
+  run_rake "bake:articles"
+end
 
 desc "Import articles, volumes, and collections from the server"
 namespace :import do
