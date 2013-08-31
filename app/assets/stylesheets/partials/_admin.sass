@@ -31,19 +31,47 @@ table#reports
 .control-bar-padding
   height: 50px
 
-#admin-bar
+#admin-bar-toggle
+  position: fixed
+  top: 0
+  right: 40px
   background-color: $red
-  padding: 5px
-  ul
-    width: 750px
-    margin: 0 auto
-    li
-      display: inline
-      margin-right: 1em
-      a
-        color: #fff
-        text-decoration: none
-      &.right
-        float: right
-        margin-right: 0
-        margin-left: 1em
+  padding: 5px 15px
+  +single-box-shadow(#333, 0, 0, 2px)
+  +border-bottom-radius(2px)
+  +single-transition(all, .10s, ease-out, 0)
+  color: #fff
+  font-size: 2em
+  text-decoration: none
+  z-index: 2
+  &:hover
+    padding-top: 15px
+#admin-bar
+  display: none
+  .placeholder
+    height: 32px
+  .nav
+    font-family: sans-serif
+    letter-spacing: normal
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    width: 100%
+    background-color: #444
+    padding: 5px 0
+    +single-box-shadow(#333, 0, 0, 2px)
+
+    ul
+      width: 750px
+      margin: 0 auto
+      li
+        display: inline
+        margin-right: 1em
+        a
+          color: #fff
+          text-decoration: none
+        &.right
+          float: right
+          margin-right: 0
+          margin-left: 1em

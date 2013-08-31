@@ -1,4 +1,4 @@
-$(document).on 'click', 'a[data-hide]', (e) ->
-  target = $(this).data('hide')
-  window.scrollBy 0, $(target).outerHeight()
+$(document).on 'click', 'a[data-toggle]', (e) ->
+  target = $(this).data('toggle')
+  $(target).toggle()
   e.preventDefault()

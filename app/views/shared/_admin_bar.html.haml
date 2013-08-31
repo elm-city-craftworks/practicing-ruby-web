@@ -1,9 +1,14 @@
 - if current_user.try(:admin)
+  - content_for(:header) do
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+  = link_to '#', :id => 'admin-bar-toggle', :data => {:toggle => "#admin-bar"} do
+    %i.icon-cog
   #admin-bar
-    %ul
-      %li= link_to "Reports", admin_reports_path
-      %li= link_to "Broadcast", new_admin_broadcast_path
-      %li= link_to "Announcements", admin_announcements_path
-      %li= link_to "New Article", new_admin_article_path
-      = yield(:admin_bar)
-      %li.right= link_to "Hide", "#", :data => {:hide => "#admin-bar"}
+    .placeholder
+    .nav
+      %ul
+        %li= link_to "Reports", admin_reports_path
+        %li= link_to "Broadcast", new_admin_broadcast_path
+        %li= link_to "Announcements", admin_announcements_path
+        %li= link_to "New Article", new_admin_article_path
+        = yield(:admin_bar)
