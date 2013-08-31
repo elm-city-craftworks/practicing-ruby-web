@@ -2,7 +2,3 @@
 - content_for(:header) do
   .bigtext
     %div= @article.subject
-
-- if current_user && current_user.admin?
-  = link_to "Edit", edit_admin_article_path(@article)
-

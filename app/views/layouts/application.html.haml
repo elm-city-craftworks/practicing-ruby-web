@@ -15,6 +15,7 @@
 
   %body{class: "#{controller.controller_name}-#{controller.action_name}"}
     = yield(:nudge)
+    = render :partial => "shared/admin_bar"
     - if active_broadcasts.any?
       #top-bar= render "shared/broadcasts"
 

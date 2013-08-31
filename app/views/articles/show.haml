@@ -4,6 +4,10 @@
       PR.Comments.init('#{comments_path}/')
       new PR.RoboBar('#{share_article_path(@article)}')
 
+- if current_user && current_user.admin?
+  - content_for(:admin_bar) do
+    %li= link_to "Edit Article", edit_admin_article_path(@article)
+
 = render "header"
 
 #article

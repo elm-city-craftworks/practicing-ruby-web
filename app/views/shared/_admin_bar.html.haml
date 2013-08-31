@@ -1,0 +1,9 @@
+- if current_user.try(:admin)
+  #admin-bar
+    %ul
+      %li= link_to "Reports", admin_reports_path
+      %li= link_to "Broadcast", new_admin_broadcast_path
+      %li= link_to "Announcements", admin_announcements_path
+      %li= link_to "New Article", new_admin_article_path
+      = yield(:admin_bar)
+      %li.right= link_to "Hide", "#", :data => {:hide => "#admin-bar"}
