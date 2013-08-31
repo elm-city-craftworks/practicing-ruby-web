@@ -24,10 +24,7 @@
     - if current_user
       = render :partial => "shared/navigation"
 
-    %header
-      - if current_user && current_user.admin?
-        #admin= yield :admin
-      = yield(:header)
+    %header= yield(:header)
     #content
       = yield
       %footer

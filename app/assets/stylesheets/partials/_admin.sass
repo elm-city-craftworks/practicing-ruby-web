@@ -47,15 +47,21 @@ table#reports
   &:hover
     padding-top: 15px
 #admin-bar
-  display: none
+  &.visible
+    .placeholder
+      height: 32px
+    .nav
+      top: 0
   .placeholder
-    height: 32px
+    +single-transition(height, .40s, ease-in-out, 0)
+    height: 0
   .nav
+    +single-transition(top, .40s, ease-in-out, 0)
     z-index: 1
     font-family: sans-serif
     letter-spacing: normal
     position: fixed
-    top: 0
+    top: -32px
     left: 0
     right: 0
     width: 100%
