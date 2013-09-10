@@ -48,21 +48,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def share
-    @share = SharedArticle.find_or_create_by_article_id_and_user_id(
-      @article.id, current_user.id)
-
-    mixpanel.track("Article Shared", :title   => @article.subject,
-                                     :user_id => current_user.hashed_id)
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render :json => article_url(@article).to_json
-      end
-    end
-  end
-
   def shared
     @share = SharedArticle.find_by_secret(params[:secret])
 
