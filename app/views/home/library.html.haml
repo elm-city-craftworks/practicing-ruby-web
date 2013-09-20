@@ -16,12 +16,12 @@
     - @recent.zip(@recommended).each_with_index do |(recent, recommended), index|
       %tr{class: "row_#{index}"}
         %td.recent
-          = link_to article_path(recent), class: ('bottom' if index == 4) do
+          = link_to article_path(recent), class: ('bottom' if index == 6) do
             %strong= recent.list_title
             .description
               #{recent.issue_number}, #{recent.published_time.strftime("%B %Y")}
         %td.recommended
-          = link_to article_path(recommended), class: ('bottom' if index == 4) do
+          = link_to article_path(recommended), class: ('bottom' if index == 6) do
             %strong= recommended.list_title
             .description
               #{recommended.issue_number}, #{recommended.published_time.strftime("%B %Y")}
