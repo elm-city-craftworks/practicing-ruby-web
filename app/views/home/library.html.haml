@@ -13,20 +13,20 @@
       %th.recent Recently published articles
       %th.recommended Recommended articles
   %tbody
-    - @recent.zip(@recommended).each_with_index do |(recent, recommended), index|
+    - @recommended.zip(@recent).each_with_index do |(recommended, recent), index|
       %tr{class: "row_#{index}"}
         %td.recent
-          = link_to article_path(recent), class: ('bottom' if index == 6) do
+          = link_to article_path(recent), class: ('bottom' if index == @recommended.count - 1) do
             %strong= recent.list_title
             .description
               #{recent.issue_number}, #{recent.published_time.strftime("%B %Y")}
         %td.recommended
-          = link_to article_path(recommended), class: ('bottom' if index == 6) do
+          = link_to article_path(recommended), class: ('bottom' if index == @recommended.count - 1) do
             %strong= recommended.list_title
             .description
               #{recommended.issue_number}, #{recommended.published_time.strftime("%B %Y")}
 
-%p
-  Once you've read these articles, check out our
+%p{style: "text-align: center;"}
+  Once you've read some of these articles, check out our
   = link_to "complete archives", archives_path
   or try a #{link_to "randomly selected issue", random_article_path}.

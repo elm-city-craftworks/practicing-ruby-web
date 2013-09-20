@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820143254) do
+ActiveRecord::Schema.define(:version => 20130920195554) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130820143254) do
     t.integer  "collection_id"
     t.text     "summary"
     t.string   "slug"
+    t.boolean  "recommended",           :default => false,   :null => false
   end
 
   create_table "authorization_links", :force => true do |t|
