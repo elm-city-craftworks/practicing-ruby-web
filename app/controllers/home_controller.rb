@@ -23,9 +23,9 @@ class HomeController < ApplicationController
   def library
     @article_count = Article.where(:status => "published").count
     @recent = ArticleDecorator.decorate(Article.order("published_time DESC").
-                                        published.limit(5))
+                                        published.limit(7))
     @recommended = ArticleDecorator.decorate(Article.published.order("RANDOM()").
-                                             limit(5))
+                                             limit(7))
   end
 
   def archives
