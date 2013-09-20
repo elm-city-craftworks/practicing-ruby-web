@@ -57,9 +57,9 @@ namespace :import do
     remote_file = "#{current_path}/#{file}"
     remote_db   = remote_database_config
 
-    run %{pg_dump --clean --no-owner --no-privileges -U#{remote_db['username']}
-          -h#{remote_db['host']} -t articles -t volumes -t collections
-           #{remote_db['database']} | bzip2 > #{remote_file}} do |ch, stream, out|
+    run %{pg_dump --clean --no-owner --no-privileges -t articles -t volumes -t
+    collections #{remote_db['database']} | bzip2 > #{remote_file}
+    } do |ch, stream, out|
       ch.send_data "#{remote_db['password']}\n" if out =~ /^Password:/
       puts out
     end
