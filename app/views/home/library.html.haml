@@ -7,26 +7,17 @@
   just want to catch up on what was recently published, try out one
   of the following articles:
 
-%table#articles
-  %thead
-    %tr
-      %th.recent Recently published articles
-      %th.recommended Recommended articles
-  %tbody
-    - @recommended.zip(@recent).each_with_index do |(recommended, recent), index|
-      %tr{class: "row_#{index}"}
-        %td.recent
-          = link_to article_path(recent), class: ('bottom' if index == @recommended.count - 1) do
-            %strong= recent.list_title
-            .description
-              #{recent.issue_number}, #{recent.published_time.strftime("%B %Y")}
-        %td.recommended
-          = link_to article_path(recommended), class: ('bottom' if index == @recommended.count - 1) do
-            %strong= recommended.list_title
-            .description
-              #{recommended.issue_number}, #{recommended.published_time.strftime("%B %Y")}
+#explore-articles
+  #recent
+    %h2 Recently published articles
+    - @recent.each_with_index do |article, index|
+      = render "explore_article", article: article, index: index
+  #recommended
+    %h2 Recommended articles
+    - @recommended.each_with_index do |article, index|
+      = render "explore_article", article: article, index: index
 
-%p{style: "text-align: center;"}
+%p.center
   Once you've read these articles, check out our
   = link_to "complete archives", archives_path
   or try a #{link_to "randomly selected issue", random_article_path}.

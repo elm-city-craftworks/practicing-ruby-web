@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   skip_before_filter :authenticate, :except => [:library]
-  layout "landing", :except => [:library, :contact, :archives]
+  layout "landing", :except => [:contact, :archives, :library]
 
   def subscribe
     mixpanel.track("Click Subscribe Button")

@@ -1,61 +1,66 @@
-$blueprint-grid-width:   28px
+$blueprint-grid-margin:  20px
+$blueprint-grid-width:   18px
 $blueprint-grid-columns: 20
 
 @import "blueprint"
 
 body.home-library
-  p, #articles
+  p, #explore-articles
     font-family: sans-serif
     letter-spacing: normal
-  table#articles
-    margin: 30px 0
-    width: 100%
-    border-collapse: collapse
-    th
+  p.center
+    text-align: center
+  #explore-articles
+    +container
+    margin: 30px auto
+    h2
       color: $dark-blue
       font-size: 20px
       padding-bottom: 10px
       text-align: center
-      &.recommended
-        padding-left: 10px
+    #recommended, #recent
+      +column(10)
+      div
+        // Color nubbins
+        $i: 0
+        @each $color in #9b59b6, $green, $red, #e67e22, $red, $green, #9b59b6
+          &.row_#{$i}
+            a
+              border-left: 4px solid
+              border-left-color: $color
+            a
+              border-right: 4px solid
+              border-right-color: $color
+          $i: $i + 1
 
-    td
-      width: 50%
-      vertical-align: top
-      .description
-        font-size: 12px
-        color: #666
-        text-align: justify
-        margin-top: 5px
-      a
-        color: #333
-        font-size: 13px
-        text-decoration: none
-        background-color: #fff
-        display: block
-        border: 1px solid #aaa
-        border-bottom: none
-        padding: 7px 10px
-        strong
-          font-weight: bold
+        vertical-align: top
+        .description
+          font-size: 12px
+          color: #666
+          text-align: justify
+          margin-top: 5px
+        a
           color: #333
-        &.bottom
+          font-size: 13px
+          text-decoration: none
+          background-color: #fff
+          display: block
+          border: 1px solid #aaa
+          border-bottom: none
+          padding: 7px 10px
+          strong
+            font-weight: bold
+            color: #333
+          &.bottom
+            border-bottom: 1px solid #aaa
+          &:hover
+            background-color: #FAFAE2
+        &:last-child a
           border-bottom: 1px solid #aaa
-        &:hover
-          background-color: #FAFAE2
-      &.recent
-        padding-right: 10px
-      &.recommended
-        padding-left: 10px
-
-    tr
-      $i: 0
-      @each $color in #9b59b6, $green, $red, #e67e22, $red, $green, #9b59b6
-        &.row_#{$i}
-          td.recent a
-            border-left: 4px solid
-            border-left-color: $color
-          td.recommended a
-            border-right: 4px solid
-            border-right-color: $color
-        $i: $i + 1
+    #recommended
+      +last
+      div a
+        border-left: 1px solid #aaa !important
+    #recent
+      div a
+        border-right: 1px solid #aaa !important
