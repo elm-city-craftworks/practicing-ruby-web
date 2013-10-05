@@ -1,0 +1,5 @@
+%div{class: "row_#{index}"}
+  = link_to article_path(article) do
+    %strong= article.list_title
+    .description
+      #{article.issue_number}, #{article.published_time.strftime("%B %Y")}

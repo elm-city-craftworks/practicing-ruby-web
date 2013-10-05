@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   skip_before_filter :authenticate, :except => [:library]
-  layout "landing", :except => [:library, :contact, :archives]
+  layout "landing", :except => [:contact, :archives, :library]
 
   def subscribe
     mixpanel.track("Click Subscribe Button")
@@ -22,8 +22,10 @@ class HomeController < ApplicationController
 
   def library
     @article_count = Article.where(:status => "published").count
-    @collections   = CollectionDecorator.decorate(Collection.order("position"))
-    @volumes       = VolumeDecorator.decorate(Volume.order("number"))
+    @recent = ArticleDecorator.decorate(Article.order("published_time DESC").
+                                        published.limit(7))
+    @recommended = ArticleDecorator.decorate(Article.published.
+      where(:recommended => true).order("published_time DESC").limit(7))
   end
 
   def archives
