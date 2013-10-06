@@ -2,27 +2,22 @@
 - content_for(:header) { "Exploring our library" }
 
 %p
-  As a subscriber to Practicing Ruby, you get full access to my library of back issues. The archives currently contain a total of #{@article_count} issues spread across #{@volumes.count} volumes, a new article gets added each month.
+  There are #{@article_count} articles in our archives, and
+  new content is added every month. If you're unsure where to get started, or
+  just want to catch up on what was recently published, try out one
+  of the following articles:
 
-%p Back issues are organized in two ways: by thematic collections and by chronologically-ordered volumes. Follow your interests and feel free to jump around the collections and volumes. The way you read this content is entirely up to you and your studies should happen on your own schedule, not mine!
+#explore-articles
+  #recent
+    %h2 Recently published articles
+    - @recent.each_with_index do |article, index|
+      = render "explore_article", article: article, index: index
+  #recommended
+    %h2 Recommended articles
+    - @recommended.each_with_index do |article, index|
+      = render "explore_article", article: article, index: index
 
-#library
-  #collections
-    - @collections.each do |collection|
-      = link_to collection.path, :class => "collection" do
-        = collection.icon
-        = collection.name
-  #volumes
-    - @volumes.each do |volume|
-      = link_to volume.path, :class => "volume" do
-        = volume.icon
-        = volume.publish_range
-
-  .clear
-
-- content_for(:footer) do
-  = render 'shared/public_footer'
-  - if current_user
-    %p.big
-      Not sure where to start? Try a
-      #{link_to "randomly selected article", random_article_path}.
+%p.center
+  Once you've read these articles, check out our
+  = link_to "complete archives", archives_path
+  or try a #{link_to "randomly selected issue", random_article_path}.
