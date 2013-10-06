@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
     session["authorization_id"] = authorization.id
 
-    unless authorization.user
+    if authorization.user.blank?
       user = User.create(:contact_email => auth["info"]["email"],
         :github_nickname => auth["info"]["nickname"])
 
@@ -23,8 +23,10 @@ class SessionsController < ApplicationController
       authorization.update_attribute(:user_id, user.id)
 
       redirect_to registration_edit_profile_path
-    else
+    elsif authorization.user.status == "active"
       redirect_back_or_default(library_path)
+    else
+      redirect_to registration_path
     end
   end
 
