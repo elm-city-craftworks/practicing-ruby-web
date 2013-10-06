@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
     store_location
     decorate_article
 
-    if current_user
+    if current_user.try(:status) == "active"
       mixpanel.track("Article Visit", :title   => @article.subject,
                                       :user_id => current_user.hashed_id)
 
