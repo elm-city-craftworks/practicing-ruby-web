@@ -16,6 +16,7 @@ set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
 set :use_sudo, false
 set :deploy_via, :remote_cache
 
+set :whenever_command, "bundle exec whenever"
 set :whenever_identifier, defer { application }
 
 set :maintenance_template_path, 'app/views/layouts/maintenance.html.erb'
