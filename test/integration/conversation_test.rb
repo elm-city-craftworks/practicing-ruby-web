@@ -13,16 +13,15 @@ class ConversationTest < ActionDispatch::IntegrationTest
                                                             :notifications_enabled => false) }
 
     @expected_contacted_emails = contacted_users.map { |e| e.contact_email }
-
-
   end
+
   test "creating a comment" do
     simulated_user
       .register(Support::SimulatedUser.default)
       .read_article
       .add_comment("This is wonderful!")
 
-    outbox.has_message_with(:subject => /conversation has started/,
+    outbox.has_message_with(:subject => /Conversation has started/,
                              :bcc     => @expected_contacted_emails)
   end
 
@@ -34,7 +33,7 @@ class ConversationTest < ActionDispatch::IntegrationTest
       .add_comment("And so is talking to myself!")
       .add_comment("Yaay!")
 
-    outbox.has_message_with(:subject => /comment has been made/,
+    outbox.has_message_with(:subject => /comment was added/,
                             :bcc     => @expected_contacted_emails,
                             :count   => 2)
  

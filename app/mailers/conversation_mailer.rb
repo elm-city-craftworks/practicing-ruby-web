@@ -6,7 +6,7 @@ class ConversationMailer < ActionMailer::Base
       mail(
         :to      => "gregory@practicingruby.com",
         :bcc     => addresses,
-        :subject => "A conversation has started about Practicing Ruby #{article.issue_number}"
+        :subject => "Conversation has started on '#{@article.subject}'"
       ).deliver
     end
   end
@@ -18,7 +18,7 @@ class ConversationMailer < ActionMailer::Base
       mail(
         :to      => "gregory@practicingruby.com",
         :bcc     => addresses,
-        :subject => "You've been mentioned in a conversation about Practicing Ruby #{@article.issue_number}"
+        :subject => "Someone mentioned you in '#{@article.subject}'"
       ).deliver
     end
   end
@@ -30,7 +30,7 @@ class ConversationMailer < ActionMailer::Base
       mail(
         :to      => "gregory@practicingruby.com",
         :bcc     => addresses,
-        :subject => "A comment has been made about Practicing Ruby #{@article.issue_number}"
+        :subject => "A comment was added to '#{@article.subject}'"
       ).deliver
     end
   end
