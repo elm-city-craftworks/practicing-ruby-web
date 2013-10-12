@@ -29,6 +29,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  after_save do
+    Tracker.update_status(self) if status_changed?
+  end
+
+
   before_create do
     write_attribute(:share_token, SecureRandom.hex(5))
   end
