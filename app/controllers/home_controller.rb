@@ -29,7 +29,7 @@ class HomeController < ApplicationController
   end
 
   def archives
-    mixpanel.track("Visit Archives")
+    mixpanel.track("Visit Archives", :distinct_id => current_user.try(:hashed_id))
 
     @articles = Article.where(:status => "published").order("published_time DESC")
     @articles = ArticleDecorator.decorate(@articles)
