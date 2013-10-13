@@ -40,6 +40,10 @@ class Tracker
   end
 
   def update_timestamp
-    set("$last_seen" => Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S"))
+    set("$last_seen" => formatted_time(Time.now.utc))
+  end
+
+  def formatted_time(time)
+    time.strftime("%Y-%m-%dT%H:%M:%S")
   end
 end
