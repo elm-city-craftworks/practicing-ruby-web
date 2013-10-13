@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    mixpanel.track("Account cancelled", :distinct_id => @user.hashed_id)
+    mixpanel.track("Account cancelled")
 
     AccountMailer.canceled(@user) unless @user.disabled?
   end

@@ -34,8 +34,7 @@ class ArticlesController < ApplicationController
     decorate_article
 
     if current_user.try(:status) == "active"
-      mixpanel.track("Article Visit", :title       => @article.subject,
-                                      :distinct_id => current_user.hashed_id)
+      mixpanel.track("Article Visit", :title => @article.subject)
 
       @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
     else
