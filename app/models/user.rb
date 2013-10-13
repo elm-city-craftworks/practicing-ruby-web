@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
 
   attr_protected :admin, :status
 
+  after_create do
+    Tracker.update_creation_date(self)
+  end
+
   before_save do
     if changed.include?("contact_email")
       write_attribute(:contact_email, contact_email.strip.downcase)

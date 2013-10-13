@@ -1,6 +1,11 @@
 class Tracker
-
   class << self
+    def update_creation_date(user)
+      tracker = new(user)
+
+      tracker.set(:created_at => tracker.formatted_time(user.created_at))
+    end
+
     def update_status(user)
       tracker = new(user)
       
@@ -40,10 +45,10 @@ class Tracker
   end
 
   def update_timestamp
-    set("$last_seen" => formatted_time(Time.now.utc))
+    set("$last_seen" => formatted_time(Time.now))
   end
 
   def formatted_time(time)
-    time.strftime("%Y-%m-%dT%H:%M:%S")
+    time.utc.strftime("%Y-%m-%dT%H:%M:%S")
   end
 end
