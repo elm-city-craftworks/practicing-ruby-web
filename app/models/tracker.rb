@@ -29,12 +29,17 @@ class Tracker
     end
 
     @mixpanel.track(event, params)
-    @mixpanel.set("$last_seen" => Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S"))
+
+    update_timestamp
   end
 
   def set(params)
     return unless @user.try(:github_nickname)
 
     @mixpanel.set(@user.hashed_id, params)
+  end
+
+  def update_timestamp
+    set("$last_seen" => Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S"))
   end
 end
