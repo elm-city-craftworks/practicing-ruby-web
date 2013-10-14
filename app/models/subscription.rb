@@ -1,6 +1,10 @@
 class Subscription < ActiveRecord::Base
   belongs_to :user
 
+  after_save do
+    Tracker.update_payment_provider(user)
+  end
+
   def self.active
     where(:finish_date => nil).first
   end
