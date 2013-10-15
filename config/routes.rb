@@ -85,6 +85,7 @@ PracticingRubyWeb::Application.routes.draw do
     resources :reports, :only => [:index]
 
     match "/magic/freebie/:nickname" => "magic#freebie"
+    match "/magic/hashed_id/:nickname" => "magic#hashed_id"
   end
 
 end
