@@ -15,4 +15,13 @@ class Admin::MagicController < ApplicationController
 
     render :text => "ok"
   end
+
+  def hashed_id
+    user = User.where(:github_nickname => params["nickname"]).first
+
+    raise unless user.github_nickname
+
+    render :text => user.hashed_id
+  end
+
 end
