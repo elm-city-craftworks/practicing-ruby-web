@@ -5,9 +5,6 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
     @authorization = FactoryGirl.create(:authorization)
     @user          = @authorization.user
     @article       = FactoryGirl.create(:article)
-
-    @share = SharedArticle.find_or_create_by_article_id_and_user_id(
-      @article.id, @user.id)
   end
 
   test "shared article visible without logging in" do
@@ -34,6 +31,19 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
     assert_article_visible(:subscriber)
   end
 
+  (User::STATUSES - User::ACTIVE_STATUSES).each do |e|
+    test "Users in status #{e} should be treated as guests" do
+      unauthorized_user = FactoryGirl.create(:user, :status => e)
+      @authorization.user = unauthorized_user
+      @authorization.save
+      
+      sign_user_in
+
+      assert_article_visible(:guest)
+    end
+  end
+
+
   test "requesting invalid share key causes a 404 response" do
     visit shared_article_path("notarealkey")
 
@@ -41,12 +51,12 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
   end
 
   def assert_article_visible(state)
-    visit shared_article_path(@share.secret)
+    visit article_path(@article, :u => @user.share_token)
 
     assert_equal 200, page.status_code
 
     assert_current_path Rails.application.routes.url_helpers.article_path(@article)
-    assert_url_has_param "u", @share.user.share_token
+    assert_url_has_param "u", @user.share_token
 
     case state
     when :guest

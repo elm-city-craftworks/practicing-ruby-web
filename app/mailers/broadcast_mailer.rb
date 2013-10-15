@@ -1,4 +1,6 @@
 class BroadcastMailer < ActionMailer::Base
+  default :from => "Gregory at Practicing Ruby <gregory@practicingruby.com>"
+
   def self.recipients
     User.where(:notify_updates => true).to_notify
   end

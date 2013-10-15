@@ -94,6 +94,6 @@ class ApplicationController < ActionController::Base
   def mixpanel
     return NullObject if cache_cooker?
 
-    @mixpanel ||= Mixpanel::Tracker.new(MIXPANEL_API_TOKEN, { :env => request.env })
+    @mixpanel ||= Tracker.new(current_user, :env => request.env)
   end
 end

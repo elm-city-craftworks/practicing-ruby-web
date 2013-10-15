@@ -8,6 +8,7 @@ PracticingRubyWeb::Application.routes.draw do
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
 
   match "/library"  => 'home#library'
+  match "/explore"  => 'home#explore'
   match "/archives" => 'home#archives'
   match "/volume/:volume/" => 'articles#index'
   match "/volume/:volume/issue/:issue" => 'articles#show'

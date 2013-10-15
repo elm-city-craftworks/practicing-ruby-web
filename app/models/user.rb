@@ -23,11 +23,20 @@ class User < ActiveRecord::Base
 
   attr_protected :admin, :status
 
+  after_create do
+    Tracker.update_creation_date(self)
+  end
+
   before_save do
     if changed.include?("contact_email")
       write_attribute(:contact_email, contact_email.strip.downcase)
     end
   end
+
+  after_save do
+    Tracker.update_status(self) if status_changed?
+  end
+
 
   before_create do
     write_attribute(:share_token, SecureRandom.hex(5))

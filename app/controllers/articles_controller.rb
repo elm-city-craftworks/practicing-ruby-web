@@ -33,33 +33,17 @@ class ArticlesController < ApplicationController
     store_location
     decorate_article
 
-    if current_user
-      mixpanel.track("Article Visit", :title   => @article.subject,
-                                      :user_id => current_user.hashed_id)
+    if current_user.try(:status) == "active"
+      mixpanel.track("Article Visit", :title => @article.subject)
 
       @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
     else
       shared_by = User.find_by_share_token(params[:u]).hashed_id
 
-      mixpanel.track("Shared Article Visit", :title => @article.subject,
-                                            :shared_by => shared_by)
+      mixpanel.track("Shared Article Visit", :title     => @article.subject,
+                                             :shared_by => shared_by)
 
       render "shared"
-    end
-  end
-
-  def share
-    @share = SharedArticle.find_or_create_by_article_id_and_user_id(
-      @article.id, current_user.id)
-
-    mixpanel.track("Article Shared", :title   => @article.subject,
-                                     :user_id => current_user.hashed_id)
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render :json => article_url(@article).to_json
-      end
     end
   end
 
