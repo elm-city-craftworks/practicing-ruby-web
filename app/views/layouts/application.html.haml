@@ -21,7 +21,7 @@
 
     = render :partial => "shared/flash", :locals => { :flash => flash }
 
-    - if current_user
+    - if current_user || @shownav
       = render :partial => "shared/navigation"
 
     %header= yield(:header)
