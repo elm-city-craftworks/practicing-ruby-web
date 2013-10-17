@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   skip_before_filter :authenticate, :except => [:library]
+  skip_before_filter :authenticate_user, :except => [:library]
   layout "landing", :except => [:contact, :archives, :library]
 
   def subscribe
@@ -9,8 +10,8 @@ class HomeController < ApplicationController
   end
 
   def index
-    if current_user
-      return redirect_to articles_path
+    if current_user.try(:status) == "active"
+      return redirect_to library_path
     end
 
     mixpanel.track("Visit Landing Page")
