@@ -6,7 +6,7 @@
   .nav
     - if current_user
       %ul
-        %li= link_to "Home", library_path
+        %li= link_to "Home", root_path
         %li= link_to "Archives", archives_path
         %li= link_to "Contact", contact_path
         %li.right= link_to "Sign out", logout_path
