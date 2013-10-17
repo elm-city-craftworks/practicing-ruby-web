@@ -4,7 +4,7 @@
 #admin-bar
   .placeholder
   .nav
-    - if current_user
+    - if current_user.try(:status) == "active"
       %ul
         %li= link_to "Home", root_path
         %li= link_to "Archives", archives_path
