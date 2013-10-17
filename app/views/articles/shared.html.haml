@@ -1,12 +1,10 @@
 - content_for(:nudge) do
-  #share-banner
-    %h3 Welcome to Practicing Ruby!
-    We produce delightful lessons for Rubyists every month.
+  #share-alert
+    Practicing Ruby publishes delightful monthly lessons for Rubyists,
+    for only $8/month.
     %br
-    Please take a moment to
-    = link_to "learn about our project.", root_path
-    If you're already a subscriber, you can
-    = link_to "sign in here.", login_path
+    You can help us produce amazing content by
+    = link_to "becoming a paid supporter.", root_path
 
 = render "header"
 

@@ -1,9 +1,10 @@
 - content_for(:title) { "Explore" }
-- content_for(:header) { "Exploring our library" }
+- content_for(:header) { "Practicing Ruby / Home" }
 
 %p
-  There are #{@article_count} articles in our archives, and
-  new content is added every month. If you're unsure where to get started, or
+  There are 
+  #{link_to "#{@article_count} articles in our archives", archives_path}, 
+  and new content is added every month. If you're unsure where to get started, or
   just want to catch up on what was recently published, try out one
   of the following articles:
 

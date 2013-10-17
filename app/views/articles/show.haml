@@ -6,7 +6,7 @@
 
 - if current_user && current_user.admin?
   - content_for(:admin_bar) do
-    %li.right= link_to "Edit Article", edit_admin_article_path(@article)
+    %li= link_to "Edit Article", edit_admin_article_path(@article)
 
 = render "header"
 
