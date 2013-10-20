@@ -62,6 +62,8 @@ class ArticlesController < ApplicationController
   end
 
   def random
+    mixpanel.track("Random Article Visit")
+
     redirect_to Article.where(:status => "published").sample
   end
 

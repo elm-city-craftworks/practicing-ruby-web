@@ -21,6 +21,8 @@ class HomeController < ApplicationController
   end
 
   def library
+    mixpanel.track("Home Visit")
+
     @article_count = Article.where(:status => "published").count
     @recent = ArticleDecorator.decorate(Article.order("published_time DESC").
                                         published.limit(5))
