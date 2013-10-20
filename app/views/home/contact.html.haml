@@ -1,25 +1,21 @@
-- content_for(:header) { "Sharing your questions and feedback" }
 - content_for(:title) { "Contact" }
+= render "shared/branded_header", :title => "Contact"
 
 #contact
-  #left
-    = image_tag "contact.jpg"
-  #right
-    No matter what, we are here to help you out. So if you have a
+  %p
+    As Practicing Ruby's editor, its my job to make sure that you have a
+    great experience here. I am sure that you will be as happy with
+    Practicing Ruby as my son was when he met Santa Claus:
+
+  = image_tag "santa.jpg"
+
+  %p
+    But I also believe we can do even better than that.
+    If you have a
     question about Practicing Ruby, problems with your account, or anything in
-    between don't hesitate to drop us a line. We'd love to hear from you.
-    Gregory can be reached via email at
-    #{ mail_to "gregory@practicingruby.com", nil, :encode => "javascript"}.
-    If twitter is more your style then direct your tweets to
+    between don't hesitate to get in touch.
+    I can be reached via email at
+    #{ mail_to "gregory@practicingruby.com", nil, :encode => "javascript"}
+    and on Twitter at
     #{link_to "@practicingruby", "http://twitter.com/practicingruby"}.
-
-    %p
-      You might also be interested in checking out the
-      #{link_to "Elm City Craftworks", "http://elmcitycraftworks.org"} blog.
-      Inside, you'll find updates on Practicing Ruby and lessons learned from
-      running the business side of things.
-
   .clear
-
-  %p.footer
-    We absolutely love hearing from our subscribers. Please contact us any time!
