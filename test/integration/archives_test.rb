@@ -36,7 +36,7 @@ class ArchivesTest < ActionDispatch::IntegrationTest
       assert_current_path root_path
       assert_content "protected"
 
-      click_link "Sign in"
+      click_link "Log in"
       assert_current_path article_path(@articles[1])
     end
   end
