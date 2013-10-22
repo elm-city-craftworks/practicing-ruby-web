@@ -1,0 +1,4 @@
+url_options = { :host => "practicingruby.dev" }
+
+ActionMailer::Base.default_url_options       = url_options
+Rails.application.routes.default_url_options = url_options

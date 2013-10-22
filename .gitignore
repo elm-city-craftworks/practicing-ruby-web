@@ -9,6 +9,7 @@ config/initializers/omniauth.rb
 config/initializers/mail_settings.rb
 config/initializers/secret_token.rb
 config/initializers/cache_cooker_settings.rb
+config/initializers/domain_settings.rb
 config/initializers/stripe.rb
 config/initializers/mixpanel.rb
 lib/development_mail_interceptor.rb
