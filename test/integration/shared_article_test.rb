@@ -61,9 +61,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
     case state
     when :guest
       assert_content("subscribe")
-      assert_content("log in")
     when :subscriber
-      assert_content("Sign out")
       assert_content("Share your thoughts:")
     else
       raise ArgumentError, "Invalid state: #{state}"
