@@ -40,6 +40,7 @@ gem 'rails_setup'
 gem 'mustache'
 
 gem 'mixpanel'
+gem 'dotenv-rails'
 
 group :development do
   gem 'capistrano'

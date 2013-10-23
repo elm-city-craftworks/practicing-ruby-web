@@ -85,6 +85,9 @@ GEM
     delayed_mailhopper (0.0.2)
       delayed_job
       mailhopper (~> 0.0.1)
+    dotenv (0.9.0)
+    dotenv-rails (0.9.0)
+      dotenv (= 0.9.0)
     draper (0.14.0)
       actionpack (~> 3.2)
       activesupport (~> 3.2)
@@ -291,6 +294,7 @@ DEPENDENCIES
   delayed_job (~> 3.0.3)
   delayed_job_active_record
   delayed_mailhopper
+  dotenv-rails
   draper
   exception_notification
   factory_girl_rails

@@ -25,6 +25,9 @@ namespace :setup do
       find_or_create_file(file.to_s, name)
       done name
     end
+
+    find_or_create_file("#{Rails.root}/.env", ".env")
+    done(".env")
   end
 end
 
