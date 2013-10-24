@@ -5,8 +5,6 @@ tmp/
 .rvmrc
 config/database.yml
 config/initializers/mailchimp_settings.rb
-config/initializers/omniauth.rb
-config/initializers/mail_settings.rb
 config/initializers/secret_token.rb
 config/initializers/cache_cooker_settings.rb
 config/initializers/stripe.rb
