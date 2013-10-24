@@ -1,4 +1,4 @@
-set :stages, %w(production old_production)
+set :stages, %w(production old_production vagrant)
 set :default_stage, "production"
 
 require 'capistrano/ext/multistage'
