@@ -25,7 +25,6 @@ set :maintenance_config_warning, false
 
 after 'deploy:update_code' do
   { "database.yml"             => "config/database.yml",
-    "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb",
     "stripe.rb"                => "config/initializers/stripe.rb",
     "mixpanel.rb"              => "config/initializers/mixpanel.rb"}.
   each do |from, to|
