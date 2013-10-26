@@ -23,15 +23,14 @@ namespace :import do
     remote_db = remote_database_config
     file = "dump.sql.bz2"
 
-    `rsync db/#{file} #{user}@#{find_servers.first.host}:/tmp/#{file}`
+    run_locally %{rsync db/#{file} #{user}@#{find_servers.first.host}:/tmp/#{file}}
 
-    run %{ bzcat /tmp/dump.sql.bz2 | } +
+    run %{ bzcat /tmp/#{file} | } +
         %{PGPASSWORD=#{remote_db['password']} }  +
         %{psql -U#{remote_db['username']} -hlocalhost #{remote_db['database']}}
+
+    run %{ rm /tmp/#{file} }
   end
 end
-   
-
-
 
 after "deploy:restart", "unicorn:restart"
