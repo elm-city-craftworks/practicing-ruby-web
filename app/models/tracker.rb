@@ -25,7 +25,7 @@ class Tracker
 
   def initialize(user, params={})
     @user     = user
-    @mixpanel = Mixpanel::Tracker.new(MIXPANEL_API_TOKEN, params)
+    @mixpanel = Mixpanel::Tracker.new(ENV["MIXPANEL_API_TOKEN"], params)
   end
 
   def track(event, params={})

@@ -1,25 +1,5 @@
 require 'rails_setup'
 
-namespace :setup do
-  desc 'Create initializers from example files'
-  setup_task :initializers do
-    initializers_dir = Rails.root.join('config', 'initializers')
-
-    initializers = %w[mixpanel.rb]
-                      
-    initializers.map! {|f| initializers_dir.join(f) }
-    
-    initializers.each do |file|
-      name = file.basename.to_s
-      find_or_create_file(file.to_s, name)
-      done name
-    end
-
-    find_or_create_file("#{Rails.root}/.env", ".env")
-    done(".env")
-  end
-end
-
 desc 'Setup Practicing Ruby for development'
 setup_task :setup do
 
@@ -32,7 +12,8 @@ setup_task :setup do
     find_or_create_file(database, "Database config", true)
     done "database.yml"
 
-    Rake::Task["setup:initializers"].invoke
+    find_or_create_file("#{Rails.root}/.env", ".env")
+    done(".env")
   end
 
   section "Database" do

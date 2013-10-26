@@ -24,11 +24,7 @@ set :maintenance_template_path, 'app/views/layouts/maintenance.html.erb'
 set :maintenance_config_warning, false
 
 after 'deploy:update_code' do
-  { "database.yml"             => "config/database.yml",
-    "mixpanel.rb"              => "config/initializers/mixpanel.rb"}.
-  each do |from, to|
-    run "ln -nfs #{shared_path}/#{from} #{release_path}/#{to}"
-  end
+  run "ln -nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
 end
 
 after  "deploy", "deploy:migrate"
