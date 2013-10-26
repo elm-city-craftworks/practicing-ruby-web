@@ -27,7 +27,6 @@ after 'deploy:update_code' do
   { "database.yml"             => "config/database.yml",
     "secret_token.rb"          => "config/initializers/secret_token.rb",
     "mailchimp_settings.rb"    => "config/initializers/mailchimp_settings.rb",
-    "omniauth.rb"              => "config/initializers/omniauth.rb",
     "cache_cooker_settings.rb" => "config/initializers/cache_cooker_settings.rb",
     "stripe.rb"                => "config/initializers/stripe.rb",
     "mixpanel.rb"              => "config/initializers/mixpanel.rb"}.
