@@ -55,11 +55,11 @@ PracticingRubyWeb::Application.routes.draw do
     get   'coupon_valid'          => 'registration#coupon_valid'
   end
 
-  match '/sessions/link/:secret' => 'sessions#link'
-  match '/auth/github/callback'  => 'sessions#create'
-  match '/auth/failure'          => 'sessions#failure'
-  match '/logout'                => 'sessions#destroy', :as => 'logout'
-  match '/login'                 => 'sessions#new',     :as => 'login'
+  match '/sessions/link/:secret'   => 'sessions#link'
+  match '/auth/:provider/callback' => 'sessions#create'
+  match '/auth/failure'            => 'sessions#failure'
+  match '/logout'                  => 'sessions#destroy', :as => 'logout'
+  match '/login'                   => 'sessions#new',     :as => 'login'
 
   match '/dismiss_broadcasts' => 'announcements#dismiss', :as => 'dismiss_broadcasts'
 
