@@ -1,5 +1,13 @@
 require 'rails_setup'
 
+namespace :setup do
+  desc 'Create .env file from .env.example'
+  setup_task :environment do
+    find_or_create_file("#{Rails.root}/.env", ".env")
+    done(".env")
+  end
+end
+
 desc 'Setup Practicing Ruby for development'
 setup_task :setup do
 
@@ -12,8 +20,7 @@ setup_task :setup do
     find_or_create_file(database, "Database config", true)
     done "database.yml"
 
-    find_or_create_file("#{Rails.root}/.env", ".env")
-    done(".env")
+    Rake::Task["setup:environment"].invoke
   end
 
   section "Database" do
