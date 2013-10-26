@@ -1,7 +1,7 @@
 rails_root = File.dirname(File.dirname(__FILE__))
 
 God.watch do |w|
-  script          = "#{rails_root}/script/delayed_job"
+  script          = "cd #{rails_root} && #{rails_root}/script/delayed_job"
   w.name          = "practicing_ruby_delayed_job"
   w.group         = "practicing_ruby"
   w.interval      = 60.seconds
