@@ -15,8 +15,7 @@ namespace :setup do
 
     done "secret_token.rb"
     
-    initializers = %w[stripe.rb mailchimp_settings.rb 
-                      cache_cooker_settings.rb mixpanel.rb]
+    initializers = %w[stripe.rb cache_cooker_settings.rb mixpanel.rb]
                       
     initializers.map! {|f| initializers_dir.join(f) }
     
