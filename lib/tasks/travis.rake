@@ -3,8 +3,7 @@ require 'fileutils'
 namespace :travis do
   desc 'Create database.yml for testing'
   task :setup do
-
-    Rake::Task["setup:initializers"].invoke
+    Rake::Task["setup:environment"].invoke
 
     # Setup our database.yml file
     #

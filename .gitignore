@@ -4,11 +4,6 @@ log/*.log
 tmp/
 .rvmrc
 config/database.yml
-config/initializers/mailchimp_settings.rb
-config/initializers/secret_token.rb
-config/initializers/cache_cooker_settings.rb
-config/initializers/stripe.rb
-config/initializers/mixpanel.rb
 lib/development_mail_interceptor.rb
 .sass-cache/
 public/assets

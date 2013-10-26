@@ -1,31 +1,8 @@
 require 'rails_setup'
 
 namespace :setup do
-  desc 'Create initializers from example files'
-  setup_task :initializers do
-    initializers_dir = Rails.root.join('config', 'initializers')
-    secret_token     = initializers_dir.join('secret_token.rb').to_s
-
-    unless File.exists?(secret_token)
-      secret   = SecureRandom.hex(64)
-      template = ERB.new(File.read(secret_token + '.example'))
-
-      File.open(secret_token, 'w') {|f| f.write(template.result(binding)) }
-    end
-
-    done "secret_token.rb"
-    
-    initializers = %w[stripe.rb mailchimp_settings.rb 
-                      cache_cooker_settings.rb mixpanel.rb]
-                      
-    initializers.map! {|f| initializers_dir.join(f) }
-    
-    initializers.each do |file|
-      name = file.basename.to_s
-      find_or_create_file(file.to_s, name)
-      done name
-    end
-
+  desc 'Create .env file from .env.example'
+  setup_task :environment do
     find_or_create_file("#{Rails.root}/.env", ".env")
     done(".env")
   end
@@ -43,7 +20,7 @@ setup_task :setup do
     find_or_create_file(database, "Database config", true)
     done "database.yml"
 
-    Rake::Task["setup:initializers"].invoke
+    Rake::Task["setup:environment"].invoke
   end
 
   section "Database" do
