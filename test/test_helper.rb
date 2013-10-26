@@ -2,6 +2,8 @@
 # SimpleCov.start 'rails'
 
 ENV["RAILS_ENV"] = "test"
+ENV["AUTH_MODE"] = "github"
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'minitest/autorun'
 require 'rails/test_help'

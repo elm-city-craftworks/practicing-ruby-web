@@ -3,8 +3,15 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate_user
 
   def new
-    provider = Rails.env.development? ? "developer" : "github"
-    redirect_to("/auth/#{provider}")
+    case ENV["AUTH_MODE"]
+    when "developer"
+      redirect_to "/auth/developer"
+    when "github"
+      mixpanel.track("Github Auth")
+      redirect_to "/auth/github"
+    else
+      raise "Programmer Error: Invalid auth mode!"
+    end
   end
 
   def create
