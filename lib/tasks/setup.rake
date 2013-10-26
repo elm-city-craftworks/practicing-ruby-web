@@ -5,7 +5,7 @@ namespace :setup do
   setup_task :initializers do
     initializers_dir = Rails.root.join('config', 'initializers')
 
-    initializers = %w[stripe.rb mixpanel.rb]
+    initializers = %w[mixpanel.rb]
                       
     initializers.map! {|f| initializers_dir.join(f) }
     
