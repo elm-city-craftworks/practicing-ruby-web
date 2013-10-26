@@ -4,17 +4,7 @@ namespace :setup do
   desc 'Create initializers from example files'
   setup_task :initializers do
     initializers_dir = Rails.root.join('config', 'initializers')
-    secret_token     = initializers_dir.join('secret_token.rb').to_s
 
-    unless File.exists?(secret_token)
-      secret   = SecureRandom.hex(64)
-      template = ERB.new(File.read(secret_token + '.example'))
-
-      File.open(secret_token, 'w') {|f| f.write(template.result(binding)) }
-    end
-
-    done "secret_token.rb"
-    
     initializers = %w[stripe.rb cache_cooker_settings.rb mixpanel.rb]
                       
     initializers.map! {|f| initializers_dir.join(f) }
