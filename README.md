@@ -33,6 +33,16 @@ bundle install
 bundle exec rake setup
 ```
 
+To run a Rails server, a delayed job worker, and Mailcatcher, type the following
+command:
+
+```bash
+$ foreman start
+```
+
+You can access the Rails application on port 3000, and the Mailcatcher instance
+on port 1080.
+
 ## Contributing
 
 Features and bugs are tracked through [Github Issues][issue-tracker].
