@@ -47,6 +47,8 @@ group :development do
   gem 'capistrano_confirm_branch'
   gem 'capistrano-unicorn', :require => false
   gem 'capistrano-maintenance'
+  gem 'foreman'
+  gem 'mailcatcher'
 end
 
 group :assets do
