@@ -3,7 +3,7 @@ namespace :import do
     sh %{ bzcat db/dump.sql.bz2 | #{psql}}
   end
 
-  def psql(env="development")
+  def psql(env=Rails.env.to_s)
     config = YAML.load_file("config/database.yml")[env]
 
     command = 'psql'
@@ -12,7 +12,7 @@ namespace :import do
       command = "PGPASSWORD=#{config['password']} #{command}"
     end
 
-    if config['user']
+    if config['username']
       command = "#{command} -U#{config['username']}"
     end
 
