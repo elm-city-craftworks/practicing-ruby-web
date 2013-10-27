@@ -18,10 +18,10 @@ set :default_environment, { "PATH" => "/opt/rubies/2.0.0-p247/bin:$PATH" }
 server "practicingruby.local", :app, :web, :db, :primary => true
 
 desc "Import articles, volumes, and collections from the server"
-namespace :import do
-  task :articles do
-    run_rake "import:articles"
-  end
+
+task :seed do
+  run_rake "db:seed"
+  run_rake "import:articles"
 end
 
 after "deploy:restart", "unicorn:restart"
