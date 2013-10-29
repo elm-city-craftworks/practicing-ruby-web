@@ -18,19 +18,10 @@ set :default_environment, { "PATH" => "/opt/rubies/2.0.0-p247/bin:$PATH" }
 server "practicingruby.local", :app, :web, :db, :primary => true
 
 desc "Import articles, volumes, and collections from the server"
-namespace :import do
-  task :articles do
-    remote_db = remote_database_config
-    file = "dump.sql.bz2"
 
-    run_locally %{rsync db/#{file} #{user}@#{find_servers.first.host}:/tmp/#{file}}
-
-    run %{ bzcat /tmp/#{file} | } +
-        %{PGPASSWORD=#{remote_db['password']} }  +
-        %{psql -U#{remote_db['username']} -hlocalhost #{remote_db['database']}}
-
-    run %{ rm /tmp/#{file} }
-  end
+task :seed do
+  run_rake "db:seed"
+  run_rake "import:articles"
 end
 
 after "deploy:restart", "unicorn:restart"

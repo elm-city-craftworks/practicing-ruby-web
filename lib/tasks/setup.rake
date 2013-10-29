@@ -31,7 +31,9 @@ setup_task :setup do
     rescue Exception
       silence do
         Rake::Task["db:create"].invoke
-        Rake::Task["db:schema:load"].invoke
+        Rake::Task["db:migrate"].invoke
+        Rake::Task["db:seed"].invoke
+        Rake::Task["import:articles"].invoke
       end
       done "Database setup"
     end
