@@ -16,6 +16,6 @@ namespace :import do
       command = "#{command} -U#{config['username']}"
     end
 
-    "#{command} -hlocalhost #{config['database']}"
+    "#{command} -h#{config['host'] || 'localhost'} #{config['database']}"
   end
 end
