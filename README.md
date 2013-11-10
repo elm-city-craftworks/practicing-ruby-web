@@ -43,6 +43,13 @@ $ foreman start
 You can access the Rails application on port 3000, and the Mailcatcher instance
 on port 1080.
 
+### Setting Up a Production-Like Environment with Chef
+
+Our [Practicing Ruby Chef cookbook][cookbook] fully automates the process of
+setting up a production-like environment that can run the Practicing Ruby Rails
+app. It takes a bare Ubuntu system from zero to the point where Practicing Ruby
+can be deployed with Capistrano. Check out the cookbook's README to learn more.
+
 ## Contributing
 
 Features and bugs are tracked through [Github Issues][issue-tracker].
@@ -97,3 +104,4 @@ Practicing Ruby - an [Elm City Craftworks](http://elmcitycraftworks.org) project
 [gpl]: http://www.gnu.org/licenses/agpl.html
 [contributors]: https://github.com/elm-city-craftworks/practicing-ruby-web/contributors
 [issue-tracker]: https://github.com/elm-city-craftworks/practicing-ruby-web/issues
+[cookbook]: https://github.com/elm-city-craftworks/practicing-ruby-cookbook#readme
