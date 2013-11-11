@@ -15,7 +15,7 @@ class ArchivesTest < ActionDispatch::IntegrationTest
 
   setup do
     @articles = 3.times.map { FactoryGirl.create(:article) }
-  end 
+  end
 
   context "Unregistered user" do
     setup { set_user_state(:guest) }
@@ -51,6 +51,38 @@ class ArchivesTest < ActionDispatch::IntegrationTest
 
       click_link @articles[1].subject
       assert_current_path article_path(@articles[1])
+    end
+  end
+
+  context "Draft articles" do
+    setup { @draft = FactoryGirl.create(:article, :status => "draft") }
+
+    test "are not visible to registered users" do
+      set_user_state(:logged_in)
+
+      visit archives_path
+
+      assert_no_content @draft.subject
+    end
+
+    test "are not visible to guests" do
+      set_user_state(:guest)
+
+      visit archives_path
+
+      assert_no_content @draft.subject
+    end
+
+    test "are visible to admins" do
+      set_user_state(:logged_in)
+
+      user       = User.first
+      user.admin = true
+      user.save
+
+      visit archives_path
+
+      assert_content @draft.subject
     end
   end
 
