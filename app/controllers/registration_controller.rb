@@ -23,8 +23,6 @@ class RegistrationController < ApplicationController
   end
 
   def edit_profile
-    mixpanel.track("Contact info requested")
-
     @user = current_user
   end
 
@@ -36,8 +34,6 @@ class RegistrationController < ApplicationController
         @user.create_access_token
 
         RegistrationMailer.email_confirmation(@user).deliver
-
-        mixpanel.track("Confirmation email sent")
 
         @user.update_attribute(:status, "pending_confirmation")
       else
@@ -62,8 +58,6 @@ class RegistrationController < ApplicationController
   end
 
   def payment
-    mixpanel.track("Payment requested")
-
     unless current_user.status == "payment_pending" || current_user.status == "confirmed"
       redirect_to(:action => :complete)
     end
@@ -76,7 +70,6 @@ class RegistrationController < ApplicationController
     payment_gateway = current_user.payment_gateway
     begin
       payment_gateway.subscribe(params)
-      mixpanel.track("Payment complete")
 
       redirect_to :action => :complete
     rescue Stripe::CardError => e

@@ -90,10 +90,4 @@ class ApplicationController < ActionController::Base
     render :file   => "public/#{status}", :layout  => false,
            :status => status,             :formats => [:html]
   end
-
-  def mixpanel
-    return NullObject if cache_cooker?
-
-    @mixpanel ||= Tracker.new(current_user, :env => request.env)
-  end
 end

@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
     when "developer"
       redirect_to "/auth/developer"
     when "github"
-      mixpanel.track("Github Auth")
       redirect_to "/auth/github"
     else
       raise "Programmer Error: Invalid auth mode!"
@@ -45,7 +44,6 @@ class SessionsController < ApplicationController
   
   def failure
     @message = params[:message].humanize if params[:message]
-    mixpanel.track("Github failure")
   end
 
 end

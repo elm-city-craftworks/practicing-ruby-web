@@ -47,8 +47,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    mixpanel.track("Account cancelled")
-
     AccountMailer.canceled(@user) unless @user.disabled?
   end
 
