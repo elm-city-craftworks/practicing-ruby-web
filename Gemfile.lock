@@ -190,8 +190,6 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-google_analytics (1.0.2)
-      rack
     rack-pjax (0.6.0)
       nokogiri (~> 1.5)
       rack (~> 1.3)
@@ -339,7 +337,6 @@ DEPENDENCIES
   omniauth-github (~> 1.0.1)
   omniauth-oauth2 (~> 1.1.1)
   pg (= 0.16.0)
-  rack-google_analytics
   rack-pjax (~> 0.6.0)
   rails (~> 3.2.15)
   rails_setup
