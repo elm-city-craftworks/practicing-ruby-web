@@ -4,6 +4,9 @@
   = render :partial => 'sidebar', :locals => {:current => 'billing'}
 
   #billing-settings.setting-panel
+    - if @active_subscription && @active_subscription.payment_provider == "stripe"
+      = link_to "Switch to #{@active_subscription.alternate_billing_interval}ly billing", '#confirm-interval-change',
+        :class => 'pull-right btn btn-small', :id => 'change-billing-interval'
     %h2 Subscription History
 
     - if @subscriptions.empty?
@@ -13,23 +16,31 @@
         #{mail_to "support@elmcitycraftworks.org"}.
     - else
       %table.table-bordered.table.table-hover
-        %tr
-          %th Start
-          %th End
-          %th Status
-          %th Amount
-        - @subscriptions.each do |subscription|
+        %thead
           %tr
-            %td= subscription.start_date
-            %td= subscription.finish_date
-            %td= subscription.status
-            %td= subscription.amount
+            %th Start
+            %th End
+            %th Status
+            %th Amount
+        %tbody
+          - @subscriptions.each do |subscription|
+            %tr
+              %td= subscription.start_date
+              %td= subscription.finish_date
+              %td= subscription.status
+              %td= subscription.amount
 
-    - if @user.subscriptions.active && @user.subscriptions.active.payment_provider == "stripe"
+    - if @active_subscription && @active_subscription.payment_provider == "stripe"
       %p
-        = link_to "Update your credit card", '#', :class => "btn update-cc"
+        = link_to "Update credit card", '#',
+          :class => "btn btn-small update-cc"
         - if @credit_card
           %span#current-credit-card Current Card: #{@credit_card.description}
+    - if @active_subscription
+      #confirm-interval-change
+        %h1 Change your billing cycle
+
+        = @active_subscription.change_billing_interval_message
 
     #update-credit-card
       %h1 Update your credit card

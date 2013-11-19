@@ -77,7 +77,12 @@ PracticingRubyWeb::Application.routes.draw do
     get 'current_credit_card' => 'users#current_credit_card',
       :as => 'current_credit_card'
   end
-  resources :users
+
+  resources :users do
+    member do
+      post :change_billing_interval
+    end
+  end
 
   namespace :admin do
     resources :announcements

@@ -45,7 +45,7 @@ module Support
       authenticate(params)
       create_profile(params)
       confirm_email
-      make_payment
+      make_payment(params)
       read_article
     end
 
@@ -71,14 +71,19 @@ module Support
       end
     end
 
-    def make_payment
+    def make_payment(params={})
       browser do
         assert_current_path registration_payment_path
       end
 
       # TODO Find a way to test this through the UI
       #
-      @user.subscriptions.create(:start_date => Date.today)
+      @user.subscriptions.create(
+        :start_date       => Date.today,
+        :payment_provider => "stripe",
+        :rate_cents       => params.fetch(:billing_rate, 800),
+        :interval         => params.fetch(:billing_interval, 'month'))
+
       @user.status = "active"
       @user.save
 
@@ -154,6 +159,35 @@ module Support
       end
 
       @browser.refute @user.subscriptions.active, "Subscription was not ended"
+    end
+
+    def change_billing_interval
+      current_interval = @user.subscriptions.active.interval
+
+      browser do
+        click_link "admin-bar-toggle"
+        click_link "Settings"
+        click_link "Billing"
+        click_link "change-billing-interval"
+
+        within "#facebox" do
+          assert /Change to (yearly|monthly) billing/ =~ first(:link).text
+        end
+      end
+
+      # FIXME Simulate billing switch
+      subscription = @user.subscriptions.active.decorate
+      subscription.update_attributes(:finish_date => Date.today)
+
+      @user.subscriptions.create(
+        :start_date       => Date.today,
+        :payment_provider => 'stripe',
+        :rate_cents       => 800,
+        :interval         => subscription.alternate_billing_interval
+      )
+
+      @browser.refute_equal @user.subscriptions.active.interval,
+                            current_interval
     end
 
     def restart_registration

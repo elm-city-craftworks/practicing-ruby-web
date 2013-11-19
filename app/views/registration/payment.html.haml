@@ -7,15 +7,30 @@
 
 %h3 You are so close. Just one last step.
 
-%p All we need from you now is your payment information. We will bill this card $8.00 USD each month until you cancel your account, which you can do at any time.
+%p
+  All we need from you now is your payment information. We can either bill this
+  card $8.00 USD each month or once a year at $96.00 USD until you cancel your
+  account, which you can do at any time.
 
-%p Your payment details are sent directly to Stripe: For security reasons, we do not store your credit card number or other sensitive information.
+%p
+  Your payment details are sent directly to Stripe: For security reasons, we do
+  not store your credit card number or other sensitive information.
 
 = form_tag registration_create_payment_path, :id => "payment-form" do
   = render 'shared/credit_card'
   .row
-    = label_tag :coupon, "Coupon Code"
-    = text_field_tag :coupon, params[:coupon]
+    %label Billing Cycle:
+  .row
+    = label_tag 'interval_month' do
+      = radio_button_tag :interval, :month, true
+      Monthly - $8.00 USD
+    = label_tag 'interval_year' do
+      = radio_button_tag :interval, :year
+      Yearly - $96.00 USD
+  - if params[:coupon].present?
+    .row
+      = label_tag :coupon, "Coupon Code"
+      = text_field_tag :coupon, params[:coupon]
   %hr
   %p
     = submit_tag "Submit Payment", :class => "submit-button"

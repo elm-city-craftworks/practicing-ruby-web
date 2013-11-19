@@ -12,13 +12,10 @@ class UsersController < ApplicationController
     redirect_to @user.github_url
   end
 
-  def edit; end
-  def profile; end
-  def notifications; end
-
   def billing
     @subscriptions = SubscriptionDecorator.decorate(
       @user.subscriptions.order("start_date"))
+    @active_subscription = @user.subscriptions.active.try(:decorate)
     @credit_card   = current_user.credit_card
   end
 
@@ -44,6 +41,15 @@ class UsersController < ApplicationController
     else
       render :action => params[:current_page]
     end
+  end
+
+  def change_billing_interval
+    new_interval = params[:interval]
+    payment_gateway = current_user.payment_gateway
+    payment_gateway.change_interval(new_interval)
+
+    flash[:notice] = "You have sucessfully changed to #{new_interval}ly billing"
+    redirect_to billing_settings_path
   end
 
   def destroy

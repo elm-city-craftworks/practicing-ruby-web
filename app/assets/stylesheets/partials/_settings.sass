@@ -50,21 +50,41 @@ form.edit_user
   a.btn
     +classy-button
     text-decoration: none
+    &.btn-small
+      font-size: 0.75em
   table
     margin: 1em 0
     font-family: Helvetica, sans-serif
-  #update-credit-card
+  #update-credit-card, #confirm-interval-change
     display: none
   a.current-cc
     margin-left: 10px
   #current-credit-card
-    margin-left: 1em
+    font-family: Helvetica, sans-serif
+    margin-top: 4px
     font-size: 0.9em
-
+    float: right
+  #change-billing-interval
+    margin-top: 3px
 #facebox
   .update-credit-card, .current-credit-card
     h1
       font-size: 2em
+
+  .confirm-interval-change.content
+    font-family: Helvetica, sans-serif
+    font-size: 14px
+    padding: 20px
+    h1
+      font-size: 16px
+      color: #333
+      font-weight: bold
+    a.btn
+      +green-button
+      text-decoration: none
+      width: 100%
+      text-align: center
+      box-sizing: border-box
 
 img.sad_pinkie
   width: 600px
