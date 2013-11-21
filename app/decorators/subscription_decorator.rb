@@ -25,13 +25,9 @@ class SubscriptionDecorator < ApplicationDecorator
         already paid for.}
     end +
     h.content_tag(:p) do
-      action = if subscription.interval == "month"
-        "charged"
-      else
-        "refunded"
-      end
+      action = (subscription.interval == "month" ? "charged" : "refunded")
 
-      %{Your credit card will be #{action} after you click the button below and
+      %{You will be #{action} after you click the button below and
         won't be charged again until #{Date.today + 1.year}.}
     end +
     h.content_tag(:p) do
