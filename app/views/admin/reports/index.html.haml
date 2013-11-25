@@ -15,24 +15,14 @@
     %th Total paid accounts
     %th.num= Reports.paid_subscriber_count
 
-%h3 Activity and Activation
-
-%p 
-  Activity:
-  = Reports.activity
-
-%p 
-  Activation:
-  = Reports.activation
-
-%h3 Recent signups
+%h3 Recent signups (last 7 days)
 
 %ul
   - Reports.recent_signups.each do |e|
     %li= e
 
 
-%h3 Recent cancellations
+%h3 Recent cancellations (last 7 days)
 
 %ul
   - Reports.recent_cancellations.each do |e|
