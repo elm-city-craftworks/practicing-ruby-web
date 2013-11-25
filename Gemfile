@@ -39,7 +39,6 @@ gem 'rails_setup'
 
 gem 'mustache'
 
-gem 'mixpanel'
 gem 'dotenv-rails'
 
 group :development do
@@ -76,6 +75,5 @@ end
 group :production do
   gem 'god', :require => false
   gem 'exception_notification'
-  gem 'rack-google_analytics'
   gem 'unicorn'
 end

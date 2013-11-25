@@ -34,14 +34,9 @@ class ArticlesController < ApplicationController
     decorate_article
 
     if current_user.try(:status) == "active"
-      mixpanel.track("Article Visit", :title => @article.subject)
-
       @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
     else
       shared_by = User.find_by_share_token(params[:u]).hashed_id
-
-      mixpanel.track("Shared Article Visit", :title     => @article.subject,
-                                             :shared_by => shared_by)
 
       render "shared"
     end
@@ -62,8 +57,6 @@ class ArticlesController < ApplicationController
   end
 
   def random
-    mixpanel.track("Random Article Visit")
-
     redirect_to Article.where(:status => "published").sample
   end
 
