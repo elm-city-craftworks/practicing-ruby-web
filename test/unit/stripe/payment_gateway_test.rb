@@ -28,7 +28,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
                                               :exp_year => Date.today.year + 2,
                                               :cvc => "314" })
 
-    gateway.subscribe(:stripeToken => token.id)
+    gateway.subscribe(:stripeToken => token.id, :interval => "month")
 
     assert @user.subscriptions.active,
           "Should have an active subscription after successful payment"
@@ -52,7 +52,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
                                               :cvc => "313" })
 
     assert_raises(Stripe::CardError) do
-      gateway.subscribe(:stripeToken => token.id)
+      gateway.subscribe(:stripeToken => token.id, :interval => "month")
     end
 
     refute @user.subscriptions.active,
