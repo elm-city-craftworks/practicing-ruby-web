@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920195554) do
+ActiveRecord::Schema.define(:version => 20131114225709) do
 
   create_table "announcements", :force => true do |t|
     t.text     "title"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20130920195554) do
     t.text     "status",                :default => "draft"
     t.text     "mailchimp_campaign_id"
     t.datetime "published_time"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "issue_number"
     t.integer  "volume_id"
     t.integer  "collection_id"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20130920195554) do
     t.text     "description"
     t.string   "image_file_name"
     t.string   "slug"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "position"
   end
 
@@ -148,11 +148,12 @@ ActiveRecord::Schema.define(:version => 20130920195554) do
 
   create_table "subscriptions", :force => true do |t|
     t.integer "user_id"
-    t.date    "start_date",         :null => false
+    t.date    "start_date",                            :null => false
     t.date    "finish_date"
     t.text    "payment_provider"
-    t.integer "monthly_rate_cents"
+    t.integer "rate_cents"
     t.text    "coupon_code"
+    t.string  "interval",         :default => "month"
   end
 
   create_table "users", :force => true do |t|
@@ -184,8 +185,8 @@ ActiveRecord::Schema.define(:version => 20130920195554) do
     t.text     "description"
     t.date     "start_date"
     t.date     "finish_date"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -8,10 +8,10 @@ class Admin::MagicController < ApplicationController
 
     user.status = "active"
     user.save
-    
-    user.subscriptions.create(:payment_provider   => "free",
-                              :monthly_rate_cents => 0,
-                              :start_date         => Date.today)
+
+    user.subscriptions.create(:payment_provider => "free",
+                              :rate_cents       => 0,
+                              :start_date       => Date.today)
 
     render :text => "ok"
   end

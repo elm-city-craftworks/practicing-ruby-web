@@ -14,12 +14,14 @@ require_relative 'support/mini_contest'
 require 'test_notifier/runner/minitest'
 require 'capybara/rails'
 require 'database_cleaner'
+require 'capybara/poltergeist'
 require 'minitest/autorun'
 
 TestNotifier.silence_no_notifier_warning = true
 DatabaseCleaner.strategy                 = :truncation
 OmniAuth.config.test_mode                = true
 Turn.config.natural                      = true
+Capybara.javascript_driver               = :poltergeist
 #Delayed::Worker.delay_jobs               = false
 
 class ActionDispatch::IntegrationTest

@@ -107,7 +107,7 @@ $green: #3D6E3C
     +image-box
     margin: 0 auto
     display: block
-    max-width: 740px 
+    max-width: 740px
     &.emoji
       padding: 0
       border: none
@@ -131,14 +131,18 @@ $green: #3D6E3C
 
 =blue-button
   +sassy-button("matte", 5px, 1em, $light-blue, #63728E, #fff, "inset")
-  font-family: inherit
+  font-family: sans-serif
 
 =money-button
   +sassy-button("matte", 5px, 1em, $red, #A02C1E, #fff, "inset")
-  font-family: inherit
+  font-family: sans-serif
 
+=green-button
+  +sassy-button("matte", 5px, 1em, $green, #365336, #fff, "inset")
+  font-family: sans-serif
 =classy-button
   +sassy-button("matte", 5px, 1em, #f9f9f9, #d9d9d9, #333, "inset")
-  font-family: inherit
+  font-family: sans-serif
+
   &:disabled
     color: #6E6E6E

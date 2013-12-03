@@ -37,8 +37,7 @@ module PaymentGateway
 
       save_credit_card(customer.active_card)
 
-      subscription_options = { :plan => "practicing-ruby-monthly" }
-
+      subscription_options = { :plan => find_plan(params[:interval]) }
       subscription_options[:coupon] = coupon unless coupon.blank?
 
       subscription = customer.update_subscription(subscription_options)
@@ -46,10 +45,11 @@ module PaymentGateway
       log subscription
 
       user.subscriptions.create(
-        :start_date         => Date.today,
-        :payment_provider   => 'stripe',
-        :monthly_rate_cents => subscription.plan.amount,
-        :coupon_code        => coupon
+        :start_date       => Date.today,
+        :payment_provider => 'stripe',
+        :rate_cents       => subscription.plan.amount,
+        :coupon_code      => coupon,
+        :interval         => params[:interval]
       )
 
       user.update_attributes(
@@ -60,9 +60,23 @@ module PaymentGateway
       user.enable
     end
 
-    def unsubscribe
-      customer = find_customer
+    def change_interval(new_interval)
+      new_plan = find_plan(new_interval)
 
+      subscription = customer.update_subscription(
+        :plan => new_plan, :prorate => true)
+
+      user.subscriptions.active.update_attributes(:finish_date => Date.today)
+
+      user.subscriptions.create(
+        :start_date       => Date.today,
+        :payment_provider => 'stripe',
+        :rate_cents       => subscription.plan.amount,
+        :interval         => new_interval
+      )
+    end
+
+    def unsubscribe
       begin
         customer.cancel_subscription
       rescue ::Stripe::InvalidRequestError => e
@@ -87,7 +101,8 @@ module PaymentGateway
     def payment_created(invoice)
       raise "Invoice #{invoice.id} has not been paid" unless invoice.paid
 
-      payment = user.payments.where(:stripe_invoice_id => invoice.id).first_or_create
+      payment = user.payments.where(:stripe_invoice_id => invoice.id).
+        first_or_create
 
       payment.update_attributes(
         :invoice_date          => Time.at(invoice.date).to_date,
@@ -115,7 +130,7 @@ module PaymentGateway
     end
 
     def customer
-      find_customer
+      @customer ||= find_customer
     end
 
     private
@@ -130,6 +145,15 @@ module PaymentGateway
       if user.payment_provider == 'stripe' && !user.payment_provider_id.blank?
         customer = ::Stripe::Customer.retrieve(user.payment_provider_id)
         customer unless customer["deleted"]
+      end
+    end
+
+    def find_plan(interval)
+      case interval
+      when "month"
+        "practicing-ruby-monthly"
+      when "year"
+        "practicing-ruby-yearly"
       end
     end
 
