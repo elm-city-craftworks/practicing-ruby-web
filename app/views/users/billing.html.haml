@@ -7,6 +7,11 @@
     - if @active_subscription && @active_subscription.payment_provider == "stripe"
       = link_to "Switch to #{@active_subscription.alternate_billing_interval}ly billing", '#confirm-interval-change',
         :class => 'pull-right btn btn-small', :id => 'change-billing-interval'
+    - elsif @active_subscription && @active_subscription.payment_provider == "mailchimp"
+      = link_to "Switch to yearly billing",
+        mailchimp_yearly_billing_user_path(current_user),
+        :method => 'post', :remote => true, :class => 'pull-right btn btn-small'
+
     %h2 Subscription History
 
     - if @subscriptions.empty?

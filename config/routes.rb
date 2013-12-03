@@ -81,6 +81,7 @@ PracticingRubyWeb::Application.routes.draw do
   resources :users do
     member do
       post :change_billing_interval
+      post :mailchimp_yearly_billing
     end
   end
 

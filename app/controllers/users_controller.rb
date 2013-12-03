@@ -52,6 +52,10 @@ class UsersController < ApplicationController
     redirect_to billing_settings_path
   end
 
+  def mailchimp_yearly_billing
+    AccountMailer.mailchimp_yearly_billing(@user)
+  end
+
   def destroy
     AccountMailer.canceled(@user) unless @user.disabled?
   end
