@@ -13,6 +13,10 @@ class PR.PaymentProcessor
       $.facebox { div: '#update-credit-card' }, 'update-credit-card'
       e.preventDefault()
 
+    $(document).on 'click', '#change-billing-interval', (e) ->
+      $.facebox { div: '#confirm-interval-change' }, 'confirm-interval-change'
+      e.preventDefault()
+
   formSubmit: (event) =>
     event.preventDefault();
 

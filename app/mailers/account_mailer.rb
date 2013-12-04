@@ -37,4 +37,11 @@ class AccountMailer < ActionMailer::Base
     mail(:to      => user.contact_email,
          :subject => "Oh No! Your credit card is expiring next month.").deliver
   end
+
+  def mailchimp_yearly_billing(user)
+    @user = user
+
+    mail(:to      => "support@elmcitycraftworks.org",
+         :subject => "[Practicing Ruby] Mailchimp yearly billing request").deliver
+  end
 end

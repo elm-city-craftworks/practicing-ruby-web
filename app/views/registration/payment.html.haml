@@ -9,9 +9,9 @@
   %span.branded Practicing Ruby
 
 %p
-  All we need is your payment information. We will bill this card
-  $8.00 USD each month until you cancel your account, which you can do at any
-  time.
+  All we need is your payment information. We can either bill this
+  card $8.00 USD each month or once a year at $96.00 USD until you cancel your
+  account, which you can do at any time.
 
 %p
   Your payment details are sent directly to Stripe: For security reasons, we do
@@ -19,6 +19,17 @@
 
 = form_tag registration_create_payment_path, :id => "payment-form" do
   = render 'shared/credit_card'
+  .billing-cycle
+    = label_tag 'interval_month' do
+      = radio_button_tag :interval, :month, true
+      Monthly - $8.00 USD
+    = label_tag 'interval_year' do
+      = radio_button_tag :interval, :year
+      Yearly - $96.00 USD
+  - if params[:coupon].present?
+    .coupon
+      = label_tag :coupon, "Coupon Code"
+      = text_field_tag :coupon, params[:coupon]
   .submit
     = submit_tag "❤  Subscribe to Practicing Ruby",
       :class => "submit-button"

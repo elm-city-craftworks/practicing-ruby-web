@@ -70,6 +70,7 @@ group :test do
   gem 'test_notifier'
   gem 'turn', '~> 0.9.5'
   gem 'simplecov', :require => false
+  gem 'poltergeist'
 end
 
 group :production do
