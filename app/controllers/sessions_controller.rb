@@ -28,11 +28,11 @@ class SessionsController < ApplicationController
       user.update_attribute(:status, "authorized")
       authorization.update_attribute(:user_id, user.id)
 
-      redirect_to registration_edit_profile_path
+      @path = registration_edit_profile_path
     elsif authorization.user.status == "active"
-      redirect_back_or_default(library_path)
+      @path = back_or_default(library_path)
     else
-      redirect_to registration_path
+      @path = registration_path
     end
   end
 
@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
     clear_location
     redirect_to "/"
   end
-  
+
   def failure
     @message = params[:message].humanize if params[:message]
   end

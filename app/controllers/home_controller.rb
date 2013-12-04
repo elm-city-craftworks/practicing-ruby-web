@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   skip_before_filter :authenticate, :except => [:library]
   skip_before_filter :authenticate_user, :except => [:library]
-  layout "landing", :except => [:contact, :archives, :library]
 
   def contact
   end
@@ -11,8 +10,12 @@ class HomeController < ApplicationController
   end
 
   def index
-    if current_user.try(:status) == "active"
-      return redirect_to library_path
+    if current_user
+      if current_user.status == "active"
+        return redirect_to back_or_default(library_path)
+      elsif current_user.status != "disabled"
+        return redirect_to registration_path
+      end
     end
 
     @article_count = [Article.published.count / 10, "0+"].join

@@ -10,8 +10,8 @@
 var PR = PR ? PR : new Object();
 
 PR.setupNamespace = function(namespace){
-	if(PR[namespace] == undefined)
-		PR[namespace] = {}
+  if(PR[namespace] == undefined)
+    PR[namespace] = {}
 }
 
 // Facebox Assets

@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate
-    return if current_authorization 
-   
+    return if current_authorization
+
     store_location
     redirect_on_auth_failure
   end
@@ -68,9 +68,10 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  def redirect_back_or_default(default)
-    redirect_to(session[:return_to] || default)
-    clear_location
+  def back_or_default(default)
+    (session[:return_to] || default).tap do
+      clear_location
+    end
   end
 
   def active_broadcasts

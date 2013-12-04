@@ -1,0 +1,7 @@
+%h1 Redirecting back to Practicing Ruby ...
+
+:coffeescript
+  if window.name == "ConnectWithOAuth"
+    window.close()
+  else
+    window.location.href = "#{@path}"
