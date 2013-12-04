@@ -5,10 +5,10 @@ class RegistrationController < ApplicationController
 
   def index
     path = case current_user.status
-      when "authorized"           then {:action => :edit_profile }
-      when "pending_confirmation" then {:action => :update_profile }
-      when "confirmed"            then {:action => :payment }
-      when "payment_pending"      then {:action => :payment }
+      when "authorized" then {:action => :payment }
+      # when "pending_confirmation" then {:action => :update_profile }
+      # when "confirmed"            then {:action => :payment }
+      # when "payment_pending"      then {:action => :payment }
       else library_path
     end
 
@@ -19,7 +19,7 @@ class RegistrationController < ApplicationController
     current_user.status = "authorized"
     current_user.save
 
-    redirect_to :action => :edit_profile
+    redirect_to :action => :payment
   end
 
   def edit_profile
@@ -58,7 +58,7 @@ class RegistrationController < ApplicationController
   end
 
   def payment
-    unless current_user.status == "payment_pending" || current_user.status == "confirmed"
+    if current_user.status == "active"
       redirect_to(:action => :complete)
     end
   end
@@ -93,7 +93,7 @@ class RegistrationController < ApplicationController
 
   # Called by ApplicationController#authenticate
   def redirect_on_auth_failure
-    redirect_to login_path 
+    redirect_to login_path
   end
 
   def ye_shall_not_pass

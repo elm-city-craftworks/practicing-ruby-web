@@ -20,7 +20,7 @@ class PR.PaymentProcessor
 
     # disable the submit button to prevent repeated clicks
     $('.submit-button').attr "disabled", "disabled"
-    $(".payment-errors").text ""
+    $(".payment-errors").text("").hide()
 
     this.createSpinner()
 
@@ -60,7 +60,7 @@ class PR.PaymentProcessor
     @form.get(0).submit()
   logError: (message) =>
     @spinner.stop()
-    $(".payment-errors").text      message
+    $(".payment-errors").text(message).show()
     $(".submit-button").removeAttr "disabled"
   createSpinner: =>
     spinnerTarget  = @form.find('#processing-spinner')[0]
@@ -73,6 +73,6 @@ class PR.PaymentProcessor
       corners: 0.8,
       hwaccel: true,
       speed: 1.6
-    };
+    }
 
     @spinner = new Spinner(spinnerOpts).spin(spinnerTarget)

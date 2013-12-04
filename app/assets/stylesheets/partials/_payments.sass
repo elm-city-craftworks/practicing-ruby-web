@@ -9,13 +9,24 @@ p.note
   a
     color: #333
 
-div.payment-errors
-  color: #9E4040
-  font-size: 1.5em
-  margin: 0.75em 0
+#payment-form
+  border-top: 1px solid #ecf0f1
+  padding-top: 1em
 
-form#payment-form
-  margin: 1em 0
+  .payment-errors
+    display: none
+    margin-bottom: 1em
+    color: $red
+
+  .cc-num, .cc-cvc, .cc-exp
+    display: inline-block
+    margin-right: 20px
+  .cc-exp
+    margin-right: 0
+
+  .card-number
+    width: 200px
+
   label, input[type=text], select
     font-size: 14px
     font-weight: normal
@@ -23,6 +34,8 @@ form#payment-form
   label
     display: block
     margin-bottom: 5px
+    color: #333
+    font-size: 0.75em
   input[type=text], select
     display: inline-block
     height: 20px
@@ -48,7 +61,7 @@ form#payment-form
   span#processing-spinner
     display: inline-block
     margin-left: 30px
-    height: 5px
+    height: 10px
 
 p.image img
   +image-box
