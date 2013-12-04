@@ -15,11 +15,19 @@ body.registration-payment
     font-family: 'Folks'
     .branded
       color: $red
-  .submit
-    margin-top: 1em
-    input.submit-button
-      +money-button
-      padding: 0.3em 1em
+  #payment-form
+    .submit
+      margin-top: 1em
+      input.submit-button
+        +money-button
+        padding: 0.3em 1em
+        margin: 0
+    .billing-cycle
+      margin-top: 1em
+      label
+        display: inline-block
+        margin-right: 1.75em
+        margin-bottom: 0
 
   footer
     margin: 0
