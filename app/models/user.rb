@@ -10,16 +10,16 @@ class User < ActiveRecord::Base
 
   has_one :credit_card
 
-  validates_uniqueness_of :contact_email, :on => :update
+  validates_uniqueness_of :contact_email, :allow_blank => true
   validates :status,      :inclusion => {
     :in => STATUSES, :message => "%{value} is not a valid status" }
 
   # Email sanity check from Rails Docs
   # http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#M000087
   #
-  validates_format_of     :contact_email,
-    :with => /\A\s*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\s*\Z/i,
-    :on   => :update
+  validates_format_of :contact_email,
+    :with        => /\A\s*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\s*\Z/i,
+    :allow_blank => true
 
   attr_protected :admin, :status
 
