@@ -2,4 +2,4 @@
   - flash.each do |flashtype, message|
     %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}= message
     :javascript
-      setTimeout("$('#flash').fadeOut()", 4000);
+      setTimeout("$('#flash').slideUp()", 4000);
