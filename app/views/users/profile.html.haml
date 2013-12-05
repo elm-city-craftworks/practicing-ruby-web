@@ -9,6 +9,14 @@
     .field
       = f.label :contact_email, "Email:"
       = f.text_field :contact_email
+      %span#email-confirmed{:class => ('confirmed' if @user.email_confirmed?)}
+        - if @user.email_confirmed
+          Confirmed
+        - elsif @user.contact_email.present?
+          Unconfirmed
+      - if @user.contact_email.present? && !@user.email_confirmed
+        = link_to "Resend confirmation email", send_confirmation_email_path,
+          :method => :post, :id => "resend-confirmation-link"
     %p#gravatar
       = UserDecorator.decorate(@user).icon(32)
       = link_to "Change your avatar at Gravatar.com", "http://gravatar.com/"
