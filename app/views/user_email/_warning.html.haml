@@ -1,0 +1,19 @@
+- if show_email_warning?
+  #email-confirmation-warning
+    - if current_user.contact_email.present?
+      %strong Oh no! You haven't confirmed your email address.
+    - else
+      %strong Oh no! You haven't entered an email address.
+    That makes us sad, because you won't recieve notifications when new
+    articles are posted or comments are made. Don't worry, you can
+    - if current_user.contact_email.present?
+      = link_to "resend the confirmation email", send_confirmation_email_path,
+        :method => :post
+    - else
+      go to the
+      = link_to "settings", user_settings_path
+      page and add one
+    or just
+    = link_to "hide", dismiss_email_warning_path, :remote => true,
+      :method => :post
+    this message.

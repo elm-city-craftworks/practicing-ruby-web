@@ -1,6 +1,8 @@
-#broadcasts
-  = link_to "Dismiss", dismiss_broadcasts_path, :class => "dismiss",
-    :remote => true
-  - active_broadcasts.each do |broadcast|
-    .broadcast
-      = link_to broadcast.broadcast_message, broadcast.url
+- if active_broadcasts.any? && current_user.try(:status) == "active"
+  #top-bar
+    #broadcasts
+      = link_to "Dismiss", dismiss_broadcasts_path, :class => "dismiss",
+        :remote => true
+      - active_broadcasts.each do |broadcast|
+        .broadcast
+          = link_to broadcast.broadcast_message, broadcast.url

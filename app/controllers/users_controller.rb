@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     params[:current_page] ||= :edit
 
     if @user.update_attributes(cleaned_params)
+      session.delete(:dismiss_email_warning)
       flash[:notice] = "#{params[:current_page].humanize} settings updated!"
       redirect_to :action => params[:current_page]
     else

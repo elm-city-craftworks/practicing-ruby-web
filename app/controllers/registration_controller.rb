@@ -5,11 +5,10 @@ class RegistrationController < ApplicationController
 
   def index
     path = case current_user.status
-      when "authorized" then {:action => :payment }
-      # when "pending_confirmation" then {:action => :update_profile }
-      # when "confirmed"            then {:action => :payment }
-      # when "payment_pending"      then {:action => :payment }
-      else library_path
+      when "authorized", "pending_confirmation", "confirmed", "payment_pending"
+        {:action => :payment }
+      else
+        library_path
     end
 
     redirect_to path

@@ -65,13 +65,13 @@ class ApplicationController < ActionController::Base
   end
 
   def clear_location
-    session[:return_to] = nil
+    session.delete(:return_to)
   end
 
   def back_or_default(default)
-    (session[:return_to] || default).tap do
-      clear_location
-    end
+    path = session[:return_to] || default
+    clear_location
+    path
   end
 
   def active_broadcasts

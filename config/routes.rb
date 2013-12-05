@@ -85,6 +85,15 @@ PracticingRubyWeb::Application.routes.draw do
     end
   end
 
+  controller :user_email do
+    get  '/account/email/confirm/:secret', :action => 'confirm',
+      :as => 'confirm_email'
+    post '/account/email/dismiss_warning', :action => 'dismiss_warning',
+      :as => 'dismiss_email_warning'
+    post '/account/email/send_confirmation', :action => 'send_confirmation',
+      :as => 'send_confirmation_email'
+  end
+
   namespace :admin do
     resources :announcements
     resources :articles

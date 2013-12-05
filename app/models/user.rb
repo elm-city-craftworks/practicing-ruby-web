@@ -25,7 +25,12 @@ class User < ActiveRecord::Base
 
   before_save do
     if changed.include?("contact_email")
-      write_attribute(:contact_email, contact_email.strip.downcase)
+      write_attribute(:email_confirmed, false)
+      if contact_email.present?
+        write_attribute(:contact_email, contact_email.strip.downcase)
+        write_attribute(:access_token, SecureRandom.hex(10))
+        RegistrationMailer.email_confirmation(self).deliver
+      end
     end
   end
 
@@ -34,7 +39,9 @@ class User < ActiveRecord::Base
   end
 
   def self.to_notify
-    where(notifications_enabled: true, :status => ACTIVE_STATUSES)
+    where(:notifications_enabled => true,
+          :status                => ACTIVE_STATUSES,
+          :email_confirmed       => true)
   end
 
   def hashed_id
@@ -67,7 +74,6 @@ class User < ActiveRecord::Base
   end
 
   def enable(mailchimp_web_id=nil)
-
     # TODO Move this to PaymentGateway
     unless mailchimp_web_id.blank?
       self.payment_provider_id = mailchimp_web_id
