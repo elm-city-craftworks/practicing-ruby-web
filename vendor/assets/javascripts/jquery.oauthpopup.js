@@ -24,7 +24,7 @@
         var oauthInterval = window.setInterval(function(){
             if (oauthWindow.closed) {
                 window.clearInterval(oauthInterval);
-                options.callback();
+                options.callback(oauthWindow);
             }
         }, 1000);
     };

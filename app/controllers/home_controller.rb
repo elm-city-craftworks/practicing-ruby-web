@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   def index
     if current_user
       if current_user.status == "active"
-        return redirect_to back_or_default(library_path)
+        return redirect_to library_path
       elsif current_user.status != "disabled"
         return redirect_to registration_path
       end

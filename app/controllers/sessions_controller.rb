@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       user.update_attribute(:status, "authorized")
       authorization.update_attribute(:user_id, user.id)
 
-      @path = registration_edit_profile_path
+      @path = registration_path
     elsif authorization.user.status == "active"
       @path = back_or_default(library_path)
     else

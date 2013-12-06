@@ -2,6 +2,7 @@
 
 :coffeescript
   if window.name == "ConnectWithOAuth"
+    window.path = "#{@path}"
     window.close()
   else
     window.location.href = "#{@path}"

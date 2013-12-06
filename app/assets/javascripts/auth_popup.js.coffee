@@ -3,3 +3,5 @@ $(document).on 'click', 'a.auth-popup', (e) ->
   $.oauthpopup
     path: $(this).attr('href')
     windowOptions: 'location=0,status=0,width=1024,height=400'
+    callback: (oauthWindow) ->
+      window.location.href = oauthWindow.path
