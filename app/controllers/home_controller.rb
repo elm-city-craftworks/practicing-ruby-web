@@ -3,13 +3,6 @@ class HomeController < ApplicationController
   skip_before_filter :authenticate_user, :except => [:library]
   layout "landing", :except => [:contact, :archives, :library]
 
-  def contact
-  end
-
-  def subscribe
-    redirect_to registration_path
-  end
-
   def index
     if current_user
       if current_user.status == "active"
