@@ -2,7 +2,7 @@
 - content_for :header_bottom do
   = javascript_include_tag "https://js.stripe.com/v1/"
   :coffeescript
-    $ -> new PR.PaymentProcessor('#{STRIPE_PUBLISHABLE_KEY}');
+    $ -> new PR.PaymentProcessor('#{STRIPE_PUBLISHABLE_KEY}')
 
 %h1
   Subscribe to
@@ -17,8 +17,13 @@
   Your payment details are sent directly to Stripe: For security reasons, we do
   not store your credit card number or other sensitive information.
 
-= form_tag registration_create_payment_path, :id => "payment-form" do
-  = render 'shared/credit_card'
+= form_tag registration_create_payment_path, :id => "payment-form",
+  'parsley-validate' => '' do
+  .email
+    = label_tag :email, "Email Address"
+    = email_field_tag :email, current_user.contact_email,
+      :placeholder => 'gregory@practicingruby.com',
+      :required => true
   .billing-cycle
     %label Billing Cycle
     = label_tag 'interval_month', :class => "billing-option" do
@@ -27,9 +32,7 @@
     = label_tag 'interval_year', :class => "billing-option" do
       = radio_button_tag :interval, :year
       Yearly - $96.00 USD
-  .email
-    = label_tag :email, "Email Address (optional)"
-    = email_field_tag :email, nil, :placeholder => 'gregory@practicingruby.com'
+  = render 'shared/credit_card'
   - if params[:coupon].present?
     .coupon
       = label_tag :coupon, "Coupon Code"

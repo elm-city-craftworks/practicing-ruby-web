@@ -187,6 +187,8 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    parsley-rails (1.2.2.0)
+      railties (>= 3.0.0)
     pg (0.16.0)
     poltergeist (1.1.2)
       capybara (~> 2.0.1)
@@ -343,6 +345,7 @@ DEPENDENCIES
   nokogiri (~> 1.5.9)
   omniauth-github (~> 1.0.1)
   omniauth-oauth2 (~> 1.1.1)
+  parsley-rails
   pg (= 0.16.0)
   poltergeist
   rack-pjax (~> 0.6.0)

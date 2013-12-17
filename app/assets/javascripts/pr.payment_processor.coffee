@@ -3,8 +3,6 @@ class PR.PaymentProcessor
     Stripe.setPublishableKey @key
     $(document).on 'submit', "#payment-form", this.formSubmit
 
-    $('.card-number').focus()
-
     $(document).on 'click', 'a#show-cvc-help', (e) ->
       $.facebox { div: '#cvc-help' }, 'cvc-help'
       e.preventDefault()
@@ -18,7 +16,7 @@ class PR.PaymentProcessor
       e.preventDefault()
 
   formSubmit: (event) =>
-    event.preventDefault();
+    event.preventDefault()
 
     @form = $(event.currentTarget)
 

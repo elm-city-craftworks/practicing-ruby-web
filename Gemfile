@@ -57,6 +57,7 @@ group :assets do
   gem 'compass-rails'
   gem 'sassy-buttons'
   gem 'turbo-sprockets-rails3'
+  gem 'parsley-rails'
 end
 
 group :test do
