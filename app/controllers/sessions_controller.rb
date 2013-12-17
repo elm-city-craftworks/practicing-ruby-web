@@ -28,11 +28,11 @@ class SessionsController < ApplicationController
       user.update_attribute(:status, "authorized")
       authorization.update_attribute(:user_id, user.id)
 
-      @path = registration_path
+      redirect_to registration_path
     elsif authorization.user.status == "active"
-      @path = back_or_default(library_path)
+      redirect_back_or_default(library_path)
     else
-      @path = registration_path
+      redirect_to registration_path
     end
   end
 

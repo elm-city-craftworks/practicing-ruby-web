@@ -57,6 +57,16 @@ module PaymentGateway
         :payment_provider_id => customer.id
       )
 
+      # This email param isn't being validated before this point and we don't
+      # want to :poop: on the user if they fail to enter an email or enter an
+      # invalid one. There are checks further down the line to resolve those
+      # issues which don't break subscribers out of the flow
+      #
+      if params[:email].present?
+        user.contact_email = params[:email]
+        user.save
+      end
+
       user.enable
     end
 

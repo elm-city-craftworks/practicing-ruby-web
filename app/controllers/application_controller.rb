@@ -68,10 +68,9 @@ class ApplicationController < ActionController::Base
     session.delete(:return_to)
   end
 
-  def back_or_default(default)
-    path = session[:return_to] || default
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
     clear_location
-    path
   end
 
   def active_broadcasts

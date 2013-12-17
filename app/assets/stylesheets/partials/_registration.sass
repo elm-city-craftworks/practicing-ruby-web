@@ -22,12 +22,19 @@ body.registration-payment
         +money-button
         padding: 0.3em 1em
         margin: 0
-    .billing-cycle
+    .billing-cycle, .email
+      display: inline-block
       margin-top: 1em
-      label
+    .billing-cycle
+      margin-right: 25px
+      label.billing-option
         display: inline-block
+        margin-top: 0.25em
         margin-right: 1.75em
         margin-bottom: 0
 
+    .email
+      input
+        width: 195px
   footer
     margin: 0

@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   skip_before_filter :authenticate, :except => [:library]
   skip_before_filter :authenticate_user, :except => [:library]
+  layout "landing", :except => [:contact, :archives, :library]
 
   def contact
   end

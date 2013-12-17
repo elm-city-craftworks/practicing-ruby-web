@@ -10,5 +10,5 @@
       = link_to "Settings", profile_settings_path if current_user.active?
       = link_to "Sign out", logout_path
     - else
-      = link_to "Subscribe", root_path, :class => "subscribe auth-popup"
-      = link_to "Sign in", login_path, :class => "auth-popup"
+      = link_to "Subscribe", root_path, :class => "subscribe"
+      = link_to "Sign in", login_path

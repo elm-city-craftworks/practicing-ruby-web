@@ -2,12 +2,13 @@
 
 .cc-num
   %label Card Number
-  %input.card-number{type: "text", size: 20, autocomplete: "off"}
+  %input.card-number{type: "text", size: 20, autocomplete: "off",
+    placeholder: "4242-4242-4242-4242"}
 .cc-cvc
   %label
     CVC
     %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
-  %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
+  %input.card-cvc{type:"text", size: 4, autocomplete: "off", placeholder: "123"}
 .cc-exp
   %label Card Expiration
   = select_month nil, { add_month_numbers: true },
