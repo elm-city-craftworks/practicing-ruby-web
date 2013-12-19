@@ -22,8 +22,9 @@
   .email
     = label_tag :email, "Email Address"
     = email_field_tag :email, current_user.contact_email,
-      :placeholder => 'gregory@practicingruby.com',
-      :required => true
+      :placeholder     => 'gregory@practicingruby.com',
+      :required        => true,
+      'parsley-remote' => email_unique_users_path
   .billing-cycle
     %label Billing Cycle
     = label_tag 'interval_month', :class => "billing-option" do

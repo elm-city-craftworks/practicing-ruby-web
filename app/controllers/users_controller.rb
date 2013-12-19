@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter      :find_user,         :except => :show
-  skip_before_filter :authenticate_user, :only   => :destroy
+  skip_before_filter :authenticate_user, :only   => [:destroy, :email_unique]
 
   def show
     @user = User.find_by_github_nickname(params[:id])
@@ -59,6 +59,19 @@ class UsersController < ApplicationController
 
   def destroy
     AccountMailer.canceled(@user) unless @user.disabled?
+  end
+
+  def email_unique
+    unique = User.where("id <> ? and contact_email = ?",
+                        @user, params[:email].downcase).empty?
+
+    message = if unique
+      true
+    else
+      { error: "This email is already registered" }
+    end
+
+    render :text => message.to_json
   end
 
   private

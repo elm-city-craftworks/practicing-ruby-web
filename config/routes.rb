@@ -83,6 +83,9 @@ PracticingRubyWeb::Application.routes.draw do
       post :change_billing_interval
       post :mailchimp_yearly_billing
     end
+    collection do
+      get :email_unique
+    end
   end
 
   controller :user_email do
