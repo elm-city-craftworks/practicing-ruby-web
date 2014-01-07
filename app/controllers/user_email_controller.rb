@@ -13,10 +13,10 @@ class UserEmailController < ApplicationController
     redirect_to user_settings_path
   end
 
-  def send_confirmation
-    RegistrationMailer.email_confirmation(current_user).deliver
-    flash[:notice] = "Confirmation email sent to #{current_user.contact_email}"
-    redirect_to :back
+  def change
+    @user = current_user
+
+    render :layout => false
   end
 
   def dismiss_warning

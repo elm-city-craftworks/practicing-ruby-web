@@ -93,8 +93,8 @@ PracticingRubyWeb::Application.routes.draw do
       :as => 'confirm_email'
     post '/account/email/dismiss_warning', :action => 'dismiss_warning',
       :as => 'dismiss_email_warning'
-    post '/account/email/send_confirmation', :action => 'send_confirmation',
-      :as => 'send_confirmation_email'
+    get '/account/email/change', :action => 'change',
+      :as => 'change_email'
   end
 
   namespace :admin do

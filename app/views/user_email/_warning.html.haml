@@ -1,6 +1,6 @@
 - if show_email_warning?
   #email-confirmation-warning
     Your email address isn't verified yet. Please check your inbox, or
-    = link_to "update your contact info", send_confirmation_email_path,
-      :method => :post
+    = link_to "update your contact info", change_email_path,
+      :rel => "facebox"
     to try again.

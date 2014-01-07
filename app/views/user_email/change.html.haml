@@ -1,0 +1,8 @@
+#change-email
+  = form_for @user, :remote => true do |f|
+    = error_messages_for(@user)
+    .field
+      = f.label :contact_email, "Email Address"
+      = f.text_field :contact_email
+    .field
+      = f.submit "Send confirmation email", :class => 'btn-small'
