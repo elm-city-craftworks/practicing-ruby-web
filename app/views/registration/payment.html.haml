@@ -22,7 +22,7 @@
   .email
     = label_tag :email, "Email Address"
     = email_field_tag :email, current_user.contact_email,
-      :placeholder     => 'gregory@practicingruby.com',
+      :placeholder     => 'you@yourdomain.com',
       :required        => true,
       'parsley-remote' => email_unique_users_path
   .billing-cycle
