@@ -3,4 +3,4 @@ $(document).on 'click', "a[href='/subscribe']", (e) ->
   $.facebox {ajax: '/subscribe'}, 'redirect-warning'
   setTimeout ->
     window.location.href = '/login'
-  , 3000
+  , 5000
