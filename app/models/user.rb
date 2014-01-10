@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
                        active disabled}
   ACTIVE_STATUSES = %w{active}
 
+  before_save :send_confirmation_email
+  before_create do
+    write_attribute(:share_token, SecureRandom.hex(5))
+  end
+
   has_many :comments
   has_many :subscriptions
   has_many :payment_logs
@@ -22,21 +27,6 @@ class User < ActiveRecord::Base
     :on   => :update
 
   attr_protected :admin, :status
-
-  before_save do
-    if changed.include?("contact_email")
-      write_attribute(:email_confirmed, false)
-      if contact_email.present?
-        write_attribute(:contact_email, contact_email.strip.downcase)
-        write_attribute(:access_token, SecureRandom.hex(10))
-        RegistrationMailer.email_confirmation(self).deliver
-      end
-    end
-  end
-
-  before_create do
-    write_attribute(:share_token, SecureRandom.hex(5))
-  end
 
   def self.to_notify
     where(:notifications_enabled => true,
@@ -99,5 +89,18 @@ class User < ActiveRecord::Base
 
   def clear_access_token
     update_attribute(:access_token, nil)
+  end
+
+  private
+
+  def send_confirmation_email
+    if changed.include?("contact_email")
+      write_attribute(:email_confirmed, false)
+      if contact_email.present?
+        write_attribute(:contact_email, contact_email.strip.downcase)
+        write_attribute(:access_token, SecureRandom.hex(10))
+        RegistrationMailer.email_confirmation(self).deliver
+      end
+    end
   end
 end
