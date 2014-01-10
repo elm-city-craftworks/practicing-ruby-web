@@ -2,7 +2,7 @@ language: ruby
 rvm:
   - 2.0.0
 before_script:
-  - rake travis:setup
+  - bundle exec rake travis:setup
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 notifications:
