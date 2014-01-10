@@ -1,7 +1,6 @@
 class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
-  before_filter :ye_shall_not_pass, :except => [ :payment, :payment_pending,
-                                                 :create_payment, :complete ]
+  before_filter :ye_shall_not_pass, :except => [ :complete ]
 
   def index
     path = case current_user.status
@@ -19,41 +18,6 @@ class RegistrationController < ApplicationController
     current_user.save
 
     redirect_to :action => :payment
-  end
-
-  def edit_profile
-    @user = current_user
-  end
-
-  def update_profile
-    @user = current_user
-
-    if params[:user]
-      if @user.update_attributes(params[:user])
-        @user.create_access_token
-
-        RegistrationMailer.email_confirmation(@user).deliver
-
-        @user.update_attribute(:status, "pending_confirmation")
-      else
-        render :edit_profile
-      end
-    end
-  end
-
-  def confirm_email
-    user = User.find_by_access_token(params[:secret])
-
-    return redirect_to(:action => :index) unless user
-
-    user.clear_access_token
-    user.update_attribute(:status, "confirmed")
-
-    return redirect_to(:action => :payment)
-  end
-
-  def payment_pending
-
   end
 
   def payment
@@ -75,9 +39,6 @@ class RegistrationController < ApplicationController
       @errors = e.message
       render :action => :payment
     end
-  end
-
-  def complete
   end
 
   def coupon_valid
