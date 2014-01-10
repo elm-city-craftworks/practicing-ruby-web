@@ -62,10 +62,11 @@ class PR.PaymentProcessor
     @form.get(0).submit()
   logError: (message) =>
     @spinner.stop()
+    @spinnerTarget.removeClass("spinning")
     $(".payment-errors").text(message).slideDown()
     $(".submit-button").removeAttr "disabled"
   createSpinner: =>
-    spinnerTarget  = @form.find('#processing-spinner')[0]
+    @spinnerTarget ||= @form.find('#processing-spinner')
 
     spinnerOpts = {
       lines: 9,
@@ -77,4 +78,5 @@ class PR.PaymentProcessor
       speed: 1.6
     }
 
-    @spinner = new Spinner(spinnerOpts).spin(spinnerTarget)
+    @spinner = new Spinner(spinnerOpts).spin(@spinnerTarget[0])
+    @spinnerTarget.addClass("spinning")

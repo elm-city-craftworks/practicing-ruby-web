@@ -13,9 +13,9 @@ module Support
 
     def self.default
       {
-        :nickname => "TestUser",
-        :uid      => "12345",
-        :email    => "test@test.com"
+        :nickname  => "TestUser",
+        :uid       => "12345",
+        :email     => "test@test.com"
       }
     end
 
@@ -43,54 +43,61 @@ module Support
 
     def register(params)
       authenticate(params)
-      create_profile(params)
-      confirm_email
       make_payment(params)
       read_article
     end
 
-    def create_profile(params={})
-      browser do
-        visit registration_edit_profile_path
-        fill_in "Email:", :with => params.fetch(:email, "")
-        click_button "Continue"
-      end
-    end
-
     def confirm_email(attempts=1)
-      browser { assert_current_path registration_update_profile_path }
-
-      mail   = ActionMailer::Base.deliveries.pop
-      base   = Rails.application.routes.url_helpers.
-                 registration_confirmation_path(:secret => "")
+      # NOTE This method assumes a confirmation email is waiting in the queue.
+      mail = ActionMailer::Base.deliveries.pop
+      base = Rails.application.routes.url_helpers.
+                 confirm_email_path(:secret => "")
 
       secret = mail.body.to_s[/#{base}(\h+)/,1]
 
       browser do
-        attempts.times { visit registration_confirmation_path(:secret => secret) }
+        attempts.times { visit confirm_email_path(:secret => secret) }
       end
     end
 
+    # Manual version of make_stripe_payment
+    #
     def make_payment(params={})
-      browser do
-        assert_current_path registration_payment_path
-      end
+      browser { assert_current_path registration_payment_path }
 
-      # TODO Find a way to test this through the UI
-      #
       @user.subscriptions.create(
         :start_date       => Date.today,
         :payment_provider => "stripe",
         :rate_cents       => params.fetch(:billing_rate, 800),
         :interval         => params.fetch(:billing_interval, 'month'))
 
+      @user.email  = params[:email]
       @user.status = "active"
       @user.save
 
+      browser { visit registration_complete_path }
+    end
+
+    def make_stripe_payment(params={})
       browser do
-        visit registration_complete_path
-        #assert_current_path registration_complete_path
+        assert_current_path registration_payment_path
+
+        fill_in "Email Address", :with => params.fetch(:email, "")
+        choose  "interval_#{params.fetch(:billing_interval, 'month')}"
+
+        find('input.card-number').set        params.fetch(:cc_number, '')
+        find('input.card-cvc').set           params.fetch(:cc_cvc, '')
+        find('select.card-expiry-month').set params.fetch(:cc_month, '')
+        find('select.card-expiry-year').set  params.fetch(:cc_year, '')
+
+        click_button "❤  Subscribe to Practicing Ruby"
+
+        # Wait for ajax to complete
+        Capybara.default_wait_time = 10
+        assert has_no_css? "#processing-spinner.spinning"
       end
+    ensure
+      Capybara.default_wait_time = 3
     end
 
     def read_article
@@ -133,9 +140,11 @@ module Support
     end
 
     def cancel_account
+      ActionMailer::Base.deliveries.clear
+
       browser do
-        click_link     "Settings"
-        click_link     "Unsubscribe from Practicing Ruby"
+        click_link "Settings"
+        click_link "Unsubscribe from Practicing Ruby"
 
         assert_content "Sorry to see you go"
 
@@ -193,14 +202,14 @@ module Support
     def restart_registration
       browser do
         click_link "subscribing"
-        assert_current_path registration_edit_profile_path
+        assert_current_path registration_payment_path
       end
     end
 
     def edit_profile(params={})
       browser do
         click_link "Settings"
-        fill_in "Email:", :with => params.fetch(:email, "")
+        fill_in "Email Address", :with => params.fetch(:email, "")
         click_button "Update Settings"
       end
     end
@@ -222,10 +231,14 @@ module Support
       })
 
       browser do
-        visit "/"
+        visit root_path
         click_link "subscribe"
 
-        assert_current_path "/registration/edit_profile"
+        # Redirect facebox
+        assert_content "Redirecting to GitHub"
+        click_link "here" # Don't wait the full 5 seconds
+
+        assert_current_path registration_payment_path
       end
     end
 
