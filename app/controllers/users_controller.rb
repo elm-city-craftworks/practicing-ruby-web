@@ -68,8 +68,9 @@ class UsersController < ApplicationController
   end
 
   def email_unique
+    email = params[:email] || (params[:user] && params[:user][:contact_email])
     unique = User.where("id <> ? and contact_email = ?",
-                        @user, params[:email].downcase).empty?
+                        @user, email.downcase).empty?
 
     message = if unique
       true
