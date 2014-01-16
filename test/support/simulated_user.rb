@@ -43,7 +43,7 @@ module Support
 
     def register(params)
       authenticate(params)
-      make_payment(params)
+      make_db_payment(params)
       read_article
     end
 
@@ -60,9 +60,17 @@ module Support
       end
     end
 
+    def make_payment(params={})
+      if ENV['STRIPE'].present?
+        make_stripe_payment(params)
+      else
+        make_db_payment(params)
+      end
+    end
+
     # Manual version of make_stripe_payment
     #
-    def make_payment(params={})
+    def make_db_payment(params={})
       browser { assert_current_path registration_payment_path }
 
       @user.subscriptions.create(

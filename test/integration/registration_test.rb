@@ -17,17 +17,9 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       :cc_year   => Date.today.year + 1
     )
 
-    # Opt-in to run stripe tests
-    #
-    payment_method = if ENV['STRIPE'] == 'true'
-      :make_stripe_payment
-    else
-      :make_payment
-    end
-
     simulated_user
       .authenticate(params)
-      .public_send(payment_method, params)
+      .make_payment(params)
 
     assert_current_path registration_complete_path
   end
@@ -35,7 +27,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
   test "successful registration with extraneous whitespace in email" do
     simulated_user
       .authenticate(:nickname => "TestUser", :uid => "12345")
-      .make_payment(Support::SimulatedUser.default.merge(
+      .make_db_payment(Support::SimulatedUser.default.merge(
         :email => "test@test.com "))
   end
 
@@ -85,7 +77,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
   test "attempting to confirm twice" do
     simulated_user
       .authenticate(Support::SimulatedUser.default)
-      .make_payment(Support::SimulatedUser.default)
+      .make_db_payment(Support::SimulatedUser.default)
       .confirm_email(2)
   end
 
