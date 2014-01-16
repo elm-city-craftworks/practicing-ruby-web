@@ -170,7 +170,7 @@ GEM
     net-ssh (2.6.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.5.10)
+    nokogiri (1.5.11)
     notifier (0.4.0)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -297,7 +297,7 @@ GEM
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
-    will_paginate (3.0.3)
+    will_paginate (3.0.5)
     xpath (1.0.0)
       nokogiri (~> 1.3)
 
@@ -340,7 +340,7 @@ DEPENDENCIES
   mocha
   multi_xml (>= 0.5.2)
   mustache
-  nokogiri (~> 1.5.9)
+  nokogiri (~> 1.5.11)
   omniauth-github (~> 1.0.1)
   omniauth-oauth2 (~> 1.1.1)
   pg (= 0.16.0)
@@ -361,4 +361,4 @@ DEPENDENCIES
   uglifier
   unicorn
   whenever
-  will_paginate
+  will_paginate (>= 3.0.5)

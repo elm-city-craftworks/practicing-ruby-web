@@ -12,14 +12,14 @@ gem 'omniauth-github', '~> 1.0.1'
 
 gem 'redcarpet', '~> 2.1'
 gem 'albino'
-gem 'nokogiri', '~> 1.5.9'
+gem 'nokogiri', '~> 1.5.11'
 gem 'md_preview'
 gem 'md_emoji'
 
 gem 'stripe'
 gem 'stripe_event'
 
-gem 'will_paginate'
+gem 'will_paginate', '>= 3.0.5'
 gem 'haml'
 gem 'coffee-filter', '~> 0.1.1'
 gem 'jquery-rails'
