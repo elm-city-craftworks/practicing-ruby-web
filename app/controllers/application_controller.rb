@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate
-    return if current_authorization 
-   
+    return if current_authorization
+
     store_location
     redirect_on_auth_failure
   end
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
 
   def clear_location
-    session[:return_to] = nil
+    session.delete(:return_to)
   end
 
   def redirect_back_or_default(default)

@@ -2,6 +2,38 @@ form
   input[type=submit]
     +classy-button
 
+  label, input[type=text], input[type=email], select
+    font-size: 14px
+    font-weight: normal
+    line-height: 20px
+  label
+    display: block
+    margin-bottom: 5px
+    color: #333
+    font-size: 0.75em
+  input[type=text], input[type=email], select
+    display: inline-block
+    height: 20px
+    padding: 4px 6px
+    margin: 0
+    font-size: 14px
+    line-height: 20px
+    color: #555
+    +border-radius(3px)
+  input[type=text], input[type=email]
+    background-color: #fff
+    border: 1px solid #CCC
+    +single-box-shadow(rgba(0,0,0,0.075), 0, 1px, 1px, false, true)
+    &:focus
+      outline: 0
+      outline: thin dotted 9
+      border-color: $dark-blue
+  select
+    height: 30px
+    line-height: 30px
+    background-color: #fff
+    border: 1px solid #CCC
+
 #errorExplanation
   margin: 1em 0
   padding: 1em
@@ -17,6 +49,14 @@ form
     margin-left: 2em
     li
       color: #522
+
+ul.parsley-error-list li
+  color: #9E4040
+  font-size: 0.75em
+  margin: 5px 0
+
+input.parsley-error
+  border: 1px solid #9E4040 !important
 
 div.field_with_errors
   display: inline-block

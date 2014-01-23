@@ -1,14 +1,15 @@
 .payment-errors= @errors
 
-.row
+.cc-num
   %label Card Number
-  %input.card-number{type: "text", size: 20, autocomplete: "off"}
-.row
+  %input.card-number{type: "text", size: 20, autocomplete: "off",
+    placeholder: "4242-4242-4242-4242"}
+.cc-cvc
   %label
     CVC
     %a#show-cvc-help{:href => "#cvc", :tabindex => -1} ?
-  %input.card-cvc{type:"text", size: 4, autocomplete: "off"}
-.row
+  %input.card-cvc{type:"text", size: 4, autocomplete: "off", placeholder: "123"}
+.cc-exp
   %label Card Expiration
   = select_month nil, { add_month_numbers: true },
     { name: nil, id: nil, class: "card-expiry-month" }

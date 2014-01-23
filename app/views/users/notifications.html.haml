@@ -8,18 +8,23 @@
     .info
       All notifications will be sent to #{@user.contact_email}
     %hr
-    %p
+
+    = f.label :notify_updates do
       = f.check_box :notify_updates
-      = f.label :notify_updates, "Notify me about content and website updates"
-    %p
+      Notify me about content and website updates
+
+    = f.label :notify_conversations do
       = f.check_box :notify_conversations
-      = f.label :notify_conversations, "Notify me when conversations start"
-    %p
+      Notify me when conversations start
+
+    = f.label :notify_mentions do
       = f.check_box :notify_mentions
-      = f.label :notify_mentions, "Notify me when I am mentioned in a conversation"
-    %p
+      Notify me when I am mentioned in a conversation
+
+    = f.label :notify_comment_made do
       = f.check_box :notify_comment_made
-      = f.label :notify_comment_made, "Notify me every time a comment is made"
+      Notify me every time a comment is made
+
     %hr
     %p
       = f.submit "Update Settings"

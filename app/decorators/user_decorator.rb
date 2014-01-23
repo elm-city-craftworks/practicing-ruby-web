@@ -5,7 +5,7 @@ class UserDecorator < ApplicationDecorator
     h.l(user.created_at.to_date, :format => :long)
   end
 
-  def icon(size=32)
+  def icon(size=32, options={})
     image_path = h.image_path("avatar.png")
 
     unless user.contact_email.blank?
@@ -17,8 +17,8 @@ class UserDecorator < ApplicationDecorator
     # Manually set height / width so layouts don't collapse while gravatars are
     # loading
     #
-    h.image_tag(image_path, :alt => user.name,
-      :style => "width: #{size}px; height: #{size}px;", :class => "user-icon")
+    h.image_tag(image_path, options.merge(:alt => user.name,
+      :style => "width: #{size}px; height: #{size}px;", :class => "user-icon"))
   end
 
   def link_to_github

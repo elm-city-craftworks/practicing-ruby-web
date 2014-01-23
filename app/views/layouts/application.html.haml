@@ -15,9 +15,8 @@
 
   %body{class: "#{controller.controller_name}-#{controller.action_name}"}
     = render :partial => "shared/admin_bar"
-    - if active_broadcasts.any? && current_user.try(:status) == "active"
-      #top-bar= render "shared/broadcasts"
-
+    = render :partial => "shared/broadcasts"
+    = render :partial => "user_email/warning"
     = render :partial => "shared/flash", :locals => { :flash => flash }
 
     = yield(:nudge)

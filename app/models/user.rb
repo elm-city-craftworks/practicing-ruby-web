@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
                        active disabled}
   ACTIVE_STATUSES = %w{active}
 
+  before_save :send_confirmation_email
+  before_create do
+    write_attribute(:share_token, SecureRandom.hex(5))
+  end
+
   has_many :comments
   has_many :subscriptions
   has_many :payment_logs
@@ -17,24 +22,16 @@ class User < ActiveRecord::Base
   # Email sanity check from Rails Docs
   # http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html#M000087
   #
-  validates_format_of     :contact_email,
+  validates_format_of :contact_email,
     :with => /\A\s*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\s*\Z/i,
     :on   => :update
 
   attr_protected :admin, :status
 
-  before_save do
-    if changed.include?("contact_email")
-      write_attribute(:contact_email, contact_email.strip.downcase)
-    end
-  end
-
-  before_create do
-    write_attribute(:share_token, SecureRandom.hex(5))
-  end
-
   def self.to_notify
-    where(notifications_enabled: true, :status => ACTIVE_STATUSES)
+    where(:notifications_enabled => true,
+          :status                => ACTIVE_STATUSES,
+          :email_confirmed       => true)
   end
 
   def hashed_id
@@ -67,7 +64,6 @@ class User < ActiveRecord::Base
   end
 
   def enable(mailchimp_web_id=nil)
-
     # TODO Move this to PaymentGateway
     unless mailchimp_web_id.blank?
       self.payment_provider_id = mailchimp_web_id
@@ -93,5 +89,18 @@ class User < ActiveRecord::Base
 
   def clear_access_token
     update_attribute(:access_token, nil)
+  end
+
+  private
+
+  def send_confirmation_email
+    if changed.include?("contact_email")
+      write_attribute(:email_confirmed, false)
+      if contact_email.present?
+        write_attribute(:contact_email, contact_email.strip.downcase)
+        write_attribute(:access_token, SecureRandom.hex(10))
+        RegistrationMailer.email_confirmation(self).deliver
+      end
+    end
   end
 end

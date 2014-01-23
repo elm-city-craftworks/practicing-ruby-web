@@ -1,0 +1,11 @@
+#change-email
+  = form_for @user, :remote => true, :html => {'parsley-validate' => ''} do |f|
+    = error_messages_for(@user)
+    .field
+      = f.label :contact_email, "Email Address"
+      = f.email_field :contact_email, :required => true,
+      'parsley-remote' => email_unique_users_path
+    .field
+      = f.submit "Send confirmation email", :class => 'btn-small'
+:coffeescript
+  $('#edit_user_#{@user.id}').parsley()

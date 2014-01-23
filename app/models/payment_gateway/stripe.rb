@@ -54,7 +54,8 @@ module PaymentGateway
 
       user.update_attributes(
         :payment_provider    => 'stripe',
-        :payment_provider_id => customer.id
+        :payment_provider_id => customer.id,
+        :contact_email       => params[:email]
       )
 
       user.enable

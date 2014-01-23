@@ -7,15 +7,14 @@
     = hidden_field_tag :current_page, :profile
     = error_messages_for(@user)
     .field
-      = f.label :contact_email, "Email:"
+      = f.label :contact_email, "Email Address"
       = f.text_field :contact_email
-    %p#gravatar
-      = UserDecorator.decorate(@user).icon(32)
-      = link_to "Change your avatar at Gravatar.com", "http://gravatar.com/"
+      = UserDecorator.decorate(@user).icon(30,
+        :title => "Change your avatar at Gravatar.com")
     %p
-      = f.check_box :beta_tester
-      = f.label :beta_tester,
-        "Give me early access to experimental website features"
+      = f.label :beta_tester do
+        = f.check_box :beta_tester
+        Give me early access to experimental website features
     %hr
     %p
       = f.submit "Update Settings"

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter      :find_user,         :except => :show
-  skip_before_filter :authenticate_user, :only   => :destroy
+  skip_before_filter :authenticate_user, :only   => [:destroy, :email_unique]
 
   def show
     @user = User.find_by_github_nickname(params[:id])
@@ -33,13 +33,20 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:current_page] ||= :edit
-
     if @user.update_attributes(cleaned_params)
-      flash[:notice] = "#{params[:current_page].humanize} settings updated!"
-      redirect_to :action => params[:current_page]
+      session.delete(:dismiss_email_warning)
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "#{params[:current_page].humanize} settings updated!"
+          redirect_to :action => params[:current_page]
+        end
+        format.js
+      end
     else
-      render :action => params[:current_page]
+      respond_to do |format|
+        format.html { render :action => params[:current_page] }
+        format.js
+      end
     end
   end
 
@@ -58,6 +65,20 @@ class UsersController < ApplicationController
 
   def destroy
     AccountMailer.canceled(@user) unless @user.disabled?
+  end
+
+  def email_unique
+    email = params[:email] || (params[:user] && params[:user][:contact_email])
+    unique = User.where("id <> ? and contact_email = ?",
+                        @user, email.downcase).empty?
+
+    message = if unique
+      true
+    else
+      { error: "This email is already registered" }
+    end
+
+    render :text => message.to_json
   end
 
   private

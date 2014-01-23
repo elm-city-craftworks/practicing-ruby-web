@@ -19,6 +19,13 @@ module ApplicationHelper
     end
   end
 
+  def show_email_warning?
+    current_user &&
+    current_user.active? &&
+    current_user.email_confirmed == false &&
+    session[:dismiss_email_warning] != true
+  end
+
   def md(content)
     MdPreview::Parser.parse(content)
   end

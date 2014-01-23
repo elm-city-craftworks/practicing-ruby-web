@@ -1,3 +1,3 @@
-web: rails s
-worker: rake jobs:work
-mail: mailcatcher -f
+web: script/rails s
+worker: bundle exec rake jobs:work
+mail: bundle exec mailcatcher -f

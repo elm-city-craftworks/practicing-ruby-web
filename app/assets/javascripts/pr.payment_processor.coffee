@@ -3,8 +3,6 @@ class PR.PaymentProcessor
     Stripe.setPublishableKey @key
     $(document).on 'submit', "#payment-form", this.formSubmit
 
-    $('.card-number').focus()
-
     $(document).on 'click', 'a#show-cvc-help', (e) ->
       $.facebox { div: '#cvc-help' }, 'cvc-help'
       e.preventDefault()
@@ -18,13 +16,13 @@ class PR.PaymentProcessor
       e.preventDefault()
 
   formSubmit: (event) =>
-    event.preventDefault();
+    event.preventDefault()
 
     @form = $(event.currentTarget)
 
     # disable the submit button to prevent repeated clicks
     $('.submit-button').attr "disabled", "disabled"
-    $(".payment-errors").text ""
+    $(".payment-errors").slideUp()
 
     this.createSpinner()
 
@@ -64,10 +62,11 @@ class PR.PaymentProcessor
     @form.get(0).submit()
   logError: (message) =>
     @spinner.stop()
-    $(".payment-errors").text      message
+    @spinnerTarget.removeClass("spinning")
+    $(".payment-errors").text(message).slideDown()
     $(".submit-button").removeAttr "disabled"
   createSpinner: =>
-    spinnerTarget  = @form.find('#processing-spinner')[0]
+    @spinnerTarget ||= @form.find('#processing-spinner')
 
     spinnerOpts = {
       lines: 9,
@@ -77,6 +76,7 @@ class PR.PaymentProcessor
       corners: 0.8,
       hwaccel: true,
       speed: 1.6
-    };
+    }
 
-    @spinner = new Spinner(spinnerOpts).spin(spinnerTarget)
+    @spinner = new Spinner(spinnerOpts).spin(@spinnerTarget[0])
+    @spinnerTarget.addClass("spinning")

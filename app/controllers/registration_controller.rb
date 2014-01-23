@@ -1,15 +1,13 @@
 class RegistrationController < ApplicationController
   skip_before_filter :authenticate_user
-  before_filter :ye_shall_not_pass, :except => [ :payment, :payment_pending,
-                                                 :create_payment, :complete ]
+  before_filter :ye_shall_not_pass, :except => [ :complete ]
 
   def index
     path = case current_user.status
-      when "authorized"           then {:action => :edit_profile }
-      when "pending_confirmation" then {:action => :update_profile }
-      when "confirmed"            then {:action => :payment }
-      when "payment_pending"      then {:action => :payment }
-      else library_path
+      when "authorized", "pending_confirmation", "confirmed", "payment_pending"
+        {:action => :payment }
+      else
+        library_path
     end
 
     redirect_to path
@@ -19,46 +17,11 @@ class RegistrationController < ApplicationController
     current_user.status = "authorized"
     current_user.save
 
-    redirect_to :action => :edit_profile
-  end
-
-  def edit_profile
-    @user = current_user
-  end
-
-  def update_profile
-    @user = current_user
-
-    if params[:user]
-      if @user.update_attributes(params[:user])
-        @user.create_access_token
-
-        RegistrationMailer.email_confirmation(@user).deliver
-
-        @user.update_attribute(:status, "pending_confirmation")
-      else
-        render :edit_profile
-      end
-    end
-  end
-
-  def confirm_email
-    user = User.find_by_access_token(params[:secret])
-
-    return redirect_to(:action => :index) unless user
-
-    user.clear_access_token
-    user.update_attribute(:status, "confirmed")
-
-    return redirect_to(:action => :payment)
-  end
-
-  def payment_pending
-
+    redirect_to :action => :payment
   end
 
   def payment
-    unless current_user.status == "payment_pending" || current_user.status == "confirmed"
+    if current_user.status == "active"
       redirect_to(:action => :complete)
     end
   end
@@ -78,9 +41,6 @@ class RegistrationController < ApplicationController
     end
   end
 
-  def complete
-  end
-
   def coupon_valid
     payment_gateway = current_user.payment_gateway
 
@@ -93,7 +53,7 @@ class RegistrationController < ApplicationController
 
   # Called by ApplicationController#authenticate
   def redirect_on_auth_failure
-    redirect_to login_path 
+    redirect_to login_path
   end
 
   def ye_shall_not_pass
