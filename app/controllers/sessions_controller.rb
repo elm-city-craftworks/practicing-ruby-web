@@ -1,7 +1,4 @@
 class SessionsController < ApplicationController
-  skip_before_filter :authenticate
-  skip_before_filter :authenticate_user
-
   def new
     case ENV["AUTH_MODE"]
     when "developer"
@@ -28,11 +25,11 @@ class SessionsController < ApplicationController
       user.update_attribute(:status, "authorized")
       authorization.update_attribute(:user_id, user.id)
 
-      redirect_to registration_path
+      redirect_to new_subscription_path
     elsif authorization.user.status == "active"
       redirect_back_or_default(library_path)
     else
-      redirect_to registration_path
+      redirect_to new_subscription_path
     end
   end
 

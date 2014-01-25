@@ -21,7 +21,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       .authenticate(params)
       .make_payment(params)
 
-    assert_current_path registration_complete_path
+    assert_content "Thanks"
   end
 
   test "successful registration with extraneous whitespace in email" do
@@ -56,7 +56,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       .logout
       .authenticate(user_params)
 
-    assert_current_path registration_payment_path
+    assert_current_path new_subscription_path
   end
 
   test "payment failure" do
@@ -79,11 +79,5 @@ class RegistrationTest < ActionDispatch::IntegrationTest
       .authenticate(Support::SimulatedUser.default)
       .make_db_payment(Support::SimulatedUser.default)
       .confirm_email(2)
-  end
-
-  test "payment pending accounts" do
-    simulated_user
-      .register(Support::SimulatedUser.default)
-      .payment_pending
   end
 end

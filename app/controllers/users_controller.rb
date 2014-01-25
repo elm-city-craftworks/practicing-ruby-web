@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_filter      :find_user,         :except => :show
-  skip_before_filter :authenticate_user, :only   => [:destroy, :email_unique]
+  before_filter :authenticate
+  before_filter :authenticate_user, :except => [:destroy, :email_unique]
+  before_filter :find_user,         :except => :show
 
   def show
     @user = User.find_by_github_nickname(params[:id])

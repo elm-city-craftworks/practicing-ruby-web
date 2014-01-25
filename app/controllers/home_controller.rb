@@ -1,22 +1,4 @@
 class HomeController < ApplicationController
-  skip_before_filter :authenticate, :except => [:library]
-  skip_before_filter :authenticate_user, :except => [:library]
-  layout "landing", :except => [:contact, :archives, :library]
-
-  def index
-    if current_user
-      if current_user.status == "active"
-        return redirect_to library_path
-      elsif current_user.status != "disabled"
-        return redirect_to registration_path
-      end
-    end
-
-    @article_count = [Article.published.count / 10, "0+"].join
-
-    render :index, :layout => "landing"
-  end
-
   def library
     @article_count = Article.where(:status => "published").count
     @recent = ArticleDecorator.decorate(Article.order("published_time DESC").

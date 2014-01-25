@@ -71,7 +71,7 @@ module Support
     # Manual version of make_stripe_payment
     #
     def make_db_payment(params={})
-      browser { assert_current_path registration_payment_path }
+      browser { assert_current_path new_subscription_path }
 
       @user.subscriptions.create(
         :start_date       => Date.today,
@@ -83,12 +83,12 @@ module Support
       @user.status = "active"
       @user.save
 
-      browser { visit registration_complete_path }
+      browser { visit library_path(:new_subscription => true) }
     end
 
     def make_stripe_payment(params={})
       browser do
-        assert_current_path registration_payment_path
+        assert_current_path new_subscription_path
 
         fill_in "Email Address", :with => params.fetch(:email, "")
         choose  "interval_#{params.fetch(:billing_interval, 'month')}"
@@ -128,21 +128,11 @@ module Support
       end
     end
 
-    def payment_pending
-      @user.status = "payment_pending"
-      @user.save
-
-      browser do
-        visit library_path
-        assert_current_path registration_payment_path
-      end
-    end
-
     def payment_failure
       @user.disable
 
       browser do
-        visit library_path
+        visit profile_settings_path
         assert_current_path problems_sessions_path
       end
     end
@@ -171,7 +161,7 @@ module Support
       @user.disable
 
       browser do
-        visit library_path
+        visit profile_settings_path
         assert_current_path problems_sessions_path
       end
 
@@ -210,7 +200,7 @@ module Support
     def restart_registration
       browser do
         click_link "subscribing"
-        assert_current_path registration_payment_path
+        assert_current_path new_subscription_path
       end
     end
 
@@ -240,13 +230,17 @@ module Support
 
       browser do
         visit root_path
-        click_link "subscribe"
+        # Toggle Navbar
+        click_link "admin-bar-toggle"
+        click_link "Subscribe"
+
+        click_link "Subscribe to Practicing Ruby ($8/month)"
 
         # Redirect facebox
         assert_content "Redirecting to GitHub"
         click_link "here" # Don't wait the full 5 seconds
 
-        assert_current_path registration_payment_path
+        assert_current_path new_subscription_path
       end
     end
 

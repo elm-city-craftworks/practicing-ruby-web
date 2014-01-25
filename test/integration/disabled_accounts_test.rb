@@ -17,7 +17,7 @@ class DisabledAccountsTest < ActionDispatch::IntegrationTest
   test "gets rerouted to session problem page when account is disabled" do
     @user.disable
     sign_user_in
-    visit article_path(@article)
+    visit profile_settings_path
 
     assert_equal problems_sessions_path, current_path
   end

@@ -53,7 +53,7 @@ class PR.PaymentProcessor
     else
       return false
   checkCoupon: =>
-    $.getJSON '/registration/coupon_valid', { coupon: @couponCode }, (data) =>
+    $.getJSON '/subscriptions/coupon_valid', { coupon: @couponCode }, (data) =>
       if data.coupon_valid
         this.submitPayment()
       else

@@ -21,19 +21,19 @@ class BroadcastMailerTest < ActionMailer::TestCase
     end
   end
 
-
   test "article links can be generated from template" do
-    user = FactoryGirl.create(:user) 
+    user = FactoryGirl.create(:user)
+    slug = "a-fancy-article"
 
-    article = FactoryGirl.create(:article, :slug => "a-fancy-article")
+    article = FactoryGirl.create(:article, :slug => slug)
 
-    message_body = "Here's an amazing article\n{{#article}}a-fancy-article{{/article}}"
+    message_body = "Here's an amazing article\n{{#article}}#{slug}{{/article}}"
 
     Broadcaster.notify_subscribers(:body => message_body, :subject => "Hi there!")
 
     message = ActionMailer::Base.deliveries.first
 
-    url  = ArticleLink.new(article).url(user.share_token)
+    url = Rails.application.routes.url_helpers.article_url(slug)
 
     expected_body = "Here's an amazing article\n#{url}"
 

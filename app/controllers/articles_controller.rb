@@ -1,10 +1,7 @@
 class ArticlesController < ApplicationController
-  before_filter :find_article, :only => [:show, :edit, :update, :share]
-  before_filter :update_url, :only => [:show]
-  before_filter :validate_token, :only => [:show]
-
-  skip_before_filter :authenticate,      :only => [:show, :shared, :samples]
-  skip_before_filter :authenticate_user, :only => [:show, :shared, :samples]
+  before_filter :find_article,   :only => [:show, :edit, :update, :share]
+  before_filter :update_url,     :only => :show
+  before_filter :validate_token, :only => :show
 
   def index
     if params[:volume]
@@ -35,10 +32,6 @@ class ArticlesController < ApplicationController
 
     if current_user.try(:status) == "active"
       @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
-    else
-      shared_by = User.find_by_share_token(params[:u]).hashed_id
-
-      render "shared"
     end
   end
 
@@ -46,7 +39,7 @@ class ArticlesController < ApplicationController
     @share = SharedArticle.find_by_secret(params[:secret])
 
     if @share
-      redirect_to ArticleLink.new(@share.article).path(@share.user.share_token)
+      redirect_to article_path(@share.article)
     else
       render_http_error 404
     end
@@ -72,9 +65,8 @@ class ArticlesController < ApplicationController
 
   def update_url
     slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
-    missing_token       = current_user && params[:u].blank?
 
-    redirect_to(article_path(@article)) if slug_needs_updating || missing_token
+    redirect_to(article_path(@article)) if slug_needs_updating
   end
 
   def validate_token

@@ -1,12 +1,12 @@
 #article-footer
-  - if current_user
-    %h3 If you enjoyed this issue of Practicing Ruby, please share it! 
+  %h3 If you enjoyed this issue of Practicing Ruby, please share it!
 
-    %p
-      Copy-and-paste the link below to give your friends free access to
-      this article:
+  %p
+    Copy-and-paste the link below to give your friends free access to
+    this article:
 
-    = text_field_tag :share_link, article_url(@article), :size => 80
+  = text_field_tag :share_link, article_url(@article), :size => 80
 
-    %p
-      We believe that sharing is caring, so feel free to post this link anywhere you'd like!
+  %p
+    We believe that sharing is caring, so feel free to post this link anywhere
+    you'd like!

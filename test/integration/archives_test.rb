@@ -1,57 +1,22 @@
 require_relative "../test_helper"
 
-
 class ArchivesTest < ActionDispatch::IntegrationTest
-  # This test applies to guests, logged in users,
-  # and logged out users alike.
-  def self.archives_should_be_viewable
-    test "archive should be viewable" do
-      visit archives_path
-      assert_current_path archives_path
-
-      @articles.each { |a| assert_content a.subject }
-    end
-  end
-
   setup do
     @articles = 3.times.map { FactoryGirl.create(:article) }
   end
 
-  context "Unregistered user" do
-    setup { set_user_state(:guest) }
+  test "archive should be viewable" do
+    visit archives_path
+    assert_current_path archives_path
 
-    archives_should_be_viewable
+    @articles.each { |a| assert_content a.subject }
   end
 
-  context "Registered user -- logged out" do
-    setup { set_user_state(:logged_out) }
+  test "clicking a link from the archives goes directly to the article" do
+    visit archives_path
 
-    archives_should_be_viewable
-
-    test "clicking a link from the archives forces a login" do
-      visit archives_path
-
-      click_link @articles[1].subject
-
-      assert_current_path root_path
-      assert_content "protected"
-
-      click_link "Log in"
-      assert_current_path article_path(@articles[1])
-    end
-  end
-
-  context "Registered user -- logged in" do
-    setup { set_user_state(:logged_in) }
-
-    archives_should_be_viewable
-
-    test "clicking a link from the archives goes directly to the article" do
-      visit archives_path
-
-      click_link @articles[1].subject
-      assert_current_path article_path(@articles[1])
-    end
+    click_link @articles[1].subject
+    assert_current_path article_path(@articles[1])
   end
 
   context "Draft articles" do

@@ -15,4 +15,14 @@
 
 = render "footer"
 
-= render :partial => "articles/comments"
+- if @comments
+  = render :partial => "articles/comments"
+- else
+  #share-alert
+    The discussion thread for this article is available to subscribers
+    only. If you want to share some feedback or ask me a question, please
+    = link_to "subscribe", subscriptions_path
+    ,
+    = link_to "log in", login_path
+    , or send an email to
+    = mail_to "support@elmcitycraftworks.org"

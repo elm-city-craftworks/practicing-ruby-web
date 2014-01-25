@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class AccountCancelationTest < ActionDispatch::IntegrationTest
   test "user account is disabled" do

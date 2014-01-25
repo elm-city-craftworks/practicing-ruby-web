@@ -1,5 +1,5 @@
 PracticingRubyWeb::Application.routes.draw do
-  root :to => 'home#index'
+  root :to => 'home#library'
 
   mount StripeEvent::Engine => STRIPE_WEBHOOK_PATH
 
@@ -41,18 +41,11 @@ PracticingRubyWeb::Application.routes.draw do
     end
   end
 
-  scope "/registration", :as => 'registration' do
-    get   '/'                     => 'registration#index'
-    get   'edit_profile'          => 'registration#edit_profile'
-    match 'update_profile'        => 'registration#update_profile'
-    get   'confirm_email/:secret' => 'registration#confirm_email',
-      :as => 'confirmation'
-    get   'payment'               => 'registration#payment'
-    get   'payment_pending'       => 'registration#payment_pending'
-    post  'create_payment'        => 'registration#create_payment'
-    get   'complete'              => 'registration#complete'
-    get   'restart'               => 'registration#restart'
-    get   'coupon_valid'          => 'registration#coupon_valid'
+  resources :subscriptions, :except => [:destroy, :edit, :update, :show] do
+    collection do
+      get :redirect
+      get :coupon_valid
+    end
   end
 
   match '/sessions/link/:secret'   => 'sessions#link'

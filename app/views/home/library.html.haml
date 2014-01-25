@@ -22,3 +22,7 @@
   Once you've read these articles, check out our
   = link_to "complete archives", archives_path
   or try a #{link_to "randomly selected issue", random_article_path}.
+
+- if params[:new_subscription]
+  :coffeescript
+    $.facebox '#{escape_javascript render('subscriptions/thanks')}', 'thanks-box'

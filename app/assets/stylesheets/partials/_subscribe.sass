@@ -1,21 +1,64 @@
-#subscribe
-  +two-panel
-  #left
-    .subscribe form div
+body.subscriptions-index
+  a#subscribe
+    +money-button
+    font-size: 1.5em
+    text-decoration: none
+    display: block
+    width: 475px
+    text-align: center
+    margin: 0 auto
+
+body.subscriptions-new
+  font-family: sans-serif
+  letter-spacing: initial
+
+  #content
+    margin-top: 3em
+    width: 550px
+    background-color: #fff
+    padding: 1.5em
+    +single-box-shadow(rgba(0,0,0,0.5), 0, 0, 1px)
+    +border-radius(2px)
+
+  h1
+    font-size: 2em
+    font-family: 'Folks'
+    .branded
+      color: $red
+  #payment-form
+    .submit
       text-align: center
-      input
+      border-top: 1px solid #ddd
+      margin-top: 1.5em
+      padding-top: 1.5em
+      input.submit-button
         +money-button
-        font-size: 1.25em
-    #price
-      p
-        text-align: center
-        font-size: 0.9em
-        font-weight: bold
-  #right
-    margin-top: 1.5em
-  #preview
-    +image-box
-    width: 90%
-  ul
-    list-style: disc outside none
-    margin-left: 1em
+        padding: 0.3em 1em
+        margin: 0
+    .billing-cycle, .email
+      display: inline-block
+      margin-bottom: 1em
+    .billing-cycle
+      label.billing-option
+        display: inline-block
+        margin-top: 0.25em
+        margin-right: 1.5em
+        margin-bottom: 0
+
+    .email
+      margin-right: 28px
+      input
+        width: 200px
+  footer
+    margin: 0
+
+#facebox .content.thanks-box
+  width: 500px
+  font-family: sans-serif
+  padding: 15px
+
+  h1
+    font-size: 1.5em
+  img
+    width: 100%
+    box-sizing: border-box
