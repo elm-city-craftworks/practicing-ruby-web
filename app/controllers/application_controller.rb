@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     if current_user.disabled?
       redirect_to problems_sessions_path
     elsif !current_user.active?
-      redirect_to registration_path
+      redirect_to new_subscription_path
     end
   end
 

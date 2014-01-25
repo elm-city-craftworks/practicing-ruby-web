@@ -5,7 +5,11 @@ class ArticleDecorator < ApplicationDecorator
 
   def list_title
     title = article.subject
-    title = "[DRAFT] #{subject}" if article.status == "draft"
+    if article.status == "draft"
+      title = "[DRAFT] #{subject}"
+    elsif article.status == "published" && (h.current_user.nil? || !h.current_user.active?)
+      title = "[Subscriber Only] #{subject}"
+    end
     title
   end
 
