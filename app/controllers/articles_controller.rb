@@ -73,7 +73,7 @@ class ArticlesController < ApplicationController
     return if current_user.try(:active?)
 
     unless params[:u].present? && User.find_by_share_token_and_status(params[:u], "active")
-      attempt_user_login
+      attempt_user_login unless @article.status == "public"
     end
   end
 
@@ -82,6 +82,6 @@ class ArticlesController < ApplicationController
   end
 
   def authenticate_admin
-    raise unless current_user.admin
+    access_denied unless current_user.admin
   end
 end

@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     @articles = Article.order("published_time DESC")
 
     unless current_user.try(:admin)
-      @articles = @articles.where(:status => "published")
+      @articles = @articles.published
     end
 
     @articles = ArticleDecorator.decorate(@articles)

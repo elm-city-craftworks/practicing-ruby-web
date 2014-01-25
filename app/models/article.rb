@@ -12,7 +12,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.published
-    where(:status => "published")
+    where(:status => ["published", "public"])
   end
 
   def self.drafts

@@ -12,11 +12,50 @@ class ArchivesTest < ActionDispatch::IntegrationTest
     @articles.each { |a| assert_content a.subject }
   end
 
-  test "clicking a link from the archives goes directly to the article" do
-    visit archives_path
+  context "Public articles" do
+    test "clicking a link from the archives goes directly to the article" do
+      public_article = FactoryGirl.create(:article, :status => "public")
 
-    click_link @articles[1].subject
-    assert_current_path article_path(@articles[1])
+      visit archives_path
+
+      click_link public_article.subject
+      assert_current_path article_path(public_article)
+    end
+  end
+
+  context "Subscriber-only articles" do
+    test "Non-Subscribers are directed back and shown a warning" do
+      visit archives_path
+
+      click_link @articles[1].subject
+
+      assert_current_path root_path
+      assert_content "article hasn't been published yet"
+    end
+
+    test "Subscribers that are logged out must login" do
+      set_user_state(:logged_out)
+
+      visit archives_path
+
+      click_link @articles[1].subject
+
+      assert_current_path root_path
+      assert_content "article hasn't been published yet"
+
+      visit login_path
+      assert_current_path article_path(@articles[1])
+    end
+
+    test "Subscribers that are logged in can view the article" do
+      set_user_state(:logged_in)
+
+      visit archives_path
+
+      click_link @articles[1].subject
+
+      assert_current_path article_path(@articles[1])
+    end
   end
 
   context "Draft articles" do

@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_on_auth_failure
-    flash[:notice] = "That page is protected. Please log in to continue"
+    flash[:notice] = "That article hasn't been published yet. Please log in or subscribe to continue"
     redirect_to(root_path)
   end
 
