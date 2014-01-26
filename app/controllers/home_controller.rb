@@ -17,4 +17,27 @@ class HomeController < ApplicationController
     @articles = ArticleDecorator.decorate(@articles)
     @articles = @articles.group_by {|a| a.published_time.strftime("%B %Y") }
   end
+
+  def public_archives
+    @articles = Article.order("published_time DESC").public
+
+    @counts = { :published => Article.published.count,
+                :members   => Article.subscriber_only.count,
+                :public    => @articles.count }
+
+
+    @member_old_date = Article.subscriber_only
+                              .order("published_time")
+                              .first.published_time
+                              .strftime("%B %Y")
+
+    @member_recent_date = Article.subscriber_only
+                                 .order("published_time DESC")
+                                 .first.published_time
+                                 .strftime("%B %Y")
+
+    
+    @articles = ArticleDecorator.decorate(@articles)
+    @articles = @articles.group_by {|a| a.published_time.strftime("%B %Y") }
+  end
 end

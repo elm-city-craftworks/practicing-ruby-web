@@ -1,0 +1,40 @@
+- content_for(:title) { "Public Archives" }
+= render "shared/branded_header", :title => "Public Archives"
+
+%p
+  Since 2010, Practicing Ruby has produced a total of
+  = "#{@counts[:published]} articles, "
+  all of which were funded by our generous subscribers.
+  We are gradually transitioning to an open-access model
+  for our content, and below you will find the
+  = "#{@counts[:public]} articles that have been released into "
+  our public archives. 
+
+%p 
+  If you enjoy these articles, please consider
+  = link_to "becoming a Practicing Ruby subscriber.", subscriptions_path
+  By doing so, you'll get immediate access to the 
+  = "#{@counts[:members]} articles that we published between"
+  = "#{@member_old_date} and #{@member_recent_date}"
+  which have not been released to the public yet. You'll
+  also be supporting our future work, as we continue on
+  our mission to build a great learning resource
+  for all Ruby programmers.
+
+%p 
+Already a subscriber? Please 
+#{link_to "sign in", login_path} 
+to get full access to everything we have.
+
+
+- @articles.each do |month, articles|
+  %hr
+  %h2= month
+
+  %ul.articles
+    - articles.each do |article|
+      %li
+        .title= link_to article.list_title, article_path(article)
+        .details #{article.issue_number}
+        .description= article.summary
+

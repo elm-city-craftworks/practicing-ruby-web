@@ -10,6 +10,7 @@ PracticingRubyWeb::Application.routes.draw do
   match "/library"  => 'home#library'
   match "/explore"  => 'home#explore'
   match "/archives" => 'home#archives'
+  match "/archives/public" => 'home#public_archives'
   match "/volume/:volume/" => 'articles#index'
   match "/volume/:volume/issue/:issue" => 'articles#show'
   match "/collection/:collection/" => 'articles#index'
