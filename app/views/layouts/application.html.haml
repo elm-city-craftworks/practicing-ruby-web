@@ -3,7 +3,8 @@
   %head
     %title
       = yield(:title).blank? ? controller_name.humanize : yield(:title)
-      \- Practicing Ruby
+      - unless yield(:title) && yield(:title)[/Practicing Ruby/]
+        \- Practicing Ruby
 
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'

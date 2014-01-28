@@ -1,6 +1,9 @@
-- content_for(:title) { "Public Archives" }
-= render "shared/branded_header", :title => "Public Archives"
+- content_for(:title) { "Practicing Ruby | A unique journal curated by Gregory Brown" }
+- content_for :header do
+  %h1 Practicing Ruby
+  %h2 Delightful coding lessons
 
+  = image_tag "ruby-divider.png"
 %p
   Since 2010, Practicing Ruby has produced a total of
   = "#{@counts[:published]} articles, "

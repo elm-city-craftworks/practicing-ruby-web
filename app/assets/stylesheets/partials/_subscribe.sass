@@ -1,4 +1,11 @@
 body.subscriptions-index
+  p
+    font-family: sans-serif
+    &.instructions
+      @extend #share-alert
+      box-sizing: border-box
+      text-align: justify
+      padding: 1em
   a#subscribe
     +money-button
     font-size: 1.5em
@@ -6,7 +13,7 @@ body.subscriptions-index
     display: block
     width: 475px
     text-align: center
-    margin: 0 auto
+    margin: 20px auto
 
 body.subscriptions-new
   font-family: sans-serif
