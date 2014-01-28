@@ -172,7 +172,7 @@ module Support
       current_interval = @user.subscriptions.active.interval
 
       browser do
-        click_link "admin-bar-toggle"
+        click_link "nav-toggle"
         click_link "Settings"
         click_link "Billing"
         click_link "change-billing-interval"
@@ -231,7 +231,7 @@ module Support
       browser do
         visit root_path
         # Toggle Navbar
-        click_link "admin-bar-toggle"
+        click_link "nav-toggle"
         click_link "Subscribe"
 
         click_link "Subscribe to Practicing Ruby ($8/month)"
