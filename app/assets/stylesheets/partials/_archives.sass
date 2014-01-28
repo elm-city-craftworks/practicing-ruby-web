@@ -1,4 +1,6 @@
-body.articles-index #archives, body.home-public_archives
+body.articles-index #archives, body.home-public_archives #archives
+  margin-top: 20px
+
   p, h2, li
     font-family: sans-serif
     letter-spacing: normal
@@ -6,24 +8,28 @@ body.articles-index #archives, body.home-public_archives
     font-size: 2.5em
     margin: 0.5em 0
   h2
-    font-size: 1.1em
-    color: rgb(176, 60, 46)
-    margin: 20px 0
+    background: #f0f1f4
+    padding: 10px
+    color: #7792B6
   ul.articles
+    padding: 0 20px
+    margin: 10px 0
     li
-      margin-bottom: 5px
+      padding: 20px 0
+      border-bottom: 1px solid #dddddd
       a
         color: #333
+        text-decoration: none
+        &:hover
+          color: $light-blue
       .title
-        font-size: 1.25em
-        color: $red
         display: inline
       .description
-        margin-top: 15px
-        margin-bottom: 25px
-        font-size: 0.9em
+        margin-top: 5px
+        font-size: 0.75em
       .details
-        color: #777
-        font-size: 1.1em
+        color: #aaa
+        font-weight: lighter
         float: right
-
+      &:last-child
+        border-bottom: none

@@ -1,0 +1,9 @@
+- @articles.each do |month, articles|
+  %h2= month
+
+  %ul.articles
+    - articles.each do |article|
+      %li
+        .title= link_to article.list_title, article_path(article)
+        .details= article.issue_number
+        .description= article.summary

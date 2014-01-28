@@ -28,13 +28,4 @@
   Already a subscriber? Please #{link_to "sign in", login_path} to get full
   access to everything we have.
 
-- @articles.each do |month, articles|
-  %hr
-  %h2= month
-
-  %ul.articles
-    - articles.each do |article|
-      %li
-        .title= link_to article.list_title, article_path(article)
-        .details= article.issue_number
-        .description= article.summary
+#archives= render 'articles/archives'
