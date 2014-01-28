@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_filter :authenticate,      :except => [:redirect, :index]
-  before_filter :ye_shall_not_pass, :except => [:redirect, :index]
+  before_filter :ye_shall_not_pass, :only   => [:new, :create, :index]
 
   def index
     if %w[authorized pending_confirmation confirmed
@@ -11,19 +11,19 @@ class SubscriptionsController < ApplicationController
     @article_count = [Article.published.count / 10, "0+"].join
   end
 
-  def redirect
-    render :layout => false
-  end
-
   def create
     payment_gateway = current_user.payment_gateway
     begin
       payment_gateway.subscribe(params)
-      redirect_to root_path(:new_subscription => true)
+      redirect_to articles_path(:new_subscription => true)
     rescue Stripe::CardError => e
       @errors = e.message
       render :action => :new
     end
+  end
+
+  def redirect
+    render :layout => false
   end
 
   def coupon_valid

@@ -57,7 +57,7 @@ class CommentsController < ApplicationController
   end
 
   def decorate
-    @comment = CommentDecorator.decorate(@comment)
+    @comment = @comment.decorate
   end
 
   def commentator_only

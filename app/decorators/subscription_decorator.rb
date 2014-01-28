@@ -1,5 +1,5 @@
-class SubscriptionDecorator < ApplicationDecorator
-  decorates :subscription
+class SubscriptionDecorator < Draper::Decorator
+  delegate_all
 
   def status
     if subscription.active?

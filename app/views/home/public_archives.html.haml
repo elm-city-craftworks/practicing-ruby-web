@@ -8,12 +8,12 @@
   We are gradually transitioning to an open-access model
   for our content, and below you will find the
   = "#{@counts[:public]} articles that have been released into "
-  our public archives. 
+  our public archives.
 
-%p 
+%p
   If you enjoy these articles, please consider
   = link_to "becoming a Practicing Ruby subscriber.", subscriptions_path
-  By doing so, you'll get immediate access to the 
+  By doing so, you'll get immediate access to the
   = "#{@counts[:members]} articles that we published between"
   = "#{@member_old_date} and #{@member_recent_date}"
   which have not been released to the public yet. You'll
@@ -21,11 +21,9 @@
   our mission to build a great learning resource
   for all Ruby programmers.
 
-%p 
-Already a subscriber? Please 
-#{link_to "sign in", login_path} 
-to get full access to everything we have.
-
+%p
+  Already a subscriber? Please #{link_to "sign in", login_path} to get full
+  access to everything we have.
 
 - @articles.each do |month, articles|
   %hr
@@ -35,6 +33,5 @@ to get full access to everything we have.
     - articles.each do |article|
       %li
         .title= link_to article.list_title, article_path(article)
-        .details #{article.issue_number}
+        .details= article.issue_number
         .description= article.summary
-

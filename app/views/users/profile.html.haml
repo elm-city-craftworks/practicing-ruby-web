@@ -9,8 +9,7 @@
     .field
       = f.label :contact_email, "Email Address"
       = f.text_field :contact_email
-      = UserDecorator.decorate(@user).icon(30,
-        :title => "Change your avatar at Gravatar.com")
+      = @user.decorate.icon(30, :title => "Change your avatar at Gravatar.com")
     %p
       = f.label :beta_tester do
         = f.check_box :beta_tester

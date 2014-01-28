@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 
       redirect_to new_subscription_path
     elsif authorization.user.status == "active"
-      redirect_back_or_default(library_path)
+      redirect_back_or_default(articles_path)
     else
       redirect_to new_subscription_path
     end

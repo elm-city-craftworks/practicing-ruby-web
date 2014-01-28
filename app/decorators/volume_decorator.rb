@@ -1,5 +1,5 @@
-class VolumeDecorator < ApplicationDecorator
-  decorates :volume
+class VolumeDecorator < Draper::Decorator
+  delegate_all
 
   def header
     h.content_tag(:div, :class => 'volume') do

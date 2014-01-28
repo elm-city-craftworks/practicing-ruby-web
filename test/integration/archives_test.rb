@@ -2,35 +2,30 @@ require_relative "../test_helper"
 
 class ArchivesTest < ActionDispatch::IntegrationTest
   setup do
-    @articles = 3.times.map { FactoryGirl.create(:article) }
+    @public_articles = 3.times.map { FactoryGirl.create(:public_article) }
+    @articles        = 3.times.map { FactoryGirl.create(:article) }
   end
 
-  test "archive should be viewable" do
-    visit archives_path
-    assert_current_path archives_path
+  test "public archive should be viewable" do
+    visit archives_public_path
 
-    @articles.each { |a| assert_content a.subject }
+    @public_articles.each { |a| assert_content a.subject }
   end
 
   context "Public articles" do
     test "clicking a link from the archives goes directly to the article" do
-      public_article = FactoryGirl.create(:article, :status => "public")
+      visit archives_public_path
 
-      visit archives_path
-
-      click_link public_article.subject
-      assert_current_path article_path(public_article)
+      click_link @public_articles[1].subject
+      assert_current_path article_path(@public_articles[1])
     end
   end
 
   context "Subscriber-only articles" do
-    test "Non-Subscribers are directed back and shown a warning" do
-      visit archives_path
+    test "are not visible in the public archives" do
+      visit archives_public_path
 
-      click_link @articles[1].subject
-
-      assert_current_path root_path
-      assert_content "article hasn't been published yet"
+      @articles.each { |a| assert_no_content a.subject }
     end
 
     test "Subscribers that are logged out must login" do
@@ -38,13 +33,8 @@ class ArchivesTest < ActionDispatch::IntegrationTest
 
       visit archives_path
 
-      click_link @articles[1].subject
-
       assert_current_path root_path
-      assert_content "article hasn't been published yet"
-
-      visit login_path
-      assert_current_path article_path(@articles[1])
+      assert_content "protected"
     end
 
     test "Subscribers that are logged in can view the article" do
@@ -52,7 +42,9 @@ class ArchivesTest < ActionDispatch::IntegrationTest
 
       visit archives_path
 
-      click_link @articles[1].subject
+      within '#archives' do
+        click_link @articles[1].subject
+      end
 
       assert_current_path article_path(@articles[1])
     end
@@ -72,7 +64,7 @@ class ArchivesTest < ActionDispatch::IntegrationTest
     test "are not visible to guests" do
       set_user_state(:guest)
 
-      visit archives_path
+      visit archives_public_path
 
       assert_no_content @draft.subject
     end

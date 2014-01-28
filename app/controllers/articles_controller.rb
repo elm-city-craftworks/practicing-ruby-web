@@ -1,28 +1,22 @@
 class ArticlesController < ApplicationController
-  before_filter :find_article,   :only => [:show, :edit, :update, :share]
-  before_filter :update_url,     :only => :show
-  before_filter :validate_token, :only => :show
+  before_filter :find_article,      :only => [:show, :edit, :update, :share]
+  before_filter :update_url,        :only => :show
+  before_filter :validate_token,    :only => :show
+  before_filter :authenticate,      :only => :index
+  before_filter :authenticate_user, :only => :index
 
   def index
-    if params[:volume]
-      @group = VolumeDecorator.find_by_number(params[:volume].to_i)
-    elsif params[:collection]
-      @group = CollectionDecorator.find_by_slug(params[:collection])
-    else
-      return redirect_to library_path
+    @articles    = Article.order("published_time DESC")
+    @recent      = @articles.published.limit(5).decorate
+    @recommended = @articles.where(:recommended => true).limit(5).decorate
+
+    unless current_user.try(:admin)
+      @articles = @articles.published
     end
 
-    unless @group.model
-      render_http_error 404
-    else
-      @collections = CollectionDecorator.decorate(Collection.order("position"))
-      @volumes     = VolumeDecorator.decorate(Volume.order("number"))
-
-      @articles = @group.articles.order("published_time")
-      @articles = @articles.published unless current_user.try(:admin)
-
-      @articles = @articles.paginate(:page => params[:page], :per_page => 8)
-      @articles = ArticleDecorator.decorate(@articles)
+    @article_count = @articles.count
+    @articles      = @articles.decorate.group_by do |a|
+      a.published_time.strftime("%B %Y")
     end
   end
 
@@ -31,7 +25,7 @@ class ArticlesController < ApplicationController
     decorate_article
 
     if current_user.try(:status) == "active"
-      @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
+      @comments = @article.comments.order("created_at").decorate
     end
   end
 
@@ -78,7 +72,7 @@ class ArticlesController < ApplicationController
   end
 
   def decorate_article
-    @article = ArticleDecorator.decorate(@article)
+    @article = @article.decorate
   end
 
   def authenticate_admin

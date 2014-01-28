@@ -1,31 +1,41 @@
-- content_for(:header) { @group.header }
-- content_for(:title)  { @group.name   }
-- content_for(:admin) do
-  = button_to "New article", new_admin_article_path, :method => :get
+- content_for(:title) { "Archives" }
+= render "shared/branded_header", :title => "Articles"
+- if params[:new_subscription]
+  :coffeescript
+    $.facebox '#{escape_javascript render('subscriptions/thanks')}', 'thanks-box'
 
-%p= @group.description
+%p
+  There are
+  #{link_to "#{@article_count} articles in our archives", '#archives'},
+  and new content is added every month. If you're unsure where to get started, or
+  just want to catch up on what was recently published, try out one
+  of the following articles:
 
-- if @articles.any?
-  .paginated-list{'data-pjax-container' => ''}
-    .controls
-      - #TODO DRY please
-      = link_to image_tag("controls/next.png"),
-        {:page => @articles.next_page},
-        :class => "next #{('disabled' unless @articles.next_page )}"
-      = link_to image_tag("controls/previous.png"),
-        {:page => @articles.previous_page},
-        :class => "previous #{('disabled' unless @articles.previous_page )}"
-    %ul#articles
-      - @articles.each do |article|
-        %li= article.list_link
+#explore-articles
+  #recent
+    %h2 Recently published articles
+    - @recent.each_with_index do |article, index|
+      = render "explore_article", article: article, index: index
+  #recommended
+    %h2 Recommended articles
+    - @recommended.each_with_index do |article, index|
+      = render "explore_article", article: article, index: index
 
-- content_for(:footer) do
-  = render 'subway'
-  = render 'shared/public_footer'
+#archives
+  %h1 Full Archives
 
-- unless current_user
-  - content_for(:header_bottom) do
-    :coffeescript
-      $ ->
-        $(document).on 'click', '#articles li', =>
-          $('footer p.big').addClass('highlight');
+  %p
+    Below you can browse all of our articles in chronological order.
+    Don't be afraid to dig far back into the archives, we try to keep the
+    articles as up-to-date as possible.
+
+  - @articles.each do |month, articles|
+    %hr
+    %h2= month
+
+    %ul.articles
+      - articles.each do |article|
+        %li
+          .title= link_to article.list_title, article_path(article)
+          .details= article.issue_number
+          .description= article.summary

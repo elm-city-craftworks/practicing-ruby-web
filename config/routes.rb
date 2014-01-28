@@ -1,5 +1,5 @@
 PracticingRubyWeb::Application.routes.draw do
-  root :to => 'home#library'
+  root :to => 'home#public_archives'
 
   mount StripeEvent::Engine => STRIPE_WEBHOOK_PATH
 
@@ -7,21 +7,12 @@ PracticingRubyWeb::Application.routes.draw do
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
 
-  match "/library"  => 'home#library'
-  match "/explore"  => 'home#explore'
-  match "/archives" => 'home#archives'
-  match "/archives/public" => 'home#public_archives'
-  match "/volume/:volume/" => 'articles#index'
-  match "/volume/:volume/issue/:issue" => 'articles#show'
-  match "/collection/:collection/" => 'articles#index'
-  match "/faq" => 'home#faq', :as => 'faq'
-  match "/contact" => 'home#contact', :as => 'contact'
-  match "/articles/samples" => 'articles#samples', :as => 'sample_articles'
-
-  match "articles/random" => 'articles#random', :as => 'random_article'
-
-  match "collections/:collection" => 'articles#index', :as => 'collection'
-  match "volumes/:volume"         => 'articles#index', :as => 'volume'
+  get "/library",  :to => redirect('/articles')
+  get "/explore",  :to => redirect('/articles')
+  get "/archives", :to => redirect('/articles#archives')
+  get "/archives/public" => 'home#public_archives'
+  get "/contact"         => 'home#contact', :as => 'contact'
+  get "/articles/random" => 'articles#random', :as => 'random_article'
 
   resources :articles do
     member do
@@ -100,5 +91,4 @@ PracticingRubyWeb::Application.routes.draw do
     match "/magic/freebie/:nickname" => "magic#freebie"
     match "/magic/hashed_id/:nickname" => "magic#hashed_id"
   end
-
 end

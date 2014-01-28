@@ -1,5 +1,5 @@
-class ArticleDecorator < ApplicationDecorator
-  decorates :article
+class ArticleDecorator < Draper::Decorator
+  delegate_all
   decorates_association :volume
   decorates_association :collection
 
@@ -7,8 +7,6 @@ class ArticleDecorator < ApplicationDecorator
     title = article.subject
     if article.status == "draft"
       title = "[DRAFT] #{subject}"
-    elsif article.status == "published" && (h.current_user.nil? || !h.current_user.active?)
-      title = "[Subscriber Only] #{subject}"
     end
     title
   end

@@ -8,16 +8,15 @@ class UsersController < ApplicationController
 
     raise ActionController::RoutingError.new('Not Found') unless @user
 
-    @user = UserDecorator.decorate(@user)
+    @user = @user.decorate
 
     redirect_to @user.github_url
   end
 
   def billing
-    @subscriptions = SubscriptionDecorator.decorate(
-      @user.subscriptions.order("start_date"))
+    @subscriptions       = @user.subscriptions.order("start_date").decorate
     @active_subscription = @user.subscriptions.active.try(:decorate)
-    @credit_card   = current_user.credit_card
+    @credit_card         = current_user.credit_card
   end
 
   def update_credit_card

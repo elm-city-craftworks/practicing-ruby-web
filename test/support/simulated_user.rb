@@ -83,7 +83,7 @@ module Support
       @user.status = "active"
       @user.save
 
-      browser { visit library_path(:new_subscription => true) }
+      browser { visit articles_path(:new_subscription => true) }
     end
 
     def make_stripe_payment(params={})
@@ -153,8 +153,8 @@ module Support
 
         # Cancellation is manual, so the subscriber will still have access
         # temporarily...
-        visit library_path
-        assert_current_path library_path
+        visit articles_path
+        assert_current_path articles_path
       end
 
       # once Jia gets around to it...

@@ -5,9 +5,11 @@
   .placeholder
   .nav
     %ul
-      %li= link_to "Home", root_path
-      %li= link_to "Archives", archives_path
-      %li= link_to "Shuffle", random_article_path
+      - if current_user.try(:active?)
+        %li= link_to "Articles", articles_path
+        %li= link_to "Archives", articles_path(:anchor => "archives")
+      - else
+        %li= link_to "Home", root_path
       %li= link_to "Contact", contact_path
       - if current_user.try(:status) == "active"
         %li.right= link_to "Log out", logout_path
@@ -20,4 +22,3 @@
         - else
           %li.right= link_to "Log in", login_path
         %li.right= link_to "Subscribe", subscriptions_path
-
