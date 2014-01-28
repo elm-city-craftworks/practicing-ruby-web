@@ -1,24 +1,60 @@
+#nav-toggle
+  position: fixed
+  top: 0
+  right: 40px
+  background-color: $red
+  padding: 5px 15px
+  +single-box-shadow(#333, 0, 0, 2px)
+  +border-bottom-radius(2px)
+  +single-transition(all, .10s, ease-out, 0)
+  color: #fff
+  font-size: 2em
+  text-decoration: none
+  z-index: 2
+  i.fa-angle-double-up
+    display: none
+  &:hover
+    padding-top: 15px
 nav
-  line-height: 1.75em
-  width: $page-width
-  margin: 1em auto
-  span.right
-    float: right
-    a
-      margin-right: 0
-      margin-left: 2em
-  a
-    display: inline-block
-    height: 1.75em
-    font-family: 'Folks', sans-serif
-    text-decoration: none
-    margin-right: 2em
-    color: #555
-    &.home
-      font-family: 'Folks', sans-serif
-      color: $red
-      font-size: 1.25em
-      margin-right: 1.5em
-    &.subscribe
-      color: $red
-      font-family: 'Folks', sans-serif
+  &.visible
+    .placeholder
+      height: 44px
+    .nav
+      top: 0
+    #nav-toggle
+      i.fa-angle-double-down
+        display: none
+      i.fa-angle-double-up
+        display: inline-block
+  .placeholder
+    +single-transition(height, .40s, ease-in-out, 0)
+    height: 0
+  .nav
+    +single-transition(top, .40s, ease-in-out, 0)
+    z-index: 1
+    font-family: sans-serif
+    letter-spacing: normal
+    position: fixed
+    top: -44px
+    left: 0
+    right: 0
+    width: 100%
+    padding: 10px 0
+    background-color: #f0f1f4
+    border-bottom: 2px solid darken(#f0f1f4, 10%)
+    ul
+      width: 750px
+      margin: 0 auto
+      li
+        display: inline
+        margin-right: 1.5em
+        a
+          color: $dark-blue
+          text-decoration: none
+          &.subscribe
+            color: $red
+            font-weight: bold
+        &.right
+          float: right
+          margin-right: 0
+          margin-left: 1.5em
