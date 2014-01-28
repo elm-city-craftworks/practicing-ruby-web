@@ -1,11 +1,20 @@
-- content_for(:header_bottom) do
-  :coffeescript
-    $ ->
-      PR.Comments.init('#{comments_path}/')
+- if current_user.try(:active?)
+  - content_for(:header_bottom) do
+    :coffeescript
+      $ ->
+        PR.Comments.init('#{comments_path}/')
 
-- if current_user && current_user.admin?
-  - content_for(:admin_bar) do
-    %li= link_to "Edit Article", edit_admin_article_path(@article)
+  - if current_user.admin?
+    - content_for(:admin_bar) do
+      %li= link_to "Edit Article", edit_admin_article_path(@article)
+- else
+  - content_for(:nudge) do
+    #share-alert
+      Practicing Ruby publishes delightful monthly lessons for Rubyists,
+      for only $8/month.
+      %br
+      You can help us produce amazing content by
+      #{link_to "becoming a paid supporter", subscriptions_path}.
 
 = render "header"
 
@@ -21,8 +30,5 @@
   #share-alert
     The discussion thread for this article is available to subscribers
     only. If you want to share some feedback or ask me a question, please
-    = link_to "subscribe", subscriptions_path
-    ,
-    = link_to "log in", login_path
-    , or send an email to
-    = mail_to "support@elmcitycraftworks.org"
+    #{link_to "subscribe", subscriptions_path}, #{link_to "log in", login_path},
+    or send an email to #{mail_to "support@elmcitycraftworks.org"}
