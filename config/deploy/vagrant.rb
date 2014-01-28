@@ -2,7 +2,7 @@
 # Capistrano config to deploy the Practicing Ruby app to a Vagrant VM that was
 # provisioned with the Practicing Ruby Chef cookbook
 #
-# See https://github.com/elm-city-craftworks/practicing-ruby-cookbook#capistrano
+# See https://github.com/elm-city-craftworks/practicing-ruby-cookbook#deploying
 #
 
 set :deploy_to, "/home/deploy"
@@ -15,7 +15,6 @@ set :rails_env, "production"
 server "practicingruby.local", :app, :web, :db, :primary => true
 
 desc "Import articles, volumes, and collections from the server"
-
 task :seed do
   run_rake "db:seed"
   run_rake "import:articles"
