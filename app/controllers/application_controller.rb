@@ -1,11 +1,22 @@
 class ApplicationController < ActionController::Base
+  include CacheCooker::Oven
   include ArticleHelper
 
   protect_from_forgery
 
+  before_filter :authenticate_cache_cooker!
+
   helper_method :current_user, :active_broadcasts
 
   private
+
+  def authenticate_cache_cooker!
+    if authenticate_cache_cooker
+      @current_authorization = Authorization.includes(:user).
+        where('users.admin is TRUE').first
+      session[:authorization_id] = @current_authorization.try(:id)
+    end
+  end
 
   def authenticate
     return if current_authorization
