@@ -7,9 +7,10 @@ PracticingRubyWeb::Application.routes.draw do
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
 
+  post "/toggle_nav" => 'home#toggle_nav'
   get "/library",  :to => redirect('/articles')
   get "/explore",  :to => redirect('/articles')
-  get "/archives", :to => redirect('/articles#archives')
+  get "/archives", :to => redirect('/articles')
   get "/archives/public" => 'home#public_archives'
   get "/contact"         => 'home#contact', :as => 'contact'
   get "/articles/random" => 'articles#random', :as => 'random_article'
@@ -33,7 +34,7 @@ PracticingRubyWeb::Application.routes.draw do
     end
   end
 
-  resources :subscriptions, :except => [:destroy, :edit, :update, :show] do
+  resources :subscriptions, :except => [:index, :destroy, :edit, :update, :show] do
     collection do
       get :redirect
       get :coupon_valid

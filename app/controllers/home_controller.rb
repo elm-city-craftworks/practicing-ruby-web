@@ -19,8 +19,12 @@ class HomeController < ApplicationController
                                  .first.try(:published_time)
                                  .try(:strftime, "%B %Y")
 
-    @articles = @articles.decorate.group_by do |a|
-      a.published_time.strftime("%B %Y")
-    end
+    @articles = @articles.decorate
+  end
+
+  def toggle_nav
+    session[:nav_hidden] = !session[:nav_hidden]
+
+    render :text => "OK"
   end
 end

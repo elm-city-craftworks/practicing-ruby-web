@@ -7,20 +7,21 @@ class ArticlesController < ApplicationController
 
   def index
     @articles    = Article.order("published_time DESC")
-    @recent      = @articles.published.limit(5).decorate
-    @recommended = @articles.where(:recommended => true).limit(5).decorate
+    @recommended = @articles.where(:recommended => true).limit(5)
+    @random      = @articles.where(:recommended => false).all.sample(5).
+      map(&:decorate)
+    @recommended = @recommended.map(&:decorate)
 
     unless current_user.try(:admin)
       @articles = @articles.published
     end
 
     @article_count = @articles.count
-    @articles      = @articles.decorate.group_by do |a|
-      a.published_time.strftime("%B %Y")
-    end
+    @articles      = @articles.decorate
   end
 
   def show
+    @hide_nav = true
     store_location
     decorate_article
 

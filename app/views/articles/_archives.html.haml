@@ -1,9 +1,10 @@
-- @articles.each do |month, articles|
-  %h2= month
-
-  %ul.articles
-    - articles.each do |article|
-      %li
-        .title= link_to article.list_title, article_path(article)
-        .details= article.issue_number
-        .description= article.summary
+%table.archives
+  %tbody
+  - @articles.each do |article|
+    %tr
+      %td.article
+        = link_to article.list_title, article_path(article)
+      %td.issue-number= article.issue_number
+    %tr
+      %td.description= article.summary
+      %td.month= article.published_time.strftime("%B %Y")

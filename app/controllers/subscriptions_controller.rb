@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_filter :authenticate,      :except => [:redirect, :index]
+  before_filter :hide_nav
   before_filter :ye_shall_not_pass, :only   => [:new, :create, :index]
 
   def index
@@ -40,5 +41,11 @@ class SubscriptionsController < ApplicationController
     if current_user && current_user.status == "active"
       redirect_to root_path, :notice => "Your account is already setup."
     end
+  end
+
+  private
+
+  def hide_nav
+    @hide_nav = true
   end
 end

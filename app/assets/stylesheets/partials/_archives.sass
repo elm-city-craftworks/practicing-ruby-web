@@ -8,9 +8,10 @@ body.articles-index #archives, body.home-public_archives #archives
     font-size: 2.5em
     margin: 0.5em 0
   h2
-    background: #f0f1f4
-    padding: 10px
-    color: #7792B6
+    //background: #ecf0f1
+    color: #7B7D83
+    padding: 10px 0
+    border-bottom: 1px solid #ddd
   ul.articles
     padding: 0 20px
     margin: 10px 0
@@ -33,3 +34,29 @@ body.articles-index #archives, body.home-public_archives #archives
         float: right
       &:last-child
         border-bottom: none
+  table.archives
+    width: 100%
+    font-family: sans-serif
+    letter-spacing: normal
+    table
+      width: 100%
+      margin-bottom: 20px
+    td
+      &.month, &.article, &.issue-number, &.description
+        padding: 5px 0
+      &.month
+        text-align: right
+      &.issue-number
+        padding: 5px 0
+        color: #aaa
+        width: 100px
+        text-align: right
+      a
+        color: #000
+        text-decoration: none
+        font-weight: normal
+      &.description, &.month
+        padding-top: 0
+        padding-bottom: 20px
+        font-size: 0.75em
+        color: #666666

@@ -1,8 +1,8 @@
-#nav-toggle
+#home-run
   position: fixed
   top: 0
   right: 40px
-  background-color: $red
+  background-color: #1b1b1b
   padding: 5px 15px
   +single-box-shadow(#333, 0, 0, 2px)
   +border-bottom-radius(2px)
@@ -11,50 +11,29 @@
   font-size: 2em
   text-decoration: none
   z-index: 2
-  i.fa-angle-double-up
-    display: none
   &:hover
     padding-top: 15px
+
 nav
-  &.visible
-    .placeholder
-      height: 44px
-    .nav
-      top: 0
-    #nav-toggle
-      i.fa-angle-double-down
-        display: none
-      i.fa-angle-double-up
-        display: inline-block
-  .placeholder
-    +single-transition(height, .40s, ease-in-out, 0)
-    height: 0
-  .nav
-    +single-transition(top, .40s, ease-in-out, 0)
-    z-index: 1
-    font-family: sans-serif
-    letter-spacing: normal
-    position: fixed
-    top: -44px
-    left: 0
-    right: 0
-    width: 100%
-    padding: 10px 0
-    background-color: #f0f1f4
-    border-bottom: 2px solid darken(#f0f1f4, 10%)
-    ul
-      width: 750px
-      margin: 0 auto
-      li
-        display: inline
-        margin-right: 1.5em
-        a
-          color: $dark-blue
-          text-decoration: none
-          &.subscribe
-            color: $red
-            font-weight: bold
-        &.right
-          float: right
-          margin-right: 0
-          margin-left: 1.5em
+  font-family: sans-serif
+  letter-spacing: normal
+  width: 100%
+  padding: 10px 0
+  background-color: #f0f1f4
+  border-bottom: 2px solid darken(#f0f1f4, 10%)
+  ul
+    width: 750px
+    margin: 0 auto
+    li
+      display: inline
+      margin-right: 1.5em
+      a
+        color: $dark-blue
+        text-decoration: none
+        &.subscribe
+          color: $red
+          font-weight: bold
+      &.right
+        float: right
+        margin-right: 0
+        margin-left: 1.5em

@@ -1,15 +1,14 @@
-%nav
-  = link_to '#', :id => 'nav-toggle', :data => {:toggle => "nav"} do
-    %i.fa.fa-angle-double-up
-    %i.fa.fa-angle-double-down
-  .placeholder
-  .nav
+- if @hide_nav
+  = link_to root_path, :id => "home-run" do
+    %i.fa.fa-home
+- else
+  %nav
     %ul
-      - if current_user.try(:active?)
-        %li= link_to "Articles", articles_path
-        %li= link_to "Archives", articles_path(:anchor => "archives")
+      %li= link_to "Home", root_path
+      - unless current_user.try(:active?)
+        %li= link_to "Public Archives", root_path(:anchor => "public-archives")
       - else
-        %li= link_to "Public Archives", root_path
+        %li= link_to "Archives", articles_path(:anchor => "archives")
       %li= link_to "Contact", contact_path
       - if current_user.try(:active?)
         %li.right= link_to "Log out", logout_path
@@ -21,5 +20,3 @@
           %li.right= link_to "Log out", logout_path
         - else
           %li.right= link_to "Log in", login_path
-        %li.right= link_to "Subscribe", subscriptions_path,
-          :class => "subscribe"
