@@ -58,6 +58,9 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-def skip_on_travis
-  skip "Do not run this test on travis ci" if ENV["TRAVIS"]
+def skip_unless_stripe_configured
+  unless ENV["STRIPE_SECRET_KEY"].present?
+    skip "Stripe not configured! Set STRIPE_SECRET_KEY and " +
+         "STRIPE_PUBLISHABLE_KEY if you'd like to run this test."
+  end
 end
