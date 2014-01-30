@@ -95,6 +95,8 @@ PracticingRubyWeb::Application.routes.draw do
       :as => 'dismiss_email_warning'
     get '/account/email/change', :action => 'change',
       :as => 'change_email'
+    put '/account/email/update', :action => 'update',
+      :as => 'update_email'
   end
 
   namespace :admin do

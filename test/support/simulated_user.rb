@@ -57,6 +57,7 @@ module Support
 
       browser do
         attempts.times { visit confirm_email_path(:secret => secret) }
+        assert_no_content "Your email address isn't verified yet"
       end
     end
 
@@ -205,6 +206,21 @@ module Support
 
       @browser.refute_equal @user.subscriptions.active.interval,
                             current_interval
+    end
+
+    def update_email_address(email=nil)
+      # Remove original confirmation email if present
+      ActionMailer::Base.deliveries.clear
+
+      browser do
+        click_link "update your contact info"
+
+        fill_in("Email Address", :with => email) if email
+
+        click_button "Send confirmation email"
+
+        assert_content "Email updated"
+      end
     end
 
     def restart_registration

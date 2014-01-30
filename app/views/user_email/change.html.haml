@@ -1,5 +1,6 @@
 #change-email
-  = form_for @user, :remote => true, :html => {'parsley-validate' => ''} do |f|
+  = form_for @user, :remote => true, :url => update_email_path,
+    :html => {'parsley-validate' => ''} do |f|
     = error_messages_for(@user)
     .field
       = f.label :contact_email, "Email Address"
