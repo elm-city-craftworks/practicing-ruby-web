@@ -141,6 +141,7 @@ module Support
       ActionMailer::Base.deliveries.clear
 
       browser do
+        visit root_path
         click_link "Settings"
         click_link "Unsubscribe from Practicing Ruby"
 
@@ -172,7 +173,7 @@ module Support
       current_interval = @user.subscriptions.active.interval
 
       browser do
-        click_link "nav-toggle"
+        visit root_path
         click_link "Settings"
         click_link "Billing"
         click_link "change-billing-interval"
@@ -206,6 +207,7 @@ module Support
 
     def edit_profile(params={})
       browser do
+        visit root_path
         click_link "Settings"
         fill_in "Email Address", :with => params.fetch(:email, "")
         click_button "Update Settings"
@@ -230,10 +232,6 @@ module Support
 
       browser do
         visit root_path
-        # Toggle Navbar
-        click_link "nav-toggle"
-        click_link "Subscribe"
-
         click_link "Subscribe to Practicing Ruby ($8/month)"
 
         # Redirect facebox

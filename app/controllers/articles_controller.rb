@@ -6,15 +6,15 @@ class ArticlesController < ApplicationController
   before_filter :authenticate_user, :only => :index
 
   def index
-    @articles    = Article.order("published_time DESC")
+    @articles = Article.order("published_time DESC")
+    unless current_user.try(:admin)
+      @articles = @articles.published
+    end
     @recommended = @articles.where(:recommended => true).limit(5)
     @random      = @articles.where(:recommended => false).all.sample(5).
       map(&:decorate)
     @recommended = @recommended.map(&:decorate)
 
-    unless current_user.try(:admin)
-      @articles = @articles.published
-    end
 
     @article_count = @articles.count
     @articles      = @articles.decorate
