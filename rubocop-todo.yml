@@ -154,7 +154,7 @@ ModuleFunction:
 # Offence count: 2
 # Cop supports --auto-correct.
 NumericLiterals:
-  MinDigits: 14
+  Enabled: false
 
 # Offence count: 5
 # Configuration parameters: Ignore.
@@ -207,7 +207,7 @@ SpaceAfterComma:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
 SpaceAroundBlockBraces:
-  Enabled: true
+  Enabled: false
 
 # Offence count: 22
 # Cop supports --auto-correct.
