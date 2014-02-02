@@ -61,3 +61,8 @@ end
 def skip_on_travis
   skip "Do not run this test on travis ci" if ENV["TRAVIS"]
 end
+
+def skip_if_no_stripe_key
+  skip "Do not run this test if no Stripe API key set" if ENV["STRIPE_SECRET_KEY"] == "stripe-secret"
+end
+

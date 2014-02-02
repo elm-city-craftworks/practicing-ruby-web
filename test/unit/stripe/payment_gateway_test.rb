@@ -17,6 +17,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
   test 'subscribe (success)' do
     skip_on_travis
+    skip_if_no_stripe_key
 
     refute @user.subscriptions.active,
            "Should not have an active subscription before payment"
@@ -36,6 +37,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
   test 'subscribe (failure)' do
     skip_on_travis
+    skip_if_no_stripe_key
 
     refute @user.subscriptions.active,
            "Should not have an active subscription before payment"
