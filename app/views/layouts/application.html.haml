@@ -3,9 +3,11 @@
   %head
     %title
       = yield(:title).blank? ? controller_name.humanize : yield(:title)
-      \- Practicing Ruby
+      - unless yield(:title) && yield(:title)[/Practicing Ruby/]
+        \- Practicing Ruby
 
     = stylesheet_link_tag 'application'
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
     = javascript_include_tag 'application'
     = csrf_meta_tag
 
@@ -14,7 +16,7 @@
     = yield(:header_bottom)
 
   %body{class: "#{controller.controller_name}-#{controller.action_name}"}
-    = render :partial => "shared/admin_bar"
+    = render :partial => "shared/navigation"
     = render :partial => "shared/broadcasts"
     = render :partial => "user_email/warning"
     = render :partial => "shared/flash", :locals => { :flash => flash }

@@ -1,14 +1,22 @@
-%nav
-  = link_to "Practicing Ruby", root_path, :class => "home"
-  - if (current_user && current_user.active?)
-    = link_to "Explore", library_path
-  - if (current_user && current_user.active?) || current_user.nil?
-    = link_to "Archives", archives_path
-    = link_to "Contact", contact_path
-  %span.right
-    - if current_user
-      = link_to "Settings", profile_settings_path if current_user.active?
-      = link_to "Sign out", logout_path
-    - else
-      = link_to "Subscribe", root_path, :class => "subscribe"
-      = link_to "Sign in", login_path
+- if @hide_nav
+  = link_to root_path, :id => "home-run" do
+    %i.fa.fa-home
+- else
+  %nav
+    %ul
+      %li= link_to "Home", root_path
+      - unless current_user.try(:active?)
+        %li= link_to "Public Archives", root_path(:anchor => "public-archives")
+      - else
+        %li= link_to "Archives", articles_path(:anchor => "archives")
+      %li= link_to "Contact", contact_path
+      - if current_user.try(:active?)
+        %li.right= link_to "Log out", logout_path
+        %li.right= link_to "Settings", user_settings_path
+        - if current_user.try(:admin)
+          = yield(:admin_bar)
+      - else
+        - if current_user
+          %li.right= link_to "Log out", logout_path
+        - else
+          %li.right= link_to "Log in", login_path

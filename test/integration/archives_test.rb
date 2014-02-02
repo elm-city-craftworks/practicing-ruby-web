@@ -1,55 +1,51 @@
 require_relative "../test_helper"
 
-
 class ArchivesTest < ActionDispatch::IntegrationTest
-  # This test applies to guests, logged in users,
-  # and logged out users alike.
-  def self.archives_should_be_viewable
-    test "archive should be viewable" do
-      visit archives_path
-      assert_current_path archives_path
+  setup do
+    @public_articles = 3.times.map { FactoryGirl.create(:public_article) }
+    @articles        = 3.times.map { FactoryGirl.create(:article) }
+  end
 
-      @articles.each { |a| assert_content a.subject }
+  test "public archive should be viewable" do
+    visit archives_public_path
+
+    @public_articles.each { |a| assert_content a.subject }
+  end
+
+  context "Public articles" do
+    test "clicking a link from the archives goes directly to the article" do
+      visit archives_public_path
+
+      click_link @public_articles[1].subject
+      assert_current_path article_path(@public_articles[1])
     end
   end
 
-  setup do
-    @articles = 3.times.map { FactoryGirl.create(:article) }
-  end
+  context "Subscriber-only articles" do
+    test "are not visible in the public archives" do
+      visit archives_public_path
 
-  context "Unregistered user" do
-    setup { set_user_state(:guest) }
+      @articles.each { |a| assert_no_content a.subject }
+    end
 
-    archives_should_be_viewable
-  end
+    test "Subscribers that are logged out must login" do
+      set_user_state(:logged_out)
 
-  context "Registered user -- logged out" do
-    setup { set_user_state(:logged_out) }
-
-    archives_should_be_viewable
-
-    test "clicking a link from the archives forces a login" do
       visit archives_path
-
-      click_link @articles[1].subject
 
       assert_current_path root_path
       assert_content "protected"
-
-      click_link "Log in"
-      assert_current_path article_path(@articles[1])
     end
-  end
 
-  context "Registered user -- logged in" do
-    setup { set_user_state(:logged_in) }
+    test "Subscribers that are logged in can view the article" do
+      set_user_state(:logged_in)
 
-    archives_should_be_viewable
-
-    test "clicking a link from the archives goes directly to the article" do
       visit archives_path
 
-      click_link @articles[1].subject
+      within '#archives' do
+        click_link @articles[1].subject
+      end
+
       assert_current_path article_path(@articles[1])
     end
   end
@@ -68,7 +64,7 @@ class ArchivesTest < ActionDispatch::IntegrationTest
     test "are not visible to guests" do
       set_user_state(:guest)
 
-      visit archives_path
+      visit archives_public_path
 
       assert_no_content @draft.subject
     end

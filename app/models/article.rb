@@ -11,8 +11,16 @@ class Article < ActiveRecord::Base
       .where("volumes.number = ?", number)
   end
 
-  def self.published
+  def self.subscriber_only
     where(:status => "published")
+  end
+
+  def self.public
+    where(:status => "public")
+  end
+
+  def self.published
+    where(:status => ["published", "public"])
   end
 
   def self.drafts

@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
   private
 
   def send_confirmation_email
-    if changed.include?("contact_email")
+    if send_confirmation_email?
       write_attribute(:email_confirmed, false)
       if contact_email.present?
         write_attribute(:contact_email, contact_email.strip.downcase)
@@ -102,5 +102,12 @@ class User < ActiveRecord::Base
         RegistrationMailer.email_confirmation(self).deliver
       end
     end
+  end
+
+  # Only send the confirmation email if the user's record is valid
+  # and their account is active
+  def send_confirmation_email?
+    (changed.include?("contact_email") || changed.include?("status")) &&
+    active?
   end
 end

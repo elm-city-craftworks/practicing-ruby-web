@@ -17,7 +17,7 @@
   Your payment details are sent directly to Stripe: For security reasons, we do
   not store your credit card number or other sensitive information.
 
-= form_tag registration_create_payment_path, :id => "payment-form",
+= form_tag subscriptions_path, :id => "payment-form",
   'parsley-validate' => '' do
   .email
     = label_tag :email, "Email Address"

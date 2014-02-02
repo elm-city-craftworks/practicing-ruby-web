@@ -1,5 +1,5 @@
-class CommentDecorator < ApplicationDecorator
-  decorates :comment
+class CommentDecorator < Draper::Decorator
+  delegate_all
   decorates_association :user
 
   def time_ago

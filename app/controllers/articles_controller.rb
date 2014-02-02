@@ -1,44 +1,32 @@
 class ArticlesController < ApplicationController
-  before_filter :find_article, :only => [:show, :edit, :update, :share]
-  before_filter :update_url, :only => [:show]
-  before_filter :validate_token, :only => [:show]
-
-  skip_before_filter :authenticate,      :only => [:show, :shared, :samples]
-  skip_before_filter :authenticate_user, :only => [:show, :shared, :samples]
+  before_filter :find_article,      :only => [:show, :edit, :update, :share]
+  before_filter :update_url,        :only => :show
+  before_filter :validate_token,    :only => :show
+  before_filter :authenticate,      :only => :index
+  before_filter :authenticate_user, :only => :index
 
   def index
-    if params[:volume]
-      @group = VolumeDecorator.find_by_number(params[:volume].to_i)
-    elsif params[:collection]
-      @group = CollectionDecorator.find_by_slug(params[:collection])
-    else
-      return redirect_to library_path
+    @articles = Article.order("published_time DESC")
+    unless current_user.try(:admin)
+      @articles = @articles.published
     end
+    @recommended = @articles.where(:recommended => true).limit(5)
+    @random      = @articles.where(:recommended => false).all.sample(5).
+      map(&:decorate)
+    @recommended = @recommended.map(&:decorate)
 
-    unless @group.model
-      render_http_error 404
-    else
-      @collections = CollectionDecorator.decorate(Collection.order("position"))
-      @volumes     = VolumeDecorator.decorate(Volume.order("number"))
 
-      @articles = @group.articles.order("published_time")
-      @articles = @articles.published unless current_user.try(:admin)
-
-      @articles = @articles.paginate(:page => params[:page], :per_page => 8)
-      @articles = ArticleDecorator.decorate(@articles)
-    end
+    @article_count = @articles.count
+    @articles      = @articles.decorate
   end
 
   def show
+    @hide_nav = true
     store_location
     decorate_article
 
     if current_user.try(:status) == "active"
-      @comments = CommentDecorator.decorate(@article.comments.order("created_at"))
-    else
-      shared_by = User.find_by_share_token(params[:u]).hashed_id
-
-      render "shared"
+      @comments = @article.comments.order("created_at").decorate
     end
   end
 
@@ -46,7 +34,7 @@ class ArticlesController < ApplicationController
     @share = SharedArticle.find_by_secret(params[:secret])
 
     if @share
-      redirect_to ArticleLink.new(@share.article).path(@share.user.share_token)
+      redirect_to article_path(@share.article)
     else
       render_http_error 404
     end
@@ -72,24 +60,23 @@ class ArticlesController < ApplicationController
 
   def update_url
     slug_needs_updating = @article.slug.present? && params[:id] != @article.slug
-    missing_token       = current_user && params[:u].blank?
 
-    redirect_to(article_path(@article)) if slug_needs_updating || missing_token
+    redirect_to(article_path(@article)) if slug_needs_updating
   end
 
   def validate_token
     return if current_user.try(:active?)
 
     unless params[:u].present? && User.find_by_share_token_and_status(params[:u], "active")
-      attempt_user_login
+      attempt_user_login unless @article.status == "public"
     end
   end
 
   def decorate_article
-    @article = ArticleDecorator.decorate(@article)
+    @article = @article.decorate
   end
 
   def authenticate_admin
-    raise unless current_user.admin
+    access_denied unless current_user.admin
   end
 end

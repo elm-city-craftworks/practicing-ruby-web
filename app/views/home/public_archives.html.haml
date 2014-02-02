@@ -1,0 +1,51 @@
+- content_for(:title) { "Practicing Ruby | Delightful lessons for dedicated programmers" }
+- content_for :header do
+  %h1 Practicing Ruby
+  %h2 Delightful lessons for dedicated programmers
+
+  = image_tag "ruby-divider.png"
+
+#landing
+  %p
+    Since 2010, Practicing Ruby has produced a total of
+    = "#{@counts[:published]} articles, "
+    all of which were funded by our generous subscribers.
+    We are
+    = link_to "gradually transitioning to an open-access model",
+      "http://elmcitycraftworks.org/post/74660361892/a-new-direction-for-practicing-ruby"
+    for our content, and below you will find the
+    = "#{@counts[:public]} articles that have been released into "
+    our #{link_to "public archives", root_path(:anchor => "public-archives")}.
+
+  %p
+    If you enjoy these articles, please consider becoming a Practicing Ruby
+    subscriber. By doing so, you'll get immediate access to the
+    #{@counts[:members]} articles that we published between
+    #{@member_old_date} and #{@member_recent_date}
+    which have not been released to the public yet. You'll
+    also be supporting our future work, as we continue on
+    our mission to build a great learning resource
+    for all Ruby programmers.
+
+  = link_to "Subscribe to Practicing Ruby ($8/month)", new_subscription_path,
+    :id => "subscribe", "data-redirect-warning" => !current_user
+
+  %p
+    Practicing Ruby is curated by Gregory Brown, with contributions from the
+    Ruby community. If you have any questions,
+    #{link_to "contact us", contact_path} and we'll get back to you quickly.
+
+%h2#public-archives.archives-header
+  Practicing Ruby's open-access archives
+  = link_to "Subscribers: Log in to see complete archives", login_path
+
+#archives
+  #share-alert
+    #{@counts[:public]} out of #{@counts[:published]} articles have
+    been released under the Creative Commons BY-SA license. Read them
+    here, or
+    = link_to "check out their manuscripts on Github.",
+      "http://github.com/elm-city-craftworks/practicing-ruby-manuscripts"
+    Errata and pull requests are welcome!
+
+  = render 'articles/archives'

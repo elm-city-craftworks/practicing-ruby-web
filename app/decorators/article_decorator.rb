@@ -1,11 +1,13 @@
-class ArticleDecorator < ApplicationDecorator
-  decorates :article
+class ArticleDecorator < Draper::Decorator
+  delegate_all
   decorates_association :volume
   decorates_association :collection
 
   def list_title
     title = article.subject
-    title = "[DRAFT] #{subject}" if article.status == "draft"
+    if article.status == "draft"
+      title = "[DRAFT] #{subject}"
+    end
     title
   end
 

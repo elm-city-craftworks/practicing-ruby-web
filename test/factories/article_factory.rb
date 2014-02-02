@@ -8,6 +8,10 @@ FactoryGirl.define do
     a.status        "published"
     a.volume
     a.published_time { Time.now }
+
+    factory :public_article do
+      status "public"
+    end
   end
 
   sequence(:volume_number) { |n| n }

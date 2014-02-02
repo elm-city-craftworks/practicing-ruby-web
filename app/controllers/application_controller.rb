@@ -1,17 +1,22 @@
 class ApplicationController < ActionController::Base
   include CacheCooker::Oven
-  include ApplicationHelper
+  include ArticleHelper
 
   protect_from_forgery
 
   before_filter :authenticate_cache_cooker!
-  before_filter :authenticate
-  before_filter :authenticate_user
-  before_filter :enable_notifications
 
   helper_method :current_user, :active_broadcasts
 
   private
+
+  def authenticate_cache_cooker!
+    if authenticate_cache_cooker
+      @current_authorization = Authorization.includes(:user).
+        where('users.admin is TRUE').first
+      session[:authorization_id] = @current_authorization.try(:id)
+    end
+  end
 
   def authenticate
     return if current_authorization
@@ -31,21 +36,13 @@ class ApplicationController < ActionController::Base
     if current_user.disabled?
       redirect_to problems_sessions_path
     elsif !current_user.active?
-      redirect_to registration_path
+      redirect_to new_subscription_path
     end
   end
 
   def attempt_user_login
     authenticate
     authenticate_user
-  end
-
-  def authenticate_cache_cooker!
-    if authenticate_cache_cooker
-      @current_authorization = Authorization.includes(:user).
-        where('users.admin is TRUE').first
-      session[:authorization_id] = @current_authorization.try(:id)
-    end
   end
 
   def current_authorization
@@ -57,7 +54,11 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_only
-    raise "Access Denied" unless current_user && current_user.admin
+    unless current_user && current_user.admin
+      store_location
+      flash[:error] = "Sorry chief you don't have access to this area"
+      redirect_to root_path
+    end
   end
 
   def store_location
@@ -80,10 +81,6 @@ class ApplicationController < ActionController::Base
     else
       []
     end
-  end
-
-  def enable_notifications
-    current_user.try(:enable_notifications)
   end
 
   def render_http_error(status)

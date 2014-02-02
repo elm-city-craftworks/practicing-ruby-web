@@ -1,5 +1,5 @@
 PracticingRubyWeb::Application.routes.draw do
-  root :to => 'home#index'
+  root :to => 'home#public_archives'
 
   mount StripeEvent::Engine => STRIPE_WEBHOOK_PATH
 
@@ -7,20 +7,13 @@ PracticingRubyWeb::Application.routes.draw do
   match '/articles/shared/:secret' => 'articles#shared', :as => "shared_article"
   match '/subscribe'               => 'home#subscribe',  :as => 'subscribe'
 
-  match "/library"  => 'home#library'
-  match "/explore"  => 'home#explore'
-  match "/archives" => 'home#archives'
-  match "/volume/:volume/" => 'articles#index'
-  match "/volume/:volume/issue/:issue" => 'articles#show'
-  match "/collection/:collection/" => 'articles#index'
-  match "/faq" => 'home#faq', :as => 'faq'
-  match "/contact" => 'home#contact', :as => 'contact'
-  match "/articles/samples" => 'articles#samples', :as => 'sample_articles'
-
-  match "articles/random" => 'articles#random', :as => 'random_article'
-
-  match "collections/:collection" => 'articles#index', :as => 'collection'
-  match "volumes/:volume"         => 'articles#index', :as => 'volume'
+  post "/toggle_nav" => 'home#toggle_nav'
+  get "/library",  :to => redirect('/articles')
+  get "/explore",  :to => redirect('/articles')
+  get "/archives", :to => redirect('/articles')
+  get "/archives/public" => 'home#public_archives'
+  get "/contact"         => 'home#contact', :as => 'contact'
+  get "/articles/random" => 'articles#random', :as => 'random_article'
 
   resources :articles do
     member do
@@ -41,18 +34,11 @@ PracticingRubyWeb::Application.routes.draw do
     end
   end
 
-  scope "/registration", :as => 'registration' do
-    get   '/'                     => 'registration#index'
-    get   'edit_profile'          => 'registration#edit_profile'
-    match 'update_profile'        => 'registration#update_profile'
-    get   'confirm_email/:secret' => 'registration#confirm_email',
-      :as => 'confirmation'
-    get   'payment'               => 'registration#payment'
-    get   'payment_pending'       => 'registration#payment_pending'
-    post  'create_payment'        => 'registration#create_payment'
-    get   'complete'              => 'registration#complete'
-    get   'restart'               => 'registration#restart'
-    get   'coupon_valid'          => 'registration#coupon_valid'
+  resources :subscriptions, :except => [:index, :destroy, :edit, :update, :show] do
+    collection do
+      get :redirect
+      get :coupon_valid
+    end
   end
 
   match '/sessions/link/:secret'   => 'sessions#link'
@@ -108,5 +94,4 @@ PracticingRubyWeb::Application.routes.draw do
     match "/magic/freebie/:nickname" => "magic#freebie"
     match "/magic/hashed_id/:nickname" => "magic#hashed_id"
   end
-
 end

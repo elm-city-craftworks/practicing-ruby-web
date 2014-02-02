@@ -1,5 +1,5 @@
-class UserDecorator < ApplicationDecorator
-  decorates :user
+class UserDecorator < Draper::Decorator
+  delegate_all
 
   def member_since
     h.l(user.created_at.to_date, :format => :long)

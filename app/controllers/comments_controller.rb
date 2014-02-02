@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate
+  before_filter :authenticate_user
   before_filter :find_comment,     :only => [:show, :update, :destroy]
   before_filter :commentator_only, :only => [:update, :destroy]
 
@@ -55,7 +57,7 @@ class CommentsController < ApplicationController
   end
 
   def decorate
-    @comment = CommentDecorator.decorate(@comment)
+    @comment = @comment.decorate
   end
 
   def commentator_only

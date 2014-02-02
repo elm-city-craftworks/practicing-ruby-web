@@ -1,5 +1,5 @@
-class CollectionDecorator < ApplicationDecorator
-  decorates :collection
+class CollectionDecorator < Draper::Decorator
+  delegate_all
 
   def self.icon(name)
     h.content_tag(:span,
