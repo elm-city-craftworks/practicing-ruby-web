@@ -33,6 +33,7 @@ GEM
       posix-spawn (>= 0.3.6)
     ansi (1.4.2)
     arel (3.0.3)
+    ast (1.1.0)
     builder (3.0.4)
     capistrano (2.13.5)
       highline
@@ -189,6 +190,9 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    parser (2.1.4)
+      ast (~> 1.1)
+      slop (~> 3.4, >= 3.4.5)
     parsley-rails (1.2.2.0)
       railties (>= 3.0.0)
     pg (0.16.0)
@@ -198,6 +202,7 @@ GEM
       http_parser.rb (~> 0.5.3)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
+    powerpack (0.0.9)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -238,6 +243,10 @@ GEM
     request_store (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rubocop (0.16.0)
+      parser (~> 2.1)
+      powerpack (~> 0.0.6)
+      rainbow (>= 1.1.4)
     rubyzip (0.9.9)
     sass (3.1.19)
     sass-rails (3.2.5)
@@ -262,6 +271,7 @@ GEM
     skinny (0.2.3)
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
+    slop (3.4.7)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -356,6 +366,7 @@ DEPENDENCIES
   rails_setup
   rake (~> 0.9.0)
   redcarpet (~> 2.1)
+  rubocop
   sass-rails (~> 3.2.0)
   sassy-buttons
   simplecov
