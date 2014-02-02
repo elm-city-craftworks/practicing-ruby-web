@@ -123,6 +123,19 @@ $green: #3D6E3C
     &:hover
       text-decoration: underline
 
+
+  a[rel="footnote"]
+    font-weight: normal
+    text-decoration: none
+    color: #999
+    &:before
+      content: "["
+    &:after
+      content: "]"
+
+  div.footnotes
+    font-size: 0.75em
+
 =image-box
   background: #fff
   padding: 5px
