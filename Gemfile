@@ -10,7 +10,7 @@ gem 'mailchimp'
 gem 'omniauth-oauth2', '~> 1.1.1'
 gem 'omniauth-github', '~> 1.0.1'
 
-gem 'redcarpet', '~> 2.1'
+gem 'redcarpet', :git => 'git://github.com/vmg/redcarpet'
 gem 'albino'
 gem 'nokogiri', '~> 1.5.11'
 gem 'md_preview'
