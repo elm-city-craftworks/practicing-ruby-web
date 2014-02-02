@@ -5,6 +5,11 @@ module Support
         "CSS #{css.inspect} with options #{options.inspect} does not exist"
     end
 
+    def assert_no_css(css, options={})
+      assert !has_css?(css, options),
+        "CSS #{css.inspect} with options #{options.inspect} exists"
+    end
+
     def assert_current_path(expected_path)
       assert_equal expected_path, current_path
     end
