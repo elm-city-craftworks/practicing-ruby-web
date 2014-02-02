@@ -72,6 +72,7 @@ group :test do
   gem 'turn', '~> 0.9.5'
   gem 'simplecov', :require => false
   gem 'poltergeist'
+  gem 'rubocop'
 end
 
 group :production do

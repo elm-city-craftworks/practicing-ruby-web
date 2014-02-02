@@ -1,0 +1,8 @@
+HashSyntax:
+  Enabled: false
+IfUnlessModifier:
+  Enabled: false
+SignalException:
+  Enabled: false
+StringLiterals:
+  Enabled: false
