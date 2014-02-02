@@ -1,98 +1,96 @@
-- content_for(:title) { "F/OSS Content and Code" }
+- content_for(:header) do
+  %h1
+    Practicing Ruby supports F/OSS, and we're proud of it.
 
-#open-source
-  %h1 
-    Practicing Ruby supports F/OSS, and we're proud of it. 
+%p
+  The spirit of community contribution for the public good is 
+  baked into everything we do, and most of our own work is freely available to all.
 
-  %p
-    The spirit of community contribution for the public good is 
-    baked into everything we do, and most of our own work is freely available to all.
+%h3 Our web application is free software.
 
-  %h3 Our web application is free software.
+%p
+  The 
+  = link_to "Rails application", 
+    "http://github.com/elm-city-craftworks/practicing-ruby-web"
+  that powers practicingruby.com is freely available under the GNU Affero GPL,
+  and is maintained by Jordan Byron. 
 
-  %p
-    The 
-    = link_to "Rails application", 
-      "http://github.com/elm-city-craftworks/practicing-ruby-web"
-    that powers practicingruby.com is freely available under the GNU Affero GPL,
-    and is maintained by Jordan Byron. 
-  
-  %p
-    Mathias Lafeldt has also developed a 
-    = link_to "Chef cookbook",
-      "http://github.com/elm-city-craftworks/practicing-ruby-cookbook"
-    that sets up a production-like testbed environment for our web application.
-    It is freely available under the Apache License 2.0.
+%p
+  Mathias Lafeldt has also developed a 
+  = link_to "Chef cookbook",
+    "http://github.com/elm-city-craftworks/practicing-ruby-cookbook"
+  that sets up a production-like testbed environment for our web application.
+  It is freely available under the Apache License 2.0.
 
-  %h3 Most of our content is free documentation.
-  %p
-    The     
-    = link_to "Markdown-formatted manuscripts",
-      "http://github.com/elm-city-craftworks/practicing-ruby-manuscripts"
-    for our open-access articles are freely available under the Creative Commons 
-    Attribution-Sharealike license.
+%h3 Most of our content is free documentation.
+%p
+  The     
+  = link_to "Markdown-formatted manuscripts",
+    "http://github.com/elm-city-craftworks/practicing-ruby-manuscripts"
+  for our open-access articles are freely available under the Creative Commons 
+  Attribution-Sharealike license.
 
-  %p
-    By the end of 2014, there will be little or no delay between the time
-    that an article gets published on practicingruby.com and the time
-    it shows up on GitHub as free documentation.
+%p
+  By the end of 2014, there will be little or no delay between the time
+  that an article gets published on practicingruby.com and the time
+  it shows up on GitHub as free documentation.
 
-  %h3 Our code samples are freely available.
-  %p
-    The majority of the
-    = link_to "code samples and example projects", "http://github.com/elm-city-craftworks"
-    we use in our articles are also available on GitHub.
-    Unless otherwise noted, you are free to use any of these resources however you'd like,
-    without restriction. Attribution is encouraged, but not required.
+%h3 Our code samples are freely available.
+%p
+  The majority of the
+  = link_to "code samples and example projects", "http://github.com/elm-city-craftworks"
+  we use in our articles are also available on GitHub.
+  Unless otherwise noted, you are free to use any of these resources however you'd like,
+  without restriction. Attribution is encouraged, but not required.
 
-  %p
-    We know that we could do a much better job of organizing these materials
-    and clarifying their licensing terms, but until we do, feel free to 
-    = link_to "contact us", contact_path
-    if you have any questions about your use of Practicing Ruby's code samples.
+%p
+  We know that we could do a much better job of organizing these materials
+  and clarifying their licensing terms, but until we do, feel free to 
+  = link_to "contact us", contact_path
+  if you have any questions about your use of Practicing Ruby's code samples.
 
-  %h3 We also work on other F/OSS projects.
+%h3 We also work on other F/OSS projects.
 
-  %p
-    We don't just produce educational materials, we also work on projects that
-    directly help people, both programmers and non-programmers alike:
+%p
+  We don't just produce educational materials, we also work on projects that
+  directly help people, both programmers and non-programmers alike:
 
-  %ul
-    %li
-      Gregory Brown is the lead maintainer for the
-      = link_to "Prawn PDF generation toolkit for Ruby.", "http://prawn.majesticseacreature.com"
-    %li
-      Jordan Byron developed a Rails-based
-      = link_to "clinic management system", "https://github.com/mission-of-mercy/mission-of-mercy"
-      to support the Mission of Mercy charitable healthcare organization.
+%ul
+  %li
+    Gregory Brown is the lead maintainer for the
+    = link_to "Prawn PDF generation toolkit for Ruby.", "http://prawn.majesticseacreature.com"
+  %li
+    Jordan Byron developed a Rails-based
+    = link_to "clinic management system", "https://github.com/mission-of-mercy/mission-of-mercy"
+    to support the Mission of Mercy charitable healthcare organization.
 
 
-  %h3 We hope you'll support our work. 
+%h3 We hope you'll support our work. 
 
-  %p 
-    Here are three ways to help out if you want us to keep doing what we're doing: 
+%p 
+  Here are three ways to help out if you want us to keep doing what we're doing: 
 
-  %ul
-    %li
-      Send us constructive feedback and/or spread the word about our projects.
-      Telling us we're doing wrong and telling the world what we're 
-      doing right is easy to do, and it helps us tremendously. 
+%ul
+  %li
+    Send us constructive feedback and/or spread the word about our projects.
+    Telling us we're doing wrong and telling the world what we're 
+    doing right is easy to do, and it helps us tremendously. 
 
-    %li
-      Become a Practicing Ruby subscriber and/or encourage others to
-      sign up for a paid subscription. The money we get from Practicing Ruby
-      supports our continued work on the project. Every subscription counts, 
-      so please don't hesitate if you are thinking about signing up.
+  %li
+    Become a Practicing Ruby subscriber and/or encourage others to
+    sign up for a paid subscription. The money we get from Practicing Ruby
+    supports our continued work on the project. Every subscription counts, 
+    so please don't hesitate if you are thinking about signing up.
 
-    %li 
-      Submit pull requests or bug reports to one of our projects. Whether
-      you found a mistake in an article, or want to add a new feature to
-      the web application, patches are welcome!
-  %p
-    Happy hacking! Please
-    = link_to "contact us", contact_path
-    if you have any questions or suggestions.
+  %li 
+    Submit pull requests or bug reports to one of our projects. Whether
+    you found a mistake in an article, or want to add a new feature to
+    the web application, patches are welcome!
+%p
+  Happy hacking! Please
+  = link_to "contact us", contact_path
+  if you have any questions or suggestions.
 
-  = image_tag "ruby-divider.png"
+= image_tag "ruby-divider.png"
 
-  %p{:style => "text-align: center"}= link_to "Return to the Practicing Ruby homepage", root_path
+%p{:style => "text-align: center"}= link_to "Return to the Practicing Ruby homepage", root_path
