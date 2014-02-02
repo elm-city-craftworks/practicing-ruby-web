@@ -1,1 +1,8 @@
-inherit_from: rubocop-todo.yml
+HashSyntax:
+  Enabled: false
+IfUnlessModifier:
+  Enabled: false
+SignalException:
+  Enabled: false
+StringLiterals:
+  Enabled: false
