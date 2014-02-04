@@ -6,3 +6,5 @@ require 'rake'
 require File.expand_path('../lib/rake_exception_notification', __FILE__)
 
 PracticingRubyWeb::Application.load_tasks
+
+Rake::Task[:test].enhance { Rake::Task["test:rubocop"].invoke }
