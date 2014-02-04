@@ -8,3 +8,7 @@ SignalException:
   Enabled: false
 StringLiterals:
   Enabled: false
+
+AllCops:
+  Excludes:
+    - vendor/**
