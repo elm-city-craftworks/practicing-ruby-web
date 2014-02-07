@@ -10,6 +10,7 @@
       - else
         %li= link_to "Archives", articles_path(:anchor => "archives")
       %li= link_to "F/OSS", open_source_path 
+      %li= link_to "Blog", "http://elmcitycraftworks.org"
       %li= link_to "Contact", contact_path
       - if current_user.try(:active?)
         %li.right= link_to "Log out", logout_path
