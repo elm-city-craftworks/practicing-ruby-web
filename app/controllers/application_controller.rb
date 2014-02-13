@@ -56,7 +56,11 @@ class ApplicationController < ActionController::Base
   def admin_only
     unless current_user && current_user.admin
       store_location
-      flash[:error] = "Sorry chief you don't have access to this area"
+
+      noun = %w[chief champ pal buddy slugger hoss 
+                boss sport slim captain slick ace].sample
+
+      flash[:error] = "Sorry #{noun}, you don't have access to this area."
       redirect_to root_path
     end
   end
