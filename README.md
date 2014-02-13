@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/elm-city-craftworks/practicing-ruby-web.png?branch=master)](http://travis-ci.org/elm-city-craftworks/practicing-ruby-web)
 
+
 This app is publicly available primarily for the sake of transparency, but
 there is very little code in here specific to [practicingruby.com][pr], so we
 definitely want to generalize it eventually. Do feel free to email
