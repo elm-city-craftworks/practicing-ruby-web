@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def public_archives
     redirect_to(articles_path) && return if current_user.try(:active?)
 
+    @branded_footer = true
     @articles = Article.order("published_time DESC").public
 
     @counts = { :published => Article.published.count,

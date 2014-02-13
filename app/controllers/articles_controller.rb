@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
   before_filter :authenticate_user, :only => :index
 
   def index
+    @branded_footer = true
     @articles = Article.order("published_time DESC")
     unless current_user.try(:admin)
       @articles = @articles.published
@@ -21,7 +22,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @hide_nav = true
+    @hide_nav       = true
+    @branded_footer = true
     store_location
     decorate_article
 

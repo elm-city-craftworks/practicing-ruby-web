@@ -4,15 +4,12 @@
       $ ->
         PR.Comments.init('#{comments_path}/')
 
-  - if current_user.admin?
-    - content_for(:admin_bar) do
-      %li= link_to "Edit Article", edit_admin_article_path(@article)
 - else
   - content_for(:nudge) do
     #share-alert
       Practicing Ruby publishes delightful lessons for Ruby programmers.
       %br
-      You can support our ongoing work by 
+      You can support our ongoing work by
       #{link_to "becoming a paid supporter for only $8/month", root_path}.
 
 = render "header"

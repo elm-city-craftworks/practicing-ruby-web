@@ -10,14 +10,12 @@
       - else
         %li= link_to "Archives", articles_path(:anchor => "archives")
         %li= link_to "Chat", CAMPFIRE_URL
-      %li= link_to "F/OSS", open_source_path 
+      %li= link_to "F/OSS", open_source_path
       %li= link_to "Blog", "http://elmcitycraftworks.org"
       %li= link_to "Contact", contact_path
       - if current_user.try(:active?)
         %li.right= link_to "Log out", logout_path
         %li.right= link_to "Settings", user_settings_path
-        - if current_user.try(:admin)
-          = yield(:admin_bar)
       - else
         - if current_user
           %li.right= link_to "Log out", logout_path
