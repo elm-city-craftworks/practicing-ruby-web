@@ -53,20 +53,29 @@ body
         font-size: 0.75em
         background-color: $dark-blue
         color: #fff
-
   footer
-    p.big
-      text-align: center
-      font-size: 1.25em
-      +single-transition(all, .25s, ease-out, 0)
-      &.highlight
-        padding: 1em 0
-        background-color: #FAFAE2
-        border: 1px dashed #AE9331
-        +border-radius(6px)
-  p, footer
+    clear: both
+    text-align: center
+    padding: 20px
+    a#ecc-logo
+      position: relative
+      width: 246px
+      height: 165px
+      display: block
+      margin: 0 auto
+      img
+        position: absolute
+        left: 0
+        top: 0
+        +single-transition(opacity, 0.5s, ease-in-out)
+        &.black
+          opacity: 0
+      &:hover img.black
+        opacity: 1
+  p
     margin: 1em 0
     text-align: justify
+
   a
     color: #1b1b1b
     font-weight: bold
