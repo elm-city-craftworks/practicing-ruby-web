@@ -33,7 +33,7 @@ class BroadcastMailerTest < ActionMailer::TestCase
 
     message = ActionMailer::Base.deliveries.first
 
-    url = Rails.application.routes.url_helpers.article_url(slug)
+    url =  ArticleLink.new(Article[slug]).url(user.share_token)
 
     expected_body = "Here's an amazing article\n#{url}"
 
