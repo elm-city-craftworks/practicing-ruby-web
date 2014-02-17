@@ -3,16 +3,14 @@
     Get in touch with your fellow Practicing Rubyists!
 
   = link_to "Chat with a guest account", CHAT_GUEST_URL,
-    :class => "btn", :style => "width: 300px"
+    :class => "btn"
   = link_to "Chat with your campfire account", CHAT_LOGIN_URL,
-    :class => "btn", :style => "width: 300px"
+    :class => "btn"
   %p
-    You can log in as a guest without any extra setup. 
+    You can log in as a guest without any extra setup.
     %br
-    For transcript access, you need a Campfire account. 
+    For transcript access, you need a Campfire account.
 
   %p
-    Email
-    = link_to "gregory@practicingruby.com", "mailto:gregory@practicingruby.com"
-    for an invite.
+    Email #{mail_to "gregory@practicingruby.com"} for an invite.
 
