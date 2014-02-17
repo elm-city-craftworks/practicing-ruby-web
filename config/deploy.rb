@@ -4,6 +4,7 @@ set :default_stage, "production"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'capistrano/confirm_branch'
+require 'capfire/capistrano'
 require 'capistrano/maintenance'
 require 'capistrano-unicorn'
 require 'whenever/capistrano'
