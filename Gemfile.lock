@@ -34,7 +34,12 @@ GEM
     ansi (1.4.2)
     arel (3.0.3)
     ast (1.1.0)
+    broach (0.3.0)
+      multi_json (~> 1.7)
+      nap (~> 0.5)
     builder (3.0.4)
+    capfire (0.3.2)
+      broach (>= 0.2.1)
     capistrano (2.13.5)
       highline
       net-scp (>= 1.0.0)
@@ -166,6 +171,7 @@ GEM
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mustache (0.99.4)
+    nap (0.6.0)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -322,6 +328,7 @@ PLATFORMS
 
 DEPENDENCIES
   albino
+  capfire
   capistrano
   capistrano-maintenance
   capistrano-unicorn
