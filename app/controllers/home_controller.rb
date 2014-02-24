@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_filter :attempt_user_login, :only => 'chat'
   def public_archives
     redirect_to(articles_path) && return if current_user.try(:active?)
 
@@ -27,5 +28,9 @@ class HomeController < ApplicationController
     session[:nav_hidden] = !session[:nav_hidden]
 
     render :text => "OK"
+  end
+
+  def chat
+    render :layout => false
   end
 end
