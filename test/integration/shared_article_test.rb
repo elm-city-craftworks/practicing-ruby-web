@@ -12,7 +12,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
   end
 
   test "shared article visit without logging in (draft)" do
-    @article.update_attribute(:status, "draft")
+    @article.update_attributes(:status => "draft")
 
     assert_article_visible(:guest)
   end
@@ -24,7 +24,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
   end
 
   test "shared article visible to logged in users (draft)" do
-    @article.update_attribute(:status, "draft")
+    @article.update_attributes(:status => "draft")
 
     sign_user_in
 
@@ -36,7 +36,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
       unauthorized_user = FactoryGirl.create(:user, :status => e)
       @authorization.user = unauthorized_user
       @authorization.save
-      
+
       sign_user_in
 
       assert_article_visible(:guest)
