@@ -19,11 +19,12 @@ class SessionsController < ApplicationController
     session["authorization_id"] = authorization.id
 
     if authorization.user.blank?
-      user = User.create(:contact_email => auth["info"]["email"],
+      user = User.new(:contact_email => auth["info"]["email"],
         :github_nickname => auth["info"]["nickname"])
+      user.status = "authorized"
+      user.save
 
-      user.update_attribute(:status, "authorized")
-      authorization.update_attribute(:user_id, user.id)
+      authorization.update_attributes(:user_id => user.id)
 
       redirect_to new_subscription_path
     elsif authorization.user.status == "active"
