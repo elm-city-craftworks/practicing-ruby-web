@@ -8,7 +8,7 @@ class ArticleFootnoteTest < ActionDispatch::IntegrationTest
   end
 
   test "article with footnotes has them rendered" do
-    @article.update_attribute(:body, "
+    @article.update_attributes(:body => "
 # Test Article
 
 This paragraph should have a footnote after it.[^1]
@@ -21,13 +21,13 @@ This paragraph should not.
     sign_user_in
 
     visit article_path(@article.id)
-    
+
     assert_css "a[rel=footnote]"
     assert_css ".footnotes li#fn1"
   end
 
   test "article with no footnotes does not render any" do
-    @article.update_attribute(:body, "
+    @article.update_attributes(:body => "
 # Test Article
 
 This article has no footnotes.

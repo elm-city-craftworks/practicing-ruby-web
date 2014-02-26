@@ -83,12 +83,12 @@ class User < ActiveRecord::Base
   end
 
   def create_access_token
-    update_attribute(:access_token, SecureRandom.hex(10))
+    update_attributes(:access_token => SecureRandom.hex(10))
     access_token
   end
 
   def clear_access_token
-    update_attribute(:access_token, nil)
+    update_attributes(:access_token => nil)
   end
 
   private

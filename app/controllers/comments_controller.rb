@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment.update_attribute(:body, params[:value])
+    @comment.update_attributes(:body => params[:value])
     expire_fragment("comment_body_#{@comment.id}")
 
     decorate

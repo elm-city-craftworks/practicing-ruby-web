@@ -5,7 +5,9 @@ class EditArticleTest < ActionDispatch::IntegrationTest
     simulated_user.register(Support::SimulatedUser.default)
 
     @article = FactoryGirl.create(:article, :slug => "awesome-article")
-    User.first.update_attribute(:admin, true)
+    user = User.first
+    user.admin = true
+    user.save
   end
 
   test "can edit articles with slugs" do
@@ -17,7 +19,7 @@ class EditArticleTest < ActionDispatch::IntegrationTest
   end
 
   test "can edit articles without slugs" do
-    @article.update_attribute(:slug, nil)
+    @article.update_attributes(:slug => nil)
 
     visit edit_admin_article_path(@article.id)
 
