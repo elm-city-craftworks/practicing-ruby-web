@@ -22,11 +22,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
            "Should not have an active subscription before payment"
 
     gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
-
-    token =  Stripe::Token.create( :card => { :number => "4242424242424242",
-                                              :exp_month => 8,
-                                              :exp_year => Date.today.year + 2,
-                                              :cvc => "314" })
+    token   = stripe_card_token
 
     gateway.subscribe(:stripeToken => token.id, :interval => "month")
 
@@ -46,10 +42,7 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     # in being attached to a customer, but the charge will fail.
     #
     # See: https://stripe.com/docs/testing
-    token =  Stripe::Token.create( :card => { :number => "4000000000000341",
-                                              :exp_month => 8,
-                                              :exp_year => Date.today.year + 2,
-                                              :cvc => "313" })
+    token = stripe_card_token(:number => "4000000000000341")
 
     assert_raises(Stripe::CardError) do
       gateway.subscribe(:stripeToken => token.id, :interval => "month")
@@ -102,5 +95,37 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     message = ActionMailer::Base.deliveries.first
 
     assert message.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+  end
+
+  test 'update_credit_card' do
+    skip_unless_stripe_configured
+
+    # First create a valid account in stripe which we can then update
+    #
+    gateway = PaymentGateway::Stripe.for_customer(@user.payment_provider_id)
+    token   = stripe_card_token
+
+    gateway.subscribe(:stripeToken => token.id, :interval => "month")
+
+    assert_equal "4242", @user.credit_card.last_four, "Card last 4 not updated"
+
+    # Next, update the credit card
+    #
+    token = stripe_card_token(:number => "4012888888881881")
+    gateway.update_credit_card(:stripeToken => token.id)
+
+    assert_equal "1881", @user.credit_card.reload.last_four,
+      "Card last 4 not updated"
+  end
+
+  private
+
+  def stripe_card_token(options = {})
+    Stripe::Token.create(:card => {
+      :number    => options.fetch(:number, "4242424242424242"),
+      :exp_month => options.fetch(:exp_month, 8),
+      :exp_year  => options.fetch(:exp_year, Date.today.year + 2),
+      :cvc       => options.fetch(:cvc, "314")
+    })
   end
 end
