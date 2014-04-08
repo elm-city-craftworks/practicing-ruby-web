@@ -14,6 +14,7 @@ PracticingRubyWeb::Application.routes.draw do
   get "/archives/public" => 'home#public_archives'
   get "/contact"         => 'home#contact', :as => 'contact'
   get "/open-source"     => 'home#open_source', :as => 'open_source'
+  get "/chat"            => 'home#chat'
   get "/articles/random" => 'articles#random', :as => 'random_article'
 
   resources :articles do
