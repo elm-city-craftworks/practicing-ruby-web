@@ -13,9 +13,7 @@ class CommentsController < ApplicationController
       redirect_to article_path(@comment.commentable, :anchor => "comments")
     else
       flash[:error] = "Please enter some text to create a comment!"
-      @article  = @comment.commentable
-      @comments = @article.comments
-      render "articles/show"
+      redirect_to article_path(@comment.commentable)
     end
   end
 

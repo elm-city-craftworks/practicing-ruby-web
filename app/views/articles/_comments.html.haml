@@ -10,7 +10,7 @@
     = f.hidden_field :commentable_type
     = f.hidden_field :commentable_id
 
-    = f.text_area :body, 'data-preview' => true
+    = f.text_area :body, 'data-preview' => true, :required => 'required'
 
     #submit-bar
       %span Each time you post a comment, a unicorn gets its horn!
