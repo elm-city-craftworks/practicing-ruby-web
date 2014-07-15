@@ -42,6 +42,7 @@ gem 'mustache'
 gem 'dotenv-rails'
 
 group :development do
+  gem 'dotenv-deployment'
   gem 'capistrano'
   gem 'capistrano_confirm_branch'
   gem 'capistrano-unicorn', :require => false

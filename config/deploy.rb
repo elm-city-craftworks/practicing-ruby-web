@@ -8,7 +8,7 @@ require 'capfire/capistrano'
 require 'capistrano/maintenance'
 require 'capistrano-unicorn'
 require 'whenever/capistrano'
-require "dotenv/capistrano"
+require "dotenv/deployment/capistrano"
 
 set :application, "practicing-ruby"
 set :repository,  "https://github.com/elm-city-craftworks/practicing-ruby-web.git"
