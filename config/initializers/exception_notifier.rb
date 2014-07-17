@@ -6,5 +6,5 @@ if Rails.env.production?
       :exception_recipients => %w{gregory.t.brown@gmail.com jordan.byron@gmail.com}
      },
     :ignore_crawlers => %w{EasouSpider},
-    :ignore_exceptions    => [ActionView::MissingTemplate] + ExceptionNotifier.default_ignore_exceptions
+    :ignore_exceptions    => [ActionView::MissingTemplate] + ExceptionNotifier.ignored_exceptions
 end
