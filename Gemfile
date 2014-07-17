@@ -79,6 +79,6 @@ end
 
 group :production do
   gem 'god', :require => false
-  gem 'exception_notification'
+  gem 'exception_notification', "~> 4.0.1"
   gem 'unicorn'
 end

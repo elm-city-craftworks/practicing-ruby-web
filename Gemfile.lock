@@ -103,8 +103,9 @@ GEM
       request_store (~> 1.0.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    exception_notification (2.5.2)
+    exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (1.2.13)
       multi_json (~> 1.0)
     factory_girl (3.3.0)
@@ -131,7 +132,7 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     httpauth (0.2.0)
-    i18n (0.6.9)
+    i18n (0.6.11)
     journey (1.0.4)
     jquery-rails (1.0.19)
       railties (~> 3.0)
@@ -169,7 +170,7 @@ GEM
     minitest (4.7.0)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
-    multi_json (1.8.4)
+    multi_json (1.10.1)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mustache (0.99.4)
@@ -208,7 +209,7 @@ GEM
       capybara (~> 2.0.1)
       faye-websocket (~> 0.4.4)
       http_parser.rb (~> 0.5.3)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     posix-spawn (0.3.6)
     powerpack (0.0.9)
     rack (1.4.5)
@@ -348,7 +349,7 @@ DEPENDENCIES
   dotenv-deployment
   dotenv-rails
   draper
-  exception_notification
+  exception_notification (~> 4.0.1)
   factory_girl_rails
   foreman
   god
