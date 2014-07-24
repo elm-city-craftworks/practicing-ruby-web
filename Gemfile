@@ -80,5 +80,6 @@ end
 group :production do
   gem 'god', :require => false
   gem 'exception_notification', "~> 4.0.1"
+  gem 'rack-google_analytics'
   gem 'unicorn'
 end

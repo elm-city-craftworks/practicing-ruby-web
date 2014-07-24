@@ -215,6 +215,8 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-google_analytics (1.0.2)
+      rack
     rack-pjax (0.6.0)
       nokogiri (~> 1.5)
       rack (~> 1.3)
@@ -373,6 +375,7 @@ DEPENDENCIES
   parsley-rails
   pg (= 0.16.0)
   poltergeist
+  rack-google_analytics
   rack-pjax (~> 0.6.0)
   rails (= 3.2.17)
   rails_setup
