@@ -1,4 +1,5 @@
-- content_for(:title) { @article.full_subject }
+- content_for(:title) do
+  #{@article.subject} - Practicing Ruby, #{@article.issue_number}
 - content_for(:header) do
   .bigtext{style: 'text-align: center;'}
     %div= @article.subject
