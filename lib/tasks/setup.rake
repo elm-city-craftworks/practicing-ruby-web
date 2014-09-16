@@ -1,4 +1,5 @@
 require 'rails_setup'
+require 'rainbow/ext/string'
 
 namespace :setup do
   desc 'Create .env file from .env.example'
