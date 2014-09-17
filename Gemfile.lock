@@ -212,6 +212,7 @@ GEM
     polyglot (0.3.5)
     posix-spawn (0.3.6)
     powerpack (0.0.9)
+    prawn-receipt (0.0.1)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -375,6 +376,7 @@ DEPENDENCIES
   parsley-rails
   pg (= 0.16.0)
   poltergeist
+  prawn-receipt
   rack-google_analytics
   rack-pjax (~> 0.6.0)
   rails (= 3.2.17)

@@ -41,6 +41,8 @@ gem 'mustache'
 
 gem 'dotenv-rails'
 
+gem "prawn-receipt"
+
 group :development do
   gem 'dotenv-deployment'
   gem 'capistrano'
