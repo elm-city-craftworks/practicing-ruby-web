@@ -41,6 +41,8 @@ gem 'mustache'
 
 gem 'dotenv-rails'
 
+gem "prawn", :github => "prawnpdf/prawn"
+gem "prawn-table", "= 0.1.0"
 gem "prawn-receipt"
 
 group :development do
@@ -52,6 +54,7 @@ group :development do
   gem 'capfire'
   gem 'foreman'
   gem 'mailcatcher'
+  gem 'pry'
 end
 
 group :assets do
