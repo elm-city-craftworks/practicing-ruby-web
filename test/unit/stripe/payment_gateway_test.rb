@@ -96,9 +96,16 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
     message = ActionMailer::Base.deliveries.first
 
-    assert message.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+    if message.has_attachments?
+      assert message.text_part.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+    else
+      assert message.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+    end
 
     assert message.attachments.length >= 1, "No attachment"
+    File.new("/tmp/receipt_test.pdf", "w") do |f|
+      f.write message.attachments['receipt.pdf']
+    end
   end
 
   test 'update_credit_card' do
