@@ -33,12 +33,11 @@ class AccountMailer < ActionMailer::Base
                                    :transaction_id => @payment.id
 
       receipt.render_file file.path
-      # verify the receipt.pdf by looking at the doc
-      receipt.render_file "/tmp/test_receipt.pdf" if ENV['RAILS_ENV'] == 'test'
 
+      attachments["receipt.pdf"] = File.read file.path
       mail(:to      => user.contact_email,
            :subject => "Receipt for your payment to practicingruby.com"
-          ).tap {|m|m.attachments["receipt.pdf"]=File.read file.path}.deliver
+          ).deliver
     ensure
       file.close
       file.unlink
