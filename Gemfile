@@ -54,7 +54,6 @@ group :development do
   gem 'capfire'
   gem 'foreman'
   gem 'mailcatcher'
-  gem 'pry'
 end
 
 group :assets do
