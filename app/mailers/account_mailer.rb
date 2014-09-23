@@ -25,12 +25,17 @@ class AccountMailer < ActionMailer::Base
     @payment = payment
     file = Tempfile.new('receipt.pdf')
     begin
+      logo_image_path = File.expand_path("../assets/images/pr-logo.png",
+                                   File.dirname(__FILE__))
 
-      receipt = Prawn::Receipt.new :customer_email => user.contact_email,
-                                   :customer_name  => user.name,
-                                   :amount_billed  => @payment.amount,
-                                   :credit_card    => "xxxx-xxxx-xxxx-#{@payment.credit_card_last_four}",
-                                   :transaction_id => @payment.id
+      receipt = Prawn::Receipt.new :logo_image_path => logo_image_path,
+                                   :company_name    => "Practicing Ruby",
+                                   :company_email   => "gregory@practicingruby.com",
+                                   :customer_email  => user.contact_email,
+                                   :customer_name   => user.name,
+                                   :amount_billed   => @payment.amount,
+                                   :credit_card     => "xxxx-xxxx-xxxx-#{@payment.credit_card_last_four}",
+                                   :transaction_id  => @payment.id
 
       receipt.render_file file.path
 

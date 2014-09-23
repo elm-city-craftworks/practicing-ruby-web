@@ -103,8 +103,8 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
     end
 
     assert message.attachments.length >= 1, "No attachment"
-    File.new("/tmp/receipt_test.pdf", "w") do |f|
-      f.write message.attachments['receipt.pdf']
+    File.open("/tmp/receipt_test.pdf", "wb") do |f|
+      f.write message.attachments['receipt.pdf'].body.raw_source
     end
   end
 
