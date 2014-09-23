@@ -248,7 +248,7 @@ module Support
 
       browser do
         visit root_path
-        click_link "Subscribe to Practicing Ruby ($8/month)"
+        click_link "become a paid subscriber for only $8/month."
 
         # Redirect facebox
         assert_content "Redirecting to GitHub"
