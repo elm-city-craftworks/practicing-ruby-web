@@ -5,8 +5,10 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
   setup do
     ActionMailer::Base.deliveries.clear
 
-    @user            = FactoryGirl.create(:user, :payment_provider => 'stripe')
-    @payment_gateway = @user.payment_gateway
+    @user             = FactoryGirl.create(:user, :payment_provider => 'stripe')
+    @credit_card      = FactoryGirl.create(:credit_card)
+    @user.credit_card = @credit_card
+    @payment_gateway  = @user.payment_gateway
   end
 
   test 'for_customer' do
@@ -94,7 +96,16 @@ class StripePaymentGatewayTest < ActiveSupport::TestCase
 
     message = ActionMailer::Base.deliveries.first
 
-    assert message.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+    if message.has_attachments?
+      assert message.text_part.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+    else
+      assert message.body.to_s[/#{payment.invoice_date}/], "Invoice date missing"
+    end
+
+    assert message.attachments.length >= 1, "No attachment"
+    File.open("/tmp/receipt_test.pdf", "wb") do |f|
+      f.write message.attachments['receipt.pdf'].body.raw_source
+    end
   end
 
   test 'update_credit_card' do
