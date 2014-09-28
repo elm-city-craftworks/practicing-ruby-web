@@ -5,35 +5,6 @@
 
   = image_tag "ruby-divider.png"
 
-#landing
-  %p
-    Since 2010, Practicing Ruby has produced a total of
-    = "#{@counts[:published]} articles "
-    across seven volumes, all of which were funded by our generous subscribers.
-    In 2014, we became an open-access publication, making all of our published
-    works freely available to all under the CC BY-SA license.
-
-  %p
-    Even though you can now read all seven volumes of Practicing Ruby for
-    free on this website, we still rely on readers to fund our ongoing
-    work. To help us publish independent, in-depth learning materials
-    for dedicated programmers, please 
-    = link_to "become a paid subscriber for only $8/month.", new_subscription_path,
-        "data-redirect-warning" => !current_user
-
-  %p
-    By subscribing, 
-    = link_to "you'll be directly funding our eighth volume,", "http://elmcitycraftworks.org/post/97065188738/plans-for-practicing-ruby-volume-8"
-    = "which we hope to complete by mid-2015. Subscribers"
-    will have early access to this new volume's content as it is being developed,
-    with new materials published every few weeks on average. There will also be several
-    subscriber-only events and activities to participate in over the next several months.
-
-  %p
-    Practicing Ruby is curated by Gregory Brown, with contributions from the
-    Ruby community. If you have any questions,
-    #{link_to "contact us", contact_path} and we'll get back to you quickly.
-
 %h2#public-archives.archives-header
   Practicing Ruby's open-access archives
   = link_to "Subscribers: Log in to see discussions on articles", login_path
@@ -41,10 +12,11 @@
 #archives
   #share-alert
     Our complete archives have
-    been released under the Creative Commons BY-SA license. Read them
-    here, or
-    = link_to "check out our open source page for more details.",
-      open_source_path
-    Errata and pull requests are welcome!
+    been released under the Creative Commons BY-SA license. 
+    %br
+    If you enjoy our articles,
+    = link_to "please support our ongoing work on this project.",
+      about_path
+
 
   = render 'articles/archives'

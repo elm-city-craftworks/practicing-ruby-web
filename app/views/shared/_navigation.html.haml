@@ -6,7 +6,7 @@
     %ul
       %li= link_to "Home", root_path
       - unless current_user.try(:active?)
-        %li= link_to "Public Archives", root_path(:anchor => "public-archives")
+        %li= link_to "About", about_path
       - else
         %li= link_to "Archives", articles_path(:anchor => "archives")
         %li= link_to "Chat", chat_path, :rel => "facebox"

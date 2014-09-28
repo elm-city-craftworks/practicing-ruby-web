@@ -11,6 +11,7 @@ PracticingRubyWeb::Application.routes.draw do
   get "/library",  :to => redirect('/articles')
   get "/explore",  :to => redirect('/articles')
   get "/archives", :to => redirect('/articles')
+  get '/about', :to => 'home#about'
   get "/archives/public" => 'home#public_archives'
   get "/contact"         => 'home#contact', :as => 'contact'
   get "/open-source"     => 'home#open_source', :as => 'open_source'
