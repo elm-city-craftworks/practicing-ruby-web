@@ -247,7 +247,7 @@ module Support
       })
 
       browser do
-        visit root_path
+        visit about_path
         click_link "become a paid subscriber for only $8/month."
 
         # Redirect facebox
