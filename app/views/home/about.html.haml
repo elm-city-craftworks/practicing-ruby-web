@@ -1,0 +1,40 @@
+- content_for :header do
+  %h1 
+    About Practicing Ruby
+
+#landing
+  %p
+    Since 2010, Practicing Ruby has produced a total of
+    = "#{@counts[:published]} articles "
+    across seven volumes, all of which were funded by our generous subscribers.
+    In 2014, we became an open-access publication, making 
+    = link_to "all of our published content", root_path
+    available to all under the CC BY-SA license. See our
+    = link_to "F/OSS page", open_source_path
+    for all the relevant source repositories, including the code
+    that runs practicingruby.com itself.
+    
+  %p
+    Even though you can read all seven volumes of Practicing Ruby for
+    free, we rely entirely on readers like you to fund our ongoing
+    work. To help us publish independent, in-depth learning materials
+    for dedicated programmers, please 
+    = link_to "become a paid subscriber for only $8/month.", new_subscription_path,
+        "data-redirect-warning" => !current_user
+
+  %p
+    By subscribing, 
+    = link_to "you'll be directly funding our eighth volume,", "http://elmcitycraftworks.org/post/97065188738/plans-for-practicing-ruby-volume-8"
+    = "which we hope to complete by mid-2015. Subscribers"
+    will have early access to this new volume's content as it is being developed,
+    with new materials published every few weeks on average. There will also be several
+    subscriber-only events and activities to participate in over the next several months.
+
+  %p
+    Practicing Ruby is curated by Gregory Brown, with contributions from the
+    Ruby community. If you have any questions,
+    #{link_to "contact us", contact_path} and we'll get back to you quickly.
+
+= image_tag "ruby-divider.png"
+
+%p{:style => "text-align: center"}= link_to "Return to the Practicing Ruby homepage", root_path
