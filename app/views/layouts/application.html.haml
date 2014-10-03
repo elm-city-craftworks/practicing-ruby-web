@@ -18,14 +18,15 @@
   %body{class: "#{controller.controller_name}-#{controller.action_name}"}
     = render :partial => "shared/navigation"
     = render :partial => "shared/broadcasts"
-    
+
     #top-bar
       #broadcasts
-        Want to explore our archives and possibly win some prizes while you're at it?
-        %br
-        Try the 
-        = link_to "Practicing Ruby Scavenger Hunt!",
-          "http://elmcitycraftworks.org/post/98895252293/practicing-ruby-scavenger-hunt"
+        .broadcast
+          Want to explore our archives and possibly win some prizes while you're at it?
+          %br
+          Try the
+          = link_to "Practicing Ruby Scavenger Hunt!",
+            "http://elmcitycraftworks.org/post/98895252293/practicing-ruby-scavenger-hunt"
 
 
     = render :partial => "user_email/warning"
