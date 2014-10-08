@@ -89,10 +89,15 @@ module Support
 
     def simulated_user
       if block_given?
-        raise "Block interface has been removed. Make direct method calls instead" 
+        raise "Block interface has been removed. Make direct method calls instead"
       end
 
       Support::SimulatedUser.new(self)
+    end
+
+    # Screenshot
+    def ss
+      Capybara::Screenshot.screen_shot_and_open_image
     end
 
     def outbox
