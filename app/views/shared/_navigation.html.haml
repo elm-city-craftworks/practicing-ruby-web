@@ -1,26 +1,22 @@
-- if @hide_nav
-  = link_to root_path, :id => "home-run" do
-    %i.fa.fa-home
-- else
-  %nav
-    %ul
+%nav
+  %ul
+    - unless current_user.try(:active?)
       %li= link_to "Home", root_path
-      - unless current_user.try(:active?)
-        %li= link_to "About", about_path
-      - else
-        %li= link_to "Archives", articles_path(:anchor => "archives")
-        %li= link_to "Chat", chat_path, :rel => "facebox"
-      %li= link_to "F/OSS", open_source_path
-      %li= link_to "Blog", "http://elmcitycraftworks.org"
-      %li= link_to "Contact", contact_path
-      - if current_user.try(:active?)
+      %li= link_to "About Us", about_path
+    - else
+      %li= link_to "Home", articles_path(:anchor => "archives")
+      %li= link_to "Chat", chat_path, :rel => "facebox"
+    %li= link_to "F/OSS", open_source_path
+    %li= link_to "Blog", "http://elmcitycraftworks.org"
+    %li= link_to "Contact", contact_path
+    - if current_user.try(:active?)
+      %li.right= link_to "Log out", logout_path
+      %li.right= link_to "Settings", user_settings_path
+    - else
+      - if current_user
         %li.right= link_to "Log out", logout_path
-        %li.right= link_to "Settings", user_settings_path
       - else
-        - if current_user
-          %li.right= link_to "Log out", logout_path
-        - else
-          %li.right= link_to "Log in", login_path
-          %li.right
-            = link_to "Subscribe", new_subscription_path, :style => "color: #B03C2E",
-              "data-redirect-warning" => !current_user
+        %li.right= link_to "Log in", login_path
+        %li.right
+          = link_to "Subscribe", new_subscription_path, :style => "color: #B03C2E",
+            "data-redirect-warning" => !current_user

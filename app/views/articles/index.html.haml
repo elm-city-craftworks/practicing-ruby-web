@@ -7,16 +7,5 @@
   %h2 Delightful lessons for dedicated programmers
   = image_tag "ruby-divider.png"
 
-#explore-articles
-  #recent
-    %h2 Recommended articles
-    - @recommended.each_with_index do |article, index|
-      = render "explore_article", article: article, index: index
-  #recommended
-    %h2 Random articles
-    - @random.each_with_index do |article, index|
-      = render "explore_article", article: article, index: index
-
-%hr
 #archives
   = render 'archives'

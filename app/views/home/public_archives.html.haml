@@ -5,18 +5,5 @@
 
   = image_tag "ruby-divider.png"
 
-%h2#public-archives.archives-header
-  Practicing Ruby's open-access archives
-  = link_to "Subscribers: Log in to see discussions on articles", login_path
-
 #archives
-  #share-alert
-    Our complete archives have
-    been released under the Creative Commons BY-SA license. 
-    %br
-    If you enjoy our articles,
-    = link_to "please support our ongoing work on this project.",
-      about_path
-
-
   = render 'articles/archives'
