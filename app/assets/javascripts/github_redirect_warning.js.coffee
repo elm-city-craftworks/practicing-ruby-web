@@ -3,6 +3,3 @@ $(document).on 'click',
   (e) ->
     e.preventDefault()
     $.facebox {ajax: '/subscriptions/redirect'}, 'redirect-warning'
-    setTimeout ->
-      window.location.href = '/login'
-    , 5000

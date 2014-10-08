@@ -1,5 +1,21 @@
-%h1 Redirecting to GitHub for authentication
+%h1 A quick note before you sign up:
 
-%p
-  If you aren't redirected within 5 seconds, click
-  = link_to "here", login_path
+%div{:style => "text-align: center"} 
+  %p 
+    We use Github for authentication so that you don't need to remember 
+    yet another username and password. We only access basic public 
+    information in your account, and won't share it with anyone else.
+
+  %p
+    Once you've authenticated with Github, you'll be asked for your 
+    payment information. We don't store any of those details either,
+    all of your information is securely transmitted using Stripe.js.
+
+  = button_to "Sign up via Github", login_path, :method => :get
+
+  %p{:style => "text-align: center"}
+    %strong
+      Subscriptions cost $8/month, and can be cancelled at any time.
+  
+  %p{:style => "text-align: center"}
+    = link_to "Why should I subscribe to Practicing Ruby?", about_path
