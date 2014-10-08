@@ -65,6 +65,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.6.7)
     chunky_png (1.2.5)
+    coderay (1.1.0)
     coffee-filter (0.1.1)
       coffee-script (>= 2.2.0)
       haml (>= 3.0.18)
@@ -166,6 +167,7 @@ GEM
       rails (>= 3.1.0)
       redcarpet (>= 2.0.0)
     metaclass (0.0.1)
+    method_source (0.8.2)
     mime-types (1.25.1)
     minitest (4.7.0)
     mocha (0.13.3)
@@ -212,6 +214,12 @@ GEM
     polyglot (0.3.5)
     posix-spawn (0.3.6)
     powerpack (0.0.9)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -375,6 +383,7 @@ DEPENDENCIES
   parsley-rails
   pg (= 0.16.0)
   poltergeist
+  pry-rails
   rack-google_analytics
   rack-pjax (~> 0.6.0)
   rails (= 3.2.19)
