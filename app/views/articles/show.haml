@@ -3,6 +3,17 @@
     :coffeescript
       $ ->
         PR.Comments.init('#{comments_path}/')
+- else
+  - content_for(:nudge) do
+    #share-alert
+      Practicing Ruby is a massive
+      = link_to "open-access library of programming lessons", root_path
+      for dedicated learners.
+      %br
+      If you enjoy our articles, please support
+      our ongoing work on this project by 
+      = link_to "subscribing for $8/month.", new_subscription_path, 
+        "data-redirect-warning" => true
 
 = render "header"
 
