@@ -250,9 +250,8 @@ module Support
         visit about_path
         click_link "become a paid subscriber for only $8/month."
 
-        # Redirect facebox
-        assert_content "Redirecting to GitHub"
-        click_link "here" # Don't wait the full 5 seconds
+        # Signup facebox
+        click_button "Sign up via Github"
 
         assert_current_path new_subscription_path
       end

@@ -41,6 +41,8 @@ gem 'mustache'
 
 gem 'dotenv-rails'
 
+gem 'pry-rails', groups: [:development, :test]
+
 group :development do
   gem 'dotenv-deployment'
   gem 'capistrano'
