@@ -247,8 +247,8 @@ module Support
       })
 
       browser do
-        visit about_path
-        click_link "become a paid subscriber for only $8/month."
+        visit root_path
+        click_link "Subscribe"
 
         # Signup facebox
         click_button "Sign up via Github"
