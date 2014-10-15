@@ -3,17 +3,6 @@
     :coffeescript
       $ ->
         PR.Comments.init('#{comments_path}/')
-- else
-  - content_for(:nudge) do
-    #share-alert
-      Practicing Ruby is a massive
-      = link_to "open-access library of programming lessons", root_path
-      for dedicated learners.
-      %br
-      If you enjoy our articles, please support
-      our ongoing work on this project by 
-      = link_to "subscribing for $8/month.", new_subscription_path, 
-        "data-redirect-warning" => true
 
 = render "header"
 
@@ -21,13 +10,15 @@
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
 
-= render "footer"
 
 - if @comments
   = render :partial => "articles/comments"
 - else
   #share-alert
-    The discussion thread for this article is available to subscribers
-    only. If you want to share some feedback or ask me a question, please
-    #{link_to "subscribe", root_path}, #{link_to "log in", login_path},
-    or send an email to #{mail_to "gregory@practicingruby.com"}
+    Practicing Ruby is a massive
+    = link_to "open-access library of programming lessons", root_path
+    for dedicated learners.
+    %br
+    Please support our ongoing work on this project by 
+    = link_to "subscribing for $8/month.", new_subscription_path, 
+      "data-redirect-warning" => true
