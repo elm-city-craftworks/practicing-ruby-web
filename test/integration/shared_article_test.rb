@@ -60,7 +60,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
 
     case state
     when :guest
-      assert_content("subscribe")
+      assert_content("subscribing")
     when :subscriber
       assert_content("Share your thoughts:")
     else
