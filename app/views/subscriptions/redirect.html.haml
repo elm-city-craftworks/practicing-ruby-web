@@ -2,9 +2,10 @@
 %div{:style => "text-align: center"} 
   %p{:style => "text-align: center; font-size: 1.2em;"}
     %strong
-      For only $8/month, you can help us keep Practicing Ruby running.
+      For only $8/month, you can help us keep Practicing Ruby running smoothly.
 
-  = button_to "Sign up for Practicing Ruby", login_path, :method => :get
+  = button_to "Become a Practicing Ruby subscriber", login_path, :method => :get, 
+              :id => "subscribe"
 
   %p{:style => "text-align: center"}
     We use Github for authentication and Stripe.js for payment processing.
