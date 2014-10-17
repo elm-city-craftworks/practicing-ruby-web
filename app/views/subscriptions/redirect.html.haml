@@ -1,21 +1,15 @@
-%h1 A quick note before you sign up:
 
 %div{:style => "text-align: center"} 
-  %p 
-    We use Github for authentication so that you don't need to remember 
-    yet another username and password. We only access basic public 
-    information in your account, and won't share it with anyone else.
+  %p{:style => "text-align: center; font-size: 1.2em;"}
+    %strong
+      For only $8/month, you can help us keep Practicing Ruby running.
 
-  %p
-    Once you've authenticated with Github, you'll be asked for your 
-    payment information. We don't store any of those details either,
-    all of your data is securely transmitted using Stripe.js.
-
-  = button_to "Sign up via Github", login_path, :method => :get
+  = button_to "Sign up for Practicing Ruby", login_path, :method => :get
 
   %p{:style => "text-align: center"}
-    %strong
-      Subscriptions cost $8/month, and can be cancelled any time.
+    We use Github for authentication and Stripe.js for payment processing.
+    To keep your sensitive information safe, we do not store any passwords 
+    or payment information on our servers.
   
   %p{:style => "text-align: center"}
     = link_to "Why should I subscribe to Practicing Ruby?", about_path
