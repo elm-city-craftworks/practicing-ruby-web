@@ -251,7 +251,7 @@ module Support
         click_link "Subscribe"
 
         # Signup facebox
-        click_button "Sign up via Github"
+        click_button "subscribe"
 
         assert_current_path new_subscription_path
       end
