@@ -51,6 +51,14 @@ body.articles-index #archives, body.home-public_archives #archives
         color: #aaa
         width: 100px
         text-align: right
+      a.favorite-link
+        margin-right: 10px
+        color: rgba(0,0,0,0.25)
+        transition: color 0.25s
+        &:hover
+          color: rgba(0,0,0,1)
+        &.favorited
+          color: red
       a
         color: #000
         text-decoration: none

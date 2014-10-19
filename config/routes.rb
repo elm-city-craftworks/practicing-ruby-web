@@ -20,7 +20,8 @@ PracticingRubyWeb::Application.routes.draw do
 
   resources :articles do
     member do
-      get 'share'
+      get  'share'
+      post 'favorite'
     end
   end
 

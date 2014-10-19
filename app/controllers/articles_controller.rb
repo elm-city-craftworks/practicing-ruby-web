@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :find_article,      :only => [:show, :edit, :update, :share]
+  before_filter :find_article,      :only => %w[show edit update share favorite]
   before_filter :update_url,        :only => :show
   before_filter :validate_token,    :only => :show
   before_filter :authenticate,      :only => :index
@@ -48,6 +48,18 @@ class ArticlesController < ApplicationController
 
   def random
     redirect_to Article.where(:status => "published").sample
+  end
+
+  def favorite
+    if favorite = current_user.favorited?(@article)
+      favorite.destroy
+    else
+      current_user.favorites.create(article_id: @article.id)
+    end
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

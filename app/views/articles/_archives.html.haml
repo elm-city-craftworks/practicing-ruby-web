@@ -3,8 +3,18 @@
   - @articles.each do |article|
     %tr
       %td.article
+        = link_to favorite_article_path(article), remote: true,
+          method: :post,
+          class: "favorite-link #{'favorited' if current_user.favorited?(article)}",
+          'data-article-id' => article.id, 'data-toggle' => 'tooltip',
+          title: 'Favorite this article' do
+          %i.fa.fa-heart
         = link_to article.list_title, article_path(article)
       %td.issue-number= article.issue_number
     %tr
       %td.description= article.summary
       %td.month= article.published_time.strftime("%B %Y")
+
+
+:javascript
+  $('a.favorite-link').tooltip();
