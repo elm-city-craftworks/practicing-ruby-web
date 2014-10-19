@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :payment_logs
   has_many :payments
+  has_many :favorites
 
   has_one :credit_card
 
@@ -89,6 +90,10 @@ class User < ActiveRecord::Base
 
   def clear_access_token
     update_attributes(:access_token => nil)
+  end
+
+  def favorited?(article)
+    favorites.where(article_id: article.id).first
   end
 
   private
