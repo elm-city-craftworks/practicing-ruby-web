@@ -34,6 +34,8 @@ GEM
     ansi (1.4.2)
     arel (3.0.3)
     ast (1.1.0)
+    autoprefixer-rails (2.0.0.20140622)
+      execjs
     broach (0.3.0)
       multi_json (~> 1.7)
       nap (~> 0.5)
@@ -341,6 +343,7 @@ PLATFORMS
 
 DEPENDENCIES
   albino
+  autoprefixer-rails
   capfire
   capistrano
   capistrano-maintenance

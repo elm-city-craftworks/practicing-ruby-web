@@ -62,6 +62,7 @@ group :assets do
   gem 'sassy-buttons'
   gem 'turbo-sprockets-rails3'
   gem 'parsley-rails'
+  gem 'autoprefixer-rails'
 end
 
 group :test do
