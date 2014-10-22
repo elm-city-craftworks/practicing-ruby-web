@@ -1,16 +1,16 @@
-- content_for(:title)  { "Goose Egg!!" }
-- content_for(:header) { "Goose Egg!!" }
+- content_for(:title)  { "Reactivate your subscription" }
+- content_for(:header) { "Reactivate your subscription" }
 
 %p
-  It looks like there is a problem with your account.
-  This can happen for a few different reasons, but most often this
-  means that either your payment has failed, or that you have
-  accidentally cancelled your account.
+  You have a Practicing Ruby account, but it's currently disabled. This
+  may be because you cancelled your account, or it could be because
+  of a failed payment.
 
 %p
-  To to fix this, you can try
-  #{link_to "subscribing", new_subscription_path} through our website
-  or email #{mail_to "support@elmcitycraftworks.org"} and we will get your
-  account all fixed up.
+  Please #{link_to "reactivate your account", new_subscription_path}
+  to continue. If you have any questions, 
+  #{ link_to "email us", "mailto:support@elmcitycraftworks.org"}  
+  and we'll help you get things sorted out quickly.
 
-%p Sorry for the hassle. This will be sorted out in a jiffy!
+%p
+  Sorry for the hassle!

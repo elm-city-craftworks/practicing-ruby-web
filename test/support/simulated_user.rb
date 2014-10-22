@@ -43,6 +43,11 @@ module Support
 
     def register(params)
       authenticate(params)
+      register_authenticated_user(params)
+    end
+
+    # skips authentication
+    def register_authenticated_user(params)
       make_db_payment(params)
       read_article
     end
@@ -214,11 +219,13 @@ module Support
       end
     end
 
-    def restart_registration
+    def reactivate_account(params)
       browser do
-        click_link "subscribing"
+        click_link "reactivate your account"
         assert_current_path new_subscription_path
       end
+
+      register_authenticated_user(params)
     end
 
     def edit_profile(params={})

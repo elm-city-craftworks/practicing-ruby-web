@@ -69,8 +69,7 @@ class RegistrationTest < ActionDispatch::IntegrationTest
     simulated_user
       .register(Support::SimulatedUser.default)
       .payment_failure
-      .restart_registration
-      .register(Support::SimulatedUser.default)
+      .reactivate_account(Support::SimulatedUser.default)
   end
 
 
