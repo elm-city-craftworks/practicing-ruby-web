@@ -6,7 +6,7 @@ atom_feed do |feed|
   @articles.each do |article|
     feed.entry article, published: article.published_time do |entry|
       entry.title article.subject
-      entry.content article.body
+      entry.content article.summary
       entry.summary article.summary
       entry.author do |author|
         author.name 'Practicing Ruby'
