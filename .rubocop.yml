@@ -8,6 +8,8 @@ SignalException:
   Enabled: false
 StringLiterals:
   Enabled: false
+ClassLength:
+  Enabled: false
 
 AllCops:
   Excludes:
