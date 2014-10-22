@@ -29,6 +29,8 @@ class SessionsController < ApplicationController
       redirect_to new_subscription_path
     elsif authorization.user.status == "active"
       redirect_back_or_default(articles_path)
+    elsif authorization.user.status == "disabled"
+      redirect_to problems_sessions_path
     else
       redirect_to new_subscription_path
     end

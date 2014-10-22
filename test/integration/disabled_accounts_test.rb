@@ -14,10 +14,18 @@ class DisabledAccountsTest < ActionDispatch::IntegrationTest
     assert_equal articles_path, current_path
   end
 
-  test "gets rerouted to session problem page when account is disabled" do
+  test "gets rerouted to session problem page when logging into a disabled account" do
     @user.disable
     sign_user_in
-    visit profile_settings_path
+
+    assert_equal problems_sessions_path, current_path
+  end
+
+  test "gets rerouted to problem page when disabled after sign-in" do
+    sign_user_in
+    @user.disable
+
+    visit user_settings_path
 
     assert_equal problems_sessions_path, current_path
   end
