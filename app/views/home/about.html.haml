@@ -4,11 +4,6 @@
 
 #landing
   %p
-    Practicing Ruby is an open-access journal for dedicated programmers.
-    Our lessons are developed by #{link_to "Gregory Brown", "https://twitter.com/practicingruby"}, 
-    with support and contributions from the Ruby community. 
-    
-  %p
     The articles you'll find on this website provide concentrated doses
     of knowledge in a wide range of different areas. Rather than
     watering things down, we use context-rich code samples and clear
@@ -16,29 +11,41 @@
     applications in the real world.
 
   %p
-    = link_to "All of our published content", root_path
-    is freely available under the CC BY-SA license. See our
-    = link_to "F/OSS page", open_source_path
-    for all the relevant source repositories, including the code
-    that runs this website.
+    Our lessons are developed by #{link_to "Gregory Brown", "https://twitter.com/practicingruby"}, 
+    with contributions from the Ruby community. 
+
+  %p
+    Practicing Ruby's 
+    = link_to "complete library", root_path
+    have been released under the CC BY-SA license. See our
+    = link_to "Open Source", open_source_path
+    page for all our code and manuscripts, including the
+    Rails app that runs this website.
 
   %div{:style => "border: 1px solid #ccc; padding: 10px; background: #fff"}
-    %p YOU CAN BECOME A PAID SUBSCRIBER TO SUPPORT OUR WORK ON PRACTICING RUBY!
+    %p PLEASE BECOME A PAID SUBSCRIBER TO SUPPORT OUR WORK ON PRACTICING RUBY!
 
     %p
-      We rely entirely on our readers to fund this project. 
+      Producing a single Practicing Ruby article usually requires at least 40 hours 
+      of dedicated work. When you multiply that by the size of our archives, well...
+      it comes up to a very big number.
+      
+    %p 
+      Rather than showing advertisements, seeking corporate sponsorship,
+      or using Practicing Ruby as "content marketing",
+      we rely on our readers to fund this project. 
       To help us publish independent, in-depth learning materials, please 
       = link_to "become a paid subscriber", new_subscription_path,
           "data-redirect-warning" => !current_user
-      for only $8/month.
+      for only $8/month. You'll be joining a small but dedicated group
+      of supporters who have kept Practicing Ruby alive since 2010.
     %p
       By subscribing, you'll be directly funding 
       = link_to "our eighth volume,", "http://elmcitycraftworks.org/post/97065188738/plans-for-practicing-ruby-volume-8"
       = "which we hope to complete by mid-2015."
-      We're hoping to release new content every few weeks on average, and will
+      We'll be releasing new content every few weeks on average, and will
       occasionally run subscriber-only events and activities to show appreciation
       for our supporters.
-
 %br
 
 = image_tag "ruby-divider.png"
