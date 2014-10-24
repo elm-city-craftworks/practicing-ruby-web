@@ -2,17 +2,19 @@
   %tbody
   - @articles.each do |article|
     %tr
-      %td.favorite
-        = link_to favorite_article_path(article), remote: true,
-          method: :post,
-          class: "favorite-link #{'favorited' if current_user.favorited?(article)}",
-          'data-article-id' => article.id do
-          %i.fa.fa-heart
-          %i.fa.fa-heart-o
+      - if current_user
+        %td.favorite
+          = link_to favorite_article_path(article), remote: true,
+            method: :post,
+            class: "favorite-link #{'favorited' if current_user.favorited?(article)}",
+            'data-article-id' => article.id do
+            %i.fa.fa-heart
+            %i.fa.fa-heart-o
       %td.article
         = link_to article.list_title, article_path(article)
       %td.issue-number= article.issue_number
     %tr
-      %td= # Dedicated column for the favorite link
+      - if current_user
+        %td= # Dedicated column for the favorite link
       %td.description= article.summary
       %td.month= article.published_time.strftime("%B %Y")
