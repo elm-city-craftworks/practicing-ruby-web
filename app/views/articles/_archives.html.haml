@@ -1,5 +1,12 @@
+%form#article-filter
+  Show
+  %select
+    %option all
+    %option favorite
+    %option recommended
+  articles
+
 %table.archives
-  %tbody
   - @articles.each do |article|
     %tr
       - if current_user
