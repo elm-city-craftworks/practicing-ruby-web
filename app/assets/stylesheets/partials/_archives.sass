@@ -55,9 +55,15 @@ body.articles-index #archives, body.home-public_archives #archives
         margin-right: 10px
         color: rgba(0,0,0,0.25)
         transition: color 0.25s
-        &:hover
-          color: rgba(0,0,0,1)
+        i.fa-heart
+          display: none
         &.favorited
+          color: rgba(0,0,0,1)
+          i.fa-heart-o
+            display: none
+          i.fa-heart
+            display: inline
+        &:hover
           color: red
       a
         color: #000
