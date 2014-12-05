@@ -5,6 +5,6 @@ if Rails.env.production?
       :sender_address => %{"Exception Notifier" <gregory@practicingruby.com>},
       :exception_recipients => %w{gregory.t.brown@gmail.com jordan.byron@gmail.com}
      },
-    :ignore_crawlers => %w{EasouSpider},
-    :ignore_exceptions    => [ActionView::MissingTemplate] + ExceptionNotifier.ignored_exceptions
+    :ignore_crawlers   => %w{EasouSpider YandexBot},
+    :ignore_exceptions => [ActionView::MissingTemplate] + ExceptionNotifier.ignored_exceptions
 end
