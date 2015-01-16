@@ -43,11 +43,16 @@ class UsersController < ApplicationController
   end
 
   def change_billing_interval
-    new_interval = params[:interval]
-    payment_gateway = current_user.payment_gateway
-    payment_gateway.change_interval(new_interval)
+    begin
+      new_interval = params[:interval]
+      payment_gateway = current_user.payment_gateway
+      payment_gateway.change_interval(new_interval)
 
-    flash[:notice] = "You have sucessfully changed to #{new_interval}ly billing"
+      flash[:notice] = "You have sucessfully changed to #{new_interval}ly billing"
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+    end
+
     redirect_to billing_settings_path
   end
 
