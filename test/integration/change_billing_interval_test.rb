@@ -1,14 +1,8 @@
 require_relative "../test_helper"
 
-# Monkey patching so Stripe::CardError plays nice with Mocha::Expectation#raises
-#
-module Stripe
-  class CardError
-    def initialize(message, param=nil, code=nil, http_status=nil, http_body=nil, json_body=nil)
-      super(message, http_status, http_body, json_body)
-      @param = param
-      @code = code
-    end
+class StubCardError < Stripe::CardError
+  def initialize(message)
+    super(message, nil, nil, nil, nil, nil)
   end
 end
 
@@ -37,7 +31,7 @@ class ChangeBillingIntervalTest < ActionDispatch::IntegrationTest
     skip_unless_stripe_configured
 
     PaymentGateway::Stripe.any_instance.stubs(:change_interval).raises(
-      Stripe::CardError, "Your card was declined.")
+      StubCardError, "Your card was declined.")
 
     simulated_user.
       register(Support::SimulatedUser.default).
