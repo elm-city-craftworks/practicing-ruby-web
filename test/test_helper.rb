@@ -25,11 +25,11 @@ Capybara.javascript_driver               = :poltergeist
 #Delayed::Worker.delay_jobs               = false
 
 Capybara.register_driver :poltergeist do |app|
-   Capybara::Poltergeist::Driver.new(app, {
-     # For Stripe
-     # https://github.com/teampoltergeist/poltergeist/issues/560
-     phantomjs_options: ['--ssl-protocol=any']
-   })
+  Capybara::Poltergeist::Driver.new(app, {
+    # For Stripe
+    # https://github.com/teampoltergeist/poltergeist/issues/560
+    phantomjs_options: ['--ssl-protocol=any']
+  })
 end
 
 class ActionDispatch::IntegrationTest

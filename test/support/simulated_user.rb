@@ -85,11 +85,15 @@ module Support
         :rate_cents       => params.fetch(:billing_rate, 800),
         :interval         => params.fetch(:billing_interval, 'month'))
 
-      @user.email  = params[:email]
+      @user.contact_email = params[:email]
       @user.status = "active"
-      @user.save
+      @user.save!
 
-      browser { visit articles_path(:new_subscription => true) }
+      browser do
+        visit articles_path(:new_subscription => true)
+        # Ensure the page is actually loaded
+        assert_content "Delightful lessons for dedicated programmers"
+      end
     end
 
     def make_stripe_payment(params={})
@@ -176,8 +180,6 @@ module Support
     end
 
     def change_billing_interval(options = {stripe: false})
-      current_interval = @user.subscriptions.active.interval
-
       browser do
         visit root_path
         click_link "Settings"
@@ -198,22 +200,27 @@ module Support
           assert_no_css "#facebox"
         end
       else
-        # Simulated billing interval switch
-        #
-        subscription = @user.subscriptions.active.decorate
-        subscription.update_attributes(:finish_date => Date.today)
-
-        @user.subscriptions.create(
-          :start_date       => Date.today,
-          :payment_provider => 'stripe',
-          :rate_cents       => 800,
-          :interval         => subscription.alternate_billing_interval
-        )
-
-        @browser.refute_equal @user.subscriptions.active.interval,
-                              current_interval
-
+        change_db_billing_interval
       end
+    end
+
+    # Update the account's billing interval at the database level
+    #
+    def change_db_billing_interval
+      current_interval = @user.subscriptions.active.interval
+      subscription     = @user.subscriptions.active.decorate
+
+      subscription.update_attributes(:finish_date => Date.today)
+
+      @user.subscriptions.create(
+        :start_date       => Date.today,
+        :payment_provider => 'stripe',
+        :rate_cents       => 800,
+        :interval         => subscription.alternate_billing_interval
+      )
+
+      @browser.refute_equal @user.subscriptions.active.interval,
+                            current_interval
     end
 
     def update_email_address(email=nil)
