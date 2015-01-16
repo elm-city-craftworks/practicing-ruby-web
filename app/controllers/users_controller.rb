@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
       flash[:notice] = "You have sucessfully changed to #{new_interval}ly billing"
     rescue Stripe::CardError => e
-      flash[:error] = e.message
+      flash[:error] = "Drat! We've got a problem here: #{e.message}"
     end
 
     redirect_to billing_settings_path

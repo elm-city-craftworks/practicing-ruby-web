@@ -1,5 +1,17 @@
 require_relative "../test_helper"
 
+# Monkey patching so Stripe::CardError plays nice with Mocha::Expectation#raises
+#
+module Stripe
+  class CardError
+    def initialize(message, param=nil, code=nil, http_status=nil, http_body=nil, json_body=nil)
+      super(message, http_status, http_body, json_body)
+      @param = param
+      @code = code
+    end
+  end
+end
+
 class ChangeBillingIntervalTest < ActionDispatch::IntegrationTest
   setup do
     Capybara.current_driver = Capybara.javascript_driver
@@ -22,17 +34,16 @@ class ChangeBillingIntervalTest < ActionDispatch::IntegrationTest
   end
 
   test "gracefully reports card errors when changing billing methods" do
-    skip "change_billing_interval in SimulatedUser doesn't hit Stripe"
+    skip_unless_stripe_configured
 
-    PaymentGateway::Stripe.any_instance.stubs(:change_interval).returns do
-      raise Stripe::InvalidRequestError.new("Your card was declined.")
-    end
+    PaymentGateway::Stripe.any_instance.stubs(:change_interval).raises(
+      Stripe::CardError, "Your card was declined.")
 
     simulated_user.
       register(Support::SimulatedUser.default).
-      change_billing_interval
+      change_billing_interval(stripe: true)
 
-    assert_equal "monthly", User.first.subscriptions.active.interval
+    assert_equal "month", User.first.subscriptions.active.interval
 
     assert_content "declined"
   end

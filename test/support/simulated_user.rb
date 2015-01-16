@@ -175,7 +175,7 @@ module Support
       @browser.refute @user.subscriptions.active, "Subscription was not ended"
     end
 
-    def change_billing_interval
+    def change_billing_interval(options = {stripe: false})
       current_interval = @user.subscriptions.active.interval
 
       browser do
@@ -189,19 +189,31 @@ module Support
         end
       end
 
-      # FIXME Simulate billing switch
-      subscription = @user.subscriptions.active.decorate
-      subscription.update_attributes(:finish_date => Date.today)
+      if options[:stripe]
+        browser do
+          within "#facebox" do
+            first(:link).click
+          end
 
-      @user.subscriptions.create(
-        :start_date       => Date.today,
-        :payment_provider => 'stripe',
-        :rate_cents       => 800,
-        :interval         => subscription.alternate_billing_interval
-      )
+          assert_no_css "#facebox"
+        end
+      else
+        # Simulated billing interval switch
+        #
+        subscription = @user.subscriptions.active.decorate
+        subscription.update_attributes(:finish_date => Date.today)
 
-      @browser.refute_equal @user.subscriptions.active.interval,
-                            current_interval
+        @user.subscriptions.create(
+          :start_date       => Date.today,
+          :payment_provider => 'stripe',
+          :rate_cents       => 800,
+          :interval         => subscription.alternate_billing_interval
+        )
+
+        @browser.refute_equal @user.subscriptions.active.interval,
+                              current_interval
+
+      end
     end
 
     def update_email_address(email=nil)
