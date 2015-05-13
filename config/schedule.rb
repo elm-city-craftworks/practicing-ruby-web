@@ -4,10 +4,6 @@ set :output, "/home/deploy/current/log/cron_log.log"
 #
 job_type :rake, "cd :path && RAILS_ENV=:environment bundle exec rake :task --silent :output"
 
-every 10.minutes do
-  rake "mailchimp:disable_unsubscribed"
-end
-
 every 1.month do
   rake "stripe:card_exipration_notice"
 end
