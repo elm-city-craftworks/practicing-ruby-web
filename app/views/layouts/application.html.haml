@@ -5,7 +5,8 @@
       = yield(:title).blank? ? controller_name.humanize : yield(:title)
       - unless yield(:title) && yield(:title)[/Practicing Ruby/]
         \- Practicing Ruby
-
+    - if yield(:description)
+      %meta{:name => "description", :content => yield(:description)}
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
     = javascript_include_tag 'application'
