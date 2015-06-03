@@ -2,6 +2,10 @@
   #{@article.subject} - Practicing Ruby, #{@article.issue_number}
 - content_for(:description) do
   #{@article.summary}
+- content_for(:nudge) do
+  #share-alert
+    Please help bring new voices to Practicing Ruby by
+    #{link_to("backing our contributors fund on Kickstarter", "https://www.kickstarter.com/projects/828998531/practicing-ruby-contributors-fund")}!
 - content_for(:header) do
   .bigtext{style: 'text-align: center;'}
     %div{:style => "padding-top: 40px;"}
