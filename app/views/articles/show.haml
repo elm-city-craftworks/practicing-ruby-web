@@ -14,7 +14,7 @@
     - if @article.collaboration?
       Published on #{@article.published_date} in collaboration with a special guest.
     -else
-      Published by #{link_to "Gregory Brown", "https://twitter.com"} on #{@article.published_date} 
+      Published by #{link_to "Gregory Brown", "https://twitter.com/practicingruby"} on #{@article.published_date} 
 
   %hr 
   - cache("article_body_#{@article.id}") do
