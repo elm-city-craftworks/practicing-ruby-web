@@ -24,10 +24,26 @@
   = render :partial => "articles/comments"
 - else
   #share-alert
-    Practicing Ruby is a massive
-    = link_to "open-access library of programming lessons", root_path
-    for dedicated learners.
+    %h3 Thanks for reading this article! You're awesome.
+    %hr
     %br
-    Please support our ongoing work on this project by 
-    = link_to "subscribing for $8/month.", new_subscription_path, 
+    If you are new to Practicing Ruby, #{link_to "see our complete archives", "https://practicingruby.com"} for many more programming lessons.
+    %br
+    %br
+    If you already know and love our work, please
+    = link_to "subscribe for $8/month", new_subscription_path, 
       "data-redirect-warning" => true
+    to help keep the project going.
+    %br
+    %br
+    And if you REALLY love Practicing Ruby, you can
+    = link_to "back our contributors fund on Kickstarter.", "https://kickstarter.com/projects/828998531/practicing-ruby-contributors-fund"
+    %br
+    %br
+    %hr
+    %br
+    Practicing Ruby is an independent publication run by #{link_to "Gregory Brown", "https://twitter.com/practicingruby"}, with community contributions.
+    %br
+    %br
+    This project has been supported solely by reader funding since 2010. We will never run advertisements or use the materials on this site as content marketing for some other product or service.
+    %br
