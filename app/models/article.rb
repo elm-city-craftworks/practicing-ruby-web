@@ -39,6 +39,10 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def collaboration?
+    !!(summary =~ /w\./)
+  end
+
   def full_subject
     "Issue #{issue_number}: #{subject}"
   end

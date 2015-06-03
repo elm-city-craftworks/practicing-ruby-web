@@ -4,6 +4,5 @@
   #{@article.summary}
 - content_for(:header) do
   .bigtext{style: 'text-align: center;'}
-    %div{:style => "padding-top: 40px; padding-bottom: 40px"}
+    %div{:style => "padding-top: 40px;"}
       = @article.subject
-    = image_tag "ruby-divider.png"

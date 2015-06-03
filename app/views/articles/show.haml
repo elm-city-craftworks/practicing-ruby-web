@@ -7,9 +7,18 @@
 = render "header"
 
 #article
+  %hr
+  %p{:style => "text-align: center; font-size: 0.8em"}
+    #{link_to "Practicing Ruby", "http://practicingruby.com"} #{@article.issue_number} ::
+  
+    - if @article.collaboration?
+      Published on #{@article.published_date} in collaboration with a special guest.
+    -else
+      Published by #{link_to "Gregory Brown", "https://twitter.com"} on #{@article.published_date} 
+
+  %hr 
   - cache("article_body_#{@article.id}") do
     = md(@article.body)
-
 
 - if @comments
   = render :partial => "articles/comments"
