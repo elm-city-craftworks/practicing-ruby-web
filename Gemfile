@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.20'
+gem 'rails', '3.2.22'
 gem 'rake', '~> 0.9.0'
 gem 'json', '~> 1.7.7'
 gem 'multi_xml', '>= 0.5.2'
@@ -22,7 +22,7 @@ gem 'stripe_event'
 gem 'will_paginate', '>= 3.0.5'
 gem 'haml'
 gem 'coffee-filter', '~> 0.1.1'
-gem 'jquery-rails'
+gem 'jquery-rails', '3.1.3'
 gem 'draper'
 gem 'rack-pjax', '~> 0.6.0'
 
