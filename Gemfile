@@ -22,7 +22,7 @@ gem 'stripe_event'
 gem 'will_paginate', '>= 3.0.5'
 gem 'haml'
 gem 'coffee-filter', '~> 0.1.1'
-gem 'jquery-rails', '3.1.3'
+gem 'jquery-rails', '~> 1.0.19'
 gem 'draper'
 gem 'rack-pjax', '~> 0.6.0'
 
