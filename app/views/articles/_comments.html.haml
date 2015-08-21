@@ -1,17 +1,3 @@
-#comments
-
-  - @comments.each do |comment|
-    = render :partial => "comments/show", :locals => {:comment => comment}
-
-  %h3.new-comment Share your thoughts:
-
-  = form_for @article.comments.build do |f|
-    = f.hidden_field :commentable_type
-    = f.hidden_field :commentable_id
-
-    = f.text_area :body, 'data-preview' => true, :required => 'required'
-
-    #submit-bar
-      %span Each time you post a comment, a unicorn gets its horn!
-      = f.submit "Comment"
-      .clear
+- if @article.discourse_url.present?
+  #comments
+    = link_to "Discuss this article on discourse", @article.discourse_url
