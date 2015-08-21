@@ -62,7 +62,7 @@ class SharedArticleTest < ActionDispatch::IntegrationTest
     when :guest
       assert_content("subscribe")
     when :subscriber
-      assert_content("Share your thoughts:")
+      assert_content("discourse")
     else
       raise ArgumentError, "Invalid state: #{state}"
     end

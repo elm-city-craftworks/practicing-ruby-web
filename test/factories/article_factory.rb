@@ -8,6 +8,7 @@ FactoryGirl.define do
     a.status        "published"
     a.volume
     a.published_time { Time.now }
+    a.discourse_url  "http://discourse.practicingruby.com/"
 
     factory :public_article do
       status "public"
