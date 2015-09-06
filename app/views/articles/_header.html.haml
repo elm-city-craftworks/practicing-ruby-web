@@ -4,5 +4,7 @@
   #{@article.summary}
 - content_for(:header) do
   .bigtext{style: 'text-align: center;'}
-    %div{:style => "padding-top: 40px;"}
+    %div{:style => "padding-top: 20px; padding-bottom: 40px;"}
       = @article.subject
+  = link_to root_path do
+    = image_tag "ruby-divider.png"
