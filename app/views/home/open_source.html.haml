@@ -1,10 +1,18 @@
 - content_for(:header) do
   %h1
-    Practicing Ruby is 100% free and open source!
+    All of Practicing Ruby is free and open source.
 
 %p
   The spirit of community contribution for the public good is
-  baked into everything we do, and most of our own work is freely available to all.
+  baked into everything we do here.
+
+%h3 Our programming lessons are free documentation.
+%p
+  The
+  = link_to "Markdown-formatted manuscripts",
+    "http://github.com/elm-city-craftworks/practicing-ruby-manuscripts"
+  for all of our articles are freely available under the Creative Commons
+  Attribution-Sharealike license.
 
 %h3 Our web application is free software.
 
@@ -12,8 +20,8 @@
   The
   = link_to "Rails application",
     "http://github.com/elm-city-craftworks/practicing-ruby-web"
-  that powers practicingruby.com is freely available under the GNU Affero GPL,
-  and is maintained by Jordan Byron.
+  that powers practicingruby.com is freely available under the GNU Affero GPL
+  + maintained by Gregory Brown and Jordan Byron.
 
 %p
   Mathias Lafeldt has also developed a
@@ -22,13 +30,6 @@
   that sets up a production-like testbed environment for our web application.
   It is freely available under the Apache License 2.0.
 
-%h3 Our content is free documentation.
-%p
-  The
-  = link_to "Markdown-formatted manuscripts",
-    "http://github.com/elm-city-craftworks/practicing-ruby-manuscripts"
-  for our open-access articles are freely available under the Creative Commons
-  Attribution-Sharealike license.
 
 %h3 We also work on other F/OSS projects.
 
@@ -36,7 +37,7 @@
   We don't just produce educational materials, we also work on projects that
   directly help people, both programmers and non-programmers alike:
 
-%ul
+%ul{:style => "padding-left: 20px"}
   %li
     Gregory Brown is original author of the
     = link_to "Prawn PDF generation toolkit for Ruby.", "http://prawn.majesticseacreature.com"
@@ -45,33 +46,6 @@
     = link_to "clinic management system", "https://github.com/mission-of-mercy/mission-of-mercy#readme"
     to support the Mission of Mercy charitable healthcare organization.
 
+%hr
 
-%h3 We rely on people like you to support our work.
-
-%p
-  Here are three ways to help out if you want us to keep doing what we're doing:
-
-%ul
-  %li
-    Send us constructive feedback and/or spread the word about our projects.
-    Telling us we're doing wrong and telling the world what we're
-    doing right is easy to do, and it helps us tremendously.
-
-  %li
-    Become a Practicing Ruby subscriber and/or encourage others to
-    sign up for a paid subscription. The money we get from Practicing Ruby
-    supports our continued work on the project. Every subscription counts,
-    so please don't hesitate if you are thinking about signing up.
-
-  %li
-    Submit pull requests or bug reports to our projects. Whether
-    you found a mistake in an article, or want to add a new feature to
-    the web application, patches are welcome!
-%p
-  Thanks, and happy hacking! Please
-  = link_to "contact us", contact_path
-  if you have any questions or suggestions.
-
-= image_tag "ruby-divider.png"
-
-%p{:style => "text-align: center"}= link_to "Return to the Practicing Ruby homepage", root_path
+%p{:style => "text-align: center"}= link_to "Return to Practicing Ruby's archives", root_path
