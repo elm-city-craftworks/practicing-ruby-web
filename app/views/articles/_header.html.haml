@@ -3,6 +3,9 @@
 - content_for(:description) do
   #{@article.summary}
 - content_for(:header) do
+  %div{:style => "text-align: center; margin: 20px"}
+    = link_to root_path do
+      = image_tag "//i.imgur.com/hYoGfNJ.png", :width => "100%"
   .bigtext{style: 'text-align: center;'}
     %div{:style => "padding-top: 40px;"}
       = @article.subject

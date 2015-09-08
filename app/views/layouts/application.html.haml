@@ -15,7 +15,7 @@
     = yield(:header_bottom)
 
   %body{class: "#{controller.controller_name}-#{controller.action_name}"}
-    = render :partial => "shared/navigation"
+    = render :partial => "shared/navigation" unless @skip_navbar
     = render :partial => "shared/broadcasts"
     = render :partial => "user_email/warning"
     = render :partial => "shared/flash", :locals => { :flash => flash }

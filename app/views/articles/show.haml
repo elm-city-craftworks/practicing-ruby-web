@@ -1,9 +1,9 @@
+- @skip_navbar = true
 - if current_user.try(:active?)
   - content_for(:header_bottom) do
     :coffeescript
       $ ->
         PR.Comments.init('#{comments_path}/')
-
 = render "header"
 
 #article
@@ -24,19 +24,11 @@
   == <a href="https://twitter.com/practicingruby" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @practicingruby</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   &nbsp;
   <a href="https://twitter.com/share" class="twitter-share-button" data-via="practicingruby" data-size="large" data-count="none">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-%hr
 - if @comments
+  %hr
   = render :partial => "articles/comments"
 - else
-  #share-alert
-    %h3 Thanks for reading this article!
-    %br
-    If you are new to Practicing Ruby, #{link_to "see our complete archives", "https://practicingruby.com"} for many more programming lessons.
-    %br
-    %br
-    If you already know and love our work, please
-    = link_to "subscribe for $8/month", new_subscription_path, 
-      "data-redirect-warning" => true
-    to help keep the project going.
-    %br
-    %br
+  %hr
+  %div{:style => "text-align: center; margin: 50px"}
+    = link_to root_path do
+      = image_tag "//i.imgur.com/hYoGfNJ.png", :width => "75%"
