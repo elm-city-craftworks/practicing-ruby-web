@@ -5,23 +5,22 @@
 #landing
   %p{:style => "font-size: 1.1em"}
     We provide concentrated doses of programming experience across a wide range
-    of different topics. Each lesson you'll find here is packed with context-rich code samples and in-depth
-    explanations to help you connect what you learn to practical applications
-    in the real world.
-
-  %p
-    Practicing Ruby's 
-    = link_to "complete library", root_path
-    is freely available under the CC BY-SA license. See our
-    = link_to "Open Source", open_source_path
-    page for all our code and manuscripts, including the
-    Rails application that runs this website.
+    of topics.
 
   %p
     Our lessons are developed by #{link_to "Gregory Brown", "https://twitter.com/practicingruby"}, 
     with the help of many contributors. Even though this project is called Practicing Ruby, 
     most of our articles tend to focus on exploring the field of software development
     in general rather than fixating entirely on language-specific details.
+
+  %p
+    Practicing Ruby's 
+    = link_to "complete library", root_path
+    is freely available to everyone in the world. See our
+    = link_to "Open Source", open_source_path
+    page for all our code and manuscripts, including the
+    Rails application that runs this website.
+
 
   %div{:style => "border: 1px solid #ccc; padding: 10px; background: #fff"}
     %p{:style => "font-size: 1.2em"}
@@ -35,7 +34,7 @@
     %p
       To help us publish independent, in-depth learning materials, please 
       = link_to "become a paid subscriber", new_subscription_path,
-          "data-redirect-warning" => !current_user
+          "data-redirect-warning" => !current_user, :style => "color: #B03C2E"
       for only $8/month. You'll be joining a dedicated group
       of supporters who have kept Practicing Ruby up and running since 2010.
 
