@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
   end
 
   def random
-    redirect_to Article.where(:status => "published").sample
+    redirect_to Article.where(:status => "public").sample
   end
 
   private
