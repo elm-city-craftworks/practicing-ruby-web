@@ -7,8 +7,8 @@
       %li= link_to "Home", articles_path
       %li= link_to "Chat", "https://practicingruby.slack.com"
     %li= link_to "Open Source", open_source_path
-    %li= link_to "Blog", "http://blog.practicingruby.com"
-    %li= link_to "Twitter", "http://twitter.com/practicingruby"
+    %li= link_to "Blog", "http://practicingdeveloper.com"
+    %li= link_to "Twitter", "http://twitter.com/practicingdev"
     - if current_user.try(:active?)
       %li.right= link_to "Log out", logout_path
       %li.right= link_to "Settings", user_settings_path
