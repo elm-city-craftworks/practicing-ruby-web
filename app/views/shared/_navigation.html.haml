@@ -17,6 +17,3 @@
         %li.right= link_to "Log out", logout_path
       - else
         %li.right= link_to "Log in", login_path
-        %li.right
-          = link_to "Subscribe", new_subscription_path, :style => "color: #B03C2E",
-            "data-redirect-warning" => !current_user
