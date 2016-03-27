@@ -9,6 +9,7 @@
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
     = javascript_include_tag 'application'
     = csrf_meta_tag
+    = auto_discovery_link_tag(:atom, archives_public_url(:atom), title: "Practicing Ruby")
 
     = render :partial => "shared/ios_icon"
 
